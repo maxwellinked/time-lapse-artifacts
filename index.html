@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark light" />
+    <title>Time-Lapse Artifacts</title>
+    <meta
+      name="description"
+      content="A public, video-first index of documented analog drawing time-lapse recordings by Tim Maxwell."
+    />
+    <meta property="og:title" content="Time-Lapse Artifacts" />
+    <meta
+      property="og:description"
+      content="Analog drawing, recorded and indexed. Browse documented time-lapse recordings by Tim Maxwell."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://maxwellinked.github.io/time-lapse-artifacts/"
+    />
+    <link rel="stylesheet" href="assets/style.css" />
+    <script src="assets/app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#recordings">Skip to recordings</a>
+
+    <header class="site-header shell">
+      <a class="project-lockup" href="#top" aria-label="Time-Lapse Artifacts home">
+        <strong>Time-Lapse Artifacts</strong>
+        <span>A longitudinal index of recorded analog drawing</span>
+      </a>
+
+      <div class="header-actions">
+        <nav aria-label="Primary navigation">
+          <a href="#recordings">Browse recordings</a>
+          <a
+            href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts"
+            target="_blank"
+            rel="noreferrer"
+            >Dataset <span aria-hidden="true">↗</span></a
+          >
+        </nav>
+
+        <div class="appearance-control" role="group" aria-label="Appearance">
+          <button type="button" data-appearance="light" aria-pressed="false">Light</button>
+          <button type="button" data-appearance="dark" aria-pressed="true">Dark</button>
+          <button type="button" data-appearance="system" aria-pressed="false">System</button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <p class="eyebrow">Standard time-lapse recordings · Public browser</p>
+          <h1 id="hero-title">Analog drawing,<br />recorded and indexed.</h1>
+          <p class="lede">
+            Browse documented analog drawing sessions here. The source video,
+            record identities, and machine-readable metadata remain on Hugging Face.
+          </p>
+
+          <div class="hero-actions">
+            <a class="primary-link" href="#recordings"
+              >Browse recordings <span aria-hidden="true">↓</span></a
+            >
+            <a
+              class="secondary-link"
+              href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts"
+              target="_blank"
+              rel="noreferrer"
+              >View source dataset <span aria-hidden="true">↗</span></a
+            >
+          </div>
+
+          <dl class="hero-stats" aria-label="Collection summary">
+            <div>
+              <dt>Standard records</dt>
+              <dd id="record-count">—</dd>
+            </div>
+            <div>
+              <dt>Coverage</dt>
+              <dd id="date-coverage">—</dd>
+            </div>
+            <div>
+              <dt>Source</dt>
+              <dd>Hugging Face</dd>
+            </div>
+          </dl>
+        </div>
+
+        <figure class="hero-recording" id="featured-recording">
+          <div class="hero-media thumb-shell is-loading">
+            <video muted playsinline preload="none" aria-hidden="true"></video>
+            <div class="thumb-scrim"></div>
+            <div class="hero-media-copy">
+              <span class="eyebrow">Newest Standard recording</span>
+              <strong id="featured-date">Loading…</strong>
+              <span class="load-state">Preparing thumbnail</span>
+            </div>
+          </div>
+          <figcaption>
+            <span id="featured-meta">Source record</span>
+            <button type="button" id="open-featured">Open recording <span>→</span></button>
+          </figcaption>
+        </figure>
+      </section>
+
+      <section class="browse shell" id="recordings" aria-labelledby="browse-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Standard Time Lapses</p>
+            <h2 id="browse-title">Browse recordings</h2>
+          </div>
+          <p>
+            Thumbnails are late-stage frames from the source videos. Full recordings
+            remain unloaded until opened.
+          </p>
+        </div>
+
+        <form class="filter-panel" id="filters">
+          <div class="search-field">
+            <label for="recording-search">Search filename or metadata</label>
+            <input
+              id="recording-search"
+              name="search"
+              type="search"
+              placeholder="Date, instrument, record ID…"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="filter-grid">
+            <label>
+              Year
+              <select name="year"><option value="">All years</option></select>
+            </label>
+            <label>
+              Instrument
+              <select name="tool"><option value="">All instruments</option></select>
+            </label>
+            <label>
+              Medium
+              <select name="medium"><option value="">All media</option></select>
+            </label>
+            <label>
+              Surface
+              <select name="support"><option value="">All surfaces</option></select>
+            </label>
+            <label>
+              Dimensions
+              <select name="dimensions"><option value="">All dimensions</option></select>
+            </label>
+            <label>
+              Order
+              <select name="order">
+                <option value="desc">Newest first</option>
+                <option value="asc">Oldest first</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="filter-summary" aria-live="polite">
+            <p id="result-count">Loading records…</p>
+            <button type="reset">Clear filters</button>
+          </div>
+        </form>
+
+        <div class="record-grid" id="record-grid" aria-live="polite"></div>
+
+        <div class="load-more">
+          <button type="button" id="show-more" hidden>Show 18 more</button>
+        </div>
+
+        <p class="data-error" id="data-error" hidden>
+          The recording index could not be loaded. The source dataset remains
+          available on Hugging Face.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <div>
+        <p class="footer-attribution">Tim Maxwell · Time-Lapse Artifacts</p>
+        <p>
+          A public browsing layer for the Standard Time Lapses collection. This site
+          does not replace the source dataset or its documentation.
+        </p>
+        <p class="construction-note">
+          Active construction release. The website is a pinned index snapshot and may
+          be refreshed as documented recordings are added.
+        </p>
+      </div>
+      <div class="footer-links">
+        <a
+          href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts"
+          target="_blank"
+          rel="noreferrer"
+          >Dataset <span aria-hidden="true">↗</span></a
+        >
+        <a
+          href="https://github.com/maxwellinked/time-lapse-artifacts"
+          target="_blank"
+          rel="noreferrer"
+          >Website source <span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </footer>
+
+    <dialog class="record-dialog" id="record-dialog" aria-labelledby="dialog-title">
+      <form method="dialog" class="dialog-close-form">
+        <button class="dialog-close" aria-label="Close recording details">Close ×</button>
+      </form>
+
+      <article class="dialog-content">
+        <header class="dialog-header">
+          <div>
+            <p class="eyebrow" id="dialog-record-id">Standard Time Lapse</p>
+            <h2 id="dialog-title">Recording</h2>
+          </div>
+          <a id="dialog-source-top" target="_blank" rel="noreferrer"
+            >Source MP4 <span aria-hidden="true">↗</span></a
+          >
+        </header>
+
+        <div class="dialog-video-shell">
+          <div class="dialog-poster thumb-shell is-loading">
+            <video muted playsinline preload="none" aria-hidden="true"></video>
+            <div class="thumb-scrim"></div>
+          </div>
+          <button type="button" class="load-video-button" id="load-full-video">
+            Load full recording <span aria-hidden="true">▶</span>
+          </button>
+          <video class="full-video" id="full-video" controls muted playsinline preload="none" hidden>
+            Your browser does not support HTML video.
+          </video>
+        </div>
+
+        <div class="dialog-information">
+          <section aria-labelledby="metadata-title">
+            <p class="eyebrow" id="metadata-title">Recording metadata</p>
+            <dl class="metadata-list" id="dialog-metadata"></dl>
+          </section>
+
+          <section class="source-details" aria-labelledby="source-title">
+            <p class="eyebrow" id="source-title">Source record</p>
+            <p class="source-filename" id="dialog-filename"></p>
+            <p>
+              The video link is pinned to the indexed Hugging Face repository revision.
+            </p>
+            <div class="source-actions">
+              <a id="dialog-source" target="_blank" rel="noreferrer"
+                >Open source file <span aria-hidden="true">↗</span></a
+              >
+              <a
+                href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts"
+                target="_blank"
+                rel="noreferrer"
+                >View dataset <span aria-hidden="true">↗</span></a
+              >
+            </div>
+            <details>
+              <summary>Integrity reference</summary>
+              <code id="dialog-hash"></code>
+            </details>
+          </section>
+        </div>
+
+        <nav class="record-navigation" aria-label="Recording navigation">
+          <button type="button" id="previous-record">← Previous</button>
+          <button type="button" id="next-record">Next →</button>
+        </nav>
+      </article>
+    </dialog>
+
+    <template id="record-card-template">
+      <article class="record-card">
+        <button type="button" class="record-open">
+          <span class="record-thumb thumb-shell is-loading">
+            <video muted playsinline preload="none" aria-hidden="true"></video>
+            <span class="thumb-scrim"></span>
+            <span class="thumb-fallback">
+              <strong></strong>
+              <small>Preparing thumbnail</small>
+            </span>
+            <span class="play-mark" aria-hidden="true">↗</span>
+          </span>
+          <span class="record-content">
+            <span class="record-id"></span>
+            <strong class="record-date"></strong>
+            <span class="record-facts"></span>
+            <span class="record-link">Open recording →</span>
+          </span>
+        </button>
+      </article>
+    </template>
+  </body>
+</html>
