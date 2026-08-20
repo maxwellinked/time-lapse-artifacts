@@ -1,5 +1,5 @@
 import { createServer } from "node:http";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 
 const root = new URL("../", import.meta.url).pathname;
@@ -25,8 +25,12 @@ if (new Set(payload.records.map((record) => record.recordId)).size !== 357) {
 if (!html.includes('id="record-grid"') || !html.includes('id="record-dialog"')) {
   throw new Error("Primary browse or detail interface is missing");
 }
-if (!app.includes("IntersectionObserver") || !app.includes("video.duration * 0.88")) {
-  throw new Error("Lazy late-stage thumbnail behavior is missing");
+if (
+  !app.includes("thumbnails/${record.recordId}.jpg") ||
+  !app.includes("IntersectionObserver") ||
+  !app.includes("video.duration * 0.88")
+) {
+  throw new Error("Static thumbnails or their live-video fallback are missing");
 }
 if (/bd5a3c|a54831|brown|rust/i.test(css)) {
   throw new Error("Warm brown accent remains in the stylesheet");
@@ -42,6 +46,21 @@ const invalid = payload.records.filter(
     ),
 );
 if (invalid.length) throw new Error(`${invalid.length} records failed source validation`);
+
+const thumbnailDirectory = join(root, "thumbnails");
+let thumbnailCount = 0;
+try {
+  thumbnailCount = readdirSync(thumbnailDirectory).filter((name) => {
+    if (!/^tla-[a-f0-9]+\.jpg$/.test(name)) return false;
+    return statSync(join(thumbnailDirectory, name)).size >= 4_000;
+  }).length;
+} catch {
+  thumbnailCount = 0;
+}
+
+if (process.env.REQUIRE_THUMBNAILS === "1" && thumbnailCount !== payload.records.length) {
+  throw new Error(`Expected ${payload.records.length} thumbnails, found ${thumbnailCount}`);
+}
 
 const types = {
   ".css": "text/css",
@@ -82,6 +101,7 @@ console.log(
       status: "valid",
       records: payload.records.length,
       unknownFinishTimes: payload.records.filter((record) => !record.time).length,
+      thumbnails: thumbnailCount,
       sourceRevision: payload.sourceRevision,
     },
     null,
