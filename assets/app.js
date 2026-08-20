@@ -123,17 +123,28 @@ const thumbnailObserver = new IntersectionObserver(
 
 function prepareThumbnail(shell, record, immediate = false) {
   const video = shell.querySelector("video");
-  if (!video) return;
+  const image = shell.querySelector("img");
+  if (!video || !image) return;
 
   shell.classList.toggle("landscape", record.orientation === "landscape");
-  shell.classList.remove("is-ready", "is-error");
+  shell.classList.remove("is-ready", "is-error", "static-ready");
   shell.classList.add("is-loading");
   shell.dataset.videoUrl = record.videoUrl;
   video.removeAttribute("src");
   video.load();
-
-  if (immediate) queueThumbnail(shell, true);
-  else thumbnailObserver.observe(shell);
+  image.hidden = false;
+  image.loading = immediate ? "eager" : "lazy";
+  image.fetchPriority = immediate ? "high" : "auto";
+  image.onload = () => {
+    shell.classList.remove("is-loading", "is-error");
+    shell.classList.add("is-ready", "static-ready");
+  };
+  image.onerror = () => {
+    image.hidden = true;
+    if (immediate) queueThumbnail(shell, true);
+    else thumbnailObserver.observe(shell);
+  };
+  image.src = `thumbnails/${record.recordId}.jpg`;
 }
 
 function queueThumbnail(shell, priority) {

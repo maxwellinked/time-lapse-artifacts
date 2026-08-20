@@ -1,0 +1,52 @@
+name: Generate static thumbnails
+
+on:
+  push:
+    branches:
+      - static-thumbnails
+    paths:
+      - .github/workflows/generate-thumbnails.yml
+      - data/records.json
+      - tools/generate-thumbnails.mjs
+      - tools/validate.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  thumbnails:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Check out thumbnail branch
+        uses: actions/checkout@v4
+        with:
+          ref: static-thumbnails
+          fetch-depth: 0
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+          ffmpeg -version
+
+      - name: Generate late-stage JPEG frames
+        run: node tools/generate-thumbnails.mjs --concurrency 10
+
+      - name: Validate complete website and thumbnail pack
+        run: REQUIRE_THUMBNAILS=1 node tools/validate.mjs
+
+      - name: Commit generated thumbnails to the branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- thumbnails
+          if git diff --cached --quiet; then
+            echo "Thumbnail pack is already complete."
+            exit 0
+          fi
+          git commit -m "Add static recording thumbnails"
+          git push origin HEAD:static-thumbnails
