@@ -27,8 +27,11 @@ jobs:
           ref: static-thumbnails
           fetch-depth: 0
 
-      - name: Confirm FFmpeg
-        run: ffmpeg -version
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+          ffmpeg -version
 
       - name: Generate late-stage JPEG frames
         run: node tools/generate-thumbnails.mjs --concurrency 10
