@@ -1,31 +1,73 @@
 import { spawn } from "node:child_process";
-import { mkdirSync, readFileSync, renameSync, rmSync, statSync } from "node:fs";
+import {
+  mkdirSync,
+  readFileSync,
+  readdirSync,
+  renameSync,
+  rmSync,
+  statSync,
+  writeFileSync,
+} from "node:fs";
+import { fileURLToPath } from "node:url";
 import { join } from "node:path";
 
-const root = new URL("../", import.meta.url).pathname;
+const root = fileURLToPath(new URL("../", import.meta.url));
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
-const outputDirectory = join(root, "thumbnails");
+const outputDirectory = join(root, "previews");
+const manifestPath = join(outputDirectory, "manifest.json");
 const concurrencyFlag = process.argv.indexOf("--concurrency");
 const concurrency = Math.max(
   1,
-  Number(concurrencyFlag >= 0 ? process.argv[concurrencyFlag + 1] : 8) || 8,
+  Number(concurrencyFlag >= 0 ? process.argv[concurrencyFlag + 1] : 2) || 2,
 );
 
 mkdirSync(outputDirectory, { recursive: true });
 
+const previewSpec = {
+  schemaVersion: 1,
+  generationVersion: 1,
+  sourceRevision: payload.sourceRevision,
+  records: payload.records.length,
+  container: "mp4",
+  videoCodec: "h264",
+  sampleFractions: [0.82, 0.68, 0.52],
+  maxDurationSeconds: 4,
+  framesPerSecond: 12,
+  longEdgePixels: 480,
+  audio: false,
+  preset: "veryfast",
+  crf: 30,
+  pixelFormat: "yuv420p",
+};
+let cachedManifest = null;
+try {
+  cachedManifest = JSON.parse(readFileSync(manifestPath, "utf8"));
+} catch {
+  cachedManifest = null;
+}
+const cacheMatchesSpec = JSON.stringify(cachedManifest) === JSON.stringify(previewSpec);
+
 const queue = payload.records.map((record) => ({ record, attempt: 0 }));
+const validFilenames = new Set(payload.records.map((record) => `${record.recordId}.mp4`));
 const failures = [];
 let completed = 0;
 let skipped = 0;
 let generatedBytes = 0;
 
-function outputPath(recordId) {
-  return join(outputDirectory, `${recordId}.jpg`);
+for (const filename of readdirSync(outputDirectory)) {
+  if (filename.endsWith(".mp4") && !validFilenames.has(filename)) {
+    rmSync(join(outputDirectory, filename), { force: true });
+  }
 }
 
-function isComplete(path) {
+function outputPath(recordId) {
+  return join(outputDirectory, `${recordId}.mp4`);
+}
+
+function isComplete(path, requireCurrentSpec = true) {
   try {
-    return statSync(path).size >= 4_000;
+    if (requireCurrentSpec && !cacheMatchesSpec) return false;
+    return statSync(path).size >= 8_000;
   } catch {
     return false;
   }
@@ -34,7 +76,7 @@ function isComplete(path) {
 function generate({ record, attempt }) {
   return new Promise((resolve) => {
     const finalPath = outputPath(record.recordId);
-    const temporaryPath = `${finalPath}.part.jpg`;
+    const temporaryPath = `${finalPath}.part.mp4`;
 
     if (isComplete(finalPath)) {
       skipped += 1;
@@ -47,11 +89,18 @@ function generate({ record, attempt }) {
     }
 
     rmSync(temporaryPath, { force: true });
-    const seekFractions = [0.88, 0.74, 0.56];
-    const fraction = seekFractions[Math.min(attempt, seekFractions.length - 1)];
+    const fraction =
+      previewSpec.sampleFractions[
+        Math.min(attempt, previewSpec.sampleFractions.length - 1)
+      ];
+    const clipSeconds = Math.min(
+      previewSpec.maxDurationSeconds,
+      Math.max(0.5, record.durationSeconds - 0.1),
+    );
+    const latestStart = Math.max(0, record.durationSeconds - clipSeconds - 0.15);
     const seekSeconds = Math.max(
-      0.1,
-      Math.min(record.durationSeconds - 0.15, record.durationSeconds * fraction),
+      0,
+      Math.min(latestStart, record.durationSeconds * fraction),
     ).toFixed(3);
 
     const args = [
@@ -68,17 +117,37 @@ function generate({ record, attempt }) {
       "1",
       "-reconnect_delay_max",
       "5",
+      "-seekable",
+      "1",
+      "-multiple_requests",
+      "1",
       "-ss",
       seekSeconds,
       "-i",
       record.videoUrl,
+      "-t",
+      clipSeconds.toFixed(3),
+      "-map",
+      "0:v:0",
       "-an",
-      "-frames:v",
-      "1",
       "-vf",
-      "scale='if(gt(iw,ih),640,-2)':'if(gt(iw,ih),-2,640)'",
-      "-q:v",
-      "4",
+      `fps=${previewSpec.framesPerSecond},scale='if(gt(iw,ih),${previewSpec.longEdgePixels},-2)':'if(gt(iw,ih),-2,${previewSpec.longEdgePixels})':flags=lanczos`,
+      "-c:v",
+      "libx264",
+      "-preset",
+      previewSpec.preset,
+      "-crf",
+      String(previewSpec.crf),
+      "-pix_fmt",
+      previewSpec.pixelFormat,
+      "-g",
+      String(previewSpec.framesPerSecond * previewSpec.maxDurationSeconds),
+      "-keyint_min",
+      String(previewSpec.framesPerSecond * previewSpec.maxDurationSeconds),
+      "-sc_threshold",
+      "0",
+      "-movflags",
+      "+faststart",
       temporaryPath,
     ];
 
@@ -87,9 +156,12 @@ function generate({ record, attempt }) {
     child.stderr.on("data", (chunk) => {
       if (errorText.length < 4_000) errorText += chunk.toString();
     });
+    child.on("error", (error) => {
+      errorText += `\n${error.message}`;
+    });
 
     child.on("close", (code) => {
-      if (code === 0 && isComplete(temporaryPath)) {
+      if (code === 0 && isComplete(temporaryPath, false)) {
         renameSync(temporaryPath, finalPath);
         const size = statSync(finalPath).size;
         generatedBytes += size;
@@ -126,6 +198,10 @@ async function worker() {
 }
 
 await Promise.all(Array.from({ length: concurrency }, () => worker()));
+
+if (!failures.length) {
+  writeFileSync(manifestPath, `${JSON.stringify(previewSpec, null, 2)}\n`);
+}
 
 console.log(
   JSON.stringify(

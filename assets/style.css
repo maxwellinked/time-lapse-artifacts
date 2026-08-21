@@ -308,8 +308,8 @@ button {
 }
 
 .hero-media,
-.record-thumb,
-.dialog-poster {
+.record-preview,
+.dialog-preview {
   aspect-ratio: 4 / 5;
   background: var(--video);
   border: 1px solid var(--rule);
@@ -319,13 +319,12 @@ button {
 }
 
 .hero-media.landscape,
-.record-thumb.landscape,
-.dialog-poster.landscape {
+.record-preview.landscape,
+.dialog-preview.landscape {
   aspect-ratio: 4 / 3;
 }
 
-.thumb-shell video,
-.thumb-shell img {
+.preview-shell video {
   height: 100%;
   inset: 0;
   object-fit: cover;
@@ -335,17 +334,15 @@ button {
   width: 100%;
 }
 
-.thumb-shell.is-ready:not(.static-ready) video,
-.thumb-shell.static-ready img {
+.preview-shell.is-ready video {
   opacity: 1;
 }
 
-.thumb-shell.is-error video,
-.thumb-shell.is-error img {
+.preview-shell.is-error video {
   display: none;
 }
 
-.thumb-scrim {
+.preview-scrim {
   background: linear-gradient(180deg, rgb(0 0 0 / 8%) 30%, rgb(0 0 0 / 72%));
   inset: 0;
   pointer-events: none;
@@ -538,21 +535,20 @@ button {
   width: 100%;
 }
 
-.record-thumb {
+.record-preview {
   width: 100%;
 }
 
-.record-open:hover .record-thumb {
+.record-open:hover .record-preview {
   border-color: var(--rule-strong);
 }
 
-.record-open:hover .record-thumb video,
-.record-open:hover .record-thumb img {
+.record-open:hover .record-preview video {
   filter: brightness(1.08);
   transform: scale(1.01);
 }
 
-.thumb-fallback {
+.preview-fallback {
   color: #d8dbde;
   display: flex;
   flex-direction: column;
@@ -562,14 +558,14 @@ button {
   position: absolute;
 }
 
-.thumb-fallback strong {
+.preview-fallback strong {
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(54px, 6vw, 84px);
   font-weight: 400;
   letter-spacing: -0.05em;
 }
 
-.thumb-fallback small {
+.preview-fallback small {
   align-self: flex-end;
   font-size: 8px;
   font-weight: 700;
@@ -577,7 +573,7 @@ button {
   text-transform: uppercase;
 }
 
-.is-ready .thumb-fallback small {
+.is-ready .preview-fallback small {
   opacity: 0;
 }
 
@@ -760,13 +756,12 @@ button {
   position: relative;
 }
 
-.dialog-poster {
+.dialog-preview {
   aspect-ratio: 16 / 9;
   border: 0;
 }
 
-.dialog-poster video,
-.dialog-poster img {
+.dialog-preview video {
   object-fit: contain;
 }
 
