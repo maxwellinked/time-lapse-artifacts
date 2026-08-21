@@ -2,6 +2,10 @@ const DATA_URL = "data/records.json";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
 
+// Initialize Dynamic Video Preview System
+let dynamicPreview;
+let previewIntegration;
+
 const state = {
   records: [],
   filtered: [],
@@ -133,6 +137,7 @@ function preparePreview(shell, record, immediate = false) {
   shell.classList.add("is-loading");
   shell.dataset.previewGeneration = String(Number(shell.dataset.previewGeneration ?? 0) + 1);
   shell.dataset.previewUrl = `${PREVIEW_DIRECTORY}/${record.recordId}.mp4`;
+  shell.dataset.recordId = record.recordId;
   shell.dataset.inView = String(immediate);
   delete shell.dataset.previewReady;
   delete shell.dataset.queued;
@@ -170,7 +175,7 @@ function processPreviewQueue() {
   }
 }
 
-function loadPreview(shell) {
+async function loadPreview(shell) {
   const video = shell.querySelector("video");
   const source = shell.dataset.previewUrl;
   if (!video || !source) return finishPreview(shell, false);
@@ -197,6 +202,29 @@ function loadPreview(shell) {
   const onCanPlay = () => finish(true);
   const onError = () => finish(false);
 
+  // Try dynamic preview generation if available
+  if (dynamicPreview && shell.dataset.recordId) {
+    try {
+      const record = state.records.find(r => r.recordId === shell.dataset.recordId);
+      if (record && record.videoUrl) {
+        const preview = await dynamicPreview.generatePreview(
+          shell.dataset.recordId,
+          record.videoUrl,
+          {
+            startTime: Math.max(0, (record.durationSeconds || 30) - 5),
+            duration: 3000
+          }
+        );
+        dynamicPreview.loadPreviewInElement(shell, preview);
+        finish(true);
+        return;
+      }
+    } catch (error) {
+      console.warn("Dynamic preview generation failed, falling back to standard preview", error);
+    }
+  }
+
+  // Fall back to standard preview loading
   video.addEventListener("canplay", onCanPlay, { once: true });
   video.addEventListener("error", onError, { once: true });
   video.preload = "auto";
@@ -477,8 +505,29 @@ function openHashRecord() {
 
 window.addEventListener("hashchange", openHashRecord);
 
+// Cleanup on page unload
+window.addEventListener("beforeunload", () => {
+  if (previewIntegration) {
+    previewIntegration.cleanup();
+  }
+  if (dynamicPreview) {
+    dynamicPreview.clearCache();
+  }
+});
+
 async function initialize() {
   try {
+    // Initialize Dynamic Preview System
+    if (typeof DynamicVideoPreview !== 'undefined') {
+      dynamicPreview = new DynamicVideoPreview({
+        outputQuality: 'medium',
+        previewDuration: 3000,
+        frameRate: 24
+      });
+      previewIntegration = new PreviewShellIntegration(dynamicPreview);
+      console.log('Dynamic preview system initialized');
+    }
+
     const response = await fetch(DATA_URL);
     if (!response.ok) throw new Error(`Data request failed with ${response.status}`);
     const payload = await response.json();
