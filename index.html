@@ -180,10 +180,18 @@
           <button type="button" id="show-more" hidden>Show 18 more</button>
         </div>
 
-        <p class="data-error" id="data-error" hidden>
-          The recording index could not be loaded. The source dataset remains
-          available on Hugging Face.
-        </p>
+        <div class="data-error" id="data-error" role="status" hidden>
+          <p id="data-error-message">The recording index could not be loaded.</p>
+          <div class="data-error-actions">
+            <button type="button" id="retry-data">Retry loading index</button>
+            <a
+              href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts"
+              target="_blank"
+              rel="noreferrer"
+              >Open source dataset <span aria-hidden="true">↗</span></a
+            >
+          </div>
+        </div>
       </section>
     </main>
 
