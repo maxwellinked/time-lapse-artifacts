@@ -1,0 +1,50 @@
+name: Generate dynamic previews
+
+on:
+  push:
+    paths:
+      - .github/workflows/generate-previews.yml
+      - data/records.json
+      - tools/generate-previews.mjs
+      - tools/validate.mjs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  previews:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Check out current branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Install FFmpeg
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes ffmpeg
+          ffmpeg -version
+
+      - name: Generate late-stage motion previews
+        run: node tools/generate-previews.mjs --concurrency 6
+
+      - name: Validate complete website and preview pack
+        run: REQUIRE_PREVIEWS=1 node tools/validate.mjs
+
+      - name: Commit generated previews to the branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- previews
+          if git diff --cached --quiet; then
+            echo "Dynamic preview pack is already complete."
+            exit 0
+          fi
+          git commit -m "Add dynamic recording previews"
+          git push origin HEAD:${GITHUB_REF_NAME}

@@ -1,13 +1,16 @@
 import { createServer } from "node:http";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = new URL("../", import.meta.url).pathname;
+const root = fileURLToPath(new URL("../", import.meta.url));
 const requiredFiles = [
   "index.html",
   "assets/style.css",
   "assets/app.js",
   "data/records.json",
+  "tools/generate-previews.mjs",
+  ".github/workflows/generate-previews.yml",
   ".nojekyll",
 ];
 
@@ -17,6 +20,22 @@ const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "assets/style.css"), "utf8");
 const app = readFileSync(join(root, "assets/app.js"), "utf8");
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
+const expectedPreviewManifest = {
+  schemaVersion: 1,
+  generationVersion: 1,
+  sourceRevision: payload.sourceRevision,
+  records: payload.records.length,
+  container: "mp4",
+  videoCodec: "h264",
+  sampleFractions: [0.82, 0.68, 0.52],
+  maxDurationSeconds: 4,
+  framesPerSecond: 12,
+  longEdgePixels: 480,
+  audio: false,
+  preset: "veryfast",
+  crf: 30,
+  pixelFormat: "yuv420p",
+};
 
 if (payload.records.length !== 357) throw new Error("Record count must be 357");
 if (new Set(payload.records.map((record) => record.recordId)).size !== 357) {
@@ -36,11 +55,16 @@ if (/CC BY 4\.0/i.test(html)) {
   throw new Error("Dataset license notice is missing the NonCommercial restriction");
 }
 if (
-  !app.includes("thumbnails/${record.recordId}.jpg") ||
   !app.includes("IntersectionObserver") ||
-  !app.includes("video.duration * 0.88")
+  !app.includes('const PREVIEW_DIRECTORY = "previews"') ||
+  !app.includes("video.loop = true") ||
+  !app.includes('addEventListener("canplay"') ||
+  !app.includes("prefers-reduced-motion: reduce") ||
+  !app.includes("video.play()") ||
+  /thumbnails?\//i.test(app) ||
+  /<img\b/i.test(html)
 ) {
-  throw new Error("Static thumbnails or their live-video fallback are missing");
+  throw new Error("Dynamic motion previews are missing or static images remain active");
 }
 if (/bd5a3c|a54831|brown|rust/i.test(css)) {
   throw new Error("Warm brown accent remains in the stylesheet");
@@ -57,19 +81,32 @@ const invalid = payload.records.filter(
 );
 if (invalid.length) throw new Error(`${invalid.length} records failed source validation`);
 
-const thumbnailDirectory = join(root, "thumbnails");
-let thumbnailCount = 0;
+const previewDirectory = join(root, "previews");
+let previewFilenames = [];
+let previewManifest = null;
 try {
-  thumbnailCount = readdirSync(thumbnailDirectory).filter((name) => {
-    if (!/^tla-[a-f0-9]+\.jpg$/.test(name)) return false;
-    return statSync(join(thumbnailDirectory, name)).size >= 4_000;
-  }).length;
+  previewFilenames = readdirSync(previewDirectory).filter(
+    (name) =>
+      /^tla-[a-f0-9]+\.mp4$/.test(name) &&
+      statSync(join(previewDirectory, name)).size >= 8_000,
+  );
+  previewManifest = JSON.parse(readFileSync(join(previewDirectory, "manifest.json"), "utf8"));
 } catch {
-  thumbnailCount = 0;
+  previewFilenames = [];
+  previewManifest = null;
 }
 
-if (process.env.REQUIRE_THUMBNAILS === "1" && thumbnailCount !== payload.records.length) {
-  throw new Error(`Expected ${payload.records.length} thumbnails, found ${thumbnailCount}`);
+if (process.env.REQUIRE_PREVIEWS === "1") {
+  const expected = new Set(payload.records.map((record) => `${record.recordId}.mp4`));
+  const missing = [...expected].filter((name) => !previewFilenames.includes(name));
+  const unexpected = previewFilenames.filter((name) => !expected.has(name));
+  const manifestMatches =
+    JSON.stringify(previewManifest) === JSON.stringify(expectedPreviewManifest);
+  if (missing.length || unexpected.length || !manifestMatches) {
+    throw new Error(
+      `Preview pack mismatch: ${missing.length} missing, ${unexpected.length} unexpected, manifest ${manifestMatches ? "valid" : "invalid"}`,
+    );
+  }
 }
 
 const types = {
@@ -77,6 +114,7 @@ const types = {
   ".html": "text/html",
   ".js": "text/javascript",
   ".json": "application/json",
+  ".mp4": "video/mp4",
 };
 
 const server = createServer((request, response) => {
@@ -111,7 +149,8 @@ console.log(
       status: "valid",
       records: payload.records.length,
       unknownFinishTimes: payload.records.filter((record) => !record.time).length,
-      thumbnails: thumbnailCount,
+      previews: previewFilenames.length,
+      previewMode: "deterministic-motion-clips",
       sourceRevision: payload.sourceRevision,
     },
     null,

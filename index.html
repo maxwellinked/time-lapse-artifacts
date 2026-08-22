@@ -90,14 +90,13 @@
         </div>
 
         <figure class="hero-recording" id="featured-recording">
-          <div class="hero-media thumb-shell is-loading">
-            <img alt="" />
+          <div class="hero-media preview-shell is-loading">
             <video muted playsinline preload="none" aria-hidden="true"></video>
-            <div class="thumb-scrim"></div>
+            <div class="preview-scrim"></div>
             <div class="hero-media-copy">
               <span class="eyebrow">Newest Standard recording</span>
               <strong id="featured-date">Loading…</strong>
-              <span class="load-state">Preparing thumbnail</span>
+              <span class="load-state">Loading live preview</span>
             </div>
           </div>
           <figcaption>
@@ -114,8 +113,8 @@
             <h2 id="browse-title">Browse recordings</h2>
           </div>
           <p>
-            Thumbnails are late-stage frames from the source videos. Full recordings
-            remain unloaded until opened.
+            Dynamic previews replay short, muted late-stage passages derived from the
+            pinned source videos. Full playback remains user-initiated.
           </p>
         </div>
 
@@ -232,10 +231,9 @@
         </header>
 
         <div class="dialog-video-shell">
-          <div class="dialog-poster thumb-shell is-loading">
-            <img alt="" />
+          <div class="dialog-preview preview-shell is-loading">
             <video muted playsinline preload="none" aria-hidden="true"></video>
-            <div class="thumb-scrim"></div>
+            <div class="preview-scrim"></div>
           </div>
           <button type="button" class="load-video-button" id="load-full-video">
             Load full recording <span aria-hidden="true">▶</span>
@@ -285,13 +283,12 @@
     <template id="record-card-template">
       <article class="record-card">
         <button type="button" class="record-open">
-          <span class="record-thumb thumb-shell is-loading">
-            <img alt="" loading="lazy" decoding="async" />
+          <span class="record-preview preview-shell is-loading">
             <video muted playsinline preload="none" aria-hidden="true"></video>
-            <span class="thumb-scrim"></span>
-            <span class="thumb-fallback">
+            <span class="preview-scrim"></span>
+            <span class="preview-fallback">
               <strong></strong>
-              <small>Preparing thumbnail</small>
+              <small>Loading live preview</small>
             </span>
             <span class="play-mark" aria-hidden="true">↗</span>
           </span>
