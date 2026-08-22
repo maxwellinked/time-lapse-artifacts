@@ -52,6 +52,13 @@ if (!html.includes('id="record-grid"') || !html.includes('id="record-dialog"')) 
   throw new Error("Primary browse or detail interface is missing");
 }
 if (
+  !html.includes('<option value="desc">Newest first</option>') ||
+  !html.includes('<option value="asc">Oldest first</option>') ||
+  app.includes('elements.filters.querySelectorAll("select")')
+) {
+  throw new Error("Newest-first and oldest-first ordering must remain available");
+}
+if (
   !html.includes("CC BY-NC 4.0") ||
   !html.includes("https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts") ||
   !html.includes("https://creativecommons.org/licenses/by-nc/4.0/")

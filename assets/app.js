@@ -295,7 +295,8 @@ function fillSelect(name, values, labeler = humanizeToken) {
 }
 
 function populateFilters() {
-  for (const select of elements.filters.querySelectorAll("select")) {
+  for (const name of ["year", "tool", "medium", "support", "dimensions"]) {
+    const select = elements.filters.elements[name];
     select.querySelectorAll("option:not(:first-child)").forEach((option) => option.remove());
   }
   fillSelect(
