@@ -26,6 +26,16 @@ if (!html.includes('id="record-grid"') || !html.includes('id="record-dialog"')) 
   throw new Error("Primary browse or detail interface is missing");
 }
 if (
+  !html.includes("CC BY-NC 4.0") ||
+  !html.includes("https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts") ||
+  !html.includes("https://creativecommons.org/licenses/by-nc/4.0/")
+) {
+  throw new Error("Dataset license notice or required link is missing");
+}
+if (/CC BY 4\.0/i.test(html)) {
+  throw new Error("Dataset license notice is missing the NonCommercial restriction");
+}
+if (
   !app.includes("thumbnails/${record.recordId}.jpg") ||
   !app.includes("IntersectionObserver") ||
   !app.includes("video.duration * 0.88")
