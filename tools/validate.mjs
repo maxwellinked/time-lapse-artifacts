@@ -3,14 +3,19 @@ import { readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { validateRecordsPayload } from "../assets/data-loader.js";
+
 const root = fileURLToPath(new URL("../", import.meta.url));
 const requiredFiles = [
   "index.html",
   "assets/style.css",
   "assets/app.js",
+  "assets/data-loader.js",
   "data/records.json",
   "tools/generate-previews.mjs",
+  "tests/data-loader.test.mjs",
   ".github/workflows/generate-previews.yml",
+  ".github/workflows/validate-site.yml",
   ".nojekyll",
 ];
 
@@ -19,7 +24,9 @@ for (const path of requiredFiles) readFileSync(join(root, path));
 const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "assets/style.css"), "utf8");
 const app = readFileSync(join(root, "assets/app.js"), "utf8");
+const dataLoader = readFileSync(join(root, "assets/data-loader.js"), "utf8");
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
+validateRecordsPayload(payload);
 const expectedPreviewManifest = {
   schemaVersion: 1,
   generationVersion: 1,
@@ -53,6 +60,16 @@ if (
 }
 if (/CC BY 4\.0/i.test(html)) {
   throw new Error("Dataset license notice is missing the NonCommercial restriction");
+}
+if (
+  !app.includes('from "./data-loader.js"') ||
+  !app.includes("loadRecords(DATA_URL)") ||
+  !html.includes('id="retry-data"') ||
+  !dataLoader.includes("AbortController") ||
+  !dataLoader.includes('cache: attempt === 0 ? "default" : "reload"') ||
+  !dataLoader.includes("validateRecordsPayload")
+) {
+  throw new Error("Resilient recording-index loading is missing");
 }
 if (
   !app.includes("IntersectionObserver") ||
@@ -134,7 +151,13 @@ await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const address = server.address();
 const origin = `http://127.0.0.1:${address.port}`;
 
-for (const path of ["/", "/assets/style.css", "/assets/app.js", "/data/records.json"]) {
+for (const path of [
+  "/",
+  "/assets/style.css",
+  "/assets/app.js",
+  "/assets/data-loader.js",
+  "/data/records.json",
+]) {
   const response = await fetch(`${origin}${path}`);
   if (!response.ok) throw new Error(`${path} returned ${response.status}`);
 }

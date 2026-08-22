@@ -1,3 +1,5 @@
+import { loadRecords, RecordsDataError } from "./data-loader.js";
+
 const DATA_URL = "data/records.json";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
@@ -26,6 +28,8 @@ const elements = {
   resultCount: document.querySelector("#result-count"),
   showMore: document.querySelector("#show-more"),
   dataError: document.querySelector("#data-error"),
+  dataErrorMessage: document.querySelector("#data-error-message"),
+  retryData: document.querySelector("#retry-data"),
   cardTemplate: document.querySelector("#record-card-template"),
   dialog: document.querySelector("#record-dialog"),
   dialogRecordId: document.querySelector("#dialog-record-id"),
@@ -291,6 +295,9 @@ function fillSelect(name, values, labeler = humanizeToken) {
 }
 
 function populateFilters() {
+  for (const select of elements.filters.querySelectorAll("select")) {
+    select.querySelectorAll("option:not(:first-child)").forEach((option) => option.remove());
+  }
   fillSelect(
     "year",
     [...new Set(state.records.map((record) => record.date.slice(0, 4)))].sort(),
@@ -516,6 +523,10 @@ window.addEventListener("beforeunload", () => {
 });
 
 async function initialize() {
+  elements.retryData.disabled = true;
+  elements.dataError.hidden = true;
+  elements.resultCount.textContent = "Loading records…";
+
   try {
     // Initialize Dynamic Preview System
     if (typeof DynamicVideoPreview !== 'undefined') {
@@ -528,9 +539,7 @@ async function initialize() {
       console.log('Dynamic preview system initialized');
     }
 
-    const response = await fetch(DATA_URL);
-    if (!response.ok) throw new Error(`Data request failed with ${response.status}`);
-    const payload = await response.json();
+    const payload = await loadRecords(DATA_URL);
     state.records = payload.records;
     state.filtered = [...state.records];
 
@@ -544,10 +553,26 @@ async function initialize() {
     renderRecords();
     openHashRecord();
   } catch (error) {
-    console.error(error);
+    const code = error instanceof RecordsDataError ? error.code : "unexpected";
+    console.error("Recording index initialization failed", {
+      code,
+      status: error instanceof RecordsDataError ? error.status : null,
+      error,
+    });
     elements.resultCount.textContent = "Recording index unavailable";
+    elements.dataErrorMessage.textContent =
+      code === "timeout"
+        ? "The recording index took too long to load."
+        : code === "invalid_payload" || code === "invalid_json"
+          ? "The published recording index could not be validated."
+          : navigator.onLine === false
+            ? "The recording index is unavailable while this device is offline."
+            : "The recording index could not be loaded.";
     elements.dataError.hidden = false;
+  } finally {
+    elements.retryData.disabled = false;
   }
 }
 
+elements.retryData.addEventListener("click", initialize);
 initialize();

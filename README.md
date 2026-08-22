@@ -11,6 +11,21 @@ not archive records or replacements for the source recordings.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
+## Validation
+
+Run the dependency-free checks before publishing:
+
+```console
+node --test tests/data-loader.test.mjs
+node tools/validate.mjs
+```
+
+The browser validates the bundled index before rendering it, retries transient
+same-origin failures with a bounded timeout, and offers a visible retry action
+if the index remains unavailable. Normal browser and GitHub Pages HTTP caching
+remain authoritative; the site does not keep a second local copy of archive
+metadata.
+
 ## Refreshing the index
 
 `data/records.json` identifies the pinned Hugging Face revision used by the site.

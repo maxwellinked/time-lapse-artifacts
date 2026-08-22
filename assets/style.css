@@ -666,6 +666,42 @@ button {
   padding: 24px;
 }
 
+.data-error p {
+  margin: 0;
+}
+
+.data-error-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.data-error-actions button,
+.data-error-actions a {
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+}
+
+.data-error-actions button {
+  background: transparent;
+  border: 1px solid var(--rule);
+  cursor: pointer;
+  padding: 10px 14px;
+}
+
+.data-error-actions button:hover,
+.data-error-actions button:focus-visible {
+  border-color: var(--ink);
+}
+
+.data-error-actions button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
 .site-footer {
   align-items: start;
   border-top: 1px solid var(--rule);
