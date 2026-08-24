@@ -12,6 +12,7 @@ const requiredFiles = [
   "assets/app.js",
   "assets/data-loader.js",
   "data/records.json",
+  "tools/sync-records.mjs",
   "tools/generate-previews.mjs",
   "tests/data-loader.test.mjs",
   ".github/workflows/generate-previews.yml",
@@ -29,7 +30,7 @@ const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8")
 validateRecordsPayload(payload);
 const expectedPreviewManifest = {
   schemaVersion: 1,
-  generationVersion: 1,
+  generationVersion: 2,
   sourceRevision: payload.sourceRevision,
   records: payload.records.length,
   container: "mp4",
@@ -42,10 +43,13 @@ const expectedPreviewManifest = {
   preset: "veryfast",
   crf: 30,
   pixelFormat: "yuv420p",
+  recordIdentities: Object.fromEntries(
+    payload.records.map((record) => [record.recordId, record.integrityReference]),
+  ),
 };
 
-if (payload.records.length !== 357) throw new Error("Record count must be 357");
-if (new Set(payload.records.map((record) => record.recordId)).size !== 357) {
+if (!payload.records.length) throw new Error("Recording index must not be empty");
+if (new Set(payload.records.map((record) => record.recordId)).size !== payload.records.length) {
   throw new Error("Record IDs must be unique");
 }
 if (!html.includes('id="record-grid"') || !html.includes('id="record-dialog"')) {

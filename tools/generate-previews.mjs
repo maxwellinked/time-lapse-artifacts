@@ -16,16 +16,19 @@ const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8")
 const outputDirectory = join(root, "previews");
 const manifestPath = join(outputDirectory, "manifest.json");
 const concurrencyFlag = process.argv.indexOf("--concurrency");
+const previousRecordsFlag = process.argv.indexOf("--previous-records");
 const concurrency = Math.max(
   1,
   Number(concurrencyFlag >= 0 ? process.argv[concurrencyFlag + 1] : 2) || 2,
 );
+const previousRecordsPath =
+  previousRecordsFlag >= 0 ? process.argv[previousRecordsFlag + 1] : null;
 
 mkdirSync(outputDirectory, { recursive: true });
 
 const previewSpec = {
   schemaVersion: 1,
-  generationVersion: 1,
+  generationVersion: 2,
   sourceRevision: payload.sourceRevision,
   records: payload.records.length,
   container: "mp4",
@@ -38,6 +41,9 @@ const previewSpec = {
   preset: "veryfast",
   crf: 30,
   pixelFormat: "yuv420p",
+  recordIdentities: Object.fromEntries(
+    payload.records.map((record) => [record.recordId, record.integrityReference]),
+  ),
 };
 let cachedManifest = null;
 try {
@@ -45,7 +51,41 @@ try {
 } catch {
   cachedManifest = null;
 }
-const cacheMatchesSpec = JSON.stringify(cachedManifest) === JSON.stringify(previewSpec);
+const encodingFields = [
+  "schemaVersion",
+  "container",
+  "videoCodec",
+  "sampleFractions",
+  "maxDurationSeconds",
+  "framesPerSecond",
+  "longEdgePixels",
+  "audio",
+  "preset",
+  "crf",
+  "pixelFormat",
+];
+const cacheVersionCompatible =
+  cachedManifest?.generationVersion === previewSpec.generationVersion ||
+  (cachedManifest?.generationVersion === 1 && Boolean(previousRecordsPath));
+const cacheMatchesEncoding =
+  cacheVersionCompatible &&
+  encodingFields.every(
+    (field) => JSON.stringify(cachedManifest[field]) === JSON.stringify(previewSpec[field]),
+  );
+let cachedRecordIdentities = cachedManifest?.recordIdentities ?? null;
+
+if (!cachedRecordIdentities && previousRecordsPath && cachedManifest) {
+  const previousPayload = JSON.parse(readFileSync(previousRecordsPath, "utf8"));
+  if (
+    previousPayload.sourceRevision !== cachedManifest.sourceRevision ||
+    previousPayload.records.length !== cachedManifest.records
+  ) {
+    throw new Error("Previous records do not match the cached preview manifest");
+  }
+  cachedRecordIdentities = Object.fromEntries(
+    previousPayload.records.map((record) => [record.recordId, record.integrityReference]),
+  );
+}
 
 const queue = payload.records.map((record) => ({ record, attempt: 0 }));
 const validFilenames = new Set(payload.records.map((record) => `${record.recordId}.mp4`));
@@ -64,9 +104,15 @@ function outputPath(recordId) {
   return join(outputDirectory, `${recordId}.mp4`);
 }
 
-function isComplete(path, requireCurrentSpec = true) {
+function isComplete(record, path, requireCurrentIdentity = true) {
   try {
-    if (requireCurrentSpec && !cacheMatchesSpec) return false;
+    if (
+      requireCurrentIdentity &&
+      (!cacheMatchesEncoding ||
+        cachedRecordIdentities?.[record.recordId] !== record.integrityReference)
+    ) {
+      return false;
+    }
     return statSync(path).size >= 8_000;
   } catch {
     return false;
@@ -78,7 +124,7 @@ function generate({ record, attempt }) {
     const finalPath = outputPath(record.recordId);
     const temporaryPath = `${finalPath}.part.mp4`;
 
-    if (isComplete(finalPath)) {
+    if (isComplete(record, finalPath)) {
       skipped += 1;
       completed += 1;
       process.stdout.write(
@@ -161,7 +207,7 @@ function generate({ record, attempt }) {
     });
 
     child.on("close", (code) => {
-      if (code === 0 && isComplete(temporaryPath, false)) {
+      if (code === 0 && isComplete(record, temporaryPath, false)) {
         renameSync(temporaryPath, finalPath);
         const size = statSync(finalPath).size;
         generatedBytes += size;
