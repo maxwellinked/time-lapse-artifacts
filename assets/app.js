@@ -295,7 +295,7 @@ function fillSelect(name, values, labeler = humanizeToken) {
 }
 
 function populateFilters() {
-  for (const name of ["year", "tool", "medium", "support", "dimensions"]) {
+  for (const name of ["year", "tool", "dimensions"]) {
     const select = elements.filters.elements[name];
     select.querySelectorAll("option:not(:first-child)").forEach((option) => option.remove());
   }
@@ -305,14 +305,12 @@ function populateFilters() {
     (value) => value,
   );
   fillSelect("tool", valuesFromRecords("tool", true));
-  fillSelect("medium", valuesFromRecords("medium", true));
-  fillSelect("support", valuesFromRecords("support", true));
   fillSelect("dimensions", valuesFromRecords("dimensions"), formatDimensions);
 }
 
 function recordMatches(record, field, expected) {
   if (!expected) return true;
-  if (["tool", "medium", "support"].includes(field)) {
+  if (field === "tool") {
     return record[field].split(";").includes(expected);
   }
   return record[field] === expected;
@@ -342,8 +340,6 @@ function applyFilters() {
       (!query || searchable.includes(query)) &&
       (!year || record.date.startsWith(year)) &&
       recordMatches(record, "tool", String(formData.get("tool") ?? "")) &&
-      recordMatches(record, "medium", String(formData.get("medium") ?? "")) &&
-      recordMatches(record, "support", String(formData.get("support") ?? "")) &&
       recordMatches(record, "dimensions", String(formData.get("dimensions") ?? ""))
     );
   });
