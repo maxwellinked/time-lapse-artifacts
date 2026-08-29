@@ -1,4 +1,10 @@
 import { loadRecords, RecordsDataError } from "./data-loader.js";
+import {
+  deriveRecordingSequences,
+  extendVisibleCount,
+  getRecordingPart,
+  sortRecordsForDisplay,
+} from "./record-sequences.js";
 
 const DATA_URL = "data/records.json";
 const PAGE_SIZE = 18;
@@ -11,6 +17,7 @@ let previewIntegration;
 const state = {
   records: [],
   filtered: [],
+  sequenceDetails: new Map(),
   visibleCount: PAGE_SIZE,
   activeRecord: null,
 };
@@ -344,12 +351,7 @@ function applyFilters() {
     );
   });
 
-  state.filtered.sort((a, b) => {
-    const comparison = `${b.date}T${b.time ?? "00:00"}`.localeCompare(
-      `${a.date}T${a.time ?? "00:00"}`,
-    );
-    return order === "asc" ? -comparison : comparison;
-  });
+  state.filtered = sortRecordsForDisplay(state.filtered, order, state.sequenceDetails);
 
   state.visibleCount = PAGE_SIZE;
   renderRecords();
@@ -357,6 +359,11 @@ function applyFilters() {
 
 function renderRecords() {
   elements.grid.replaceChildren();
+  state.visibleCount = extendVisibleCount(
+    state.filtered,
+    state.visibleCount,
+    state.sequenceDetails,
+  );
   const visible = state.filtered.slice(0, state.visibleCount);
   const fragment = document.createDocumentFragment();
   const previews = [];
@@ -365,13 +372,21 @@ function renderRecords() {
     const card = elements.cardTemplate.content.firstElementChild.cloneNode(true);
     const button = card.querySelector(".record-open");
     const preview = card.querySelector(".record-preview");
+    const recordingPart = getRecordingPart(record.filename);
 
     button.setAttribute(
       "aria-label",
-      `Open recording from ${formatDate(record.date)} at ${formatTime(record.time)}`,
+      `Open recording${recordingPart ? ` part ${recordingPart.number}` : ""} from ${formatDate(
+        record.date,
+      )} at ${formatTime(record.time)}`,
     );
     card.querySelector(".preview-fallback strong").textContent = record.date.slice(0, 4);
     card.querySelector(".record-id").textContent = record.recordId;
+    if (recordingPart) {
+      const partLabel = card.querySelector(".record-part");
+      partLabel.textContent = recordingPart.label;
+      partLabel.hidden = false;
+    }
     card.querySelector(".record-date").textContent = formatDate(record.date);
     card.querySelector(".record-facts").textContent = [
       formatTime(record.time),
@@ -538,7 +553,7 @@ async function initialize() {
 
     const payload = await loadRecords(DATA_URL);
     state.records = payload.records;
-    state.filtered = [...state.records];
+    state.sequenceDetails = deriveRecordingSequences(state.records);
 
     elements.recordCount.textContent = state.records.length.toLocaleString();
     const oldest = state.records.at(-1);
@@ -547,7 +562,7 @@ async function initialize() {
 
     populateFilters();
     renderFeatured();
-    renderRecords();
+    applyFilters();
     openHashRecord();
   } catch (error) {
     const code = error instanceof RecordsDataError ? error.code : "unexpected";

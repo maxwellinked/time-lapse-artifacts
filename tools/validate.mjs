@@ -11,10 +11,12 @@ const requiredFiles = [
   "assets/style.css",
   "assets/app.js",
   "assets/data-loader.js",
+  "assets/record-sequences.js",
   "data/records.json",
   "tools/sync-records.mjs",
   "tools/generate-previews.mjs",
   "tests/data-loader.test.mjs",
+  "tests/record-sequences.test.mjs",
   ".github/workflows/generate-previews.yml",
   ".github/workflows/validate-site.yml",
   ".nojekyll",
@@ -26,6 +28,7 @@ const html = readFileSync(join(root, "index.html"), "utf8");
 const css = readFileSync(join(root, "assets/style.css"), "utf8");
 const app = readFileSync(join(root, "assets/app.js"), "utf8");
 const dataLoader = readFileSync(join(root, "assets/data-loader.js"), "utf8");
+const recordSequences = readFileSync(join(root, "assets/record-sequences.js"), "utf8");
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
 validateRecordsPayload(payload);
 const expectedPreviewManifest = {
@@ -56,8 +59,8 @@ if (!html.includes('id="record-grid"') || !html.includes('id="record-dialog"')) 
   throw new Error("Primary browse or detail interface is missing");
 }
 if (
-  !html.includes('<option value="desc">Newest first</option>') ||
-  !html.includes('<option value="asc">Oldest first</option>') ||
+  !html.includes('<option value="desc">Newest first (REC forward)</option>') ||
+  !html.includes('<option value="asc">Oldest first (REC forward)</option>') ||
   app.includes('elements.filters.querySelectorAll("select")')
 ) {
   throw new Error("Newest-first and oldest-first ordering must remain available");
@@ -74,6 +77,7 @@ if (/CC BY 4\.0/i.test(html)) {
 }
 if (
   !app.includes('from "./data-loader.js"') ||
+  !app.includes('from "./record-sequences.js"') ||
   !app.includes("loadRecords(DATA_URL)") ||
   !html.includes('id="retry-data"') ||
   !dataLoader.includes("AbortController") ||
@@ -81,6 +85,14 @@ if (
   !dataLoader.includes("validateRecordsPayload")
 ) {
   throw new Error("Resilient recording-index loading is missing");
+}
+if (
+  !html.includes('class="record-part"') ||
+  !recordSequences.includes("deriveRecordingSequences") ||
+  !recordSequences.includes("sortRecordsForDisplay") ||
+  !recordSequences.includes("extendVisibleCount")
+) {
+  throw new Error("Recording-sequence presentation behavior is missing");
 }
 if (
   !app.includes("IntersectionObserver") ||
@@ -167,6 +179,7 @@ for (const path of [
   "/assets/style.css",
   "/assets/app.js",
   "/assets/data-loader.js",
+  "/assets/record-sequences.js",
   "/data/records.json",
 ]) {
   const response = await fetch(`${origin}${path}`);

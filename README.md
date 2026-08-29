@@ -9,6 +9,10 @@ from the pinned Hugging Face source MP4s. Full playback remains user-initiated
 and streams from Hugging Face; the preview clips are presentation derivatives,
 not archive records or replacements for the source recordings.
 
+The gallery keeps strict, consecutive `Rec01` through `RecNN` filename runs in
+numbered order for viewing continuity. This presentation rule does not assert a
+shared work, session, or completion state.
+
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
 ## Validation
@@ -16,7 +20,7 @@ Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 Run the dependency-free checks before publishing:
 
 ```console
-node --test tests/data-loader.test.mjs
+node --test tests/*.test.mjs
 node tools/validate.mjs
 ```
 

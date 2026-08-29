@@ -10,6 +10,7 @@ import {
 const revision = "a".repeat(40);
 const record = {
   recordId: "tla-0123456789abcdef",
+  rowIndex: 0,
   filename: "2026-08-10.1201.BallpointPen.Ink.Paper.9x12.mp4",
   date: "2026-08-10",
   time: "12:01",
@@ -50,6 +51,14 @@ test("validates a pinned, newest-first payload", () => {
 test("rejects duplicate record IDs", () => {
   assert.throws(
     () => validateRecordsPayload(payload([record, { ...record }])),
+    (error) => error instanceof RecordsDataError && error.code === "invalid_payload",
+  );
+});
+
+test("rejects duplicate source row indexes", () => {
+  const duplicateRow = { ...record, recordId: "tla-fedcba9876543210" };
+  assert.throws(
+    () => validateRecordsPayload(payload([record, duplicateRow])),
     (error) => error instanceof RecordsDataError && error.code === "invalid_payload",
   );
 });

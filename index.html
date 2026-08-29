@@ -27,8 +27,8 @@
       rel="canonical"
       href="https://maxwellinked.github.io/time-lapse-artifacts/"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20260829-filter-simplification" />
-    <script src="assets/app.js?v=20260829-filter-simplification" type="module"></script>
+    <link rel="stylesheet" href="assets/style.css?v=20260829-sequence-continuity" />
+    <script src="assets/app.js?v=20260829-sequence-continuity" type="module"></script>
   </head>
   <body>
     <a class="skip-link" href="#recordings">Skip to recordings</a>
@@ -154,8 +154,8 @@
             <label>
               Order
               <select name="order">
-                <option value="desc">Newest first</option>
-                <option value="asc">Oldest first</option>
+                <option value="desc">Newest first (REC forward)</option>
+                <option value="asc">Oldest first (REC forward)</option>
               </select>
             </label>
           </div>
@@ -169,7 +169,7 @@
         <div class="record-grid" id="record-grid" aria-live="polite"></div>
 
         <div class="load-more">
-          <button type="button" id="show-more" hidden>Show 18 more</button>
+          <button type="button" id="show-more" hidden>Show more</button>
         </div>
 
         <div class="data-error" id="data-error" role="status" hidden>
@@ -301,7 +301,10 @@
             <span class="play-mark" aria-hidden="true">↗</span>
           </span>
           <span class="record-content">
-            <span class="record-id"></span>
+            <span class="record-identity">
+              <span class="record-id"></span>
+              <span class="record-part" hidden></span>
+            </span>
             <strong class="record-date"></strong>
             <span class="record-facts"></span>
             <span class="record-link">Open recording →</span>
