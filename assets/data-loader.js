@@ -42,6 +42,7 @@ export function validateRecordsPayload(payload) {
   const expectedSourcePrefix =
     `${CANONICAL_SOURCE_ROOT}${payload.sourceRevision}/Standard_Time_Lapses/`;
   const recordIds = new Set();
+  const rowIndexes = new Set();
   let previousDate = null;
 
   payload.records.forEach((record, index) => {
@@ -55,6 +56,13 @@ export function validateRecordsPayload(payload) {
       invalidPayload(`Record ID ${record.recordId} appears more than once.`);
     }
     recordIds.add(record.recordId);
+    if (!Number.isInteger(record.rowIndex) || record.rowIndex < 0) {
+      invalidPayload(`Record ${record.recordId} has an invalid source row index.`);
+    }
+    if (rowIndexes.has(record.rowIndex)) {
+      invalidPayload(`Source row index ${record.rowIndex} appears more than once.`);
+    }
+    rowIndexes.add(record.rowIndex);
 
     for (const field of ["filename", "tool", "medium", "support", "dimensions"]) {
       if (!isNonEmptyString(record[field])) {

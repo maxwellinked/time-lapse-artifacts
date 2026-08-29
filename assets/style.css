@@ -603,6 +603,14 @@ button {
   margin-top: 15px;
 }
 
+.record-identity {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  min-width: 0;
+}
+
 .record-id {
   color: var(--quiet);
   font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
@@ -611,6 +619,16 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.record-part {
+  border: 1px solid var(--rule-strong);
+  color: var(--muted);
+  flex: 0 0 auto;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 3px 5px 2px;
 }
 
 .record-date {
