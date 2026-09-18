@@ -44,8 +44,9 @@ The sync reads the canonical Standard rows directly from that revision's
 playback URL to the same revision. Verify record count, ordering, filters, source
 links, and direct record hashes before publishing.
 
-The older extraction helper is retained only for reproducing legacy rendered
-index snapshots; it is not the current refresh path.
+The legacy `tools/extract-records.mjs` helper has been removed; retrieve it from
+Git history only to reproduce historical rendered index snapshots. Use
+`tools/sync-records.mjs` for all current index refreshes.
 
 ## Refreshing previews
 
