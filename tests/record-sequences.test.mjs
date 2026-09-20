@@ -136,7 +136,7 @@ test("extends a page boundary through the end of a recognized sequence", () => {
   assert.equal(extendVisibleCount(records, 19, details), 19);
 });
 
-test("keeps the indexed August 22–23 recording run forward without joining August 19", () => {
+test("keeps the indexed August 19–20 and August 22–23 recording runs separate and forward", () => {
   const records = JSON.parse(
     readFileSync(new URL("../data/records.json", import.meta.url), "utf8"),
   ).records;
@@ -150,7 +150,20 @@ test("keeps the indexed August 22–23 recording run forward without joining Aug
     "tla-793ae81230693d67",
   ];
   const runStart = orderedIds.indexOf(expectedRun[0]);
+  const august19Id = "tla-3c67bd9f8958b9b7";
+  const august20Id = "tla-85cdf161df0b807e";
+  const earlierRunStart = orderedIds.indexOf(august19Id);
+  const earlierGroupId = `recording-sequence:${august19Id}`;
 
   assert.deepEqual(orderedIds.slice(runStart, runStart + expectedRun.length), expectedRun);
-  assert.equal(details.get("tla-3c67bd9f8958b9b7").groupId, null);
+  assert.deepEqual(orderedIds.slice(earlierRunStart, earlierRunStart + 2), [
+    august19Id,
+    august20Id,
+  ]);
+  assert.equal(details.get(august19Id).groupId, earlierGroupId);
+  assert.equal(details.get(august20Id).groupId, earlierGroupId);
+  assert.equal(details.get(august19Id).sequencePosition, 1);
+  assert.equal(details.get(august20Id).sequencePosition, 2);
+  assert.equal(details.get(august19Id).sequenceSize, 2);
+  assert.notEqual(details.get(expectedRun[0]).groupId, earlierGroupId);
 });
