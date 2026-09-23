@@ -48,7 +48,7 @@ A future proxy release should remove audio by default while preserving the archi
 
 ## Citation
 
-Until a DOI-backed release is available, cite the dataset and pinned revision:
+A DOI-backed snapshot is now available. DOI [10.57967/hf/10529](https://doi.org/10.57967/hf/10529) identifies the **September 20, 2026 snapshot** (845 indexed video files; Hugging Face revision `f6d92df`). For reproducibility, cite the exact Hugging Face repository revision used. The DOI identifies that snapshot and does not automatically identify later changes on the moving `main` branch.
 
 ### BibTeX Format
 
@@ -58,15 +58,17 @@ Until a DOI-backed release is available, cite the dataset and pinned revision:
   title     = {time-lapse-artifacts},
   year      = {2026},
   publisher = {Hugging Face},
+  doi       = {10.57967/hf/10529},
   url       = {https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts},
-  note      = {Active construction release; include the repository revision used}
+  note      = {September 20, 2026 snapshot; include the exact repository revision used}
 }
 ```
 
 ### Citation Requirements
 
 **Always include**:
-- The repository revision (commit SHA or tag) used
+- The DOI when citing the September 20, 2026 snapshot
+- The exact Hugging Face repository revision (commit SHA or tag) used
 - Selected `record_id` values if using a subset
 - Pinned `hub_xet_hash` values for specific files
 - Documentation of any preprocessing steps
