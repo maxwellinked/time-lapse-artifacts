@@ -1,3 +1,10 @@
+> [!WARNING]
+> **Historical documentation snapshot: August 23, 2026**
+>
+> The historical text below is preserved from the August 23, 2026 documentation snapshot. Its counts, schema, and workflow descriptions may be outdated.
+>
+> For current archive information, see the [Hugging Face dataset](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts). For current field definitions, see [SCHEMA.md](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/main/SCHEMA.md).
+
 # time-lapse-artifacts
 
 490 time-lapse recordings of one artist's traditional drawing practice across nearly two years (September 2024–August 22, 2026), with standardized acquisition since July 13, 2025. Across approximately 1.98 TB of video, the archive follows the same artist working in physical media—including pencil, ballpoint pen, fountain pen, brush, graphite, and ink—on fixed-format paper and illustration board.
