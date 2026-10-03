@@ -1,3 +1,10 @@
+> [!WARNING]
+> **Historical documentation snapshot: August 23, 2026**
+>
+> The historical text below is preserved from the August 23, 2026 documentation snapshot. Its counts, schema, and workflow descriptions may be outdated.
+>
+> For current archive information, see the [Hugging Face dataset](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts). For current field definitions, see [SCHEMA.md](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/main/SCHEMA.md).
+
 # Repository Structure
 
 ## Directory Layout
