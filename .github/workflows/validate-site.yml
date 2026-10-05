@@ -19,3 +19,6 @@ jobs:
           node-version: 22
       - run: node --test tests/*.test.mjs
       - run: node tools/validate.mjs
+      - name: Validate committed preview pack
+        if: github.event_name == 'pull_request'
+        run: REQUIRE_PREVIEWS=1 node tools/validate.mjs
