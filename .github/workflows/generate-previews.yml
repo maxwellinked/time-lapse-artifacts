@@ -31,6 +31,19 @@ jobs:
           sudo apt-get install --yes ffmpeg
           ffmpeg -version
 
+      - name: Capture encoder toolchain provenance
+        run: |
+          {
+            printf 'Toolchain for added or modified previews listed below; excludes cached previews.\n'
+            printf 'Run: %s/%s/actions/runs/%s\nAttempt: %s\n' "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID" "$GITHUB_RUN_ATTEMPT"
+            printf 'Checkout: %s\n' "$(git rev-parse HEAD)"
+            printf 'Runner image: %s %s\n' "$ImageOS" "$ImageVersion"
+            ffmpeg -version
+            dpkg-query -W -f='${binary:Package}\t${Version}\t${Architecture}\n' ffmpeg 'libx264-*'
+            printf '\nSHA-256 of FFmpeg executable, source index and generator:\n'
+            sha256sum "$(command -v ffmpeg)" data/records.json tools/generate-previews.mjs
+          } > "$RUNNER_TEMP/preview-toolchain.txt"
+
       - name: Generate late-stage motion previews
         run: node tools/generate-previews.mjs --concurrency 6
 
@@ -45,6 +58,20 @@ jobs:
           if git diff --cached --quiet; then
             echo "Dynamic preview pack is already complete."
             exit 0
+          fi
+          # Persist provenance only for changed MP4s, never for cache-only runs.
+          mapfile -d '' generated_previews < <(git diff --cached --name-only --diff-filter=AM -z -- 'previews/*.mp4')
+          if (( ${#generated_previews[@]} )); then
+            mkdir -p previews/provenance
+            provenance="previews/provenance/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.txt"
+            cp "$RUNNER_TEMP/preview-toolchain.txt" "$provenance"
+            {
+              printf '\nSHA-256 of resulting manifest:\n'
+              sha256sum previews/manifest.json
+              printf '\nSHA-256 of added or modified previews from this run:\n'
+              sha256sum -- "${generated_previews[@]}"
+            } >> "$provenance"
+            git add -- "$provenance"
           fi
           git commit -m "Add dynamic recording previews"
           git push origin HEAD:${GITHUB_REF_NAME}
