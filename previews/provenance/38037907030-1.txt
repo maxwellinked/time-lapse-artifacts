@@ -1,0 +1,95 @@
+Toolchain for added or modified previews listed below; excludes cached previews.
+Run: https://github.com/maxwellinked/time-lapse-artifacts/actions/runs/38037907030
+Attempt: 1
+Checkout: 6d89b18238182ef8ec0c2d3cf69d5c10090dde04
+Runner image: ubuntu24 20261004.327.1
+ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers
+built with gcc 13 (Ubuntu 13.2.0-23ubuntu3)
+configuration: --prefix=/usr --extra-version=3ubuntu5 --toolchain=hardened --libdir=/usr/lib/x86_64-linux-gnu --incdir=/usr/include/x86_64-linux-gnu --arch=amd64 --enable-gpl --disable-stripping --disable-omx --enable-gnutls --enable-libaom --enable-libass --enable-libbs2b --enable-libcaca --enable-libcdio --enable-libcodec2 --enable-libdav1d --enable-libflite --enable-libfontconfig --enable-libfreetype --enable-libfribidi --enable-libglslang --enable-libgme --enable-libgsm --enable-libharfbuzz --enable-libmp3lame --enable-libmysofa --enable-libopenjpeg --enable-libopenmpt --enable-libopus --enable-librubberband --enable-libshine --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libtheora --enable-libtwolame --enable-libvidstab --enable-libvorbis --enable-libvpx --enable-libwebp --enable-libx265 --enable-libxml2 --enable-libxvid --enable-libzimg --enable-openal --enable-opencl --enable-opengl --disable-sndio --enable-libvpl --disable-libmfx --enable-libdc1394 --enable-libdrm --enable-libiec61883 --enable-chromaprint --enable-frei0r --enable-ladspa --enable-libbluray --enable-libjack --enable-libpulse --enable-librabbitmq --enable-librist --enable-libsrt --enable-libssh --enable-libsvtav1 --enable-libx264 --enable-libzmq --enable-libzvbi --enable-lv2 --enable-sdl2 --enable-libplacebo --enable-librav1e --enable-pocketsphinx --enable-librsvg --enable-libjxl --enable-shared
+libavutil      58. 29.100 / 58. 29.100
+libavcodec     60. 31.102 / 60. 31.102
+libavformat    60. 16.100 / 60. 16.100
+libavdevice    60.  3.100 / 60.  3.100
+libavfilter     9. 12.100 /  9. 12.100
+libswscale      7.  5.100 /  7.  5.100
+libswresample   4. 12.100 /  4. 12.100
+libpostproc    57.  3.100 / 57.  3.100
+ffmpeg	7:6.1.1-3ubuntu5	amd64
+libx264-164:amd64	2:0.164.3108+git31e19f9-1	amd64
+
+SHA-256 of FFmpeg executable, source index and generator:
+ed16af623947494a72e284b6eb8ff225f2da22b38b5d5069c2fd4b4ba3384e41  /usr/bin/ffmpeg
+c31da3df553765b921a07dc8815a2c66bbdd3d9ee99a56121db3a3f5214320df  data/records.json
+9ab500b1da806056d25f82bedd0a0e5995b748facb11e48732123c5fc71268aa  tools/generate-previews.mjs
+
+SHA-256 of resulting manifest:
+b8120fc09fd21c5c432c704e690606f23cacaa740fcaa154882d67e80e1511ef  previews/manifest.json
+
+SHA-256 of added or modified previews from this run:
+0e9e340c594755cc2a9e9ccb8b23aeab351628a0fc147aa283f9d55a2cd54755  previews/tla-03aee9f3f44ca06b.mp4
+e3f75f37550b7e52d395f0283c3eda6ac6e13187517391df4b3425f3f1e2fe44  previews/tla-06896bf0fd1e3cd0.mp4
+9fb6dc94200f9fa9a3e291e5eebe09dde59eff94cf3bff97ff6f114fd9dcf3a9  previews/tla-0c0fb3c95f443188.mp4
+a804c541bcf96e8f0a788ea869bea77a7ae1cd301086e92e89109813048b739f  previews/tla-1969301ab06c6c3a.mp4
+923ef43de40dec6ca6bbb26990510230dd87b5d5590751e7846a7ee96a8dcf93  previews/tla-1f2d637d26b82e2b.mp4
+d14d59f86f82f9b70f9cff2ccc4e7662cbc94bbd0396c06ac9c18970e6cdb21b  previews/tla-22cd720e561eb084.mp4
+a574b314a1f7a77f60f73e132ab0725611e6ac79f490b34682fa8e7892fe90c8  previews/tla-239ce170b3aa5a88.mp4
+e7199e25d9f9edd36f75a721a6bda7a48c43de1806d1f11e629cf0dc966235e0  previews/tla-2510baf33104671c.mp4
+f12247cbb1a49fabb8119ee601b40d2698b4b9bcdfad3ba184f01fac0ec7639b  previews/tla-29406e7acc230540.mp4
+ee3dd604ac7ca0179accbf9b124295f32db65e6fe268a4e59f42a4af98b59710  previews/tla-2c5c86ec905f0941.mp4
+2bbcae509362d22c2e07a5b5a89a273b8d73ed67f6bc3184f84e7baff10e974e  previews/tla-32b8f3c3abcb6201.mp4
+e92de8c539c3ca2a5d56fc0b22b7f67c94cb349ef9bfa6cc43c6260ad1d1246a  previews/tla-34cd77349b410923.mp4
+b5526268eceb579c2c9f6b3f34e32b883acfaf23fb97ac5f79241eead5e3558d  previews/tla-368a1b0dd7c81a21.mp4
+ce8c5993ec5e9ed0353de183e4d25b17e92a245e01eceee2ad41f955ceb6c6ff  previews/tla-3990159709728e0a.mp4
+fbef47492e743362ca3ed9b62ecae29fb224e34cd1c700ead11cd042e87fbf5a  previews/tla-3afcb15afcb2e5e6.mp4
+2c9349ceaa1bc0c52d0e24aad30fa27d87d767f737a5770e597d9c25daae6d29  previews/tla-3b2c6716c0c4e44e.mp4
+03e58be1464537661f0b339fcfe10c85ff98e50e2eded06170d81962988c00ee  previews/tla-40396755d022e891.mp4
+7b7b9e8437191623f282b81fb1f7da244e7b1c7cd030ad4df98b5cbc9dff3d40  previews/tla-43f62fc0499d88fa.mp4
+6c36ff7456faded2a5eec03c33aeccb2b1ac30db4e7b0c23a9092b06d0a35df6  previews/tla-53214d6da1cedec6.mp4
+bc7880455aaf610943d5eb02a34b754812f24528aa714e6827679036401427de  previews/tla-54839f7f0fffc8f3.mp4
+48ea84910360107ab2b98d8526756f8ae9d91df9d3db8538b58464f003d5cc6d  previews/tla-59172d73f291719c.mp4
+057b80a36b87f57db86a8d4705230682b18338b9df1f964a7c774d0a6c710c2b  previews/tla-59dc1a87e9999269.mp4
+c8fe5848e37c9b4f4b832d4333072b5b79da47589019a33f35bf6bb75e4f177f  previews/tla-5dfe598f7b0b0fc7.mp4
+fcc94d90ea831e7b2c52a5b970592a0023089f986ed7bc25024431d8dc94ea3f  previews/tla-60efc28fc15f63e4.mp4
+45841d815a680c20bbb873046e59a3cc9c1d0056dd6ff5896a1e84470f17fe68  previews/tla-610ffb9ba0f3b675.mp4
+04ddbf2a75c1c0d22a4660e652aeec195302a31568d3d314bc6ee9491ecb2df3  previews/tla-681295eef9f682e8.mp4
+870ac58fc32806022e5f2fcffe725c6b853ee1b6d93b727408bedc637d79b2e7  previews/tla-6ea95648986f14f0.mp4
+3577950a0f6f27309d4ff403f73021c8e3842647ec2972cc8bbbb31f4d8f4a70  previews/tla-6f00af92824a5cac.mp4
+a793bbf6ba01fdb84d9e1a9c25f3eaaae6fc6b22c4e08d6ebddfa2de3d28b807  previews/tla-7343160b1c3cb177.mp4
+46b44c21908d8e55d2fc5d08c6e6e9ec553b94ec3c4e811b4b21e99e3c9ede94  previews/tla-7cb9f3929949aca2.mp4
+f3876e01d076409a4b4cd4c0653daa957dcba84a6ec3f03f530f9b573b41da52  previews/tla-7df646aca1f9d60b.mp4
+ca42ca66f8f782005580cd46e684ea1f504f34fd5d5523e88c5fef3d000dab7d  previews/tla-7f345a6df09ccca6.mp4
+c0f631f51da06c1af7554cb30d83a7dc9b1c77932ea0996afed55522286edbf4  previews/tla-8101878687e8d341.mp4
+8fc3b54c0438926a28f2be776c6feab9c1bc732b7530e0b6d352545262d5984b  previews/tla-85da137a7e23d371.mp4
+e037434fde150ab13aa47d7e9572810bef530af06c2598acdd3ea19963c9edfb  previews/tla-8666882413f2f211.mp4
+55400defe565928da77ff6ecc17ac7bc2aea875f66879943715a4ca4d9c78f89  previews/tla-89c5cff406eb362c.mp4
+4b32a0940b93f2dccaa0c2436df3443d558eb05479ca5a370f817641833ec1ce  previews/tla-8cf7bd9c2f2c9ba6.mp4
+554469aa5221af98b41f6d28c8ebc8000acb37dcc1db8896edeeadc25d7daaef  previews/tla-91c78bdcd7e39b8d.mp4
+2a6c7f0cc0b171ce6cc9c09ecdddcfb04a89bedf530ef362b7dd1813577745aa  previews/tla-a3b0e19c89a3c465.mp4
+2a26346b2595b75abd018dffcc550052a84e6793e8048d618078c16e231bb59d  previews/tla-a7dedf6292d58410.mp4
+ec63897aade6a06772e5ea3c319cd8dcad711c6f49892a4b16253139e9de2301  previews/tla-ab05f6d6dabd01ce.mp4
+d84a00e00d597fed16a9b0e3c685e64653559ed8440dc89f827621d45045f81a  previews/tla-b19dabc4ca37484b.mp4
+74badb5d25ca1b6d11f8f151f36e9d9b117073fd70756f360c5317024c1b6524  previews/tla-b23c43ad530942b4.mp4
+963d9e0c45a801ff4493540379c7f884bb58eb699f9ce57822beff3adabbfd73  previews/tla-bc0f063248ab9a31.mp4
+a2f2575ff7ddd876414bda856069ebf992e25dc6260ba42b9870f71ed6894b86  previews/tla-bc4f8d0f10417276.mp4
+f3ed360248c1d108a1ab35b8c2a4e811bf3c0b08f06e0bf0fe8a5e25ffd4ff3c  previews/tla-bdb7cf4f4894a718.mp4
+326a94e5632ac0f2a16f1142982f13d1e9733cdb8ae026d791b2283f595bde26  previews/tla-bf480dad5f9eef9f.mp4
+342a80aef377f2de2a3a52855ce86af77edec6ce727dbcf1fff65d5aec29b758  previews/tla-bfa0ef411dffc3c7.mp4
+61709e43e27c61e95e0a05d93652671565d29af8262cbb1a0d944903dd03f364  previews/tla-c28ae0e47faa5da7.mp4
+41ebd4c8524b80c5353fd15c359980069a11ae4e77ac3812fc3e7c7d223f7180  previews/tla-c490ef8e9be74c45.mp4
+f6d6df082dcfae51004f38a44a12a21558ca835f5c34b4be9eda201a9c942eb9  previews/tla-d3527adc03c62f72.mp4
+5826841419f4dc871bc704ec1762e6bf1b4d651d8e539b548a8fdda02768303e  previews/tla-da31017b29494576.mp4
+1081b958ea6089116b3aa8a6d40f58243245f3259d66c35b13db67bf9372ab7f  previews/tla-da81343b55574ed0.mp4
+8e225ef46d6c95f43b755bd18ae4b36372c7502cfe9d050f55fb440c7c7d28c7  previews/tla-dc143688ecd93039.mp4
+1e6705d843a10074a9228546b82418cad910c878eb5bd79571697325ad69b481  previews/tla-dc8aa4dd020bd165.mp4
+530d80be17bb697de0b7fc54e1f36733ae0e5d64bf4aa3e3868a741dab69eb30  previews/tla-dde4ef5dd9e4be5b.mp4
+4773c42133872be6d254d94e78f48d26ef8babcf512a2b2071c43fdb7166dedb  previews/tla-dec0c1c97b651e60.mp4
+300f78cd0feb15f3d0f3635b59da31fd0df52a980bfc805899c7c47c35312398  previews/tla-defed15b3786c87b.mp4
+99f08bf16372a52ed23dcd9ed0d4bf48a8e469efeb37f719d24354b97f6b641d  previews/tla-e2294dd3b7d908d9.mp4
+be57a82b461e1e6fe04894e59bd68d17c54f65a370cb6b51a40ec0d4d778f0e7  previews/tla-e2329491f3961464.mp4
+96e575453ea609e58aa0032c5d6fa6308707dc9794738d1b7cfacb99509f4843  previews/tla-e29f30881ddfcdbe.mp4
+1a95a3d43ef3627601a3bed41348905d0e0169aea9e6994cc9f0d63e64ef41b3  previews/tla-e3ae068773a94487.mp4
+0aed25fea830f0f52aebdcab644e2c87c2879399f744e3768a5d711c508ec87f  previews/tla-e6d97a1297b0fcac.mp4
+09d22a72245b6702262157a2ac7566e07cddb9ddf55a8227d41271760a567b05  previews/tla-ef23ca4967d8fa09.mp4
+b48bdc2c1ed529cb8d0e0011a6e8ae0d1d71f5a8c890323740ffa6d9fb250477  previews/tla-f3aed2fb155c2862.mp4
+755baa76777069ba0a99e84327fc04f40884968d6fa08907d42e2b739b3baa97  previews/tla-fc5b820912bb6eed.mp4
+3c315cb669d11d7e48fda8a65e28ecd4629a96298b9e4fb369e82d7b93c97a3f  previews/tla-fdac35ac05ae8d3d.mp4
