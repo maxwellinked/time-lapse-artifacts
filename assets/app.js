@@ -538,6 +538,7 @@ async function loadReferenceLookup() {
               (image.inspection_resolution_class !== "native_full_resolution_inspection" &&
                 image.processing_method === "jpeg_metadata_only_codestream_unchanged");
             if (image.work_id !== entry.workId || image.image_role !== "drawing_reference" ||
+                !/^[a-f0-9]{64}$/.test(image.sha256) ||
                 !image.fullResolutionUrl?.startsWith(prefix + entry.workId + "/") ||
                 !validRole || !validReview || !sourceBindings.includes(image.source_binding_method) ||
                 image.processing_spec !== "Physical_References/Photographs/PROCESSING.json" ||
@@ -590,15 +591,17 @@ async function renderReference(record) {
         : entry.selectionStatus === "missing_work_link" ? "No established work link is available for this recording."
           : "No published physical reference photograph is linked to this recording.";
     } else {
+      const useSource = Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 &&
+        Number(image.size_bytes) <= 512 * 1024;
       elements.referenceRole.textContent = referenceRole(image);
       elements.referenceFull.href = image.fullResolutionUrl;
       elements.referenceFull.hidden = false;
-      elements.referenceRepresentation.textContent = referencePresentation(image);
+      elements.referenceRepresentation.textContent = `${useSource ? "" : "Display-sized preview. "}${referencePresentation(image)}`;
       elements.referenceRepresentation.hidden = false;
       elements.pairingClarification.textContent = entry.clarification;
       elements.pairingClarification.hidden = false;
       const photograph = document.createElement("img");
-      photograph.alt = `Physical reference photograph — ${referenceRole(image)}`;
+      photograph.alt = `${useSource ? "Physical reference photograph" : "Display-sized physical reference photograph"} — ${referenceRole(image)}`;
       photograph.decoding = "async";
       photograph.addEventListener("load", () => {
         if (isCurrent()) elements.referenceStatus.hidden = true;
@@ -611,7 +614,7 @@ async function renderReference(record) {
       }, { once: true });
       elements.referenceStatus.textContent = "Loading photograph…";
       elements.referenceStage.append(photograph);
-      photograph.src = image.fullResolutionUrl;
+      photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`;
     }
     if (entry.referenceCount) {
       elements.referenceWork.textContent = `Registered work: ${entry.workId}`;
