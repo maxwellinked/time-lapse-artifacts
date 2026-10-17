@@ -24,6 +24,13 @@ node --test tests/*.test.mjs
 node tools/validate.mjs
 ```
 
+The [photograph clarification list](photograph-clarifications.html), also linked
+beside the recording filters, groups questions and coverage gaps by work and
+links every listed recording by stable ID. Supported indirect references are
+not treated as unverified matches merely because their status is proposed.
+Refresh it from the bundled, reviewed snapshot with
+`node tools/build-photograph-clarifications.mjs`; validation rejects a stale list.
+
 The photograph lookup generator's `--check` also requires the Git objects for
 the lookup's `githubRevision` and Hugging Face `sourceRevision`. Use full-history
 checkouts, or fetch those exact commits before checking a shallow checkout.
@@ -74,9 +81,11 @@ The gallery shows only unambiguous primary drawing photographs with a direct
 owner-confirmed identification and exact confirmed source bytes. The same rule
 governs the photograph filter, recording dialogs, and full-resolution links.
 Proposed/transitive links, inferred export variants, supplemental-only images,
-and unresolved selections are withheld from the reference display, including
-additional-image links. The source lookup retains their original evidence;
-withholding a pairing does not relabel or delete the source archive.
+and unresolved selections are withheld from primary display and the confirmed
+filter. Qualified links remain accessible in Reference details with their source,
+authority and selection limits. Supported indirect links require checked public
+premises and a matching processing receipt; other proposals remain explicitly
+unverified here. The source lookup retains its original evidence.
 
 Documented EXIF orientation is honored exactly once. No rotation, mirroring,
 front/back identification, or recording endpoint is inferred from dimensions,

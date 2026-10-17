@@ -27,13 +27,38 @@ An inferred export variant is excluded even when another photograph from that
 capture was owner-confirmed. A proposed candidate is not promoted because it is
 the only available photograph. Multiple primary candidates remain unresolved;
 there is no fallback to a convenient supplemental photograph. Excluded images
-are absent from the drawing-reference filter, inline image, full-resolution
-link, and additional-photograph links. Recording playback remains available.
+are absent from the confirmed-reference filter, inline primary image and primary
+full-resolution link. Qualified documentation links remain accessible in the
+existing Reference details area. Recording playback remains available.
 
 The original source lookup and photograph bytes are preserved as provenance.
 Their presence in the archive does not mean they qualify as displayed pairs.
 As of the pinned source snapshot, the policy retains 303 recording pairings
 using 40 unique photographs and withholds 660 formerly displayed pairings.
+
+## Qualified documentation access
+
+Reference details can link to a published photograph without making it an
+eligible primary. Source variants retain their inferred capture connection;
+supplemental photographs retain that role; unresolved candidates are listed
+equally without selecting one. These links establish no recording endpoint,
+same-surface equivalence, or photograph-to-video alignment.
+
+An indirect reference is labelled supported only when the derived, revision-bound
+`data/reference-link-evidence.json` retains checked public premises: an existing
+owner-confirmed photograph-to-record reference ID with a source hash, one unique
+owner-confirmed recording-to-active-work membership, and a matching processing
+receipt for the published photograph. The work-reference projection must not
+report unresolved uncertainty. Neither a proposed status nor a transitive label
+alone establishes support. This verifies recorded public premises, not the
+underlying photographs or owner assertions. Source cautions and surface scope
+remain visible; authority and relationship statuses are unchanged.
+
+If support is unavailable, mismatched, private-only or stale, the link says
+**Proposed reference · support not verified here**. This does not assert that
+private evidence is absent or that a proposal is false. Reproduce the support
+snapshot from its pinned public text inputs with
+`python -B tools/build-reference-link-evidence.py --check`.
 
 ## Orientation
 

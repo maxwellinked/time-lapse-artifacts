@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { validateRecordsPayload } from "../assets/data-loader.js";
 import { getDisplayReference } from "../assets/reference-policy.js";
+import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const requiredFiles = [
@@ -40,6 +41,31 @@ validateRecordsPayload(payload);
 // Display JPEGs are bound to the selected photograph bytes, never to video frames
 // or a substitute photo of the same work. Validation is offline and dependency-free.
 const references = JSON.parse(readFileSync(join(root, "data/physical-references.json"), "utf8"));
+const linkEvidence = JSON.parse(readFileSync(join(root, "data/reference-link-evidence.json"), "utf8"));
+if (!html.includes('href="photograph-clarifications.html"') ||
+    readFileSync(join(root, "photograph-clarifications.html"), "utf8") !== buildClarificationPage(payload, references, linkEvidence)) {
+  throw new Error("Photograph clarification list is missing, unreachable or stale");
+}
+if (linkEvidence.schemaVersion !== 1 || linkEvidence.sourceRevision !== references.sourceRevision ||
+    linkEvidence.lookupSha256 !== createHash("sha256").update(readFileSync(join(root, "data/physical-references.json"))).digest("hex")) {
+  throw new Error("Qualified-link evidence snapshot mismatch");
+}
+for (const path of ["Work_Identity/works.csv", "Work_Identity/work_record_links.csv"]) {
+  if (linkEvidence.sourceInputs?.[path]?.sha256 !== references.sourceInputs[path].sha256) {
+    throw new Error("Qualified-link work-registry binding mismatch");
+  }
+}
+const sourcePhotos = new Map(Object.values(references.records)
+  .flatMap((entry) => [entry.mainImage, ...entry.additionalReferences]).filter(Boolean)
+  .map((photo) => [photo.sha256, photo]));
+for (const [hash, proof] of Object.entries(linkEvidence.images)) {
+  const photo = sourcePhotos.get(hash);
+  if (!photo || photo.relationship_status !== "proposed" || photo.work_id !== proof.workId ||
+      !photo.evidence_reference_id || photo.evidence_reference_id !== proof.referenceId ||
+      !/^tla-[a-f0-9]{16}$/.test(proof.bridgeRecordId) || !/^[a-f0-9]{64}$/.test(proof.sourcePhotographSha256)) {
+    throw new Error("Qualified-link support is not bound to the published photograph");
+  }
+}
 const displayedReferences = Object.values(references.records).map(getDisplayReference).filter(Boolean);
 if (!app.includes('getDisplayReference(photoLookup.records[record.recordId])') ||
     !app.includes('const image = getDisplayReference(entry)')) {

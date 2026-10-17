@@ -1,0 +1,2205 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "042469fe4bff3c7ffad36b47be25503bf73f0da6",
+  "lookupSha256": "28359d4b2bd2c9495b7245d0b3f85e7d63d3cbb9764b17952bb6dcaf4a704af7",
+  "sourceInputs": {
+    "Work_Identity/works.csv": {
+      "sha256": "e593abc32a969f48a39a876e88a545794ec8a3c094b30d68fd645a2b6938602d",
+      "bytes": 194330
+    },
+    "Work_Identity/work_record_links.csv": {
+      "sha256": "77ce723edf309d0dfee7fdce2a2d4acf1764bd3a7520de8d77a1e57305635a1d",
+      "bytes": 416828
+    },
+    "Physical_References/work_reference_status.csv": {
+      "sha256": "12ffa5fd4fe4e4bacdc3055b86bdbcc9f00e9b22ec532f3bda9329b08b5ada2e",
+      "bytes": 84078
+    },
+    "Physical_References/endpoint_references.csv": {
+      "sha256": "5f3e1ed6c484853cd6df8722e3916b111fc280a1e02a4f9272c0566172821c3a",
+      "bytes": 346794
+    },
+    "Physical_References/Photographs/PROCESSING.json": {
+      "sha256": "06d038206577917459376290f38650de1e246f49f5b97da1daf572b37605bec7",
+      "bytes": 391550
+    }
+  },
+  "images": {
+    "01e95e8660fca29ee8fdd3899918f74d55ab970f4740ee136cc471f2541e344a": {
+      "workId": "tlaw-ce2b627d907c4284",
+      "referenceId": "tlar-9f75ab6b5deb688a",
+      "bridgeRecordId": "tla-51d8bac758cad734",
+      "sourcePhotographSha256": "4930fc46545f58ea7f2557a0d051628ac68c2f362bcf308d1f60f36c7c79f0ea",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "023bc724c7b925da96bf071139fcb672fef5f8ba3c200235549ced6ac03027b8": {
+      "workId": "tlaw-9b6a8ec87c98db5b",
+      "referenceId": "tlar-2ecf79c7f1113007",
+      "bridgeRecordId": "tla-3f1a136f5c1d8799",
+      "sourcePhotographSha256": "afa09450d43ff820ca182b56abda73fcac3cf0d0a089b8b5b5f77f75b004003d",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "02e8076387bb92630649e92770c39497659a5b796a1a7df2ae521d7bf7b3e93e": {
+      "workId": "tlaw-9943bfc29a7ca5c1",
+      "referenceId": "tlar-526b8d652599ec57",
+      "bridgeRecordId": "tla-5d727397a8b89ce8",
+      "sourcePhotographSha256": "156881e1768e6c4415a3f24c7fdceb9fd1c20a51841c03d8541615b11c1402c6",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0333ce73ac4ac7e19dd70881aa97af21e837b8d2095047aca92f2a91bbca3d5b": {
+      "workId": "tlaw-47e6786d2aeef119",
+      "referenceId": "tlar-af85ab412901bd0f",
+      "bridgeRecordId": "tla-f6d92a334aeb828e",
+      "sourcePhotographSha256": "b3fe380f9e2ea7da5ce6c7afad0d5b4292c2d6c157eafb85802882a1925c8d74",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "035445380de638654581cbd4f2bdc06cd6a82ac9898e7ea48859596064c4f40e": {
+      "workId": "tlaw-95ab58666f59569a",
+      "referenceId": "tlar-3448408c2b564d3f",
+      "bridgeRecordId": "tla-4ad99fb753b60778",
+      "sourcePhotographSha256": "99a528118a51dd9c4776d7ab71a5d94a11cd5f06ed571608220030f6a2dd1fdf",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0521ed89885c12fef6ccfadef49b2e83eafca896e4f5d44f32d837bfdd905a08": {
+      "workId": "tlaw-a05c3117d3601603",
+      "referenceId": "tlar-128e8e793b9f60a9",
+      "bridgeRecordId": "tla-193eec2fe19fafd3",
+      "sourcePhotographSha256": "2dbbd7e2d7ecf9fcab5b07883c772ba70eaed7592942b12c35ad42e09292f33d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "055bceef545eb54bc967f5ce70379983994e1241770f6d170237083e8ba31897": {
+      "workId": "tlaw-e0d49454bb95f200",
+      "referenceId": "tlar-3c1d4d85ca093b2e",
+      "bridgeRecordId": "tla-c4ddf075680578f7",
+      "sourcePhotographSha256": "84dcd47f3867b8ec5566b76e67b20fe4d7b845a2d41c8a3ea14d9ec10a267ebb",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "058733de4bb77c621812e3ff51dba396317b184dac8a3fad7c0c398ce8265905": {
+      "workId": "tlaw-4e508cffc2faa990",
+      "referenceId": "tlar-41caf4d503440765",
+      "bridgeRecordId": "tla-bc4ec625d47cb3ed",
+      "sourcePhotographSha256": "f151bb65ef15a560677da5cfb48550d82f4ffc64e4e3baf1c97b72302c54b0db",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "06eef2457d4ead0a866fded5a5f6584230f1aea0588badfe7d3652a3ab79aec8": {
+      "workId": "tlaw-1cfce6f6068113d0",
+      "referenceId": "tlar-10e2b2f890cddd7a",
+      "bridgeRecordId": "tla-27ba3e1c29d10d0c",
+      "sourcePhotographSha256": "4530467a279add165b114d1cd9b3131c2ebf8befcb25422cc67956333f59c779",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "074adaa304d5d92afc97352bfa8aa27fb30aa55018422bff2409b21bf058d621": {
+      "workId": "tlaw-68857e64ff3be2a9",
+      "referenceId": "tlar-ed03e36428073f71",
+      "bridgeRecordId": "tla-95f3967be55e9954",
+      "sourcePhotographSha256": "d81ec2a8643fd54eb179ac24cbe8844e2839a54e99a96618248b4044a9149c6f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "07ec3377e0ee419db3ce97cb24bff8ad2a4792d5f7488272644e226eb6405273": {
+      "workId": "tlaw-cf9ccca8f281b0f3",
+      "referenceId": "tlar-7b52a2a2eb7419cc",
+      "bridgeRecordId": "tla-5249b0fa983d3c3c",
+      "sourcePhotographSha256": "bb82c6e0874057f327522c72d53716733899277aa5e2c66f40506d71d4ef693d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "08ba2e64de0a0f68e0cb44efb9eccf49dfdffbb03781d89ba68d8ca552e9ca0d": {
+      "workId": "tlaw-763c0618ae6f56e1",
+      "referenceId": "tlar-a83bc18c07a99d6b",
+      "bridgeRecordId": "tla-4ee22dda6247c16c",
+      "sourcePhotographSha256": "e05ed853871f1c0899834359615f863bfe7659428c5d6f85309f3c949f8da12f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "08e95cf9c01d47f29391ff2fc3f83b60aefea069e65273dcbc4ab9b83e1d8c1e": {
+      "workId": "tlaw-790186d377e6a98a",
+      "referenceId": "tlar-035279bee5a91e22",
+      "bridgeRecordId": "tla-cceb94bad2fa78b7",
+      "sourcePhotographSha256": "a635bb847d3793ea470db375fcf7c5a26837eb965f9f443dfdf7c32f7c07c43a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0c21574e76c096a1327d3fdb0eb4c257dc0762d7401383beca31a6036e756e4e": {
+      "workId": "tlaw-367c909cad6560c4",
+      "referenceId": "tlar-d64a4c4d5e0e254c",
+      "bridgeRecordId": "tla-97edff70dbec8110",
+      "sourcePhotographSha256": "2e4cab22be7fb1d07cc204bd93e783b4ec6ff254166d8a7822732d6da3eb3723",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0c538ed0e92006597d773dea39aeebc7dc0d2145e2cceeefa1ee129d043da571": {
+      "workId": "tlaw-472907d57b78a9e7",
+      "referenceId": "tlar-4784fb08cfce38f5",
+      "bridgeRecordId": "tla-eeb6e6fff4bda275",
+      "sourcePhotographSha256": "5d1d252cff8fc13d3c1991142a7b001d1b3324a938c554566d562c8fbbb33473",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0db2c81d4b0675287d5994a582d39bc8780e759f19b5c5aac1ad9ce59c92ef87": {
+      "workId": "tlaw-dcf5125652bb74bb",
+      "referenceId": "tlar-ddc17ea9498dd7a2",
+      "bridgeRecordId": "tla-1e91de7af1b70f7d",
+      "sourcePhotographSha256": "139f8e4e998fb5b6d5fd9fc8bb40706e4e4a74d621124a72c4092ee42e110611",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0e2209df51e7f240a2e425421207354eb3944bbd5d26b3e7d77a72a7a3d5322a": {
+      "workId": "tlaw-8f670d6bbfc202a8",
+      "referenceId": "tlar-781efd26968d54f0",
+      "bridgeRecordId": "tla-c0222c11669ccd2e",
+      "sourcePhotographSha256": "5f3b483925af4a01ffe9178bebce961cb45ac02c2f2ceea5852898b0adbe9d74",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0e9b36c6c9ddae453903939e27fafd3bad7be480669a80d41c7a566750e03e5b": {
+      "workId": "tlaw-d04a0cf5edfceacd",
+      "referenceId": "tlar-6ad333a61cc21847",
+      "bridgeRecordId": "tla-b2e4926f641b879a",
+      "sourcePhotographSha256": "4072335cf715747e7de9a46c39593a6cc04dab1c94f4acc9ce0027de29bc5f53",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0ed9b162e750a9a542815018f7bbae65bc37c269080c2f23ba5fcd7ce4ce7893": {
+      "workId": "tlaw-f3fea68f63d78d8a",
+      "referenceId": "tlar-82c1ca39a06c95c4",
+      "bridgeRecordId": "tla-c186e4efa35987fc",
+      "sourcePhotographSha256": "7c4c29a3b1a07fda6dc7911f535b5580cb0e2c967979ec91ca712551e22f25fa",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "0f375c7690e7d74ce9fbe85c0ce5397045f70adfe286186812282e0c55b13eac": {
+      "workId": "tlaw-0cd8e49feaa049fb",
+      "referenceId": "tlar-b323e87432ec1fb7",
+      "bridgeRecordId": "tla-4b88d25f60dad7a5",
+      "sourcePhotographSha256": "12a0122afb593305e4788b5629fb1da005807e1b3746ce3e185ce3b22ade7e5c",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "0fe32c52172f3b5ebb7955c1e286341db00bd1aefbf32145e71a28981046b599": {
+      "workId": "tlaw-a3b03622e9460c34",
+      "referenceId": "tlar-8cc8bda74f3461d2",
+      "bridgeRecordId": "tla-e312ca73857aa85d",
+      "sourcePhotographSha256": "ea8cc546f93d91ea747481ecf8254e98ab2e3570c8532269ded11170bf57a7d1",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1332cf81182cc0ff6cb15a2993e9ef434c9437dbe724e76f2e2c6238d7caf0dc": {
+      "workId": "tlaw-98e798f8994fb760",
+      "referenceId": "tlar-81a485cd528bc15d",
+      "bridgeRecordId": "tla-6350ce9896f70d9d",
+      "sourcePhotographSha256": "f389dcfaf3c268e2fd5eb945f53411a70002270b6245a967c4a64171c1b9587f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "13ca94242094c9b47278236b442891f1d9a26c71b14cd5f8befb78f7cdb56406": {
+      "workId": "tlaw-a3eb4bd7435eb3dc",
+      "referenceId": "tlar-4a98b257ac68e1e0",
+      "bridgeRecordId": "tla-6da741f26d8299d0",
+      "sourcePhotographSha256": "950cbc2bb66934c9fbf7f9f06e3dd7bf286185b8b1131d96b5f3d4b825031a3c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1445de70227d1f06e5f8b6895261ca822e6ca16d305ed73b9c3fc20965904ef2": {
+      "workId": "tlaw-1fe680c64d9801c2",
+      "referenceId": "tlar-43a4f48c5dca673e",
+      "bridgeRecordId": "tla-9942011910282d9d",
+      "sourcePhotographSha256": "e55349ce414d5141072450e4b4fbe078998c33ca6ff8e8082b066dee1f7a701a",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "1490a6193d8b8c0ec9e8906593e5afdd7ea4cd19ff8de720ae9cf885fd34f0f6": {
+      "workId": "tlaw-2d67f7f4f897cb5b",
+      "referenceId": "tlar-275cfba82c5f635b",
+      "bridgeRecordId": "tla-5a163aa9fd778a26",
+      "sourcePhotographSha256": "52f827ecf162255fb9028c86daf87c1541f19b392e18ddad4b4d421d9665f980",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "14ccc495ed1d17ae6f28307464288d9f3cada4c0974c82f06ab44310d9d91d80": {
+      "workId": "tlaw-99a28658b1cc424a",
+      "referenceId": "tlar-9e120ba7de55514e",
+      "bridgeRecordId": "tla-e483560944e03f7a",
+      "sourcePhotographSha256": "4029f6b173329f4447eb887ab6f52e881830c6dba739982f3b059236f13beb17",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "14f4350485949df340ae791a5f7850421305fc16dd3acd878e39d6fb229db108": {
+      "workId": "tlaw-e2879296e920b97f",
+      "referenceId": "tlar-15f084523ea92116",
+      "bridgeRecordId": "tla-d1fc69736a637d7e",
+      "sourcePhotographSha256": "627db75338794c2fef7eba04d6558647a756c5f08bbd0a329d4b998cb9929ca1",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "1656219519bba31eab3088d2903d889442980582a2c1e39b6e44413789839951": {
+      "workId": "tlaw-c911217b4e11ca92",
+      "referenceId": "tlar-17cb2a3274883b28",
+      "bridgeRecordId": "tla-3f66f402cb8603f1",
+      "sourcePhotographSha256": "d0f947ac829582f6096ba2cb8c9d44a12d62b453418bfc4740ecc3e3ab99cf94",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "16a6efa3dabb58d5e468c2eba0a37d8ee6e1c43885a542eaeb2d7e77d2e4885c": {
+      "workId": "tlaw-8decea2c6fbc9ac5",
+      "referenceId": "tlar-533f221c135c9311",
+      "bridgeRecordId": "tla-0ecfd88ad1f42dab",
+      "sourcePhotographSha256": "592459c491d3f7cb56a4f6da130589d87dd702ce83eb9becb343cdc32cbe7a38",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "16a8cd1ec39682aa4750267af77b16f8707663af4d2c6d435d44cc8b5c78cc45": {
+      "workId": "tlaw-006d0454b98f434d",
+      "referenceId": "tlar-0ee06ea5cf7532f8",
+      "bridgeRecordId": "tla-d9c55c2215a49da7",
+      "sourcePhotographSha256": "8702992cca738d203193c6634615924cca5e26d601c7747c8b2c4e071da99f7a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "16ada608357ff35df4abeb57f8e55681ad09b8add658c694413a1a0d023ed93f": {
+      "workId": "tlaw-1e6a248d610042bb",
+      "referenceId": "tlar-41ab88bb4b467cbf",
+      "bridgeRecordId": "tla-de2841b98c7de5e2",
+      "sourcePhotographSha256": "1c1c900026f33870c0c0c73999e1acd6ebda20c9996396e47899490344055faf",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "16cf2ff563b1de544623a55382603bb42b5210edda62b05e98d700b0e3c2b51d": {
+      "workId": "tlaw-73122498044798b8",
+      "referenceId": "tlar-3d6114f133d565c5",
+      "bridgeRecordId": "tla-7e9f9523031b7440",
+      "sourcePhotographSha256": "3d60ec40b3958f2bd98788a749e63624fa0f06312c92758e119aa337ed097d7e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1724eb7e28cad79a4bb3ea459adcefb3d056f9854d349a90f411cb6cf8e68e16": {
+      "workId": "tlaw-bcb4dbe41f43f30b",
+      "referenceId": "tlar-02aed02fe1384fd4",
+      "bridgeRecordId": "tla-f98b45ad5efdfedb",
+      "sourcePhotographSha256": "fccfc77167b810aa566972b28ce75109b385361e51ece081a543639196f73729",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "18a751a3ab7e0d71b369f4f8afa371ff8d714f846e3da9f9491be67e1ff00e72": {
+      "workId": "tlaw-8abbd185bb31b61f",
+      "referenceId": "tlar-3875fc9eccc394a4",
+      "bridgeRecordId": "tla-84aae77e68e01275",
+      "sourcePhotographSha256": "52ac2736afab133bd3b98ff858a642ca6a9c1386dce1fda37eaa8467f3342ff4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "19cbd629a40ee7cd1c3ea5565289f54781fc4fa45d12816fdf59c7839adbdfd2": {
+      "workId": "tlaw-5df9083cd7760d89",
+      "referenceId": "tlar-62a3896a1f22abd6",
+      "bridgeRecordId": "tla-44a316fe3b112c48",
+      "sourcePhotographSha256": "4fbd8dd4a2d8caa73ce2116fa19bcff4f588dc21f168c36a57486a18e5d50769",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "19fabe984a5e45aacd60bda0cde68bb69744fd6a028f93dce8512fcdb49c5c8b": {
+      "workId": "tlaw-5bebd1b80927a35e",
+      "referenceId": "tlar-72c548637e343a77",
+      "bridgeRecordId": "tla-4c48b5c172f33fe1",
+      "sourcePhotographSha256": "c2c832e858f09c90980d49e1875a4bf2883cc69c528c2b9991e7fc18f2073818",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "19fb16c7149240b9ea648e1a78488d1a74525a42b9964455269256cbb189517f": {
+      "workId": "tlaw-83f02c4fe9a7646f",
+      "referenceId": "tlar-28484e7cca813589",
+      "bridgeRecordId": "tla-246f2079df6f3530",
+      "sourcePhotographSha256": "7fec380c471b5ff1ad8c13485291fa0804e6bee35cd83fb464eba055003ea7f3",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1aafc29060316e11f33613fd67d2db7462d888e4636d1b0a6cda997a685845bb": {
+      "workId": "tlaw-db1592e6a7815761",
+      "referenceId": "tlar-cd8789789d4cf84b",
+      "bridgeRecordId": "tla-d0031ca94f3563e3",
+      "sourcePhotographSha256": "8b822f98bafb6041b57238bbca9b4716060541aa73aa97090eae2c42cd51128e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1c5b1d03874ced83a21f10934ee08c7b7096f8cb1bfed843cb4e35cc1dbd870e": {
+      "workId": "tlaw-2d6f354fd954068d",
+      "referenceId": "tlar-4174306d3a12d6df",
+      "bridgeRecordId": "tla-ef79625444fb9290",
+      "sourcePhotographSha256": "567f0590d7394b4fe25fa9a4a19dc6b6c5174a4df8c739326bf9783691cbb107",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1d8b7faddba0c63c2b3ab3018466337ea3c309c7a0bb2d29f2d2c36217d030d1": {
+      "workId": "tlaw-ac19e97683d9a0fa",
+      "referenceId": "tlar-94f05e6805076b47",
+      "bridgeRecordId": "tla-dfe8bb22a7ef78fb",
+      "sourcePhotographSha256": "492c60a866074fb73a83c4701cf463846456d3e274fd28b2bb0c0e36c8c8f97b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1d9a440f043d4e12345e6176e83bc9a2cf93d9e550c61b313e9895bae37acdfb": {
+      "workId": "tlaw-8f68e4cfe1e02d1b",
+      "referenceId": "tlar-d7971423597340f2",
+      "bridgeRecordId": "tla-e29df26fc2e59982",
+      "sourcePhotographSha256": "7a61b502fdaebe616436c8c60bba8270be9b1a05611905cc6220aa1b8aefad14",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1dd1c012c498140460dc06f5d4abd1ed916abc41b8e6eca6fb089fa733e35088": {
+      "workId": "tlaw-0a5bdd73ff5a78d9",
+      "referenceId": "tlar-749b7dfc3c9e5456",
+      "bridgeRecordId": "tla-85ac91e34d658b58",
+      "sourcePhotographSha256": "6ba2c6d0916dfdfd0ca78e01818f7dbc84b904d7320839868538324cc541e887",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "1e77e96fafa0762075fa21cdbb3bcaf8b4a81239f26021f6fea0e566251b2be4": {
+      "workId": "tlaw-b3529aa82d234ad2",
+      "referenceId": "tlar-b71eac664f58be15",
+      "bridgeRecordId": "tla-ef3b0ff5d6e6e9c5",
+      "sourcePhotographSha256": "54e7dbba79c4f853bc5feb4e1168af975dada55314a39a739c57b80421fea129",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "21a501f092bb82f921c4ed4a93d000d9545dd67024ccaa1ea6df5cbe79e53350": {
+      "workId": "tlaw-3af097fb83cca97d",
+      "referenceId": "tlar-ea2abc1cfd45c59d",
+      "bridgeRecordId": "tla-b6b5923705c8d618",
+      "sourcePhotographSha256": "f1a9bde10684757caf942d449cc622031b77c56ff7a03ee917e80b40c3c1b5f4",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "22418aea092e7f60553357058e0c71ddab2fc30fbed74f228624eae726419c90": {
+      "workId": "tlaw-f21cfff76f023062",
+      "referenceId": "tlar-67aa704fb78a04b3",
+      "bridgeRecordId": "tla-627c831e3df28d78",
+      "sourcePhotographSha256": "a8f5b36e7930575da9fe09b30403739cf59a39b85435a0006322309a007fe632",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "234b8a03a34835cfee606139cfe306d9f15c059557a95c1381d670173c3b141c": {
+      "workId": "tlaw-bfd49c0f92cc0b28",
+      "referenceId": "tlar-78a87b60ef02f9e0",
+      "bridgeRecordId": "tla-2c38711267c795e8",
+      "sourcePhotographSha256": "e7aca3eeedad9dfc372f3aa82c73c12d5af784178e82f431c443da2dacca82f9",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "257eeba4f6652349ae6296b26c3cd973a15785921a637118d28c7918284be1b1": {
+      "workId": "tlaw-768df72cf157f87a",
+      "referenceId": "tlar-2676371ba276ac85",
+      "bridgeRecordId": "tla-27ae1fc2ec693d8e",
+      "sourcePhotographSha256": "2c201e52a7242b491eb3f78e3674a2cdcc6af8c6014efdc9309bd683501e5688",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "260b11d128f346221858a1bd495de9f56c1c524efeb32257b02887059f5d3fce": {
+      "workId": "tlaw-bfbd3ce7077df5ca",
+      "referenceId": "tlar-7e80503909bf5aa7",
+      "bridgeRecordId": "tla-24f1bf5235f868ca",
+      "sourcePhotographSha256": "001a49c3fc7c2290e37d411e392a8923e120e9bc2c5059c5688f9042150b0570",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "27a9cce1925217545238a65c0cdefec3a2a55c57ebce994f89077ce73645cd3c": {
+      "workId": "tlaw-8a8415bea4760715",
+      "referenceId": "tlar-636a633fd7fa7199",
+      "bridgeRecordId": "tla-e800ace73c12c56c",
+      "sourcePhotographSha256": "f276cf74d228175333dfdab8d7bc32d3a1a5b8ddc5d9bbbf7f33d1c7bc0642d7",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "285f11ceeb7cf6672bb8163866cb422599447b3df96fa8807c9720d544f1523e": {
+      "workId": "tlaw-636321848293b309",
+      "referenceId": "tlar-6c20f6651b4c0637",
+      "bridgeRecordId": "tla-7f5baf7bf10406f5",
+      "sourcePhotographSha256": "63fa3ea5e6c094c0f8f3110bf672ba8ded038ba23ba0d53f9079054938fd6a73",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "2974089c27f247e26f4c209805e7a70c801dadfb4d9acc7be25f0adf9c425045": {
+      "workId": "tlaw-697bca69ed42d20a",
+      "referenceId": "tlar-6fdaf57e0b4de07d",
+      "bridgeRecordId": "tla-f685c9d99438f517",
+      "sourcePhotographSha256": "e275be7e5e3354da146e0f1939dafa8294338ef4f1113a2969de7de10c6e264a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "2a5497845c42df06909aa42cbfb66331503e8d1413ab7fefb58e8ea809ab31ff": {
+      "workId": "tlaw-26963aef954457f4",
+      "referenceId": "tlar-207aee6f11ac83b8",
+      "bridgeRecordId": "tla-958a11e7dbdcb3c2",
+      "sourcePhotographSha256": "4c10fca74815a65feb843ffbeffde6171120839a6ee8fa9e296445c21ed44e9b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "2a69ffc43f59509882032f5b40154b5638002b6fffd1765748e6eb5fb1394c19": {
+      "workId": "tlaw-34a72ca73c2bebb9",
+      "referenceId": "tlar-57f7d279579d58d7",
+      "bridgeRecordId": "tla-2c76d19112addf9b",
+      "sourcePhotographSha256": "144d3f26f105a3f29868b4b1459459274b2a4d9a2847af0c1c55c204e4643924",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "2a960694a6b5e24ae0e27ad4096c8c359a33652e561ae5783e800c4ba1eab819": {
+      "workId": "tlaw-46ddeaf1d3269931",
+      "referenceId": "tlar-37db85448f763b74",
+      "bridgeRecordId": "tla-4042209d96e388ba",
+      "sourcePhotographSha256": "6c7e33c786e6c636bc7b270a9ffa8cd935acc78eabb508b864a5c7243366043f",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "2e86a8e2fef07b85769444745f559e73a17bc75c4f442dea320d93ce25b37da8": {
+      "workId": "tlaw-aae074105457dc06",
+      "referenceId": "tlar-49ba512b600c8c14",
+      "bridgeRecordId": "tla-5346e81e83d9e749",
+      "sourcePhotographSha256": "5c260e9f19f7b810298acadab48c07a29381cf786e413c4ca67d9ae106db9154",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "2f7bc874c9fd8c1d5b0e6d6f47a35f9e835ce5d415c7088a439ac78589fdb41f": {
+      "workId": "tlaw-7230b954ae971ca3",
+      "referenceId": "tlar-2042452c7d9cbe93",
+      "bridgeRecordId": "tla-b2b282201d113a51",
+      "sourcePhotographSha256": "aa7c67b5ad5fd8489962748a3dd2f299ed4df9e4a29caabf2d2413be742c4422",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "2f9214f0c3c09eda6d6dbb4b24eb5b5e18f5ce571e93d3d3799d463662edc85b": {
+      "workId": "tlaw-2e802d659a20d68c",
+      "referenceId": "tlar-9946604bf9cc5fe4",
+      "bridgeRecordId": "tla-b0327e322476998b",
+      "sourcePhotographSha256": "be8a1c736b00220b34727a182efd1daa349a31d0f0fbb44c21457c7a4892d9c1",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "2f99981d8b7342f26447f3f599259edcc37a8e69e740a90d110a1f28e9d01a2f": {
+      "workId": "tlaw-5d1b4a801508ef14",
+      "referenceId": "tlar-ce19bcba75b37b76",
+      "bridgeRecordId": "tla-8a6654e2a93b1c3b",
+      "sourcePhotographSha256": "6d431473f7a32553ea5c6871f9ec0fd8f3a003c424608fa44941a7396e3d7135",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "30ff277210b2028d05bd36c1b4dab4c8111fb422a4315723181287232cf3f376": {
+      "workId": "tlaw-406e7dd53d42c6b0",
+      "referenceId": "tlar-8d51764a988f2086",
+      "bridgeRecordId": "tla-b0146ef2b2f11e37",
+      "sourcePhotographSha256": "33fcddb9b4ed70a05da79326026b031e927c5a111e01d435c34bce163b3a98d9",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "31d97b6c2d44abf08d070a2a2dad6024b1543e78ad924df328439080fb8e729e": {
+      "workId": "tlaw-e2373ae8a2322e57",
+      "referenceId": "tlar-849f838662d6ac94",
+      "bridgeRecordId": "tla-69b740e88693140a",
+      "sourcePhotographSha256": "9a5ecd1ccad548fcaa2bb30f4d28a2202d3864f3be754e0ff59020b7369d1822",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "3315f66ab6f327a8978462a294fa3559c0682db278457b6f19d9bea626ba8cb0": {
+      "workId": "tlaw-4e95a10011747efd",
+      "referenceId": "tlar-ee6f00a116b7de67",
+      "bridgeRecordId": "tla-c2e63a71706f64b4",
+      "sourcePhotographSha256": "e7aee1c49d3796d560cb62367d4c0eef145de4051bd3f272442b9d4e89674284",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "33638f59d0672f9764586846b42633309ca5d136a15b31a2398887e04d698ab5": {
+      "workId": "tlaw-e3a0cbdfe7a4c92d",
+      "referenceId": "tlar-a6d73159f94862d5",
+      "bridgeRecordId": "tla-ae60223734575dbb",
+      "sourcePhotographSha256": "ad87711677406067b4ba27d0c648657dd4324c0faabaf74f4b29d28bc17864d8",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "33e8139948ce4636f9e6fb17b667934b46820e8fc6142d83e7e428974fb8c8b9": {
+      "workId": "tlaw-f745a1299f351ef4",
+      "referenceId": "tlar-05a525bf94a5a143",
+      "bridgeRecordId": "tla-f52c569ff3391143",
+      "sourcePhotographSha256": "f9c7a43304ff6ac3f14bb3d7766ecb343d530dbabe8ae8230a431f77f9ffda2b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "33ec00e2633f992fafadae71cf414d96250a950e037e9d43f998c018e1afe67c": {
+      "workId": "tlaw-a46268f0357f9ce2",
+      "referenceId": "tlar-28b997b939fc9e14",
+      "bridgeRecordId": "tla-c078e1b6a37f850f",
+      "sourcePhotographSha256": "a0b3acf05f8d3dcdd616b701da9bad347c595b8038261586a9b33ae28e885764",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "34fad43223f746afa6c04cc793e8b6b3d4a9b4f744dca8d1e84a519a3e1a9cfa": {
+      "workId": "tlaw-828ef2a01929cf79",
+      "referenceId": "tlar-db5010b0cb40d27d",
+      "bridgeRecordId": "tla-d6323aee78abda10",
+      "sourcePhotographSha256": "886c6eac6dfef33d22ac56626992b36f50ec7f4be26b9c4b65d727cd1d50df1b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "351f120f8468765d7e670201f1391235c6710fca5b4a5b72d42da3d47d2dfe59": {
+      "workId": "tlaw-dca7503a7fcfb840",
+      "referenceId": "tlar-e2339fa1dcfe9742",
+      "bridgeRecordId": "tla-3ac7c19293fbacb5",
+      "sourcePhotographSha256": "6e86a0e8189059050958f113901e1ddb26151ccdcab565cfbc5b4b1c9ec5c580",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "3520095e17c5c6011c73ff9602213a92d0e3e0947e3c16a626b1d6fa35e42b54": {
+      "workId": "tlaw-d5e59d8ed9b4135a",
+      "referenceId": "tlar-ab5a33fb5e629975",
+      "bridgeRecordId": "tla-1fb1cfe38107cdd1",
+      "sourcePhotographSha256": "e86ac9e97d29de415e8256d37dddff9a4766aa63632577cf8e33a22d2898a07a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "363a47d4e8d3342b4ca9e33fe2b4ee07f07968236454598e709b97975c345698": {
+      "workId": "tlaw-1153ef260afac2dc",
+      "referenceId": "tlar-49f621c0b5c59947",
+      "bridgeRecordId": "tla-4eda1db7bd2c5d20",
+      "sourcePhotographSha256": "f2024854aef14e94e00c895262ef8101133d25c275558c6c8c6af5f9f58b2486",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "371451588af87780c19502917550bffc3d6ed3a03f3a012cbddfe8a583c074f9": {
+      "workId": "tlaw-38d406544cb1a53b",
+      "referenceId": "tlar-e361944f71eb24c6",
+      "bridgeRecordId": "tla-e962d3c9e7610fcf",
+      "sourcePhotographSha256": "7fea8d00272525986adeeb20dc3462a44c41328a14e1600908b176e26b264cfd",
+      "surfaceScope": "physical_side_a",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "378c7a877bb1149675bc38d2a197f5b9ea68aa85afd629f1764fa665e0c1c9ff": {
+      "workId": "tlaw-ec5dfa5187417b9b",
+      "referenceId": "tlar-36a0c516862d8a82",
+      "bridgeRecordId": "tla-2e786389e4216d3f",
+      "sourcePhotographSha256": "49f44bc28405fb24d67d9669013d70e8149c126ffef38e556ff6e90faeccc637",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "3888438622f7c513e84acab14a27f237afe6104928e52afc2561d884d8cc6e2d": {
+      "workId": "tlaw-461cc07506c13831",
+      "referenceId": "tlar-f1cc4fba63821291",
+      "bridgeRecordId": "tla-dfb05972f667962b",
+      "sourcePhotographSha256": "97d88b1a7b718328093443d20a144ffd291c5fb6c066ad91f002e5b044e429d5",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "3a8a316b62f21bb738bd1a50d4022a28c24e9161efd8970f0c783d1b0b44bc84": {
+      "workId": "tlaw-e98b6951f8dee96e",
+      "referenceId": "tlar-50dade7efe9da231",
+      "bridgeRecordId": "tla-d0e25284fd0ce05e",
+      "sourcePhotographSha256": "783a5f27e972d92325845d51f111ad9c7b139733d8e399648d126670d510ef55",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "3db1b5b5ab6812868d38562f053ee1ee5aa41a312a52c6caaa487ea496ff74d5": {
+      "workId": "tlaw-7c59472e5811db6c",
+      "referenceId": "tlar-e0cca4b1a164db69",
+      "bridgeRecordId": "tla-b3097878f5e235f6",
+      "sourcePhotographSha256": "9623feb995501bd7f5ac064871c260b5db4e4e9ecfda4a314cd8e1b3d84b9708",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "3e64ea67317a6be9323f33ede55775bb4c1f492b14a621c3165531a1aadc8e85": {
+      "workId": "tlaw-cbda67821d4c2e9b",
+      "referenceId": "tlar-82333f20eb4838be",
+      "bridgeRecordId": "tla-90a0516ba2cb5685",
+      "sourcePhotographSha256": "8bf0834272266ce2d5de37cbb5338fdc8749b2fb5fe69c53d798e30f73082ff1",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "3fac199cb0cb007e14822c91541b10a1dbd2ab798f6e2d39c964b025fb48410f": {
+      "workId": "tlaw-1117c1f73b7b356b",
+      "referenceId": "tlar-40d746de1924594b",
+      "bridgeRecordId": "tla-30ac39b23e2a3820",
+      "sourcePhotographSha256": "b47d19a5b2cd6e25b98f9c6131e9ff567129c8fd469fa7a810bd8b0b9f512cf3",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "43e881e5cfee0dda8e1b76d6a43eacec68262172971292a87457505bfd88aa1d": {
+      "workId": "tlaw-63528d4b71b288c9",
+      "referenceId": "tlar-370dda43ede6c6c0",
+      "bridgeRecordId": "tla-ed76f76e1a8b037e",
+      "sourcePhotographSha256": "0da9ff31c2ec043fc85b0f748829f1dd41ce96e58f6be06dd7741462ae73e9a9",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "443b09576a3bdd5938fa727589f561e52e049fb1e4efe764f930653f15c9b2ff": {
+      "workId": "tlaw-7d08c7f5a1f08ed1",
+      "referenceId": "tlar-427f1be78502a92e",
+      "bridgeRecordId": "tla-d4fdf465d0be955d",
+      "sourcePhotographSha256": "cf6cfa945f5461bcadd93ddc3bbe210ee2d68fa49da46cd6648b442f41bc3cda",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "452984bf8e0f1615b26ad650a0c12181215591f53accc9241f5692db3efb9b0e": {
+      "workId": "tlaw-f31a861ca215b6ae",
+      "referenceId": "tlar-992a4ec5e0ab2596",
+      "bridgeRecordId": "tla-d76a303d6a16e38d",
+      "sourcePhotographSha256": "4a438a6e68de6290fa9e935eb3d50122b11b28c2fce59768e41b5cf66e8f8519",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "45654eb20358435b2ccbc805ae2f909598ceefabdc7d9cab617da00c494ba73a": {
+      "workId": "tlaw-2201622854097a3e",
+      "referenceId": "tlar-30421f550d68ecb0",
+      "bridgeRecordId": "tla-1f09450dae0074e2",
+      "sourcePhotographSha256": "622834ef9f0d1439e33f117523f0cb4f7b3ec860e9007122f044743305ae1490",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "45be6a071a35d9e6f865950d24da3ba59da05d3db8b201c55546968003dc4372": {
+      "workId": "tlaw-592a77316744d88d",
+      "referenceId": "tlar-36841286b0e1ff0b",
+      "bridgeRecordId": "tla-c7ff166abf35fc43",
+      "sourcePhotographSha256": "c210e4a7f84a977a27de96d756a0e9effc2ab40ddbccfcee466cd24a6a054f5f",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "46f583e69af29df2e2fa3cba423962cc2994d46e2a3375b55e1fe07a21cc7e6e": {
+      "workId": "tlaw-09c10943d6cb5901",
+      "referenceId": "tlar-9f6f468d2d8b09b7",
+      "bridgeRecordId": "tla-2ec2cd70feeb5879",
+      "sourcePhotographSha256": "d061d8940783ee29b1b626499bedaf25745ebad68a044227511b9b38a3ab30ac",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "4833f8e5abe103b2a626e49996de7ca83cf727c5bdb577f2298fe3aff097d33b": {
+      "workId": "tlaw-accdaa1eb5bd1cbf",
+      "referenceId": "tlar-aec51d3549088e6e",
+      "bridgeRecordId": "tla-9c65cdc292320529",
+      "sourcePhotographSha256": "bd228d29453ee4694a497ee5f89cce244073287343110fb041a234003b491008",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "48b77e162585402bf011cecc569731ac4f816e09a87e2dc883150db700fc7fca": {
+      "workId": "tlaw-7a00c80267c44f23",
+      "referenceId": "tlar-2954947f70fe3de5",
+      "bridgeRecordId": "tla-b48d3ced8ae7dcdf",
+      "sourcePhotographSha256": "317827507153d1eabd834d42f5492c83045c1487570dd38ec20625238df6fe75",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "49684c15d0fa2c4ce410e3ea99eac5765f0741f4ac0f4d7e00528c0654481964": {
+      "workId": "tlaw-c3adb56067a4ff19",
+      "referenceId": "tlar-5d81b9a40018b363",
+      "bridgeRecordId": "tla-2cabfe23e3e43d56",
+      "sourcePhotographSha256": "2210cdd0c6d209cee44a4b10df428d38e409ccfd2ea0c2671d98f4e721fa37dc",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "4b7209506036313be38e62f8497ecc2f12b2d38ee2bdc272576668039ffcf56f": {
+      "workId": "tlaw-e089b254b5fbd3e8",
+      "referenceId": "tlar-e6d1c91829af5091",
+      "bridgeRecordId": "tla-e7843a94a9b85a8f",
+      "sourcePhotographSha256": "8de79861794b723fed49f8a3959cb091868624333f0068b1691947784c3ef4e8",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "4bb3845f88c7be34c42eda6bf86117a2eeb809fd581fb15aded89d109a0f9a77": {
+      "workId": "tlaw-189af517c94873f2",
+      "referenceId": "tlar-1c9af40361cab409",
+      "bridgeRecordId": "tla-b823ff4d628bba62",
+      "sourcePhotographSha256": "5481b6763aab1aea76941b45f26ac29f7e17f6b67f98c0750c9223a3b0ae9839",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "4de629c5ae7b71846e21e8cf77694915f24ba612023f9d9cf2a319e125ec3d2a": {
+      "workId": "tlaw-60044be91f6a7f9a",
+      "referenceId": "tlar-150eba8d5c7757c8",
+      "bridgeRecordId": "tla-5a1a2392337b245e",
+      "sourcePhotographSha256": "20b873c9129e68ac51ba4941697ea52e108c70a83ec8228a2c1ae6a4f2b790a2",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "4f094304dcf3ff690265fa3594f7cd2cb2a49aba93ade18dbead65ba59131a54": {
+      "workId": "tlaw-608cc2ee8bf34c11",
+      "referenceId": "tlar-9a3218bc48de227d",
+      "bridgeRecordId": "tla-0cff16600a0c4f44",
+      "sourcePhotographSha256": "68de0e7e6f5d9782fe60f18841cff90c017cb6f2d08456d87178a72542d35014",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "50a117d940a831996cf8ab77e8d4cac54f0fd82bee6387dd51670d2de19401f5": {
+      "workId": "tlaw-b99f0ba7e6a04f62",
+      "referenceId": "tlar-6d21c54ca79938b9",
+      "bridgeRecordId": "tla-da910d6208df2b28",
+      "sourcePhotographSha256": "de092d60c20283a53c6624262220c4abcf0ec796017c6f2c99adf90e0a2a1938",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "50a1d043dab1274825c58df80bfd3c6fea6c9ae546ac9219cebe56113d45bc1a": {
+      "workId": "tlaw-3a3d35a8f9a4ed08",
+      "referenceId": "tlar-0516d2c1895e8b76",
+      "bridgeRecordId": "tla-d499682380e1d905",
+      "sourcePhotographSha256": "15e0d369dbc04d5cadd3c166a563d9e6cc3280aeb958b4e60f6e9aeeceda79e6",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "50bae95ae2916f7b10738752a98ddcae451bd981c215c0302c8e8b52260aa49d": {
+      "workId": "tlaw-a56feeb3631f5263",
+      "referenceId": "tlar-2f1c985e929bda8c",
+      "bridgeRecordId": "tla-708525ae36149bd8",
+      "sourcePhotographSha256": "d872720a515affab3e16e68d0f94e2573383092dfc4bbf6a9557a35b7df775ef",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "54120b2e1fda087b1e43a422545eec6b193d615ba435dc7b66fe3b0c2d4506f3": {
+      "workId": "tlaw-12a9831f82040c34",
+      "referenceId": "tlar-2a744870727b53ff",
+      "bridgeRecordId": "tla-0abd3f161938a29e",
+      "sourcePhotographSha256": "e93c4001bd468d28432baaf9e8a7e84bc36c925b2dfe3ebf4a1b681a533c236f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "5558e6e2b7ce684b9e91b2ee76f67def1b3856c00219e48b75cfd2d60a9d5272": {
+      "workId": "tlaw-3bb2aa7614d1d1ef",
+      "referenceId": "tlar-96ffbd13b55df25c",
+      "bridgeRecordId": "tla-93e88a8ec1dd1fe6",
+      "sourcePhotographSha256": "c98e5a2ef155bdcdddaa1141b01b0c013bdf8c2f41256b94f221082ab3f7d94a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "5594654d4199e25c6f78eb795888d69900ae0eb1eba44eee74c9fc3ae435143f": {
+      "workId": "tlaw-11ae8f374fb80b4b",
+      "referenceId": "tlar-475eac1d6ec5fae1",
+      "bridgeRecordId": "tla-e89d7c02112f543a",
+      "sourcePhotographSha256": "5d82fb6a61b9c930ba025c817f3db81f429ffd96fccee4bd4b623308bc9e5b82",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "567df677c4830770c91c8e8c8d19941bd4878260f42b30566df662f6bd6c385a": {
+      "workId": "tlaw-c22b50c3679b0566",
+      "referenceId": "tlar-6acfe33da185fda5",
+      "bridgeRecordId": "tla-0e526b1fc2a34b23",
+      "sourcePhotographSha256": "e923e8bc64b88b6caed8d3ef85a707729a18c30c45c6f102bb29823332b9d043",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "5811bea593a7f65d443f7de3324d14d09eca6142c762fb1957bd4186f5fe6099": {
+      "workId": "tlaw-e6602924c29191d7",
+      "referenceId": "tlar-4cc3fe29c039bbc0",
+      "bridgeRecordId": "tla-3682684e0a4b1e90",
+      "sourcePhotographSha256": "e73a49f017b2c7bb4de207777b2e4718b05e6b3e07a4afc80e71eb602b6661ad",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "5950bb28891f0e44c74acac019a0d4bbdd0c2ccec0ca39915fd9b4e9a655cf08": {
+      "workId": "tlaw-1c59cecc0dae3b36",
+      "referenceId": "tlar-e9c83346d7fcbeba",
+      "bridgeRecordId": "tla-44498796f4816cc6",
+      "sourcePhotographSha256": "7290279f77c9f1083bfbe26fa7e2093daf56fe915b39a8f2a9c4ce6d71091048",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "5c443ebe93756b8a4609de5fc755cfbef4e30f93e92d7747c2b1fdc25808b435": {
+      "workId": "tlaw-b555b4ea27118239",
+      "referenceId": "tlar-4e96c7a9c49cdefc",
+      "bridgeRecordId": "tla-5756f8ccd3161a1c",
+      "sourcePhotographSha256": "2b1157897ab1625a9353ddc759a4fc49354f3fa8240818f643e3247ad2d46d49",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "5cb6aaa715b0611754641ea0aed42d4c1f7c608954bf250060008ab12ab09ee7": {
+      "workId": "tlaw-97cb0020b7c7f3fe",
+      "referenceId": "tlar-8ebc01538d33b4bb",
+      "bridgeRecordId": "tla-1492fd90861cfa8a",
+      "sourcePhotographSha256": "0882ecd88daff95a7d7cda5cc25a605f82e7102cba6bdafa553783a3f116ff60",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "5f9c47b3a6d36d0d25e881e41bf3db5c969803a73cb69d1661781a3f3e389b73": {
+      "workId": "tlaw-d42c4916254e029c",
+      "referenceId": "tlar-e0ad937f0531e0ae",
+      "bridgeRecordId": "tla-9973baed5c9b2ce4",
+      "sourcePhotographSha256": "ff70b677d5822efa59270f4c16a1d100be732f22d009e3955bfe7164f4497c4d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "60993b57561148d59e65fae6986f85fb48ea91e52d5dcb6d62ca31f0b3577d21": {
+      "workId": "tlaw-65a3837bdcdf0fdf",
+      "referenceId": "tlar-c0ee1bf44f94698b",
+      "bridgeRecordId": "tla-c93cab9a435a3a20",
+      "sourcePhotographSha256": "a0b2e3e798196b030a51f25cd87806a64b8185a6f886a6c106226aa20f1cdcf9",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "61efa4e7aafce51260159d9d3bdd6f9bf8682cff7de825ba60e092b747b373e6": {
+      "workId": "tlaw-5a69069aee9b0630",
+      "referenceId": "tlar-a130977b5b9d7e0b",
+      "bridgeRecordId": "tla-3edd62a82dcda0cc",
+      "sourcePhotographSha256": "c8b9d36171ea0564cba7685dbd7ecbe681b3d13b865180b3ae2d96ca5df3ba21",
+      "surfaceScope": "physical_side_a",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "61f119208a7c7f6a853f087ccc79b8b85b6339f202954ed8f2bc95dfaa459d5e": {
+      "workId": "tlaw-869389414ec608ff",
+      "referenceId": "tlar-6e39a10667e21d69",
+      "bridgeRecordId": "tla-b3367c22da62f3ac",
+      "sourcePhotographSha256": "4a6c81a0c66534c3fbefcd64f05985fcde526aa87f0c1cc68da22b1ffb55dfb8",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "626287ed757eedfecf00f99f3999e0659224f540b7512e9828f69e59e2e93415": {
+      "workId": "tlaw-909a9425b0bd951c",
+      "referenceId": "tlar-7c31f1f32c4d022e",
+      "bridgeRecordId": "tla-22dfbc138cd4285c",
+      "sourcePhotographSha256": "60652400dc91cf156f41281134b646fa1beed429529763c37217d9d1f001ae1f",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "6307afe8971315e5fdd46ad9a7eaa98692fde250d244617630a53581ea9f775e": {
+      "workId": "tlaw-7c7a2a4c571bea94",
+      "referenceId": "tlar-d76a8cd00f7fe396",
+      "bridgeRecordId": "tla-ed7827496ae87223",
+      "sourcePhotographSha256": "7c2dbfe2bd1d37520d20bc34fb4019ccdefc9fea28edf33f4753cdd10cd86366",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "63cccc5a5f1aee4642eb11c1e4fa45314efa1fa791711f470c0d4ac870dc6dca": {
+      "workId": "tlaw-ef35a0df9b57f972",
+      "referenceId": "tlar-1d329c98b2fa6678",
+      "bridgeRecordId": "tla-439bd36b8f6e504b",
+      "sourcePhotographSha256": "c19f847faed79f1a74c29a24b121ed4f728a36d03fa3b34726a2989d514c7290",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "63ce803cc84ad6c2d8c06732bf4c8bd1a49abc7016f5deffbb081b209cb8594d": {
+      "workId": "tlaw-8ed51abe0c1af69b",
+      "referenceId": "tlar-584e16218db81c49",
+      "bridgeRecordId": "tla-56a5a88533c7f09f",
+      "sourcePhotographSha256": "70a6ffdfb9ed22e45c34eca740dedcd42c94503ff0b90a6202bff29cb17bd704",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "6432e0f143285505979b9b4016d10ec6a2902681295e5f0afd333596de08e5c1": {
+      "workId": "tlaw-2ab948acbe85d4b7",
+      "referenceId": "tlar-be4766f62e3fa7e4",
+      "bridgeRecordId": "tla-815de1cee17ea661",
+      "sourcePhotographSha256": "a48aa2d9c669cc12d2cc669372482eb36d4b570af89f0bf5f6fb0410e631ca95",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "6616ccbca87c9bdf076956e3b6b7f29657344f4c8ef76fc08ad1995b8042aa31": {
+      "workId": "tlaw-de15228497c58226",
+      "referenceId": "tlar-5a02530b9364d4c0",
+      "bridgeRecordId": "tla-4a4497a0a8c42197",
+      "sourcePhotographSha256": "967c1b8b788296142efab4fb5626a02a9557a56ccb547c00789a736ba00705db",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "674c48b6a43ee3f7b26b0a7770049ceb0bb9d06e2bed672b907d037cb7b6239a": {
+      "workId": "tlaw-d0436dcefba3c527",
+      "referenceId": "tlar-d822af8448da8aa9",
+      "bridgeRecordId": "tla-4238d4d6f827de64",
+      "sourcePhotographSha256": "d99bcfd62077d5dfa3b4ab3ac783298c87c1d197a34e276584354bb5d002af26",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "6817ec2f8a9ea808c1d35622f71b351282c008631458c91e15f07f55ca2c1081": {
+      "workId": "tlaw-ff0b851759fc9a35",
+      "referenceId": "tlar-02a72af7421eb64f",
+      "bridgeRecordId": "tla-637b32395775660b",
+      "sourcePhotographSha256": "f2f19a8d37edec29ebb4026a43b940b29ce41c67c781e8c848a9766c3fe4b663",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "681b0b59a0d7db5421215dbacc54c1fb888d5c35ab83e6f0245ba4f4ce670308": {
+      "workId": "tlaw-c95f21c3f931efcd",
+      "referenceId": "tlar-4deb00f2dfc8e8e8",
+      "bridgeRecordId": "tla-866161d4032c888b",
+      "sourcePhotographSha256": "e7a44c6682a1e17c1dee93aea926dce280dc930cb30e3ae343a995e43836af22",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "681b93614eb30fb46fb9423522dee4553fcd19dd590a955883e6285e2a5a3ba2": {
+      "workId": "tlaw-a7930be53081bd48",
+      "referenceId": "tlar-fa11e7d1affa474d",
+      "bridgeRecordId": "tla-839dd9363653ac2e",
+      "sourcePhotographSha256": "b1a20432a9d6e40ac9ff36476b02eff355e10e1cd9ae56dfa0784f38a2d88c9f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "681cf7edd81a35efce55c78024724ed4429ea57a499d2481d997c9551a86c845": {
+      "workId": "tlaw-5f5480ecb02e7417",
+      "referenceId": "tlar-1c353e9c5b9c50eb",
+      "bridgeRecordId": "tla-9fe09479d2daba00",
+      "sourcePhotographSha256": "e6e7a97f64e416464647f0949602fe090df4c3a4c4fc0cd6f05b0df994e5e4bf",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "6a33e0f495e8881ce9f68405096b453ab260ac95efaf55501bf59b06759312ba": {
+      "workId": "tlaw-7f0b3f95483e0365",
+      "referenceId": "tlar-6274983368897cd8",
+      "bridgeRecordId": "tla-9d7a3463d2902dcd",
+      "sourcePhotographSha256": "647da1a4f687b3672d5b2bc50ce96c59d0ec7a587bec86174edd4322e3e7f30f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "6ddb5d783e1a0cefbbe9366399ae1305f8f52f4faddd111bd337513cb83b9ae9": {
+      "workId": "tlaw-619a8f619dff6ff5",
+      "referenceId": "tlar-9886a5d46fdffb5f",
+      "bridgeRecordId": "tla-f2953cf7653f3d38",
+      "sourcePhotographSha256": "946b011845497b8b954434033e85f2eec49ec567d706f9f518c07de4e6c13b22",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "6f34efbcc18c3ff532e930654bea7a186b871eba90d72657985bda51c0f54d65": {
+      "workId": "tlaw-6c7e527145622c6c",
+      "referenceId": "tlar-154cfb8593b85279",
+      "bridgeRecordId": "tla-a61a431b60570fae",
+      "sourcePhotographSha256": "bc7d1b2f47ae576c56cc625040e7a4f06cc288353df5f31a73c35e39a93c7098",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7050dfabda46c301a2d32001956c67472062b645ce3599d0e99499af327b332a": {
+      "workId": "tlaw-c61429342d943238",
+      "referenceId": "tlar-5235a3d9053c8695",
+      "bridgeRecordId": "tla-0ac532eb53db3a62",
+      "sourcePhotographSha256": "2135d7ff37928b20132c1aec07d41084edd56bd18c24a200a409488d43da4ec8",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "70f9458dc502874d05766548ad39496376483fd276a05cf562539b47857f7dff": {
+      "workId": "tlaw-6c0a831915e12180",
+      "referenceId": "tlar-526064c397312d72",
+      "bridgeRecordId": "tla-354837fd89268bbb",
+      "sourcePhotographSha256": "41a18719b99bad701c69a5cc06dfc05b47b13d63d10e68d002ae4cedc472ffb1",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "71911bbae44f2d5292597182be2992980da9b713cad27ab802679f2a9f3cfe1b": {
+      "workId": "tlaw-ed9763dcb62d0740",
+      "referenceId": "tlar-e39a691ac34eb7ac",
+      "bridgeRecordId": "tla-831eb8c5dac33851",
+      "sourcePhotographSha256": "b342929d9a8b72423f25473f71b823db66607f2fb654d31c512c9574083e3760",
+      "surfaceScope": "physical_side_a",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "728629042ff7d67f0a4afaee89f80b0fa9d967ee49c3e1369fa01b3ce0335cf3": {
+      "workId": "tlaw-1dbea1a36a7c7733",
+      "referenceId": "tlar-4ee353fc82900388",
+      "bridgeRecordId": "tla-763108be8b77ef1a",
+      "sourcePhotographSha256": "5dc65c2c23e1549e719c97eebc37d37c187652a25f108886668ac02e499f8268",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "72f3846a754d1a021e82b207f70da961fde21d80eb502197afe23aa88c74c5d3": {
+      "workId": "tlaw-efc2ecc3c8398b6e",
+      "referenceId": "tlar-458218d4c8490a5a",
+      "bridgeRecordId": "tla-14dfbd1da5085eae",
+      "sourcePhotographSha256": "f02bbc5184b68e499d2336ac7db1a3a36e778371ecdc49eb068991460b5c3034",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "74d10e49670b5530e3b74cf179ef494f73d23ab00d00bef64d71918202d4e565": {
+      "workId": "tlaw-ebecb7f6d8b9478d",
+      "referenceId": "tlar-505e5b9553694ac7",
+      "bridgeRecordId": "tla-76f3bbafdc7cfd7e",
+      "sourcePhotographSha256": "6197573e37f1525a30410a586b31fb0908e96da54f521b326fe57e1b5fcd1ea4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "74fd3f951487b1a1266fe94a087fcd4ee55e70ffad7fbb33a2a74b4f333be9c8": {
+      "workId": "tlaw-ad232321d35003fc",
+      "referenceId": "tlar-03245eef33a7bc99",
+      "bridgeRecordId": "tla-7379edf8b54b4548",
+      "sourcePhotographSha256": "51589802ff4b115d377d22b00aa672a9790cb059e20ec2365c659feece8c5739",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "75bf832fc372d3abaf05229274f80fa0d93e6ddf1c9bb12bb29eb9f21e949a20": {
+      "workId": "tlaw-1beb4628e96a156c",
+      "referenceId": "tlar-fd19e3d93b9c7ea3",
+      "bridgeRecordId": "tla-823f6ba2f40282dc",
+      "sourcePhotographSha256": "d57b12ffa0e64cba8a1c7e1b910065822c1e57fc5efae744578e031dd06b2958",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "76239b54c69d7c096941a524a6f1e5eb6ad0d33f3d4f3899572cdf457c5e050b": {
+      "workId": "tlaw-ee9364842e2ac6eb",
+      "referenceId": "tlar-a39e9ff600650d93",
+      "bridgeRecordId": "tla-9a9fc627fcc64b0c",
+      "sourcePhotographSha256": "c2e921f0943433fad1cb8591817a3b40a73ad3e66a5befb42a554bd30488387d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "76a5efe9c8e7140dbbad7c3de35bcff91f00c3dbc857f87060c941be836810df": {
+      "workId": "tlaw-d2abf5591447c4cf",
+      "referenceId": "tlar-b6bd952bf76c6903",
+      "bridgeRecordId": "tla-000a2cf9278096a5",
+      "sourcePhotographSha256": "df971db6aafe10c5cf85d4e5805a91f8208da18c6c217a4b082bf87278b83f66",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "76e6eb245e9682d60751650973ff6b0734ac80cb68c49aa28a119085d7c1df94": {
+      "workId": "tlaw-c5a1f05a0531be8b",
+      "referenceId": "tlar-53e72c76ef89d20a",
+      "bridgeRecordId": "tla-287582c7cefeca6e",
+      "sourcePhotographSha256": "d4c35797e5026da4aa04deb96420f32dfa4f7922bea1efff3cf83dee48690761",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "77eb42257072885a5b444a4d52fe5c3c4636365edef3f9b96906b774f5674dd1": {
+      "workId": "tlaw-9411e4369ef0ab3a",
+      "referenceId": "tlar-4b6fb7dfb4433d15",
+      "bridgeRecordId": "tla-7da2e53bd37482e8",
+      "sourcePhotographSha256": "aa340546eab50ab4109e0edb87ddda817fd035894344e27aafe2c9ced07783ae",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7833446024ec04ec2548bfb5b9cbe43594214f2bf25498d0929b3477b388f43e": {
+      "workId": "tlaw-c1a999dd663ea9ca",
+      "referenceId": "tlar-020c8e3999fc85e8",
+      "bridgeRecordId": "tla-f8bb4e9f8145f52f",
+      "sourcePhotographSha256": "c5aaf10490864863880e7face72664f4aa7c50eacd0a3628ac7690c07e2e5be4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7891bdf100cc7b9af12d15dfd89c58768e4bbf96747e9a9a3a2f843f035ce7ba": {
+      "workId": "tlaw-2343d33f8cbf0aa5",
+      "referenceId": "tlar-6e8e45029c42b25c",
+      "bridgeRecordId": "tla-576e8def17b9fbbc",
+      "sourcePhotographSha256": "8b3bcb27be06068c2b33b9637d00d94b6ac2b4751ca46e38aed3e9a62ef511fb",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "78e1d386647639f72ddfa08103b35943c559b85a66d2fd3c820a0397ff2e53fb": {
+      "workId": "tlaw-a627e2fec01dd590",
+      "referenceId": "tlar-71bca24fbc4294ab",
+      "bridgeRecordId": "tla-ecd8ba8362e1cf32",
+      "sourcePhotographSha256": "f26e3feb26d8729f03af70cf2cbcf91cd920be8b6e1eae84ff2960ec40fa7ea7",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "794a55d15caf991cf049ffe81abb878d8b4bb60b00a4f41c181600a9a7348532": {
+      "workId": "tlaw-cf31f417413277af",
+      "referenceId": "tlar-731f45841ad668b4",
+      "bridgeRecordId": "tla-13b566b219e7b09b",
+      "sourcePhotographSha256": "38ddfc5519af5f980f31b3e0ecf61c3c080dce8a47dced8c234ecc60b1b37883",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7a77c1f008438773504c2139e450ee7619d4666b3429e595cd6a6471fab442c4": {
+      "workId": "tlaw-da5e9edbd1cd1220",
+      "referenceId": "tlar-4656817c8d0b4379",
+      "bridgeRecordId": "tla-fb3ee7b545582833",
+      "sourcePhotographSha256": "ad741d1bca15c20698f10d771ce94686490c6358fd65bd5c0593bddd507e32e2",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7b75ab929c25c1a3549ed36963c23f5bfdf794b8135330379fb2fcc9060f1fcd": {
+      "workId": "tlaw-1585dfd31f55af74",
+      "referenceId": "tlar-916d78c6fbe9da6b",
+      "bridgeRecordId": "tla-4a090a9a78295b06",
+      "sourcePhotographSha256": "32c246ae3b37a5c5f6ba9ef542776624e7445e93d32e55e95ce3a37d1b43a9ed",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7b851ad8e2a849dac33c8c048136e65af1fffa2dad20a146dd3aba6377c30b65": {
+      "workId": "tlaw-473f520a64669848",
+      "referenceId": "tlar-20d08d390de1822b",
+      "bridgeRecordId": "tla-d0a403ffc52c0f46",
+      "sourcePhotographSha256": "58fab8e2d8e0d895322a14b4a391622d760303fe4b3a5514ec2ea87b7876dc8e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7b8d2722c7eb0ff321a6115bea7d738281c94eb74c8581d4f53601c8668e4a72": {
+      "workId": "tlaw-d93300bddbe18c01",
+      "referenceId": "tlar-ba92d1cb618212fa",
+      "bridgeRecordId": "tla-ee1b434534dba2c2",
+      "sourcePhotographSha256": "586f53beeea99d65a70235defea5461a2cd4d1dbd4c263878459850d3926732b",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "7c616e6019743753e7c7a6250d7c16720a4c79ac536fecde45b0dd6970eaf295": {
+      "workId": "tlaw-95d57c073e09afd4",
+      "referenceId": "tlar-2587ff35c574445d",
+      "bridgeRecordId": "tla-69e11b95cd154fde",
+      "sourcePhotographSha256": "fbacc732babc672c704ee618acb30c8529463051efa39f0fa671a01c9ce395d2",
+      "surfaceScope": "physical_side_a",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "7d8f3bac0b398879f2c026eee0b599b9f8abc194ab67c8db6cfd30233e8f8487": {
+      "workId": "tlaw-d4a4a1d3ab3d9c1b",
+      "referenceId": "tlar-c20cb88a0fe2fb0f",
+      "bridgeRecordId": "tla-d7a8cf88894ff37a",
+      "sourcePhotographSha256": "bac98e87a1ec3717167683f9ec1f8e8a4af70f19fdd90ddceab7dd5618090d46",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "7dabc1ec9cd02cefc4970e86943f837cb0f5c4a3dd4a430351823d9e21e00b1d": {
+      "workId": "tlaw-84e36237ff4f7984",
+      "referenceId": "tlar-e1dcdf92086a790a",
+      "bridgeRecordId": "tla-68b9b8f4e4aa154b",
+      "sourcePhotographSha256": "cd151e3f553a06cba54f2f7d365bb8e2cc17123ea190f39e8e51d4d5205fd19a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7e1b0201a7b4e8dcb4004b7d6cc36c25ec17f963a4046e84625822bc3261c14b": {
+      "workId": "tlaw-9f432d60610a18ea",
+      "referenceId": "tlar-2628f1b8cc6b39fd",
+      "bridgeRecordId": "tla-9dfd8b00957988f8",
+      "sourcePhotographSha256": "39170901193a74a6b5508622886aec49cc3fea1418e0702d288aad2e0ae308bc",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "7edaf79c8c71d498a8ee653ebc8d5571864686bf32d5795bcb8be7a528806c95": {
+      "workId": "tlaw-f06e0266735d42a1",
+      "referenceId": "tlar-bae3b5c1c9826817",
+      "bridgeRecordId": "tla-3686711eece0ee7d",
+      "sourcePhotographSha256": "913027bc4073cc5821a9e815c2b8c986c520573116a5d43337f3d0be4ebd1812",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "7fa57ecbd37b705cacc581b7ea27df934015d41414e605dce3fd7b7c417e3fc5": {
+      "workId": "tlaw-6858f01c277a163f",
+      "referenceId": "tlar-13c34dec5ced1774",
+      "bridgeRecordId": "tla-2a9dc86bed79c40b",
+      "sourcePhotographSha256": "9ed547eeb6e752e34f638860628d81c697d54d7d55f65772e6010325f0b5cfb4",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "806d812f2fb6142f9efd9d8e9c4f98510a6c5a3e915b171a6328e42ff57a743b": {
+      "workId": "tlaw-b342edd4e2589d67",
+      "referenceId": "tlar-3f69bf9b379b91f7",
+      "bridgeRecordId": "tla-1dac37d2706b9411",
+      "sourcePhotographSha256": "f28ecff09084c128ff6ee09e4e4e1fbe358735846384ac8478fef8987e183459",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "80c4dd76459eeb5cbb77294381f2d1c1cff999f2204ae4611b609dde52f1cb82": {
+      "workId": "tlaw-7fe165914ebb0fe7",
+      "referenceId": "tlar-276750f606110c02",
+      "bridgeRecordId": "tla-14cded4a3e8553af",
+      "sourcePhotographSha256": "9f5317cc30b1366d6217ca6ab31d6137136e6d6072cb75c4e97456901e68ae4a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "819b3937ca41449da5d1b4f800e0ecd565222192efa23c6e476e313d4210b223": {
+      "workId": "tlaw-dab1dd00cc5324c8",
+      "referenceId": "tlar-0059c041317112ae",
+      "bridgeRecordId": "tla-28aed105fcb441dd",
+      "sourcePhotographSha256": "56b906330962f78f0ca86e36ff523e1f1ac816d5b9672244241a7a983fcc126a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "83b34db4937839c5e152cabe3107482db6fa2a6ec3b442d9dcb3f3389c0f5875": {
+      "workId": "tlaw-055de2034d93bbd7",
+      "referenceId": "tlar-d397de66ff028bfe",
+      "bridgeRecordId": "tla-aac7bc776e9a1dfa",
+      "sourcePhotographSha256": "1b3aba4d40dfa8f6b01374e159989661f1f2e0b5d7c50255586e05bc1919c54c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "84bf44b5e42606a117dd58227c5b7a3a8bd9f254b2a8af3e0d7f1eec78ef465a": {
+      "workId": "tlaw-77885394e961218d",
+      "referenceId": "tlar-077faa8cdd54fe96",
+      "bridgeRecordId": "tla-adf1600f853869dc",
+      "sourcePhotographSha256": "34f90407dec16804545ca24afa01d09a8298a97ab557498c0d3c5b771a688726",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "853f36060c8422aad271dbe3015dc88471c979771604bff8793132e6a2051b47": {
+      "workId": "tlaw-472d22ce8c57765d",
+      "referenceId": "tlar-0b135292e1e174cf",
+      "bridgeRecordId": "tla-af95c252bf1e9d18",
+      "sourcePhotographSha256": "b0fcff16efc3a500c94fa39c7cff7bf6eed5a18a8b4ca9223553f6b29f520e2d",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "86121d6b37e755745e299a42d28bc1e7cbd2beb2c952dd0f5437f70e9a6f32b7": {
+      "workId": "tlaw-8901482df6e4e728",
+      "referenceId": "tlar-5e7bc16c85c4f7c0",
+      "bridgeRecordId": "tla-7eb0c154b3b1cd1e",
+      "sourcePhotographSha256": "0afe5d009f39efbee560bbe1cb3feeb589ad7712a4a61a64f4d6f9a3a0311bd1",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "871d1bc872d3d854ea52d89a7391b95e3608773be709eafd5c73be515fcb6c38": {
+      "workId": "tlaw-603aae583e81e8b3",
+      "referenceId": "tlar-aec0be3d7e00769f",
+      "bridgeRecordId": "tla-8ae918f6a5e84a89",
+      "sourcePhotographSha256": "15cb07fe231b60a6e22763155fa98402d77f384e093f670f4f3204c0237d1457",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8732108c1b52b995124e66ccace64a0bce57c5d43e9ee17ad9604ba0e439d915": {
+      "workId": "tlaw-fcb6d36d61f41267",
+      "referenceId": "tlar-444ee6cdf06f80f7",
+      "bridgeRecordId": "tla-ef985f54bda0080a",
+      "sourcePhotographSha256": "9b6a8c35675777c6b62cbc5470b0079cd494b2ab24ebb4355967a92fa9d8aa05",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8734b2179962052682c901e0ead86d72ab5bfdf62f4ae43eb5b8ce27d1e7a0cb": {
+      "workId": "tlaw-b7740dbef7bee7f1",
+      "referenceId": "tlar-4d37dbc7c7e5712e",
+      "bridgeRecordId": "tla-4bb59b08eac99dce",
+      "sourcePhotographSha256": "8a8070f39822153ce0c31f30dbf1e0474bf72d809f6dc3463ac4edeab4673fad",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8a33855e26f39ce6ea74f7605bc985833fc5bb535dca8aa291c7912125573b64": {
+      "workId": "tlaw-d725f5b9aad55cdf",
+      "referenceId": "tlar-e9ce87ea7d24c143",
+      "bridgeRecordId": "tla-f5bb3968bd4f5a2a",
+      "sourcePhotographSha256": "3c96d282204ddecbcc91ab0dbcac8de35dc868dcbf5eb99d82f9a858ef07de21",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8a4a23f5c95cc2a7e280972dbc7e1d703dfc05170dfb3e46c94c70cf6eda1ce6": {
+      "workId": "tlaw-17749d66ff0fa606",
+      "referenceId": "tlar-8629368df24fcb46",
+      "bridgeRecordId": "tla-59a368819a8b31ba",
+      "sourcePhotographSha256": "81b1be3e327a2bbdfa2a2564ddcc700b12bd82a20d06cbbff1bf596ec01530ce",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8a60f315be400cde015240e5639d796c9219fabaaaa5285e6d6d43fc40d342ff": {
+      "workId": "tlaw-70f3800007d8a400",
+      "referenceId": "tlar-5c6b685f5179246a",
+      "bridgeRecordId": "tla-363d38ad4371c759",
+      "sourcePhotographSha256": "a2b7ddc190116522c1305b530c71d31bc8a62f0bf1f1f53a5d17a17782ff4637",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "8bb8083786f9627a1c6f8e232c96f1d13e721b919d806b6cab1193c31a04526f": {
+      "workId": "tlaw-1a2bab731d0d2339",
+      "referenceId": "tlar-d46956a8517672b4",
+      "bridgeRecordId": "tla-aa5b800112d5164f",
+      "sourcePhotographSha256": "1985257ada87cc1bc112329d6ab564da1cbcf9970d0d7bb77ff8d7c7410ba235",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8bea72d5259bc7363c0f750c9a9475d5cfd0314caa47110dec4812c5d8f43b07": {
+      "workId": "tlaw-1371f09e395417ef",
+      "referenceId": "tlar-93dcd1ccc70b6429",
+      "bridgeRecordId": "tla-e78d28c9d5625ecf",
+      "sourcePhotographSha256": "9e321afe87197d02b81b6eeb39de222775635f2b309ca83723eecf413eeee693",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8c2407eca8240bbc1ed4e552532619ae96a5eba7bbc2f463bebcaf21da5bedfd": {
+      "workId": "tlaw-55979e805f2bab33",
+      "referenceId": "tlar-c083bc340b81b1ba",
+      "bridgeRecordId": "tla-65b72ca05270f2ee",
+      "sourcePhotographSha256": "c3654c0b63adcd482da15a1f903b698366c53aa73e3594e145981dcf29cf58f8",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "8c2d089e63205b777dbaaf9df200528a6909c4f821832588a066a163f841bbe3": {
+      "workId": "tlaw-7f5c79f9b1b86673",
+      "referenceId": "tlar-832732aece52a12a",
+      "bridgeRecordId": "tla-54e12c889707a128",
+      "sourcePhotographSha256": "6209856d0b2fa7856c1300ef4c56fee889a43541b4df0442e53542bd93fef660",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8c3a2ddeefd006d2dd7cd2a43dd58b31241da3de81683f797f7fa2cf5c399bc4": {
+      "workId": "tlaw-d0ab3af481de7627",
+      "referenceId": "tlar-233a183fc5888059",
+      "bridgeRecordId": "tla-d0ac3265406a6e4d",
+      "sourcePhotographSha256": "e35874f43aecc12f32a538fd882565bd09c06d3a3099edda437fbd9ca39b655a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8cb33fa0fc7c563a871bbeb57bf7f2b46728de41c9ad70bcd5df379e0c575592": {
+      "workId": "tlaw-791bbe1fb2ee5e4f",
+      "referenceId": "tlar-6d91f7af9b662600",
+      "bridgeRecordId": "tla-f64cda7b91303006",
+      "sourcePhotographSha256": "47c32bc2191a9853552889d326688a8dab864fa512890db21c7551bbe9cb7614",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "8e1c2827de65a8c381ae2b5b1fc87e4e4fa26488a99fb4246463038bd4e058da": {
+      "workId": "tlaw-08f2dbb3a6e0914e",
+      "referenceId": "tlar-561e0c22f58f9a94",
+      "bridgeRecordId": "tla-e8d1676f40d43f98",
+      "sourcePhotographSha256": "98e2984bec56e29dfcf54d6ce1f1c18106dc73b002abf9d14b5cc71196f7d00b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8efb0f553b2a2753fbe261c0e74a4adaab32b0362cc125e3370bffdba1d30ad2": {
+      "workId": "tlaw-eba927a5349b6d7b",
+      "referenceId": "tlar-154c0ef748da1bcc",
+      "bridgeRecordId": "tla-2645dd46bf6aa35c",
+      "sourcePhotographSha256": "a44542b26ee6ebf7542ecc839639909851f11c746e088e4ed90bc19eae8e00f4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "8f2f4d0d6d171e735f098f34b668d10810cbe91d5b59d45d901958fec1275e39": {
+      "workId": "tlaw-fdac64237c264f5e",
+      "referenceId": "tlar-63397cd208980809",
+      "bridgeRecordId": "tla-bf615e09154229a7",
+      "sourcePhotographSha256": "42566daf32d33b758a41e71e9796c66e5d66991a372835b9dec775b9f6bc1e55",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "90c517ea018aec2b387f02b9c3d925ae77c2a40bb14700fb211b622e0bd10aa7": {
+      "workId": "tlaw-a1e1ab8a7199f1a1",
+      "referenceId": "tlar-430fbf99468c8468",
+      "bridgeRecordId": "tla-84a181d2436bf911",
+      "sourcePhotographSha256": "3b838bd0e22c7f025ae346ce858efa1be94547673b7a0d4970383a9eeb26097b",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "9106ef2232bfac515f47c997ac87240076074d085741199a95e4bd9b287b522b": {
+      "workId": "tlaw-22ab674875600113",
+      "referenceId": "tlar-da6da98ae5335303",
+      "bridgeRecordId": "tla-1e3c6a93338b30a9",
+      "sourcePhotographSha256": "8cdef2cfd078a7bd69340a0d6bf933359bd5331b6369460f0d38dfe83890e2e9",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "912cdf5558efda88b3e67348eba0c998503324fbe5f6eb29769e7618858bc5f5": {
+      "workId": "tlaw-21b9d4693c60a3ed",
+      "referenceId": "tlar-bee8f10849f99fea",
+      "bridgeRecordId": "tla-4f61b24d38765ee3",
+      "sourcePhotographSha256": "20b280f3af4f69e343c0f70434ec5ca5c8d68c6f5c66cb0692ec5a6873ab3fee",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "914e627c594c8d12c4834fddeccb2b31110de46e0b8dcdbfec0cbc052f474d3d": {
+      "workId": "tlaw-6890eb803a6f504c",
+      "referenceId": "tlar-aceb354184286b0f",
+      "bridgeRecordId": "tla-77117d24d560f7ef",
+      "sourcePhotographSha256": "7a1845a61044b8ccc6bf72b708bf622db520d1459cf602a6c1248ecdeaef9203",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "91a0ce7814f1df29198b718886675033e20f089f11d5c62becfbdfc00f5e716c": {
+      "workId": "tlaw-472b6176735b8ab7",
+      "referenceId": "tlar-a49a69272cb611c8",
+      "bridgeRecordId": "tla-073661cda8d18fd4",
+      "sourcePhotographSha256": "c62e65441ddcf104efb9d53ce7aad0e2973c6960f97f7bbb590400081653a754",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "92b45f96b8e51ba463633e1868fe8dee2ed3547a827a3e074ea482a6b43f7287": {
+      "workId": "tlaw-273721735ceb6374",
+      "referenceId": "tlar-027c854df08feb79",
+      "bridgeRecordId": "tla-6e23bd7578a06579",
+      "sourcePhotographSha256": "556d236eab7f3cce3e8f6fb70b843c6c322d23123e1c60b39b3dd66d30258816",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "940b5e2dc68916d758144a574c7de84b60bc49f727a6dbe73e144c8688e83b69": {
+      "workId": "tlaw-d32f9a7af75538c6",
+      "referenceId": "tlar-a8f3e74d94f498d6",
+      "bridgeRecordId": "tla-65e2a8c7092e738d",
+      "sourcePhotographSha256": "4eb075c45102c5daa05d9ce873b7d3676e4e55b53567fafc89450a6ff3796926",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "954a5a2842352f831b3b31c25e7b09d7eaadcb06ef256fc9a5c999866d7d07a5": {
+      "workId": "tlaw-b76ff9ccefa26339",
+      "referenceId": "tlar-439b17eb37c81ef3",
+      "bridgeRecordId": "tla-1ffb2a7fe1deb728",
+      "sourcePhotographSha256": "5aa4738aa64ca99a74309db4916a0e35a26c6fe4f25ef082b74f350e6c02e6a8",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "95df95bcf21bd13674739f5934046817f7b00c1633816f27f7d03facf9e4610c": {
+      "workId": "tlaw-a70181f4a264d6d6",
+      "referenceId": "tlar-259e9ae104c3da9e",
+      "bridgeRecordId": "tla-30ce6fa8438cd136",
+      "sourcePhotographSha256": "da77433c229fde001a9f4185e604b2cd5dd2b2706111075803f40073af07d192",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "95f1796922778156ee4123f6e150fa907a8a475cac993c6c2b99dbcc76f45a5e": {
+      "workId": "tlaw-bd5b6ca9bdede01a",
+      "referenceId": "tlar-aa5caf74685252ad",
+      "bridgeRecordId": "tla-8941c7cfd50503bf",
+      "sourcePhotographSha256": "ed352c7e2af2ca30981fb2e31531819adce988242f497851f1a4b32dad7200c8",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "971366a6ddfbdf87c88024786c581bed3e22585be528e207bc5785232509a902": {
+      "workId": "tlaw-425aa8d669bed654",
+      "referenceId": "tlar-d01e4639d8b8808e",
+      "bridgeRecordId": "tla-ed806fc159fe199f",
+      "sourcePhotographSha256": "4a9abedadf459fc2111741a4261e5ae771290ca39084246e6c3b160e440070bf",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "974583e45caf33d1ad970e58baadc2c761d7994e5e033e6880889cab2fb203cb": {
+      "workId": "tlaw-ed28482324f994cb",
+      "referenceId": "tlar-e6a26efd024a9c45",
+      "bridgeRecordId": "tla-292ba5800839ba6b",
+      "sourcePhotographSha256": "f5f3532e073f16dba071ec73dc768a0ece50fa2811a8d80adc2a2fd7d03c8971",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "978d04bd7595fa94adeb7ebae1816aabb3ed886b92e27fed044272d0b80f1b81": {
+      "workId": "tlaw-59cefdae9fa7174f",
+      "referenceId": "tlar-2f8548d2abb95903",
+      "bridgeRecordId": "tla-d053c22a88f79234",
+      "sourcePhotographSha256": "63ba78f3309735b9e44d87d766de09e28c7960eec78815211f1f3006f5b712c6",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9961375280999015cb57fe0e64e02377755988923df21bd97e82bcb01974c3a6": {
+      "workId": "tlaw-493ee2e3e6afc17e",
+      "referenceId": "tlar-54f2b99271851d04",
+      "bridgeRecordId": "tla-441c974bb5a397e2",
+      "sourcePhotographSha256": "e48b5ac44e940f7073eefde179ddd053aac60312cef8186414b83863683a6477",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9b166409849ce2570970a5b6f4087b5cc4543232003ef8287da69eeec7643d96": {
+      "workId": "tlaw-11181496bc76eda0",
+      "referenceId": "tlar-2a2925005abb69ca",
+      "bridgeRecordId": "tla-69a3050cdd7a84c4",
+      "sourcePhotographSha256": "b7dbe4f1daa72e5da59d43a0716bd33a28084722634237193933a4895a7ca7d5",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9b1f02ee75611fc6b6d6d359472811ecd3e2d93c1759e79f1208b9bfac8a5caa": {
+      "workId": "tlaw-20e8c683fd989287",
+      "referenceId": "tlar-1055d8d158957c52",
+      "bridgeRecordId": "tla-d65402addb073943",
+      "sourcePhotographSha256": "3154b6b8a9fc58e3f9b41dad83ce17b350ed6f7de3c54357a225c6a5673db9e7",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9b8784cfa7a220882c4dc8d8a699e8b024bfe8b29f4d172d6e64cae15fc2a8b0": {
+      "workId": "tlaw-55239a14c9ec8842",
+      "referenceId": "tlar-329a82b2cce3549a",
+      "bridgeRecordId": "tla-29c40634e686ac09",
+      "sourcePhotographSha256": "261bf5f363cb8336c70f13c82c6fb19547c7416f6913204271629bdda8a204f0",
+      "surfaceScope": "physical_side_a",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "9b97f71eca4a6bfc462ca1e54228ad882e2cf8247bd5f758295bda2b1078c903": {
+      "workId": "tlaw-84561fdb10901f00",
+      "referenceId": "tlar-a5b903ca3403e0b3",
+      "bridgeRecordId": "tla-536c65c76e57c815",
+      "sourcePhotographSha256": "8a3ea943af40990825aa38c12bf056e8bab6a2d505bb50d86697533e217250ab",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9c9233d7447a620cae99f51cff19dabb3d9a1c0d02d62ada15990d8fdd39add0": {
+      "workId": "tlaw-f4f0cb87656c7a46",
+      "referenceId": "tlar-6f635baf0c51c6a7",
+      "bridgeRecordId": "tla-b004078955bb366e",
+      "sourcePhotographSha256": "a9ad93ab3392aea6be8882a8ed9c8413682ed26f54fd8be9213e3b6204fd6220",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9db194de191b79ac5c310f080cc3a47950fb76f45d849bf56ac920365d9d9fe9": {
+      "workId": "tlaw-69c5b64caf73e685",
+      "referenceId": "tlar-c3e9babd4bd2485d",
+      "bridgeRecordId": "tla-b6479a26b79918cd",
+      "sourcePhotographSha256": "7c409cdfa81c1f8972d3984840b7836c69365f5acc2adbab77599b63f7742e16",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9ed5fff198c72c0bcc111b3ff38634f5cfb7de287446b349e827a94a00a7bbaf": {
+      "workId": "tlaw-57ab2af6121c6fa5",
+      "referenceId": "tlar-483b2750c9d9e2f8",
+      "bridgeRecordId": "tla-389e052869e1b801",
+      "sourcePhotographSha256": "0d5e120cdd6e3e2119de9745059b76f59de6d04da12b9dfcd0f8943967bc9b2d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "9f35b77171ce468984d9256d98064e9a4e222df4faaf5b9177d301455aa78182": {
+      "workId": "tlaw-89bd57612f23fc37",
+      "referenceId": "tlar-bd3b4951d8d9e25d",
+      "bridgeRecordId": "tla-e80c6dcd2cdea7a4",
+      "sourcePhotographSha256": "7540f39a14f663fdeb06ac55253b8505146c3abfa1c23afccd99a7cd381e6d76",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "9fe221c08f249ed2f72be08fe512a95ed6ac8944b867100b12ec9bd667aafc1c": {
+      "workId": "tlaw-23a6457f25d50df1",
+      "referenceId": "tlar-250874c0451b2934",
+      "bridgeRecordId": "tla-24c0be5e9deff598",
+      "sourcePhotographSha256": "2765cdfa8a2d6f14fdc4fe0ad976b5603f64657449b5cf20b6ed66610c0adec1",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "a19802e955daa190161b89d6668bebf9dfbbc201dadb8375009e9b77b96a34f6": {
+      "workId": "tlaw-fa924e968a21f7cc",
+      "referenceId": "tlar-aefe53b1fc7c39a1",
+      "bridgeRecordId": "tla-77e182a1c88530fc",
+      "sourcePhotographSha256": "3a254b19baafcbccb7f2a5642402087c1886d34b47e40fb129f45b703c6fa39e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a1aac962d200b028466c2bb97b4983ab6f4175da0e7f3f3a3c3befe2077b6dbc": {
+      "workId": "tlaw-0503a6ad50cf647b",
+      "referenceId": "tlar-43f3151f2207fafd",
+      "bridgeRecordId": "tla-514d05bf1ac38ee5",
+      "sourcePhotographSha256": "c2bf8f74d3560776c071c70bce4ad2d9b2c807666a3313ffad533ec0b2a32899",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a6189cab6b079a059a1b6c11c89bbfe1175079cc9cba07ca3a5a8b4bbee4780e": {
+      "workId": "tlaw-f587ed6b59b6b1db",
+      "referenceId": "tlar-77833ca0cb4c80ab",
+      "bridgeRecordId": "tla-c31a45034d1b4be7",
+      "sourcePhotographSha256": "1735529e43ccb31e73577589b4b50f70ddc90167d5be4d3dd9f55f8585ec6d8d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a7287854c57e849b14e0a72ffa4c451db3abdac7a977f8175f18451f675a8aa9": {
+      "workId": "tlaw-dbefb462f5d8742f",
+      "referenceId": "tlar-3a1bd373df4c6f50",
+      "bridgeRecordId": "tla-96f7598e9391abf3",
+      "sourcePhotographSha256": "9f4ac5c82b0ed19f647c08f4d19eda585167c83666c26a7a121a1e2a419a6f98",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a72f8dfa6fd89894159455dab429465c467cf7c63a2c5adbcd281373736a4a18": {
+      "workId": "tlaw-5f51262d7cd88489",
+      "referenceId": "tlar-1b2d6f9cd3b99936",
+      "bridgeRecordId": "tla-80d0af0240c677ff",
+      "sourcePhotographSha256": "48d96bcedef9353457784b266aae96b34a86bea4296d964ed356f019109205e2",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a7590ffc5afe04aaa73a276d1602fdf003a67fcd3dece016c1713a51fe8c9400": {
+      "workId": "tlaw-26fa28cf2857329d",
+      "referenceId": "tlar-5e866d6c32a374c5",
+      "bridgeRecordId": "tla-eb427b5ec557d3aa",
+      "sourcePhotographSha256": "07d70e65971c519a3c93fd6ac285d59eb258e84ac1aa4af4344c48d3c0f54c9a",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "a768ade931950480a1aefd92527e38519b74a6151374d2becb615c3bdf3ca9de": {
+      "workId": "tlaw-7b42496cf9860616",
+      "referenceId": "tlar-13d1ae18a80b2c95",
+      "bridgeRecordId": "tla-dfecfc6e010ca60e",
+      "sourcePhotographSha256": "2f3911e004034a491c426b3970bad62a591db99ec0a1eb2f27fb570a67d9a13b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a78b9a66b795fa5ebe7e6a4b7eb2c814161361817f8e9057acd5d54082e718ba": {
+      "workId": "tlaw-b5a64b91f5f81474",
+      "referenceId": "tlar-a416325813051e89",
+      "bridgeRecordId": "tla-d312c603718b4ab1",
+      "sourcePhotographSha256": "2d1f9107212942eba170076e60f05673fdbfd5d65d4c990014c6a2c8cdd79a6c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "a9596fe0616bae0dd2a6c2333af7fc5185474ae147b13b4665a1719a93a7e17e": {
+      "workId": "tlaw-759e414ece5a0f8a",
+      "referenceId": "tlar-2171d8b17e031004",
+      "bridgeRecordId": "tla-f2212ff401f26dd0",
+      "sourcePhotographSha256": "7748de637f45e612da2c81a81854bf1633375c58403483aee13b2998ae3720cb",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ab2dcf83b7c363b6248a92d60fea87f31224f5bcd3ae5613452455a9685b55eb": {
+      "workId": "tlaw-886bb99cfec77f0b",
+      "referenceId": "tlar-4d7058add59fec69",
+      "bridgeRecordId": "tla-9584f13cbb2d02d8",
+      "sourcePhotographSha256": "f52398eb6859442649e1a1a35aa20f952a9683acc524fc32056c99d50bb83214",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ab32086aa7d97f48354dff05022febbe23a69fd303f4d92de6e135b06240b372": {
+      "workId": "tlaw-4bd5b7b4f033972a",
+      "referenceId": "tlar-dd4ebf763866d451",
+      "bridgeRecordId": "tla-1a0cbe9cc6ec9b0e",
+      "sourcePhotographSha256": "6439c7c7ab61756ff8f9a98a0dcb0686d77e8000d0c8b031490fc173416631a4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "acd3f3c9e0feefa482f698f886b6ca180f2cf371cd70da0a9646a9222f6e77c6": {
+      "workId": "tlaw-5d94d482863cefa2",
+      "referenceId": "tlar-f8b019a6794ad71b",
+      "bridgeRecordId": "tla-c3fa74afbf300737",
+      "sourcePhotographSha256": "ccdda7cc953b577441f67473e89219c2fecf95631910a8a5e247de1b13f59306",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ad219b1a2c8a740e5b772987b0bef5fe909ad5b2848a5727fcbc9dcd1cd0c37c": {
+      "workId": "tlaw-e3f9247464ae7a9c",
+      "referenceId": "tlar-e4a7a4e9d1a513d5",
+      "bridgeRecordId": "tla-2df594e0092c367a",
+      "sourcePhotographSha256": "caf3b6c1835719fe0c983268d8bb6065e655ade6419b70910b3aae90e6963d8a",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ae817ffc93ad09f451e4721061b397d972af84f377bc236a35bd542d8923722d": {
+      "workId": "tlaw-25880d6a471faeb4",
+      "referenceId": "tlar-f6b5dcf4f061d3d2",
+      "bridgeRecordId": "tla-fbc82b1b21702f8d",
+      "sourcePhotographSha256": "157066e1d19538e2bbf71029a7703087dfad4702d4e0ee108d9d55574d85ba44",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "af3ea1f80f8084396051706d28538890b2e7db0d153748a5012909fa9038e3f6": {
+      "workId": "tlaw-fc024204173fa5ee",
+      "referenceId": "tlar-e89891184fc5b205",
+      "bridgeRecordId": "tla-aa0b5592b1eddd0e",
+      "sourcePhotographSha256": "a780ea5b52ccaa8a8d120c7664d74c2ff7d9c72199b130ad7f4432c9e03df3e6",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "b0969f99c7e2169fde9393ee5ad51afe4f1552e3d8d4ebc66c30b2ec80fbc22d": {
+      "workId": "tlaw-d365bae36e720b33",
+      "referenceId": "tlar-f5013fb056547acc",
+      "bridgeRecordId": "tla-da1d6bbba06ddd5d",
+      "sourcePhotographSha256": "3821bc76f4fbc59c516873d638a75c8f9df02228a9ece1913dc4324fffe2af1c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "b0e0ff36fdd6c04585668248adef9a87df06af8f5326895a11755eea06f48cb5": {
+      "workId": "tlaw-8fec89793f5b1f2e",
+      "referenceId": "tlar-d0591b78af42d867",
+      "bridgeRecordId": "tla-2b172d48772679d3",
+      "sourcePhotographSha256": "660d1deb6c96ddfc0c54b62976f1fbeb091c71701049b1532754f9564d6de89e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "b23f5e3cd941ca4146c77b657d4db7dd9003ffe6603bb9dd263737e8da5a56ff": {
+      "workId": "tlaw-42892a4a35df17db",
+      "referenceId": "tlar-b9edbfc549d6ed6f",
+      "bridgeRecordId": "tla-87b43e1917bcea30",
+      "sourcePhotographSha256": "6f7e5cf0108c1478adcbc2f1ce6d2d97be79675a9edae5700ee56bb7dcfcfdff",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "b2dcb5f9aa1b533743b748c73131f8bf82b7351c84aaa97bfe56e251b6be93a0": {
+      "workId": "tlaw-1415488430031cf1",
+      "referenceId": "tlar-1fe798edee4e4ec4",
+      "bridgeRecordId": "tla-cddcad2e9a03b35d",
+      "sourcePhotographSha256": "2473661bbcb512b49bc926cb2d15bd9ff5dbdfa258f3a3f575178a4bedd259b5",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "b3228661f4b7598e172734692c2d8ae88b00ba8644f72e01f5d32eecd1c21631": {
+      "workId": "tlaw-5005250175551343",
+      "referenceId": "tlar-f5085174efd46ddd",
+      "bridgeRecordId": "tla-572b392ae40ef440",
+      "sourcePhotographSha256": "ff828ff09061a14c567f3e07a5d9877691607798d98577912cf096776a70b8b6",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "b4ac2db67dd40dec4abf96d8a9ec565a2a349b59b59e4b21af785907e4c42383": {
+      "workId": "tlaw-36887fbcb89fadb7",
+      "referenceId": "tlar-37bace3d37e29715",
+      "bridgeRecordId": "tla-5a327f8976c37e91",
+      "sourcePhotographSha256": "856cd2b08e15ffb417844d12d36408744dc437f2ee5527c1ea8b98a58ed0f70c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "b94acaf27b94588601198c97d33725932d04f8fc020148cc2c06d60982ea1a9c": {
+      "workId": "tlaw-b9feceda953b5179",
+      "referenceId": "tlar-69bb870542c6e90a",
+      "bridgeRecordId": "tla-5dd633dbcd2f272f",
+      "sourcePhotographSha256": "1e3a69e5ff140864a2e09842aaabea4b85775750a02fd26d03aded47cffc214c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "baa14b05d4bc9fbcc5a0f9a56bd7fe652546ed90ced13274a21e2f311eb72903": {
+      "workId": "tlaw-781eaf4d304c6037",
+      "referenceId": "tlar-9dd81eeeb9ce9845",
+      "bridgeRecordId": "tla-3893f87d7ae25931",
+      "sourcePhotographSha256": "05810341aebe7f452745436de2c1a41498da310468c956e2c85d69db4280c4c9",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "bd7bc40d3011500594611c29d80e23f2b670b93f4bbc0eb02c18f1ea2492b049": {
+      "workId": "tlaw-e7d6dec4a754c00b",
+      "referenceId": "tlar-131bd94533ec6c68",
+      "bridgeRecordId": "tla-a9fe020343efa644",
+      "sourcePhotographSha256": "c9a155e4a464f37065fc09c3706449ca62b6b334e1806da2a493ba59bb6509ba",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "bf8ab9503cf0bb723b7b026ad36e8cd78dd0a20816a94dab62801766860e9aa1": {
+      "workId": "tlaw-75f1375df7e6a70e",
+      "referenceId": "tlar-1a0023155856cf7f",
+      "bridgeRecordId": "tla-031b7b34afeb6cf0",
+      "sourcePhotographSha256": "0d896cc5237ef00aa53a27a37548fc4dbc007e6d392c43025991a08edd15fc93",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c0ba47ee9319647e85d452ea07dde7dfb1fe2b00dabde02927b759efc2910a83": {
+      "workId": "tlaw-94ef52f87ae661d1",
+      "referenceId": "tlar-09f8dae50184daa3",
+      "bridgeRecordId": "tla-a6bd9380e0256aff",
+      "sourcePhotographSha256": "1186240f81a6a0c057bc8b5ef6e88f0fbe3ae9622152878eb7e0fe65e51b5547",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c0fdbf4f86be0fc84cde6a959dc7ac229cc8f8da91398cced48c27834e1567b0": {
+      "workId": "tlaw-2058e26b04d3a123",
+      "referenceId": "tlar-089dfb5944b40db5",
+      "bridgeRecordId": "tla-db9142820d43e4b2",
+      "sourcePhotographSha256": "99718a7b70f73711539d0c0197ba3c66fa2fd8fe08ae31074f05d5c1ce6b690d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c2e07e2f34cec4115466ebe90682c6920f1311ac1dd996dfaebfed428547bde9": {
+      "workId": "tlaw-9106f22d35921394",
+      "referenceId": "tlar-4dd29165a9d90f24",
+      "bridgeRecordId": "tla-c3e669c17218a788",
+      "sourcePhotographSha256": "e5ab9ca88b5952b29940adabba261febb2c8d5ecac613122b3775875a942aa99",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c2ef790e0cc87b5bd956fa48fd25f13bab87d109017f34785dd712bc13337bfd": {
+      "workId": "tlaw-a70b8ce2dd5f19bb",
+      "referenceId": "tlar-7cc3026971ecfd9d",
+      "bridgeRecordId": "tla-cf4c4f44b8e57982",
+      "sourcePhotographSha256": "bbb9322bc0c7ced2518f641d07cf692ecb5839e443dad85c37cd83a4dfea5c02",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c2fb8a1f11d3501e3b3061bebfd89557b8a50f07099a5e5768682085b88b34f1": {
+      "workId": "tlaw-b0d6b0ca04bbfbf8",
+      "referenceId": "tlar-05c7d9cf3552e023",
+      "bridgeRecordId": "tla-0cea16263e6d221d",
+      "sourcePhotographSha256": "21f440ac366c503d45161637feeca0b31537502a2535acfc0c5331dd7a2d7649",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c37048302be752b61746bcb4114b3e1c7ec0467332a98a452ac241bd02fcd264": {
+      "workId": "tlaw-543f655f19908873",
+      "referenceId": "tlar-5b1a007dfbfeccd0",
+      "bridgeRecordId": "tla-6e95e33d4d742a9a",
+      "sourcePhotographSha256": "57dc521fdfd1b52e27878305f949e4bf3a81e73334866e66ce81f205e7cf7e63",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "c50fcc46f4516c348af6f3e7c1d10b729adcd21faaafc57ff194396d7d559ad0": {
+      "workId": "tlaw-d09bf9e5c0fdb8cf",
+      "referenceId": "tlar-701b6ed0d1ed791c",
+      "bridgeRecordId": "tla-25a8ba077f7b9584",
+      "sourcePhotographSha256": "bd1ea06224be0e78ee4d8ca1f6c299ab92971fd84868c67c9a48bea606fcc76b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c57cf0790c9d1e7e46f524c144ef40222107c38292300c264fb75864c01d0674": {
+      "workId": "tlaw-213bccd5c11ec676",
+      "referenceId": "tlar-e7babf7263d3c2b9",
+      "bridgeRecordId": "tla-7fe5d873edc93ad3",
+      "sourcePhotographSha256": "47339947466de1eea89765a9be352f1ab6c8df81accb7c8dfbb49b8f56bbec0d",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "c62647c788de4aa5beaed66ae45b24c4f82513d22757829f94dabe4217a9309f": {
+      "workId": "tlaw-12426f99e5a96f79",
+      "referenceId": "tlar-940c5d9a610a68ad",
+      "bridgeRecordId": "tla-d8150f20cda50475",
+      "sourcePhotographSha256": "eae1ff2b2d53bc6c12e6c18f3553470a31b884927c4ce124a82b7c41fad0ad03",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "c85ab3748fbff5285a1e5a92189ec0b01b85763751b628062bbed4127e4c6d03": {
+      "workId": "tlaw-3a3a56acaae9f780",
+      "referenceId": "tlar-01b5ac4ed6f70c80",
+      "bridgeRecordId": "tla-fd5ba94cbf85c954",
+      "sourcePhotographSha256": "8ada6355894c3f0aa9434023ad970bbb980a9ded51d3e1b183305f38d1bdc5b5",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "ca225a71135390393249c3902b498e36e2162988bde7921bd8de8f3db63cc949": {
+      "workId": "tlaw-ad729f83505f275e",
+      "referenceId": "tlar-fa65658c80dad83f",
+      "bridgeRecordId": "tla-634a48017e4dae0e",
+      "sourcePhotographSha256": "ce6961cbe10478bc17c3485b5d9e85ac4e3799be7307ae26d9c744a11ea54449",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "caf3c07c5d847d59b0af7f21b5f0244f60da706b44a5fd6fe0774e66a3fcc16c": {
+      "workId": "tlaw-9a61a00f67d2da78",
+      "referenceId": "tlar-8a5eb542df1fa7c5",
+      "bridgeRecordId": "tla-d20200f68babb305",
+      "sourcePhotographSha256": "95a6e63f9112d00f11b86dd8b9f4e7ebfa95f775677be07351651b595cfe0765",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "cb5b20d401d6d7663f1ee14f463e6c4ed6fe961ee3b3d41e39c904fc2c780fcf": {
+      "workId": "tlaw-9d81de3b57afa2a3",
+      "referenceId": "tlar-eb1baa6e9ee679d2",
+      "bridgeRecordId": "tla-b2b8c37175926220",
+      "sourcePhotographSha256": "99aded5fe97133f2515de9ea7ec4d2b22a4878af7daf6a2010a96edcaec877cb",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "cbfd1c5d630f8e1c2484095bb982055f655fec3d65109f8dbc4b897239a85072": {
+      "workId": "tlaw-c42476ff07fe3e24",
+      "referenceId": "tlar-bfb84f6442d825c8",
+      "bridgeRecordId": "tla-3daa66217fc64643",
+      "sourcePhotographSha256": "25aa28463ea628b565d9428de71a357daf205b79a41953c9a5e3a9b29d9f8240",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "cc3bebe1eedf82cd59d2748f489f5429215ca2a2056933906666c73db167ec48": {
+      "workId": "tlaw-5ab9d0e120a54e9b",
+      "referenceId": "tlar-addd97f35545196b",
+      "bridgeRecordId": "tla-8c37082c94b0f9bf",
+      "sourcePhotographSha256": "f3ef66525f53ad4b188945db09d92a14e770182b246f7dee8db74c61ada72b4e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "cd04218bc7c91bbea7d99d418cdc289c856a78dcace0f0d9a933b34bdb927006": {
+      "workId": "tlaw-66d74373722cc152",
+      "referenceId": "tlar-eabb11f3b250260b",
+      "bridgeRecordId": "tla-82687dc264c79ff6",
+      "sourcePhotographSha256": "07aef7ae5d3a3222a24b4f1f26c9d9b1a8f56c24006ceb9fea3a1618cb28acf6",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "cd796b93e927cbad233de5aefe4f30bb82f4308925c1aad3e277bda7994bd617": {
+      "workId": "tlaw-5630a5bb8dae7c5b",
+      "referenceId": "tlar-91a440c42c1db16e",
+      "bridgeRecordId": "tla-3e7550cef913f901",
+      "sourcePhotographSha256": "29c8dd0b0f942c5f9ef9481d818df910b7cce795900c6337b830e0dbc072261c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "cfd0ccd3e200ad7f11a1e5ea293da5b780a2470768b8d65b25ea8c31a69c92c3": {
+      "workId": "tlaw-e0bf6e388ca75ea8",
+      "referenceId": "tlar-ac3ba577b024d18c",
+      "bridgeRecordId": "tla-ac836a7916b62dc2",
+      "sourcePhotographSha256": "6b90c266bfc06e87359c520d78969cd8254ea96dc5d15b173ece74d442097084",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d240edc7bcf09cfeb29bc2125fac136ace49fc2bf8f751a6361ef0caee452668": {
+      "workId": "tlaw-494a5ce1d84077bd",
+      "referenceId": "tlar-104b8e837ea1fc7f",
+      "bridgeRecordId": "tla-336b9ddfd7da07cd",
+      "sourcePhotographSha256": "9e96e59f326922d0d6b40c76f33f5b526f6262cdd526ee8804fcf11776335a73",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "d300eadac30b6084763e4b28d5b395908afccb46272faca354e29c3aeb8361d5": {
+      "workId": "tlaw-af8d14a9980f4246",
+      "referenceId": "tlar-db26e8151008e195",
+      "bridgeRecordId": "tla-350400af313db8d7",
+      "sourcePhotographSha256": "f03f6742e48162da43caad8204465394b8bc9cd3cdcaa4800fd45c5dad514f5d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d3759a35f575fd5ac69dc4215060622c2ad322c614d875e828701bca3526e4fa": {
+      "workId": "tlaw-45c5471a1b335253",
+      "referenceId": "tlar-4d0fe2d978fd1d65",
+      "bridgeRecordId": "tla-f0ebb7087ca15b13",
+      "sourcePhotographSha256": "c3341f206e8bc822f76e2a939dbca1ce4513a1003a7e6dc12b0e799b17a8cd26",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d57128a202fef61783bf2d928953d1c6bd6bfafe91b6dd50f5f1a56836410e0a": {
+      "workId": "tlaw-b1f9379ec5cac355",
+      "referenceId": "tlar-7efe4d5b01b6bccb",
+      "bridgeRecordId": "tla-c91866cd3082d177",
+      "sourcePhotographSha256": "fae5468cf3f834df50c79cb86591d86945b15dfc3cfd5c30220858c0462bca9f",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d6d4f42b6be718acf10f3dae1725736abab1f23b8bec9b092214b56e9ca35af4": {
+      "workId": "tlaw-08c9856843a96c94",
+      "referenceId": "tlar-e6dfc0442319059e",
+      "bridgeRecordId": "tla-b0f750baec34d608",
+      "sourcePhotographSha256": "c721c96fd8a67e160ff84f10915fa8ccf40d4e9bb74901a5d5ae2f49b84fab17",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d734472c8aef80b5cc1eef2d5d3e03ef65d1819708237740bb8348b3bc7c8374": {
+      "workId": "tlaw-1d254c5dd2fe4249",
+      "referenceId": "tlar-3460b846eed5445c",
+      "bridgeRecordId": "tla-5f0a846bf9bcc550",
+      "sourcePhotographSha256": "a488692deae35ea97a01d7f37462911b9f5654778770b758c648aaa6bb01d1b8",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d9403199bb9195f2aac04bfc70b0bac9bdb1c6bd5a1a199d4a4cdd33f631c5b8": {
+      "workId": "tlaw-6104514f69fd1bb3",
+      "referenceId": "tlar-621557304216da3f",
+      "bridgeRecordId": "tla-391d9faea0ddc3a8",
+      "sourcePhotographSha256": "94490f0d3b4b6c81f8831870d94ed51f87be21158935da18a51970f185983b77",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "d9a811c4bb73b519a406c714b750838572c66e35f7686e97ed255972b189126d": {
+      "workId": "tlaw-bf24bec9b07e3438",
+      "referenceId": "tlar-a9ad6a06ec4382de",
+      "bridgeRecordId": "tla-2131f89739c962c3",
+      "sourcePhotographSha256": "2e0d36446aa9492cc3846ab0433010ec55df63999482a40bcff1278b856419fa",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "dc5704c7391093e41927d3cb54fe719953a3574988fce57dcf66b531827198b8": {
+      "workId": "tlaw-5988d41e93c366f4",
+      "referenceId": "tlar-a64fc0fa011490ff",
+      "bridgeRecordId": "tla-ec7e8ef0d26d347b",
+      "sourcePhotographSha256": "bf87c4add135fa70b1fe28483521c964548a4def972bc36f71819ea469206f29",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "dd7439bbe9dede4315df832cf1cb105e13a10ae8eef9d2e1c23610df75893730": {
+      "workId": "tlaw-12175344dc7362e0",
+      "referenceId": "tlar-412e260f43591def",
+      "bridgeRecordId": "tla-08b7a2ce5e0ccf7f",
+      "sourcePhotographSha256": "6ec2c5f9b34d4df382c1c4d9f9b720e6d1aeedc2cc1858430191aa64f3e225b0",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "dea664a5a73e071d444dd8a91ec30784d624c903489be2c112909b7046c6338b": {
+      "workId": "tlaw-01ecb62602950d5f",
+      "referenceId": "tlar-59242fc56ee7d2d9",
+      "bridgeRecordId": "tla-be35b5eed3d7114a",
+      "sourcePhotographSha256": "1d2a35bccbb74ecabe89e584e71483dcc9b375873ee8f9f6ff31a49bc401c2c5",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "df3d4ac6d735c55a06f06bccd8ae0eec4c4f53aef14e89e31a4c9c4fb220664d": {
+      "workId": "tlaw-5e7bbdeb649735e5",
+      "referenceId": "tlar-f0faede455dd33f9",
+      "bridgeRecordId": "tla-c6e78962cc0ac520",
+      "sourcePhotographSha256": "845635cb47fabbc18260e85d64c4c75bdc5784d3de6d3e19ef1dbaafe5f891e4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e0aa98f48406e4f8be1b70846e1d7f500eab459b3d5ebe34b69a673ccbdf4f02": {
+      "workId": "tlaw-724eadc6f72ac35e",
+      "referenceId": "tlar-26988721df5e99c4",
+      "bridgeRecordId": "tla-2552f82561ea95b3",
+      "sourcePhotographSha256": "6647530130ad916c5cca97434a7dbce73ba200443982f0325c9ca989a73e7ef9",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e0ab16d05b6514e7564c494ee6eeab3049a01f90b788197dfa16780511fd4026": {
+      "workId": "tlaw-1ed810a22a66b606",
+      "referenceId": "tlar-2f88045399976a77",
+      "bridgeRecordId": "tla-4b26c46d5fff41d6",
+      "sourcePhotographSha256": "0e3bfc8096b3a0492ecb8b2125b3ca01150cf5d9b4f960b980d04b94e85b154b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e13cacdae2264c6143e3d4dbe9d20dc63c4f3d2ed8cdf51cd7b346725a5a483a": {
+      "workId": "tlaw-c185ffe95fa34fc7",
+      "referenceId": "tlar-ca32c5af17e038b3",
+      "bridgeRecordId": "tla-db0a713320359361",
+      "sourcePhotographSha256": "78fbb22d9f54cb4c66bc1c9490f3fb200af3977d5b8f338c270e63de4dfe3e26",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e33317e299270d05b8332c25d759b91a278d654d4d96ea975a002155afb467bc": {
+      "workId": "tlaw-5ffedc1af47d0942",
+      "referenceId": "tlar-f3ea97d546c0d24b",
+      "bridgeRecordId": "tla-cb48ecc517cba991",
+      "sourcePhotographSha256": "525eb1c83b4ed3a9090a4f731094f12f9d605b6bdf8724b145b9222333f9abfb",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "e399080eeeefaa04531328356b0519eedbc22dd1211713687abd7e12ef411fef": {
+      "workId": "tlaw-dc5a208c4bbf11c4",
+      "referenceId": "tlar-fd1e6448ddf70e85",
+      "bridgeRecordId": "tla-7f8be3aa8c62b7bf",
+      "sourcePhotographSha256": "6f6b346df2e0f36f8bfc38660e1f129fc1bd8f8ff17b3575338c5a8bd7d4bbe4",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e5c4c35982b3b0ac46658214d9bc43500ca1c337c318a5c5b1105a7e4213bb28": {
+      "workId": "tlaw-7de83db5a1d1f1db",
+      "referenceId": "tlar-ea87b3dc4926cc83",
+      "bridgeRecordId": "tla-76878c5f3a7515fe",
+      "sourcePhotographSha256": "58d00ae1783ce61dbba3a6bf049cddef7fa6557b6b3e90bde4e3b9a6f6fd9904",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e6da677c5a121c1548c59362b44b4c28207f6aead23e6d67f26dceba84a9a602": {
+      "workId": "tlaw-b4598853be24dca6",
+      "referenceId": "tlar-b33f3616fddfe00c",
+      "bridgeRecordId": "tla-15c0af96b67e55f2",
+      "sourcePhotographSha256": "f09f6c02b9e78aab8c80483cb08673dc425cbb73505968cb7f733a5a27ec4705",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "e94719ce7ddbe0d5ff1ff17238de060302483b93aaeea0b3224257d8d2c31f10": {
+      "workId": "tlaw-338279728f1dd81c",
+      "referenceId": "tlar-91b4ecdf7e571c1f",
+      "bridgeRecordId": "tla-531ed1bf9f09f903",
+      "sourcePhotographSha256": "7e9b9aca933b6b0c8a37c15046c4692f7b3fd8fdf54402700217e715d2ef5fed",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "eba652a886be43dfb5e15cb50f8bf0ebede5499e6639d3d1e41a9ba26960a796": {
+      "workId": "tlaw-3729f4181935f229",
+      "referenceId": "tlar-78c68c30c09f1590",
+      "bridgeRecordId": "tla-21eee0233610de15",
+      "sourcePhotographSha256": "a6a7d4cedbca794426c0d37b6d67cf72bd579a596c02be28ae4051f3ab1d224c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ee009fc456ec240db2d2c1743679766fd337cd39f75549f47a89a3d7f8dfdffb": {
+      "workId": "tlaw-e2ff3df47f645274",
+      "referenceId": "tlar-98daf44368d6d8ac",
+      "bridgeRecordId": "tla-ffff4ff7440b3ca6",
+      "sourcePhotographSha256": "744ede4fc21fe0549c622666d39bd842a47272c8aa9316ca666d8318affbe134",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ee9fa982f60dfcbde51172d010e5847825b11940e838b7bd87b6eba05ef71f25": {
+      "workId": "tlaw-a0cfc4950a627158",
+      "referenceId": "tlar-944fef624d1e2d5d",
+      "bridgeRecordId": "tla-89c3b7b57d8ac7b6",
+      "sourcePhotographSha256": "f136b6f6e22ec2f3909999c9e3f23584915e07c89484e82663b8dc13498134eb",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "f107a3e8c3be4bdf0f26f517a6314e66b6b9dfa04e07a8dc339ae5b907f3da64": {
+      "workId": "tlaw-5c7f6d3c39960592",
+      "referenceId": "tlar-7acd2375e2bc36d1",
+      "bridgeRecordId": "tla-2c49564894502dbe",
+      "sourcePhotographSha256": "194c1786344184c6f30312ccf1550447d3e990cb4254cff8681753c5b3fcae70",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f3657b695c70ed57e5f2bfbdd652142cb947e377a6e693895f319d1867c5ed89": {
+      "workId": "tlaw-bae66e69d089a95c",
+      "referenceId": "tlar-ed53ca9fb82161ce",
+      "bridgeRecordId": "tla-3287b60750d434f5",
+      "sourcePhotographSha256": "fb088904864bdf1f327570f7a8bd35495e6645f22c79534e0684742cc0d497ad",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f45d1f5039f73e9b5b9db34cfd519ca8c79a468870d633ef7044aba66e97b325": {
+      "workId": "tlaw-7ae90ed9d03a57c2",
+      "referenceId": "tlar-929f341bfddd0772",
+      "bridgeRecordId": "tla-21be1b7705a558ca",
+      "sourcePhotographSha256": "7b62dde0480fa4d6e0ea7e0c955770e79f1896ba6929994a1250568260e423a8",
+      "surfaceScope": "physical_side_b",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "f4ec12f3ad7fef835d234c2204437827a71b3babaa658120c9cac41b58e76e1e": {
+      "workId": "tlaw-3292eeb554c20b46",
+      "referenceId": "tlar-6e4ed5b6792ad43f",
+      "bridgeRecordId": "tla-130dbffd43a99c54",
+      "sourcePhotographSha256": "096bcc28b3169ec87ef15ba72d3f9c7b219b4c6391328abedf7827523751341c",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f63a5dfa1dd139856e3295228db40eeff5d47f9fdab5bc9733391af6f5fe49e7": {
+      "workId": "tlaw-82298fb76b0a804b",
+      "referenceId": "tlar-4a23b43f2406c9a7",
+      "bridgeRecordId": "tla-4e6e329a09af8300",
+      "sourcePhotographSha256": "5e9d0c62a47bd693bc0bd65320a9c367c06574acfa488041abe7012697cf2d3e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f6a5c95c30223db7ef6d1fc586e064e3e1eca7ba4a97bee291101a87c983437b": {
+      "workId": "tlaw-e0c1fd8cbbeaa7ea",
+      "referenceId": "tlar-e44e0a493d505ed3",
+      "bridgeRecordId": "tla-cf81b6141f9f3292",
+      "sourcePhotographSha256": "844948444914c6bd7b72183f99c3c51d950cbf9e30b0e5765c75074aff8d16e3",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f78f4e6cad95ec5dbc3831f57d93fe8c25f21c142d2d3b47bf8168a42d54d770": {
+      "workId": "tlaw-90cef48daa5738d7",
+      "referenceId": "tlar-e6e3808c9eaf4acf",
+      "bridgeRecordId": "tla-3c417c375a541190",
+      "sourcePhotographSha256": "8a30c837d7d6af69fe09f53788c0cb4c8bbcda699852cf696401cecceae3570b",
+      "surfaceScope": "front_surface",
+      "caution": "A physical side or reverse relationship is preserved; visual-surface equivalence is not assumed."
+    },
+    "f7a950cf145b37d904e564276ea1b79e04e7cd3977cb694a4e1559762e1d0b10": {
+      "workId": "tlaw-8820ce06e12c3d36",
+      "referenceId": "tlar-5d1a238ed00beabf",
+      "bridgeRecordId": "tla-07ec1fa6ef7b53fe",
+      "sourcePhotographSha256": "129903dbba9ab0702a92cc0123474e96b0680391b26b702cf9b36cfdf4b43fff",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f7df8344254bac6e7aa6551a563a9c02bb0fbb6ee7d4bb9ccfc3602fe20e6724": {
+      "workId": "tlaw-88ac428a3f4a0a52",
+      "referenceId": "tlar-029c31c8766b94a4",
+      "bridgeRecordId": "tla-a65bc19a631940b7",
+      "sourcePhotographSha256": "8b82d76060158036668896884e80350a4fcf35bb3ebe34a8f69969b371697c7d",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f80c476fbae5afb108c8d0aaffaea7ea8df6f9c9f06199361444600bf49d2840": {
+      "workId": "tlaw-221c2df9d8a55146",
+      "referenceId": "tlar-4de21ada8b5b7edb",
+      "bridgeRecordId": "tla-4e0488545a5e0661",
+      "sourcePhotographSha256": "b5fd18f2c52e4e8794370308f0d4c631e7c1c69c1fc5b05fdfc9a5853b941187",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f9c4ed780edd76eba696c42ced49fb56b66824f116078503f7cea9b9d2e94267": {
+      "workId": "tlaw-794f3c7a1e5a05b6",
+      "referenceId": "tlar-26f430f3e4bb9c26",
+      "bridgeRecordId": "tla-a17cb49ce64c3c17",
+      "sourcePhotographSha256": "e2ce70b860bc20033fbaed6256b786225472dac4d015fc1515656b21cc813be3",
+      "surfaceScope": "front_surface_later_state",
+      "caution": "Same evolving physical work; later rotation and substantial overdraw are preserved."
+    },
+    "f9dc34923bda8009bac5b9e251594e991dc2e591fb8e03592bcae465908193e2": {
+      "workId": "tlaw-a523462946cb7671",
+      "referenceId": "tlar-a73e2c1bea8348b5",
+      "bridgeRecordId": "tla-52da990a1aa717d8",
+      "sourcePhotographSha256": "32e0c745acbe8a82550b4fc7e18db7bcde94057a47001abcf2548fd709f3ab7e",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "f9ea449fa8d8d6562550e83e51aa97a6cf26f6b9fecc8bef41adafad47cd3c83": {
+      "workId": "tlaw-5f895280cb37cb5b",
+      "referenceId": "tlar-df289d2b4814a2c7",
+      "bridgeRecordId": "tla-490ba196152fa5be",
+      "sourcePhotographSha256": "7d4a64450a9b244674707dfac2866cafcd2c6670fb4ececc071d8285763a4af1",
+      "surfaceScope": "front_surface",
+      "caution": "Owner-confirmed endpoint link; the photograph remains a separate noncanonical object."
+    },
+    "fa136e7c5e8040f577090b3eeb12c3a56bdbc147a0938579b816b44738727b97": {
+      "workId": "tlaw-af2469aea7028245",
+      "referenceId": "tlar-4cbeea5842644f39",
+      "bridgeRecordId": "tla-e9ae69a207e660ba",
+      "sourcePhotographSha256": "da855db62be00e0cfa984e343e6a1b29f9d6d90f366abdcf1d92aa585fb444a2",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "fb4723e7707838249e730558f1497f84cf52c66d03b44e4e6541656ff2fc390d": {
+      "workId": "tlaw-393746629a3e39cb",
+      "referenceId": "tlar-7cef714e26ba5618",
+      "bridgeRecordId": "tla-b163716757043cc1",
+      "sourcePhotographSha256": "cd030d6894c98c2cf223ed4d602d63ea6c5908f1db80e3d6ea7ce0d1a3af1df3",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "fe1d90962a608de6a58f757c3d4e4d312142a329822aa890aa16418cd6328b59": {
+      "workId": "tlaw-bd9fe63973c322df",
+      "referenceId": "tlar-3c4d7852d70b8714",
+      "bridgeRecordId": "tla-07268949974ff303",
+      "sourcePhotographSha256": "f8643b42435b18ec663316373fa94aa10954a88eadf3bad815df1962e446f0d5",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "fecc499adb16b00f7fcf1e35f935a050861be3115a511020a7bae16e1860c837": {
+      "workId": "tlaw-b9f4b08aa6bc256e",
+      "referenceId": "tlar-57d6941c77f40f22",
+      "bridgeRecordId": "tla-2b648233fe612f1b",
+      "sourcePhotographSha256": "e32d4ba5165464c11bf5517430ae571454dc87634a566a863303d5a3225d4761",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    },
+    "ff4cff73bff7a97699b1247254d85c4129b0c1bf54a199dd747186ed2ce0c122": {
+      "workId": "tlaw-c7896869e25893f5",
+      "referenceId": "tlar-60f0f2eeb6a79a6e",
+      "bridgeRecordId": "tla-3a4b9a31dba72808",
+      "sourcePhotographSha256": "6520780c22411457c47638d56389b9e188b9332c0cd42781e2c46daa2fe0918b",
+      "surfaceScope": "front_surface",
+      "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
+    }
+  }
+}
