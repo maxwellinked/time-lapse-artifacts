@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, readdir, unlink, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -93,10 +93,19 @@ async function worker() {
   }
 }
 await Promise.all([worker(), worker()]);
+// Prune only generated hash-named JPEGs, after every active preview is ready.
+// A failed source download/build must not retire the previous display set.
+let pruned = 0;
+for (const name of await readdir(directory)) {
+  if (/^[a-f0-9]{64}\.jpg$/.test(name) && !Object.hasOwn(previews, name.slice(0, -4))) {
+    await unlink(join(directory, name));
+    pruned += 1;
+  }
+}
 await writeFile(manifestPath, `${JSON.stringify({
   schemaVersion: 1,
   sourceRevision: lookup.sourceRevision,
   processing,
   images: Object.fromEntries(Object.entries(previews).sort(([a], [b]) => a.localeCompare(b))),
 }, null, 2)}\n`);
-console.log(JSON.stringify({ previews: images.size, generated }));
+console.log(JSON.stringify({ previews: images.size, generated, pruned }));

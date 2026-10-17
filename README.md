@@ -92,5 +92,7 @@ performs no enhancement. `reference-previews/manifest.json` binds each source ha
 and pinned URL to the preview hash, dimensions, bytes, and processing settings.
 Unchanged, verified previews are reused; commit the generated files and manifest
 with the lookup refresh. Existing validation checks coverage, bindings, size bounds,
-and preview hashes offline. A failed preview keeps the original link available;
+and preview hashes offline, and rejects obsolete JPEGs. After a successful build,
+the generator removes hash-named previews no longer in the selected set.
+A failed preview keeps the original link available;
 it never automatically downloads the full-resolution source as a fallback.

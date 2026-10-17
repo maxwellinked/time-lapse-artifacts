@@ -46,6 +46,10 @@ const selectedPhotos = new Map(Object.values(references.records)
     !(Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 && Number(image.size_bytes) <= 512 * 1024))
   .map((image) => [image.sha256, image]));
 if (Object.keys(photoPreviews.images).length !== selectedPhotos.size) throw new Error("Photograph preview coverage mismatch");
+const expectedPhotoFiles = new Set([...selectedPhotos.keys()].map((hash) => `${hash}.jpg`));
+const obsoletePhotoFiles = readdirSync(join(root, "reference-previews"))
+  .filter((name) => /\.jpe?g$/i.test(name) && !expectedPhotoFiles.has(name));
+if (obsoletePhotoFiles.length) throw new Error(`Unexpected photograph previews: ${obsoletePhotoFiles.join(", ")}`);
 for (const [sourceHash, image] of selectedPhotos) {
   const preview = photoPreviews.images[sourceHash];
   const expectedUrl = `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/${payload.sourceRevision}/${image.image_path}`;
