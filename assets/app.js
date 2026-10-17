@@ -1,5 +1,5 @@
 import { loadRecords, RecordsDataError } from "./data-loader.js";
-import { getDisplayReference } from "./reference-policy.js";
+import { getDisplayReference, referenceExclusion, describeReferenceLink } from "./reference-policy.js?v=20261017-qualified-reference-links-v2";
 import {
   deriveRecordingSequences,
   extendVisibleCount,
@@ -12,6 +12,7 @@ const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
 const REFERENCE_URL = "data/physical-references.json";
 let referenceLookupPromise;
+let referenceEvidencePromise;
 let referenceGeneration = 0;
 let filterGeneration = 0;
 
@@ -492,9 +493,28 @@ function referencePresentation(image, additional = false) {
   };
   const source = sources[image.source_binding_method];
   if (!source) throw new Error("Unknown photograph source representation");
-  return image.relationship_status === "proposed"
-    ? `Linked through recording and registered work (proposed relationship). ${source}`
-    : source;
+  return source;
+}
+
+async function loadReferenceEvidence(lookupSha256) {
+  if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
+  if (!referenceEvidencePromise) {
+    referenceEvidencePromise = (async () => {
+      const response = await fetch("data/reference-link-evidence.json", { signal: AbortSignal.timeout(5000) });
+      if (!response.ok) throw new Error("Qualified-link evidence unavailable");
+      const evidence = await response.json();
+      if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {
+        throw new Error("Qualified-link evidence snapshot differs");
+      }
+      return evidence;
+    })().catch(() => { referenceEvidencePromise = null; return null; });
+  }
+  const evidence = await referenceEvidencePromise;
+  if (evidence?.lookupSha256 !== lookupSha256) {
+    referenceEvidencePromise = null;
+    return null;
+  }
+  return evidence;
 }
 
 async function loadReferenceLookup() {
@@ -505,7 +525,8 @@ async function loadReferenceLookup() {
       try {
         const response = await fetch(REFERENCE_URL, { signal: controller.signal });
         if (!response.ok) throw new Error("Reference lookup unavailable");
-        const payload = await response.json();
+        const bytes = await response.arrayBuffer();
+        const payload = JSON.parse(new TextDecoder().decode(bytes));
         const ids = new Set(state.records.map((record) => record.recordId));
         if (payload.sourceRevision !== state.sourceRevision || !payload.records ||
             Object.keys(payload.records).length !== ids.size) throw new Error("Reference snapshot differs from recording index");
@@ -548,7 +569,14 @@ async function loadReferenceLookup() {
             }
           }
         }
-        return payload;
+        let lookupSha256 = null;
+        try {
+          const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+          lookupSha256 = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+        } catch {
+          // Qualified links remain accessible when byte-bound support cannot be checked.
+        }
+        return { ...payload, lookupSha256 };
       } finally {
         window.clearTimeout(timeout);
       }
@@ -585,8 +613,7 @@ async function renderReference(record) {
     const entry = payload.records[record.recordId];
     const image = getDisplayReference(entry);
     if (!image) {
-      elements.referenceRole.textContent = "No confirmed drawing reference";
-      elements.referenceStatus.textContent = "No unambiguous, owner-confirmed drawing photograph is available for this recording.";
+      [elements.referenceRole.textContent, elements.referenceStatus.textContent] = referenceExclusion(entry);
     } else {
       const useSource = Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 &&
         Number(image.size_bytes) <= 512 * 1024;
@@ -613,9 +640,31 @@ async function renderReference(record) {
       elements.referenceStage.append(photograph);
       photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`;
     }
-    if (image) {
-      elements.referenceWork.textContent = `Registered work: ${entry.workId}`;
-      elements.referenceEvidence.textContent = "Drawing identification: owner-confirmed. Photograph shown in its documented orientation.";
+    if (entry.referenceCount) {
+      const photographs = [entry.mainImage, ...entry.additionalReferences].filter(Boolean);
+      const evidence = photographs.some((photo) => photo.relationship_status === "proposed")
+        ? await loadReferenceEvidence(payload.lookupSha256) : null;
+      if (!isCurrent()) return;
+      elements.referenceWork.textContent = `Recording belongs to registered work: ${entry.workId}`;
+      elements.referenceEvidence.textContent = "Links below retain their own identification and source limits. They do not establish this recording’s endpoint or photograph-to-video alignment.";
+      for (const photo of photographs) {
+        if (photo === image) continue;
+        const description = describeReferenceLink(entry, photo, evidence, state.sourceRevision);
+        const paragraph = document.createElement("p");
+        const link = document.createElement("a");
+        link.href = photo.fullResolutionUrl;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = `${description.title} ↗`;
+        const detail = document.createElement("small");
+        detail.textContent = `${referenceRole(photo)}. ${description.detail} ${referencePresentation(photo, true)}${description.surfaceScope ? ` Recorded surface scope: ${description.surfaceScope.replaceAll("_", " ")}.` : ""}${description.caution ? ` Source caution: ${description.caution}` : ""}`;
+        paragraph.append(link, document.createElement("br"), detail);
+        elements.additionalReferences.append(paragraph);
+        if (!image && photo === entry.mainImage && description.supportedIndirect) {
+          elements.referenceRole.textContent = "Supported indirect reference";
+          elements.referenceStatus.textContent = "An indirect photograph-to-work link is supported by public premises. Its status remains proposed, so no primary photograph is displayed. The qualified link is in Reference details.";
+        }
+      }
       elements.referenceManifest.href = `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/${state.sourceRevision}/Physical_References/Photographs/manifest.csv`;
       elements.referenceDetails.hidden = false;
     }
