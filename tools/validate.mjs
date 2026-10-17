@@ -5,6 +5,7 @@ import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { validateRecordsPayload } from "../assets/data-loader.js";
+import { getDisplayReference } from "../assets/reference-policy.js";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const requiredFiles = [
@@ -12,12 +13,15 @@ const requiredFiles = [
   "assets/style.css",
   "assets/app.js",
   "assets/data-loader.js",
+  "assets/reference-policy.js",
   "assets/record-sequences.js",
   "data/records.json",
   "tools/sync-records.mjs",
   "tools/generate-previews.mjs",
   "tests/data-loader.test.mjs",
   "tests/record-sequences.test.mjs",
+  "tests/reference-policy.test.mjs",
+  "REFERENCE_POLICY.md",
   ".github/workflows/generate-previews.yml",
   ".github/workflows/validate-site.yml",
   ".nojekyll",
@@ -36,6 +40,11 @@ validateRecordsPayload(payload);
 // Display JPEGs are bound to the selected photograph bytes, never to video frames
 // or a substitute photo of the same work. Validation is offline and dependency-free.
 const references = JSON.parse(readFileSync(join(root, "data/physical-references.json"), "utf8"));
+const displayedReferences = Object.values(references.records).map(getDisplayReference).filter(Boolean);
+if (!app.includes('getDisplayReference(photoLookup.records[record.recordId])') ||
+    !app.includes('const image = getDisplayReference(entry)')) {
+  throw new Error("Drawing-reference filters and dialogs must share the owner-confirmed selection policy");
+}
 const photoPreviews = JSON.parse(readFileSync(join(root, "reference-previews/manifest.json"), "utf8"));
 if (references.sourceRevision !== payload.sourceRevision || photoPreviews.sourceRevision !== payload.sourceRevision ||
     photoPreviews.schemaVersion !== 1 || photoPreviews.processing.longEdgePixels !== 1024) {
@@ -217,6 +226,7 @@ for (const path of [
   "/assets/style.css",
   "/assets/app.js",
   "/assets/data-loader.js",
+  "/assets/reference-policy.js",
   "/assets/record-sequences.js",
   "/data/records.json",
 ]) {
@@ -236,6 +246,8 @@ console.log(
       unknownFinishTimes: payload.records.filter((record) => !record.time).length,
       previews: previewFilenames.length,
       photographPreviews: selectedPhotos.size,
+      displayedDrawingReferences: displayedReferences.length,
+      displayedDrawingPhotographs: new Set(displayedReferences.map((image) => image.sha256)).size,
       previewMode: "deterministic-motion-clips",
       sourceRevision: payload.sourceRevision,
     },

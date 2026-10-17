@@ -7,6 +7,7 @@ import {
   deriveRecordingSequences,
   sortRecordsForDisplay,
 } from "../assets/record-sequences.js";
+import { getDisplayReference } from "../assets/reference-policy.js";
 
 const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
 // Run the browser's actual filter functions without starting its DOM/media UI.
@@ -31,24 +32,27 @@ async function filter(records, lookup, values = { photograph: "with" }) {
     state, elements, PAGE_SIZE: 18, filterGeneration: 0,
     FormData: class { get(name) { return values[name] ?? ""; } },
     loadReferenceLookup: async () => { lookupLoads += 1; return lookup; },
+    getDisplayReference,
     sortRecordsForDisplay,
     renderRecords() {},
   });
   return { records: state.filtered, lookupLoads };
 }
 
-test("published candidates qualify even when selection remains unresolved", async () => {
+test("only 303 confirmed drawing pairings qualify; unresolved published candidates remain excluded", async () => {
   const before = JSON.stringify(published);
   const result = await filter(payload.records, published);
   const ids = new Set(result.records.map((record) => record.recordId));
-  const expected = payload.records.filter(({ recordId }) => {
+  assert.equal(ids.size, 303);
+  for (const recordId of ids) {
     const entry = published.records[recordId];
-    return entry.mainImage !== null || entry.additionalReferences.length > 0;
-  });
-  assert.equal(ids.size, expected.length);
-  for (const record of expected) assert.ok(ids.has(record.recordId));
+    assert.equal(entry.selectionStatus, "primary_inspection");
+    assert.equal(entry.mainImage.relationship_status, "owner_confirmed");
+    assert.equal(entry.mainImage.view_purpose, "primary_inspection");
+    assert.equal(entry.mainImage.source_binding_method, "exact_confirmed_source_bytes");
+  }
   for (const id of ["tla-f27d620979e140d9", "tla-bdbd7d2e290b638a"]) {
-    assert.ok(ids.has(id), `${id} has published candidates`);
+    assert.ok(!ids.has(id), `${id} has unresolved published candidates, not a confirmed drawing reference`);
     assert.equal(published.records[id].mainImage, null);
     assert.equal(published.records[id].selectionStatus, "selection_unresolved");
     assert.equal(published.records[id].additionalReferences.length, 2);
@@ -57,24 +61,42 @@ test("published candidates qualify even when selection remains unresolved", asyn
   assert.equal(JSON.stringify(published), before, "filtering must not alter reference evidence");
 });
 
-test("includes selected and supplemental photographs, excludes records with no photographs", async () => {
-  const records = payload.records.slice(0, 5);
-  const entries = [
-    { referenceCount: 1, mainImage: { view_purpose: "primary_inspection" }, additionalReferences: [] },
-    { referenceCount: 1, mainImage: { view_purpose: "supplemental_documentation" }, additionalReferences: [] },
-    { referenceCount: 2, mainImage: null, additionalReferences: [{}, {}], selectionStatus: "selection_unresolved" },
+test("filter accepts the confirmed primary and excludes supplemental, inferred, proposed and unresolved references", async () => {
+  const records = payload.records.slice(0, 8);
+  const confirmed = structuredClone(Object.values(published.records).find((entry) => getDisplayReference(entry)));
+  Object.assign(confirmed, { referenceCount: 1, primaryReferenceCount: 1, additionalReferences: [] });
+  const entries = Array.from({ length: 5 }, () => structuredClone(confirmed));
+  Object.assign(entries[1], { selectionStatus: "single_supplemental", primaryReferenceCount: 0 });
+  Object.assign(entries[1].mainImage, {
+    view_purpose: "supplemental_documentation", inspection_resolution_class: "supplemental_documentation",
+    sha256: "b".repeat(64),
+  });
+  entries[2].mainImage.source_binding_method = "inferred_same_capture_export_variant";
+  Object.assign(entries[3].mainImage, {
+    relationship_status: "proposed", evidence_class: "deterministic_transitive_bridge",
+    authority_class: "derived_from_owner_confirmed_edges", derivation_method: "transitive_closure",
+    source_binding_method: "exact_historical_reference_bytes", sha256: "c".repeat(64),
+  });
+  Object.assign(entries[4], {
+    referenceCount: 2, primaryReferenceCount: 2, selectionStatus: "selection_unresolved", mainImage: null,
+    additionalReferences: [structuredClone(confirmed.mainImage), structuredClone(entries[3].mainImage)],
+  });
+  entries.push(
     { referenceCount: 0, mainImage: null, additionalReferences: [], selectionStatus: "missing_public_photo" },
     { referenceCount: 0, mainImage: null, additionalReferences: [], selectionStatus: "missing_work_link" },
-  ];
+    structuredClone(confirmed),
+  );
+  entries[7].referenceCount = 2;
+  entries[7].additionalReferences.push(structuredClone(entries[1].mainImage));
+  const before = JSON.stringify(entries);
   const lookup = { records: Object.fromEntries(records.map((record, index) => [record.recordId, entries[index]])) };
   const result = await filter(records, lookup);
-  assert.deepEqual(new Set(result.records.map((record) => record.recordId)), new Set(records.slice(0, 3).map((record) => record.recordId)));
-  assert.equal(entries[2].mainImage, null);
-  assert.equal(entries[2].selectionStatus, "selection_unresolved");
+  assert.deepEqual(new Set(result.records.map((record) => record.recordId)), new Set([records[0].recordId, records[7].recordId]));
+  assert.equal(JSON.stringify(entries), before, "filtering must retain excluded source evidence unchanged");
 });
 
 test("photograph filtering composes with search, year, tool, dimensions and order", async () => {
-  const record = payload.records.find(({ recordId }) => recordId === "tla-f27d620979e140d9");
+  const record = payload.records.find(({ recordId }) => getDisplayReference(published.records[recordId]));
   const values = { photograph: "with", search: record.recordId, year: record.date.slice(0, 4),
     tool: record.tool.split(";")[0], dimensions: record.dimensions, order: "asc" };
   assert.deepEqual((await filter(payload.records, published, values)).records, [record]);
