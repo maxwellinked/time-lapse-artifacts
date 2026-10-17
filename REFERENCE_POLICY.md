@@ -54,6 +54,10 @@ alone establishes support. This verifies recorded public premises, not the
 underlying photographs or owner assertions. Source cautions and surface scope
 remain visible; authority and relationship statuses are unchanged.
 
+Before using support claims, the browser compares the evidence's lookup hash
+with SHA-256 of the actual loaded lookup bytes. Mixed cached snapshots from the
+same Hugging Face revision, or unavailable hashing, retain unverified labels.
+
 If support is unavailable, mismatched, private-only or stale, the link says
 **Proposed reference · support not verified here**. This does not assert that
 private evidence is absent or that a proposal is false. Reproduce the support

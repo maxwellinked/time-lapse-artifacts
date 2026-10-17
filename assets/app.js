@@ -1,5 +1,5 @@
 import { loadRecords, RecordsDataError } from "./data-loader.js";
-import { getDisplayReference, referenceExclusion, describeReferenceLink } from "./reference-policy.js";
+import { getDisplayReference, referenceExclusion, describeReferenceLink } from "./reference-policy.js?v=20261017-qualified-reference-links-v2";
 import {
   deriveRecordingSequences,
   extendVisibleCount,
@@ -496,7 +496,8 @@ function referencePresentation(image, additional = false) {
   return source;
 }
 
-async function loadReferenceEvidence() {
+async function loadReferenceEvidence(lookupSha256) {
+  if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
       const response = await fetch("data/reference-link-evidence.json", { signal: AbortSignal.timeout(5000) });
@@ -508,7 +509,12 @@ async function loadReferenceEvidence() {
       return evidence;
     })().catch(() => { referenceEvidencePromise = null; return null; });
   }
-  return referenceEvidencePromise;
+  const evidence = await referenceEvidencePromise;
+  if (evidence?.lookupSha256 !== lookupSha256) {
+    referenceEvidencePromise = null;
+    return null;
+  }
+  return evidence;
 }
 
 async function loadReferenceLookup() {
@@ -519,7 +525,8 @@ async function loadReferenceLookup() {
       try {
         const response = await fetch(REFERENCE_URL, { signal: controller.signal });
         if (!response.ok) throw new Error("Reference lookup unavailable");
-        const payload = await response.json();
+        const bytes = await response.arrayBuffer();
+        const payload = JSON.parse(new TextDecoder().decode(bytes));
         const ids = new Set(state.records.map((record) => record.recordId));
         if (payload.sourceRevision !== state.sourceRevision || !payload.records ||
             Object.keys(payload.records).length !== ids.size) throw new Error("Reference snapshot differs from recording index");
@@ -562,7 +569,14 @@ async function loadReferenceLookup() {
             }
           }
         }
-        return payload;
+        let lookupSha256 = null;
+        try {
+          const digest = await window.crypto.subtle.digest("SHA-256", bytes);
+          lookupSha256 = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+        } catch {
+          // Qualified links remain accessible when byte-bound support cannot be checked.
+        }
+        return { ...payload, lookupSha256 };
       } finally {
         window.clearTimeout(timeout);
       }
@@ -629,7 +643,7 @@ async function renderReference(record) {
     if (entry.referenceCount) {
       const photographs = [entry.mainImage, ...entry.additionalReferences].filter(Boolean);
       const evidence = photographs.some((photo) => photo.relationship_status === "proposed")
-        ? await loadReferenceEvidence() : null;
+        ? await loadReferenceEvidence(payload.lookupSha256) : null;
       if (!isCurrent()) return;
       elements.referenceWork.textContent = `Recording belongs to registered work: ${entry.workId}`;
       elements.referenceEvidence.textContent = "Links below retain their own identification and source limits. They do not establish this recording’s endpoint or photograph-to-video alignment.";
