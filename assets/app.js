@@ -480,6 +480,22 @@ function referenceRole(image) {
   throw new Error("Unknown photograph resolution");
 }
 
+function referencePresentation(image, additional = false) {
+  const sources = {
+    exact_confirmed_source_bytes: "Source representation: exact confirmed source bytes.",
+    inferred_same_capture_export_variant: additional
+      ? "Source representation: inferred same capture export variant."
+      : "Source representation: inferred same-capture export variant.",
+    exact_historical_reference_bytes: "Source representation: exact historically bound reference bytes.",
+    provenance_bound_review_derivative: "Source representation: provenance-bound review JPEG; original unavailable; limited representation.",
+  };
+  const source = sources[image.source_binding_method];
+  if (!source) throw new Error("Unknown photograph source representation");
+  return image.relationship_status === "proposed"
+    ? `Linked through recording and registered work (proposed relationship). ${source}`
+    : source;
+}
+
 async function loadReferenceLookup() {
   if (!referenceLookupPromise) {
     referenceLookupPromise = (async () => {
@@ -509,13 +525,23 @@ async function loadReferenceLookup() {
             throw new Error("Inconsistent reference selection");
           }
           for (const image of images) {
+            const relationship = [image.relationship_status, image.evidence_class,
+              image.authority_class, image.derivation_method].join("|");
+            const sourceBindings = relationship === "owner_confirmed|direct_owner_confirmed|owner_direct|direct_confirmation"
+              ? ["exact_confirmed_source_bytes", "inferred_same_capture_export_variant"]
+              : relationship === "proposed|deterministic_transitive_bridge|derived_from_owner_confirmed_edges|transitive_closure"
+                ? ["exact_historical_reference_bytes", "provenance_bound_review_derivative"] : [];
             const validRole = image.view_purpose === "primary_inspection"
               ? ["native_full_resolution_inspection", "limited_resolution_full_drawing_reference"].includes(image.inspection_resolution_class)
               : image.view_purpose === "supplemental_documentation" && image.inspection_resolution_class === "supplemental_documentation";
-            if (image.work_id !== entry.workId || image.relationship_status !== "owner_confirmed" ||
+            const validReview = image.source_binding_method !== "provenance_bound_review_derivative" ||
+              (image.inspection_resolution_class !== "native_full_resolution_inspection" &&
+                image.processing_method === "jpeg_metadata_only_codestream_unchanged");
+            if (image.work_id !== entry.workId || image.image_role !== "drawing_reference" ||
                 !image.fullResolutionUrl?.startsWith(prefix + entry.workId + "/") ||
-                !validRole ||
-                !["exact_confirmed_source_bytes", "inferred_same_capture_export_variant"].includes(image.source_binding_method)) {
+                !validRole || !validReview || !sourceBindings.includes(image.source_binding_method) ||
+                image.processing_spec !== "Physical_References/Photographs/PROCESSING.json" ||
+                !["jpeg_metadata_only_codestream_unchanged", "embedded_primary_JPEG_codestream_and_ICC_preserved"].includes(image.processing_method)) {
               throw new Error("Invalid reference relationship or source URL");
             }
           }
@@ -567,9 +593,7 @@ async function renderReference(record) {
       elements.referenceRole.textContent = referenceRole(image);
       elements.referenceFull.href = image.fullResolutionUrl;
       elements.referenceFull.hidden = false;
-      elements.referenceRepresentation.textContent = image.source_binding_method === "inferred_same_capture_export_variant"
-        ? "Source representation: inferred same-capture export variant."
-        : "Source representation: exact confirmed source bytes.";
+      elements.referenceRepresentation.textContent = referencePresentation(image);
       elements.referenceRepresentation.hidden = false;
       elements.pairingClarification.textContent = entry.clarification;
       elements.pairingClarification.hidden = false;
@@ -602,7 +626,7 @@ async function renderReference(record) {
         link.rel = "noreferrer";
         link.textContent = `${referenceRole(other)} ↗`;
         const evidence = document.createElement("small");
-        evidence.textContent = `Source representation: ${other.source_binding_method.replaceAll("_", " ")}.`;
+        evidence.textContent = referencePresentation(other, true);
         paragraph.append(link, document.createElement("br"), evidence);
         elements.additionalReferences.append(paragraph);
       }
@@ -690,6 +714,7 @@ elements.previousRecord.addEventListener("click", () => navigateDialog(elements.
 elements.nextRecord.addEventListener("click", () => navigateDialog(elements.nextRecord));
 
 elements.dialog.addEventListener("close", () => {
+  if (elements.dialog.open) return;
   clearReference();
   resetDialogVideo();
   state.activeRecord = null;

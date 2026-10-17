@@ -47,6 +47,16 @@ SHA = re.compile(r"[0-9a-f]{64}\Z")
 
 PRIMARY_CLASSES = {"native_full_resolution_inspection": "native full drawing",
                    "limited_resolution_full_drawing_reference": "limited"}
+RELATIONSHIP_FIELDS = ("relationship_status", "evidence_class", "authority_class", "derivation_method")
+DIRECT_RELATIONSHIP = ("owner_confirmed", "direct_owner_confirmed", "owner_direct", "direct_confirmation")
+DERIVED_RELATIONSHIP = ("proposed", "deterministic_transitive_bridge", "derived_from_owner_confirmed_edges", "transitive_closure")
+SOURCE_BINDINGS_BY_RELATIONSHIP = {
+    DIRECT_RELATIONSHIP: {"exact_confirmed_source_bytes", "inferred_same_capture_export_variant"},
+    DERIVED_RELATIONSHIP: {"exact_historical_reference_bytes", "provenance_bound_review_derivative"},
+}
+PROPOSED_LABEL = "Linked through recording and registered work (proposed relationship)."
+EXACT_HISTORICAL_LABEL = "Source representation: exact historically bound reference bytes."
+REVIEW_DERIVATIVE_LABEL = "Source representation: provenance-bound review JPEG; original unavailable; limited representation."
 
 class ContractError(ValueError):
     """An input or generated view violates the display contract."""
@@ -77,6 +87,15 @@ def path_check(value: str, label: str) -> PurePosixPath:
 def urls(path: str, revision: str) -> tuple[str, str]:
     return (f"hf://datasets/{REPOSITORY}@{revision}/{path}",
             f"https://huggingface.co/datasets/{REPOSITORY}/resolve/{revision}/{quote(path, safe='/')}")
+
+def visible_reference_role(photo: dict[str, str]) -> str:
+    """Keep direct labels stable and expose proposed/source limits beside media."""
+    role = PRIMARY_CLASSES[photo["inspection_resolution_class"]] if photo["view_purpose"] == "primary_inspection" else "supplemental-only"
+    if tuple(photo[name] for name in RELATIONSHIP_FIELDS) == DERIVED_RELATIONSHIP:
+        source = EXACT_HISTORICAL_LABEL if photo["source_binding_method"] == "exact_historical_reference_bytes" else REVIEW_DERIVATIVE_LABEL
+        return f"{role}. {PROPOSED_LABEL} {source}"
+    return role
+
 
 def build_rows(inputs: dict[str, bytes], revision: str) -> list[dict[str, str | int]]:
     require(bool(re.fullmatch(r"[0-9a-f]{40}", revision)), "Full40hex source revision required")
@@ -142,18 +161,22 @@ def build_rows(inputs: dict[str, bytes], revision: str) -> list[dict[str, str | 
         require(name not in photo_paths and photo["sha256"] not in photo_hashes, "Duplicate photograph path/bytes")
         photo_paths.add(name)
         photo_hashes.add(photo["sha256"])
-        for key, expected in {"image_role": "drawing_reference", "relationship_status": "owner_confirmed",
-                              "evidence_class": "direct_owner_confirmed", "authority_class": "owner_direct",
-                              "derivation_method": "direct_confirmation", "processing_spec": "Physical_References/Photographs/PROCESSING.json"}.items():
+        for key, expected in {"image_role": "drawing_reference", "processing_spec": "Physical_References/Photographs/PROCESSING.json"}.items():
             require(photo[key] == expected, f"Unknown photograph {key}")
+        relationship = tuple(photo[name] for name in RELATIONSHIP_FIELDS)
+        require(relationship in SOURCE_BINDINGS_BY_RELATIONSHIP, "Unknown photograph relationship tuple")
         purpose, resolution = photo["view_purpose"], photo["inspection_resolution_class"]
         require((purpose == "primary_inspection" and resolution in PRIMARY_CLASSES) or
                 (purpose == "supplemental_documentation" and resolution == "supplemental_documentation"),
                 "Unknown/inconsistent photograph purpose or resolution")
-        require(photo["source_binding_method"] in {"exact_confirmed_source_bytes", "inferred_same_capture_export_variant"},
-                "Unknown photograph source-binding method")
+        require(photo["source_binding_method"] in SOURCE_BINDINGS_BY_RELATIONSHIP[relationship],
+                "Photograph source binding conflicts with relationship tuple")
         require(photo["processing_method"] in {"jpeg_metadata_only_codestream_unchanged", "embedded_primary_JPEG_codestream_and_ICC_preserved"},
                 "Unknown photograph processing method")
+        if photo["source_binding_method"] == "provenance_bound_review_derivative":
+            require(resolution != "native_full_resolution_inspection", "Review JPEG cannot establish native original resolution")
+            require(photo["processing_method"] == "jpeg_metadata_only_codestream_unchanged",
+                    "Review derivative must preserve its available JPEG representation")
         for key in ("width_px", "height_px", "encoded_width_px", "encoded_height_px", "orientation", "size_bytes"):
             require(bool(re.fullmatch(r"[1-9][0-9]*", photo[key])), "Invalid positive photograph integer")
         orientation = int(photo["orientation"])
@@ -185,7 +208,7 @@ def build_rows(inputs: dict[str, bytes], revision: str) -> list[dict[str, str | 
         # snapshot, as in the four original VideoFolder configurations.
         video = media_path
         image_path, public_url = urls(selected["image_path"], revision) if selected else ("", "")
-        role = PRIMARY_CLASSES[selected["inspection_resolution_class"]] if selected and status == "primary_inspection" else "supplemental-only" if selected else "selection unresolved" if status == "selection_unresolved" else "missing"
+        role = visible_reference_role(selected) if selected else "selection unresolved" if status == "selection_unresolved" else "missing"
         output = dict(zip(COLUMNS, [""] * len(COLUMNS)))
         output.update({"video": video, "Physical reference photograph": image_path, "Reference role": role,
                        "Pairing clarification": CLARIFICATION if selected else "", "Full-resolution photograph URL": public_url,
