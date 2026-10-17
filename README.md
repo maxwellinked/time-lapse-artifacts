@@ -60,3 +60,39 @@ the primary position. The browser loads these clips only as they enter view and
 keeps them paused when reduced motion is requested. The manifest binds each
 preview to its record ID and Hub content identity, so unchanged clips are reused
 across source-revision refreshes while new or changed records are regenerated.
+
+## Physical-reference display previews
+
+Recording dialogs reuse the selected photograph directly when its long edge is
+at most 1024 pixels and its file is at most 512 KiB. Larger photographs use a
+committed display JPEG alongside the existing motion preview. The explicit
+full-resolution link still points to the exact
+revision-pinned photograph. Source roles, proposed relationships, and selection
+ambiguities retain their existing meanings; the inline image is labeled as a
+display-sized preview and is not fine-detail evidence.
+
+The pinned photograph layer has no separate display-sized set for oversized
+selected images; other photographs of a work are not interchangeable with its
+selected main image. Dataset Viewer assets depend on successful row processing,
+so the site does not depend on them.
+
+After refreshing `data/physical-references.json`, generate one preview per unique
+oversized selected source hash (no preview is selected for unresolved candidates):
+
+```console
+npm install --no-save --package-lock=false sharp@0.34.5
+node tools/generate-reference-previews.mjs
+node tools/validate.mjs
+```
+
+Sharp is a build-time dependency only. The generator verifies the downloaded source
+SHA-256, applies EXIF orientation once, fits the entire frame within 1024 × 1024
+without upscaling or cropping, converts to sRGB, and emits quality-82 JPEGs. It
+performs no enhancement. `reference-previews/manifest.json` binds each source hash
+and pinned URL to the preview hash, dimensions, bytes, and processing settings.
+Unchanged, verified previews are reused; commit the generated files and manifest
+with the lookup refresh. Existing validation checks coverage, bindings, size bounds,
+and preview hashes offline, and rejects obsolete JPEGs. After a successful build,
+the generator removes hash-named previews no longer in the selected set.
+A failed preview keeps the original link available;
+it never automatically downloads the full-resolution source as a fallback.

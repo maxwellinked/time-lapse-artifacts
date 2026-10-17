@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { extname, join, normalize } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -31,6 +32,43 @@ const dataLoader = readFileSync(join(root, "assets/data-loader.js"), "utf8");
 const recordSequences = readFileSync(join(root, "assets/record-sequences.js"), "utf8");
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
 validateRecordsPayload(payload);
+
+// Display JPEGs are bound to the selected photograph bytes, never to video frames
+// or a substitute photo of the same work. Validation is offline and dependency-free.
+const references = JSON.parse(readFileSync(join(root, "data/physical-references.json"), "utf8"));
+const photoPreviews = JSON.parse(readFileSync(join(root, "reference-previews/manifest.json"), "utf8"));
+if (references.sourceRevision !== payload.sourceRevision || photoPreviews.sourceRevision !== payload.sourceRevision ||
+    photoPreviews.schemaVersion !== 1 || photoPreviews.processing.longEdgePixels !== 1024) {
+  throw new Error("Photograph preview snapshot mismatch");
+}
+const selectedPhotos = new Map(Object.values(references.records)
+  .map((entry) => entry.mainImage).filter((image) => image &&
+    !(Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 && Number(image.size_bytes) <= 512 * 1024))
+  .map((image) => [image.sha256, image]));
+if (Object.keys(photoPreviews.images).length !== selectedPhotos.size) throw new Error("Photograph preview coverage mismatch");
+const expectedPhotoFiles = new Set([...selectedPhotos.keys()].map((hash) => `${hash}.jpg`));
+const obsoletePhotoFiles = readdirSync(join(root, "reference-previews"))
+  .filter((name) => /\.jpe?g$/i.test(name) && !expectedPhotoFiles.has(name));
+if (obsoletePhotoFiles.length) throw new Error(`Unexpected photograph previews: ${obsoletePhotoFiles.join(", ")}`);
+for (const [sourceHash, image] of selectedPhotos) {
+  const preview = photoPreviews.images[sourceHash];
+  const expectedUrl = `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/${payload.sourceRevision}/${image.image_path}`;
+  if (!/^[a-f0-9]{64}$/.test(sourceHash) || !preview || preview.sourceUrl !== expectedUrl ||
+      image.fullResolutionUrl !== expectedUrl || !Number.isInteger(preview.width) || !Number.isInteger(preview.height) ||
+      preview.width < 1 || preview.height < 1 || Math.max(preview.width, preview.height) > 1024 ||
+      preview.width > Number(image.width_px) || preview.height > Number(image.height_px)) {
+    throw new Error(`Invalid photograph preview binding: ${sourceHash}`);
+  }
+  const bytes = readFileSync(join(root, "reference-previews", `${sourceHash}.jpg`));
+  if (bytes.length !== preview.sizeBytes || createHash("sha256").update(bytes).digest("hex") !== preview.sha256) {
+    throw new Error(`Photograph preview fixity mismatch: ${sourceHash}`);
+  }
+}
+if (!app.includes('photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`') ||
+    !app.includes("elements.referenceFull.href = image.fullResolutionUrl") ||
+    app.includes("photograph.src = image.fullResolutionUrl")) {
+  throw new Error("Bounded photograph display or full-resolution access is missing");
+}
 const expectedPreviewManifest = {
   schemaVersion: 1,
   generationVersion: 2,
@@ -197,6 +235,7 @@ console.log(
       records: payload.records.length,
       unknownFinishTimes: payload.records.filter((record) => !record.time).length,
       previews: previewFilenames.length,
+      photographPreviews: selectedPhotos.size,
       previewMode: "deterministic-motion-clips",
       sourceRevision: payload.sourceRevision,
     },
