@@ -386,7 +386,7 @@ async function applyFilters() {
     return (
       (!query || searchable.includes(query)) &&
       (!year || record.date.startsWith(year)) &&
-      (!photoLookup || Boolean(photoLookup.records[record.recordId].mainImage)) &&
+      (!photoLookup || photoLookup.records[record.recordId].referenceCount > 0) &&
       recordMatches(record, "tool", String(formData.get("tool") ?? "")) &&
       recordMatches(record, "dimensions", String(formData.get("dimensions") ?? ""))
     );
