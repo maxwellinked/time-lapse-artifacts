@@ -24,6 +24,13 @@ node --test tests/*.test.mjs
 node tools/validate.mjs
 ```
 
+The photograph lookup generator's `--check` also requires the Git objects for
+the lookup's `githubRevision` and Hugging Face `sourceRevision`. Use full-history
+checkouts, or fetch those exact commits before checking a shallow checkout.
+Inputs must retain their committed bytes; clone with `-c core.autocrlf=false`
+when local Git settings would convert line endings. A missing baseline object
+does not mean that the recorded baseline is invalid or should be replaced.
+
 The browser validates the bundled index before rendering it, retries transient
 same-origin failures with a bounded timeout, and offers a visible retry action
 if the index remains unavailable. Normal browser and GitHub Pages HTTP caching
