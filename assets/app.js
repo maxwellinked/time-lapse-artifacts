@@ -12,6 +12,7 @@ const PREVIEW_DIRECTORY = "previews";
 const REFERENCE_URL = "data/physical-references.json";
 let referenceLookupPromise;
 let referenceGeneration = 0;
+let filterGeneration = 0;
 
 // Initialize Dynamic Video Preview System
 let dynamicPreview;
@@ -38,6 +39,7 @@ const elements = {
   grid: document.querySelector("#record-grid"),
   resultCount: document.querySelector("#result-count"),
   showMore: document.querySelector("#show-more"),
+  retryPhotoFilter: document.querySelector("#retry-photo-filter"),
   dataError: document.querySelector("#data-error"),
   dataErrorMessage: document.querySelector("#data-error-message"),
   retryData: document.querySelector("#retry-data"),
@@ -338,11 +340,34 @@ function recordMatches(record, field, expected) {
   return record[field] === expected;
 }
 
-function applyFilters() {
+async function applyFilters() {
+  if (!state.sourceRevision) return;
+  const generation = ++filterGeneration;
   const formData = new FormData(elements.filters);
   const query = String(formData.get("search") ?? "").trim().toLowerCase();
   const year = String(formData.get("year") ?? "");
   const order = String(formData.get("order") ?? "desc");
+  const withPhotograph = formData.get("photograph") === "with";
+  let photoLookup = null;
+  let photoFilterFailed = false;
+  elements.retryPhotoFilter.hidden = true;
+
+  if (withPhotograph) {
+    elements.grid.setAttribute("aria-busy", "true");
+    elements.showMore.disabled = true;
+    elements.resultCount.textContent = "Loading photograph availability… Previous results remain below.";
+    try {
+      photoLookup = await loadReferenceLookup();
+    } catch {
+      if (generation !== filterGeneration) return;
+      // Preserve browsing when the optional lookup is unavailable.
+      elements.filters.elements.photograph.value = "";
+      photoFilterFailed = true;
+    }
+    if (generation !== filterGeneration) return;
+  }
+  elements.grid.removeAttribute("aria-busy");
+  elements.showMore.disabled = false;
 
   state.filtered = state.records.filter((record) => {
     const searchable = [
@@ -361,6 +386,7 @@ function applyFilters() {
     return (
       (!query || searchable.includes(query)) &&
       (!year || record.date.startsWith(year)) &&
+      (!photoLookup || Boolean(photoLookup.records[record.recordId].mainImage)) &&
       recordMatches(record, "tool", String(formData.get("tool") ?? "")) &&
       recordMatches(record, "dimensions", String(formData.get("dimensions") ?? ""))
     );
@@ -370,6 +396,10 @@ function applyFilters() {
 
   state.visibleCount = PAGE_SIZE;
   renderRecords();
+  if (photoFilterFailed) {
+    elements.resultCount.textContent += " Photograph filter unavailable; showing all matching recordings.";
+    elements.retryPhotoFilter.hidden = false;
+  }
 }
 
 function renderRecords() {
@@ -674,6 +704,10 @@ elements.showMore.addEventListener("click", () => {
 elements.filters.addEventListener("input", applyFilters);
 elements.filters.addEventListener("change", applyFilters);
 elements.filters.addEventListener("reset", () => window.setTimeout(applyFilters));
+elements.retryPhotoFilter.addEventListener("click", () => {
+  elements.filters.elements.photograph.value = "with";
+  applyFilters();
+});
 
 function openHashRecord() {
   const match = location.hash.match(/^#record=(tla-[a-f0-9]+)$/);

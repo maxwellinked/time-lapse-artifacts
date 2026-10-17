@@ -28,7 +28,7 @@
       href="https://maxwellinked.github.io/time-lapse-artifacts/"
     />
     <link rel="stylesheet" href="assets/style.css?v=20260829-sequence-continuity" />
-    <script src="assets/app.js?v=20260829-sequence-continuity" type="module"></script>
+    <script src="assets/app.js?v=20261017-published-photo-filter" type="module"></script>
   </head>
   <body>
     <a class="skip-link" href="#recordings">Skip to recordings</a>
@@ -152,6 +152,13 @@
               <select name="dimensions"><option value="">All dimensions</option></select>
             </label>
             <label>
+              Photograph
+              <select name="photograph">
+                <option value="">All recordings</option>
+                <option value="with">With published photograph</option>
+              </select>
+            </label>
+            <label>
               Order
               <select name="order">
                 <option value="desc">Newest first (REC forward)</option>
@@ -162,6 +169,7 @@
 
           <div class="filter-summary" aria-live="polite">
             <p id="result-count">Loading records…</p>
+            <button type="button" id="retry-photo-filter" hidden>Retry photograph filter</button>
             <button type="reset">Clear filters</button>
           </div>
         </form>
