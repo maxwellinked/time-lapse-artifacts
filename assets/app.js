@@ -1,4 +1,5 @@
 import { loadRecords, RecordsDataError } from "./data-loader.js";
+import { getDisplayReference } from "./reference-policy.js";
 import {
   deriveRecordingSequences,
   extendVisibleCount,
@@ -386,7 +387,7 @@ async function applyFilters() {
     return (
       (!query || searchable.includes(query)) &&
       (!year || record.date.startsWith(year)) &&
-      (!photoLookup || photoLookup.records[record.recordId].referenceCount > 0) &&
+      (!photoLookup || Boolean(getDisplayReference(photoLookup.records[record.recordId]))) &&
       recordMatches(record, "tool", String(formData.get("tool") ?? "")) &&
       recordMatches(record, "dimensions", String(formData.get("dimensions") ?? ""))
     );
@@ -582,14 +583,10 @@ async function renderReference(record) {
     const payload = await loadReferenceLookup();
     if (!isCurrent()) return;
     const entry = payload.records[record.recordId];
-    const image = entry.mainImage;
+    const image = getDisplayReference(entry);
     if (!image) {
-      elements.referenceRole.textContent = entry.selectionStatus === "selection_unresolved" ? "Selection unresolved"
-        : entry.selectionStatus === "missing_work_link" ? "Work link unresolved" : "No published photograph";
-      elements.referenceStatus.textContent = entry.selectionStatus === "selection_unresolved"
-        ? "A primary photograph has not been selected."
-        : entry.selectionStatus === "missing_work_link" ? "No established work link is available for this recording."
-          : "No published physical reference photograph is linked to this recording.";
+      elements.referenceRole.textContent = "No confirmed drawing reference";
+      elements.referenceStatus.textContent = "No unambiguous, owner-confirmed drawing photograph is available for this recording.";
     } else {
       const useSource = Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 &&
         Number(image.size_bytes) <= 512 * 1024;
@@ -598,7 +595,7 @@ async function renderReference(record) {
       elements.referenceFull.hidden = false;
       elements.referenceRepresentation.textContent = `${useSource ? "" : "Display-sized preview. "}${referencePresentation(image)}`;
       elements.referenceRepresentation.hidden = false;
-      elements.pairingClarification.textContent = entry.clarification;
+      elements.pairingClarification.textContent = "Owner-confirmed drawing. The photograph does not establish this recording’s endpoint.";
       elements.pairingClarification.hidden = false;
       const photograph = document.createElement("img");
       photograph.alt = `${useSource ? "Physical reference photograph" : "Display-sized physical reference photograph"} — ${referenceRole(image)}`;
@@ -616,23 +613,9 @@ async function renderReference(record) {
       elements.referenceStage.append(photograph);
       photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`;
     }
-    if (entry.referenceCount) {
+    if (image) {
       elements.referenceWork.textContent = `Registered work: ${entry.workId}`;
-      elements.referenceEvidence.textContent = image
-        ? `Photograph relationship: ${image.relationship_status}. Evidence: ${image.evidence_class}. View: ${image.view_purpose}.`
-        : "Photograph selection remains unresolved; no candidate is presented as primary.";
-      for (const other of entry.additionalReferences) {
-        const paragraph = document.createElement("p");
-        const link = document.createElement("a");
-        link.href = other.fullResolutionUrl;
-        link.target = "_blank";
-        link.rel = "noreferrer";
-        link.textContent = `${referenceRole(other)} ↗`;
-        const evidence = document.createElement("small");
-        evidence.textContent = referencePresentation(other, true);
-        paragraph.append(link, document.createElement("br"), evidence);
-        elements.additionalReferences.append(paragraph);
-      }
+      elements.referenceEvidence.textContent = "Drawing identification: owner-confirmed. Photograph shown in its documented orientation.";
       elements.referenceManifest.href = `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/${state.sourceRevision}/Physical_References/Photographs/manifest.csv`;
       elements.referenceDetails.hidden = false;
     }
@@ -730,7 +713,10 @@ elements.showMore.addEventListener("click", () => {
 });
 
 elements.filters.addEventListener("input", applyFilters);
-elements.filters.addEventListener("change", applyFilters);
+elements.filters.addEventListener("change", (event) => {
+  // Search already updates on input; rerendering on blur would discard a card click.
+  if (event.target !== elements.filters.elements.search) applyFilters();
+});
 elements.filters.addEventListener("reset", () => window.setTimeout(applyFilters));
 elements.retryPhotoFilter.addEventListener("click", () => {
   elements.filters.elements.photograph.value = "with";

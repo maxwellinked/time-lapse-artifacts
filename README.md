@@ -70,6 +70,21 @@ across source-revision refreshes while new or changed records are regenerated.
 
 ## Physical-reference display previews
 
+The gallery shows only unambiguous primary drawing photographs with a direct
+owner-confirmed identification and exact confirmed source bytes. The same rule
+governs the photograph filter, recording dialogs, and full-resolution links.
+Proposed/transitive links, inferred export variants, supplemental-only images,
+and unresolved selections are withheld from the reference display, including
+additional-image links. The source lookup retains their original evidence;
+withholding a pairing does not relabel or delete the source archive.
+
+Documented EXIF orientation is honored exactly once. No rotation, mirroring,
+front/back identification, or recording endpoint is inferred from dimensions,
+filenames, or a shared work ID. A direct owner identification is accepted as
+drawing evidence; the current metadata does not separately attest alignment
+relative to the video frame. See [the shared reference policy](REFERENCE_POLICY.md)
+for the GitHub rules and the template for a Hugging Face implementation.
+
 Recording dialogs reuse the selected photograph directly when its long edge is
 at most 1024 pixels and its file is at most 512 KiB. Larger photographs use a
 committed display JPEG alongside the existing motion preview. The explicit
