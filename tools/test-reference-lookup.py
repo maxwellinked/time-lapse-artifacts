@@ -128,6 +128,66 @@ class ReferenceLookupContract(unittest.TestCase):
         with self.assertRaises(lookup.ContractError):
             self.build()
 
+    def derived(self, photo, binding="exact_historical_reference_bytes"):
+        photo.update(relationship_status="proposed", evidence_class="deterministic_transitive_bridge",
+                     authority_class="derived_from_owner_confirmed_edges", derivation_method="transitive_closure",
+                     source_binding_method=binding)
+
+    def repack_photos(self):
+        self.inputs[lookup.PHOTO_MANIFEST] = csv_bytes(lookup.PHOTO_FIELDS, self.photos)
+
+    def test_derived_photo_keeps_all_manifest_fields_and_visible_proposed_qualification(self):
+        self.derived(self.photos[0])
+        self.repack_photos()
+        result = self.build()
+        record = result["records"][RIDS[0]]
+        self.assertEqual({name: record["mainImage"][name] for name in lookup.PHOTO_FIELDS}, self.photos[0])
+        self.assertEqual(record["referenceRole"], "native full drawing. Linked through recording and registered work (proposed relationship). Source representation: exact historically bound reference bytes.")
+        self.assertEqual(record["clarification"], "Same registered work. The photograph does not establish this recording’s endpoint.")
+        self.assertEqual(result["sourceRevision"], REV)
+        self.assertEqual(set(result["records"]), set(RIDS[:4]))
+
+    def test_review_derivative_is_limited_original_unavailable_without_field_promotion(self):
+        self.derived(self.photos[2], "provenance_bound_review_derivative")
+        self.repack_photos()
+        record = self.build()["records"][RIDS[1]]
+        self.assertEqual(record["mainImage"]["inspection_resolution_class"], "limited_resolution_full_drawing_reference")
+        self.assertIn("provenance-bound review JPEG; original unavailable; limited representation.", record["referenceRole"])
+        self.photos[2]["inspection_resolution_class"] = "native_full_resolution_inspection"
+        self.repack_photos()
+        with self.assertRaises(lookup.ContractError):
+            self.build()
+
+    def test_derived_binding_and_relationship_cross_products_fail_closed(self):
+        for field, value in [("source_binding_method", "exact_confirmed_source_bytes"),
+                             ("source_binding_method", "inferred_same_capture_export_variant"),
+                             ("relationship_status", "owner_confirmed"), ("evidence_class", "visual_similarity"),
+                             ("authority_class", "owner_direct"), ("derivation_method", "direct_confirmation")]:
+            with self.subTest(field=field, value=value):
+                self.inputs, self.github, self.photos = fixture()
+                self.derived(self.photos[0])
+                self.photos[0][field] = value
+                self.repack_photos()
+                with self.assertRaises(lookup.ContractError):
+                    self.build()
+        for binding in ("exact_historical_reference_bytes", "provenance_bound_review_derivative"):
+            self.inputs, self.github, self.photos = fixture()
+            self.photos[0]["source_binding_method"] = binding
+            self.repack_photos()
+            with self.assertRaises(lookup.ContractError):
+                self.build()
+
+    def test_proposed_and_direct_candidates_do_not_auto_select_a_primary(self):
+        extra = photo(WIDS[0], 9)
+        self.derived(extra)
+        self.photos.append(extra)
+        self.repack_photos()
+        record = self.build()["records"][RIDS[0]]
+        self.assertIsNone(record["mainImage"])
+        self.assertEqual(record["selectionStatus"], "selection_unresolved")
+        self.assertEqual(record["clarification"], "")
+        self.assertEqual(record["additionalReferences"][-1]["source_binding_method"], "exact_historical_reference_bytes")
+
     def test_git_bound_cli_positive_mismatch_stale_check_and_no_source_mutation(self):
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory); hf = base / "hf"; gh = base / "gh"
