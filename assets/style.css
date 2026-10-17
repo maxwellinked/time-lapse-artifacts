@@ -42,6 +42,11 @@ html[data-theme="light"] {
 
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+html:has(.record-dialog:modal) {
+  overflow: hidden;
 }
 
 body {
@@ -757,6 +762,8 @@ button {
   color: var(--ink);
   height: min(92svh, 980px);
   max-width: 1120px;
+  overflow: auto;
+  overscroll-behavior: contain;
   padding: 0;
   width: min(calc(100% - 40px), 1120px);
 }
@@ -804,6 +811,13 @@ button {
   margin: 0;
 }
 
+.dialog-finish-label {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  margin: 0 0 6px;
+}
+
 .dialog-video-shell {
   background: var(--video);
   min-height: 320px;
@@ -845,6 +859,122 @@ button {
   max-height: 72svh;
   object-fit: contain;
   width: 100%;
+}
+
+.dialog-pair {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.paired-media {
+  min-width: 0;
+}
+
+.paired-media-heading {
+  min-height: 76px;
+}
+
+.paired-media-heading h3 {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 8px;
+}
+
+.paired-media-role {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.dialog-pair .paired-media-stage {
+  background: var(--video);
+  border: 1px solid var(--rule);
+  height: min(49svh, 500px);
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.dialog-pair .dialog-preview,
+.dialog-pair .dialog-preview.landscape,
+.dialog-pair .full-video {
+  aspect-ratio: auto;
+  height: 100%;
+  max-height: none;
+  width: 100%;
+}
+
+.dialog-pair video,
+.reference-stage img {
+  height: 100%;
+  object-fit: contain;
+  width: 100%;
+}
+
+.reference-stage img {
+  display: block;
+  image-orientation: from-image;
+}
+
+.reference-status {
+  align-items: center;
+  color: var(--muted);
+  display: flex;
+  font-size: 12px;
+  inset: 0;
+  justify-content: center;
+  line-height: 1.6;
+  margin: 0;
+  padding: 20px;
+  position: absolute;
+  text-align: center;
+}
+
+.reference-actions,
+.reference-representation,
+.reference-details,
+.pairing-clarification {
+  font-size: 11px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.reference-actions {
+  margin-top: 14px;
+}
+
+.reference-actions a,
+.reference-details a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.reference-representation {
+  color: var(--muted);
+  margin: 10px 0;
+}
+
+.reference-details summary {
+  cursor: pointer;
+}
+
+.reference-details p {
+  margin: 12px 0;
+}
+
+.pairing-clarification {
+  border-top: 1px solid var(--rule);
+  margin: 24px 0 0;
+  padding-top: 18px;
+}
+
+.dialog-pair [hidden],
+.pairing-clarification[hidden] {
+  display: none !important;
 }
 
 .dialog-information {
@@ -1070,6 +1200,36 @@ button {
 
   .load-video-button {
     white-space: nowrap;
+  }
+
+  .dialog-pair {
+    gap: 12px;
+  }
+
+  .paired-media-heading {
+    min-height: 104px;
+  }
+
+  .paired-media-heading h3 {
+    font-size: 13px;
+  }
+
+  .paired-media-role {
+    font-size: 10px;
+  }
+
+  .dialog-pair .paired-media-stage {
+    height: 240px;
+  }
+
+  .dialog-pair .load-video-button {
+    font-size: 9px;
+    gap: 6px;
+    line-height: 1.5;
+    max-width: calc(100% - 16px);
+    padding: 10px;
+    text-align: center;
+    white-space: normal;
   }
 
   .metadata-list div {

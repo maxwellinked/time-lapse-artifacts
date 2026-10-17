@@ -222,7 +222,7 @@
       </div>
     </footer>
 
-    <dialog class="record-dialog" id="record-dialog" aria-labelledby="dialog-title">
+    <dialog class="record-dialog" id="record-dialog" aria-labelledby="dialog-finish-label dialog-title">
       <form method="dialog" class="dialog-close-form">
         <button class="dialog-close" aria-label="Close recording details">Close ×</button>
       </form>
@@ -231,6 +231,7 @@
         <header class="dialog-header">
           <div>
             <p class="eyebrow" id="dialog-record-id">Standard Time Lapse</p>
+            <p class="dialog-finish-label" id="dialog-finish-label">Documented finish</p>
             <h2 id="dialog-title">Recording</h2>
           </div>
           <a id="dialog-source-top" target="_blank" rel="noreferrer"
@@ -238,18 +239,47 @@
           >
         </header>
 
-        <div class="dialog-video-shell">
-          <div class="dialog-preview preview-shell is-loading">
-            <video muted playsinline preload="none" aria-hidden="true"></video>
-            <div class="preview-scrim"></div>
-          </div>
-          <button type="button" class="load-video-button" id="load-full-video">
-            Load full recording <span aria-hidden="true">▶</span>
-          </button>
-          <video class="full-video" id="full-video" controls muted playsinline preload="none" hidden>
-            Your browser does not support HTML video.
-          </video>
+        <div class="dialog-pair">
+          <section class="paired-media" aria-labelledby="dialog-recording-label">
+            <header class="paired-media-heading">
+              <h3 id="dialog-recording-label">Recording</h3>
+              <p class="paired-media-role">Motion preview · full recording available</p>
+            </header>
+            <div class="dialog-video-shell paired-media-stage">
+              <div class="dialog-preview preview-shell is-loading">
+                <video muted playsinline preload="none" aria-hidden="true"></video>
+                <div class="preview-scrim"></div>
+              </div>
+              <button type="button" class="load-video-button" id="load-full-video">
+                Load full recording <span aria-hidden="true">▶</span>
+              </button>
+              <video class="full-video" id="full-video" controls muted playsinline preload="none" hidden>
+                Your browser does not support HTML video.
+              </video>
+            </div>
+          </section>
+          <section class="paired-media" aria-labelledby="dialog-reference-label">
+            <header class="paired-media-heading">
+              <h3 id="dialog-reference-label">Physical reference photograph</h3>
+              <p class="paired-media-role" id="dialog-reference-role">Loading reference…</p>
+            </header>
+            <div class="reference-stage paired-media-stage" id="dialog-reference-stage">
+              <p class="reference-status" id="dialog-reference-status" role="status">Loading physical reference…</p>
+            </div>
+            <div class="reference-actions">
+              <a id="dialog-reference-full" target="_blank" rel="noreferrer" hidden>Open full-resolution photograph ↗</a>
+            </div>
+            <p class="reference-representation" id="dialog-reference-representation" hidden></p>
+            <details class="reference-details" id="dialog-reference-details" hidden>
+              <summary>Reference details and other photographs</summary>
+              <p id="dialog-reference-work"></p>
+              <p id="dialog-reference-evidence"></p>
+              <div id="dialog-additional-references"></div>
+              <a id="dialog-reference-manifest" target="_blank" rel="noreferrer">Published photograph manifest ↗</a>
+            </details>
+          </section>
         </div>
+        <p class="pairing-clarification" id="dialog-pairing-clarification" hidden>Same registered work. The photograph does not establish this recording’s endpoint.</p>
 
         <div class="dialog-information">
           <section aria-labelledby="metadata-title">

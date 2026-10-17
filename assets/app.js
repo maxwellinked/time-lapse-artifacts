@@ -9,6 +9,9 @@ import {
 const DATA_URL = "data/records.json";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
+const REFERENCE_URL = "data/physical-references.json";
+let referenceLookupPromise;
+let referenceGeneration = 0;
 
 // Initialize Dynamic Video Preview System
 let dynamicPreview;
@@ -20,6 +23,7 @@ const state = {
   sequenceDetails: new Map(),
   visibleCount: PAGE_SIZE,
   activeRecord: null,
+  sourceRevision: null,
 };
 
 const elements = {
@@ -51,6 +55,17 @@ const elements = {
   fullVideo: document.querySelector("#full-video"),
   previousRecord: document.querySelector("#previous-record"),
   nextRecord: document.querySelector("#next-record"),
+  referenceStage: document.querySelector("#dialog-reference-stage"),
+  referenceStatus: document.querySelector("#dialog-reference-status"),
+  referenceRole: document.querySelector("#dialog-reference-role"),
+  referenceFull: document.querySelector("#dialog-reference-full"),
+  referenceRepresentation: document.querySelector("#dialog-reference-representation"),
+  referenceDetails: document.querySelector("#dialog-reference-details"),
+  referenceWork: document.querySelector("#dialog-reference-work"),
+  referenceEvidence: document.querySelector("#dialog-reference-evidence"),
+  additionalReferences: document.querySelector("#dialog-additional-references"),
+  referenceManifest: document.querySelector("#dialog-reference-manifest"),
+  pairingClarification: document.querySelector("#dialog-pairing-clarification"),
 };
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -428,6 +443,149 @@ function metadataRow(term, description) {
   return wrapper;
 }
 
+function referenceRole(image) {
+  if (image.view_purpose === "supplemental_documentation") return "Supplemental documentation only";
+  if (image.inspection_resolution_class === "limited_resolution_full_drawing_reference") return "Full-drawing reference · limited resolution";
+  if (image.inspection_resolution_class === "native_full_resolution_inspection") return "Full-drawing reference · native resolution";
+  throw new Error("Unknown photograph resolution");
+}
+
+async function loadReferenceLookup() {
+  if (!referenceLookupPromise) {
+    referenceLookupPromise = (async () => {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 8000);
+      try {
+        const response = await fetch(REFERENCE_URL, { signal: controller.signal });
+        if (!response.ok) throw new Error("Reference lookup unavailable");
+        const payload = await response.json();
+        const ids = new Set(state.records.map((record) => record.recordId));
+        if (payload.sourceRevision !== state.sourceRevision || !payload.records ||
+            Object.keys(payload.records).length !== ids.size) throw new Error("Reference snapshot differs from recording index");
+        const prefix = `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/${state.sourceRevision}/Physical_References/Photographs/images/`;
+        for (const [id, entry] of Object.entries(payload.records)) {
+          if (!ids.has(id) || !entry || !Array.isArray(entry.additionalReferences)) throw new Error("Invalid reference entry");
+          const images = [entry.mainImage, ...entry.additionalReferences].filter(Boolean);
+          const primary = images.filter((image) => image.view_purpose === "primary_inspection");
+          const expectedSelection = primary.length === 1 ? "primary_inspection"
+            : !primary.length && images.length === 1 ? "single_supplemental"
+              : images.length ? "selection_unresolved"
+                : entry.workId ? "missing_public_photo" : "missing_work_link";
+          const selected = expectedSelection === "primary_inspection" ? primary[0]
+            : expectedSelection === "single_supplemental" ? images[0] : null;
+          if (entry.referenceCount !== images.length || entry.primaryReferenceCount !== primary.length ||
+              entry.selectionStatus !== expectedSelection || entry.mainImage !== selected ||
+              entry.clarification !== (selected ? "Same registered work. The photograph does not establish this recording’s endpoint." : "")) {
+            throw new Error("Inconsistent reference selection");
+          }
+          for (const image of images) {
+            const validRole = image.view_purpose === "primary_inspection"
+              ? ["native_full_resolution_inspection", "limited_resolution_full_drawing_reference"].includes(image.inspection_resolution_class)
+              : image.view_purpose === "supplemental_documentation" && image.inspection_resolution_class === "supplemental_documentation";
+            if (image.work_id !== entry.workId || image.relationship_status !== "owner_confirmed" ||
+                !image.fullResolutionUrl?.startsWith(prefix + entry.workId + "/") ||
+                !validRole ||
+                !["exact_confirmed_source_bytes", "inferred_same_capture_export_variant"].includes(image.source_binding_method)) {
+              throw new Error("Invalid reference relationship or source URL");
+            }
+          }
+        }
+        return payload;
+      } finally {
+        window.clearTimeout(timeout);
+      }
+    })().catch((error) => {
+      referenceLookupPromise = null;
+      throw error;
+    });
+  }
+  return referenceLookupPromise;
+}
+
+function clearReference() {
+  referenceGeneration += 1;
+  elements.referenceStage.querySelector("img")?.remove();
+  elements.referenceStatus.hidden = false;
+  elements.referenceFull.hidden = true;
+  elements.referenceFull.removeAttribute("href");
+  elements.referenceRepresentation.hidden = true;
+  elements.referenceDetails.hidden = true;
+  elements.referenceDetails.open = false;
+  elements.additionalReferences.replaceChildren();
+  elements.pairingClarification.hidden = true;
+}
+
+async function renderReference(record) {
+  clearReference();
+  const generation = referenceGeneration;
+  const isCurrent = () => referenceGeneration === generation && state.activeRecord?.recordId === record.recordId;
+  elements.referenceRole.textContent = "Loading reference…";
+  elements.referenceStatus.textContent = "Loading physical reference…";
+  try {
+    const payload = await loadReferenceLookup();
+    if (!isCurrent()) return;
+    const entry = payload.records[record.recordId];
+    const image = entry.mainImage;
+    if (!image) {
+      elements.referenceRole.textContent = entry.selectionStatus === "selection_unresolved" ? "Selection unresolved"
+        : entry.selectionStatus === "missing_work_link" ? "Work link unresolved" : "No published photograph";
+      elements.referenceStatus.textContent = entry.selectionStatus === "selection_unresolved"
+        ? "A primary photograph has not been selected."
+        : entry.selectionStatus === "missing_work_link" ? "No established work link is available for this recording."
+          : "No published physical reference photograph is linked to this recording.";
+    } else {
+      elements.referenceRole.textContent = referenceRole(image);
+      elements.referenceFull.href = image.fullResolutionUrl;
+      elements.referenceFull.hidden = false;
+      elements.referenceRepresentation.textContent = image.source_binding_method === "inferred_same_capture_export_variant"
+        ? "Source representation: inferred same-capture export variant."
+        : "Source representation: exact confirmed source bytes.";
+      elements.referenceRepresentation.hidden = false;
+      elements.pairingClarification.textContent = entry.clarification;
+      elements.pairingClarification.hidden = false;
+      const photograph = document.createElement("img");
+      photograph.alt = `Physical reference photograph — ${referenceRole(image)}`;
+      photograph.decoding = "async";
+      photograph.addEventListener("load", () => {
+        if (isCurrent()) elements.referenceStatus.hidden = true;
+      }, { once: true });
+      photograph.addEventListener("error", () => {
+        if (!isCurrent()) return;
+        photograph.remove();
+        elements.referenceStatus.hidden = false;
+        elements.referenceStatus.textContent = "The photograph could not load. Try the full-resolution link.";
+      }, { once: true });
+      elements.referenceStatus.textContent = "Loading photograph…";
+      elements.referenceStage.append(photograph);
+      photograph.src = image.fullResolutionUrl;
+    }
+    if (entry.referenceCount) {
+      elements.referenceWork.textContent = `Registered work: ${entry.workId}`;
+      elements.referenceEvidence.textContent = image
+        ? `Photograph relationship: ${image.relationship_status}. Evidence: ${image.evidence_class}. View: ${image.view_purpose}.`
+        : "Photograph selection remains unresolved; no candidate is presented as primary.";
+      for (const other of entry.additionalReferences) {
+        const paragraph = document.createElement("p");
+        const link = document.createElement("a");
+        link.href = other.fullResolutionUrl;
+        link.target = "_blank";
+        link.rel = "noreferrer";
+        link.textContent = `${referenceRole(other)} ↗`;
+        const evidence = document.createElement("small");
+        evidence.textContent = `Source representation: ${other.source_binding_method.replaceAll("_", " ")}.`;
+        paragraph.append(link, document.createElement("br"), evidence);
+        elements.additionalReferences.append(paragraph);
+      }
+      elements.referenceManifest.href = `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/${state.sourceRevision}/Physical_References/Photographs/manifest.csv`;
+      elements.referenceDetails.hidden = false;
+    }
+  } catch {
+    if (!isCurrent()) return;
+    elements.referenceRole.textContent = "Reference lookup unavailable";
+    elements.referenceStatus.textContent = "The reference lookup could not load. Recording playback remains available.";
+  }
+}
+
 function renderDialog(record) {
   state.activeRecord = record;
   elements.dialogRecordId.textContent = `Standard Time Lapse · ${record.recordId}`;
@@ -451,6 +609,7 @@ function renderDialog(record) {
 
   resetDialogVideo();
   preparePreview(elements.dialogPreview, record, true);
+  renderReference(record);
 
   const currentIndex = state.filtered.findIndex((item) => item.recordId === record.recordId);
   elements.previousRecord.disabled = currentIndex <= 0;
@@ -501,6 +660,7 @@ elements.previousRecord.addEventListener("click", () => navigateDialog(elements.
 elements.nextRecord.addEventListener("click", () => navigateDialog(elements.nextRecord));
 
 elements.dialog.addEventListener("close", () => {
+  clearReference();
   resetDialogVideo();
   state.activeRecord = null;
   if (location.hash.startsWith("#record=")) history.replaceState(null, "", location.pathname);
@@ -553,6 +713,7 @@ async function initialize() {
 
     const payload = await loadRecords(DATA_URL);
     state.records = payload.records;
+    state.sourceRevision = payload.sourceRevision;
     state.sequenceDetails = deriveRecordingSequences(state.records);
 
     elements.recordCount.textContent = state.records.length.toLocaleString();
