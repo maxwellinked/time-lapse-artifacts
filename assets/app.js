@@ -593,6 +593,7 @@ async function loadReferenceLookup() {
 function clearReference() {
   referenceGeneration += 1;
   elements.referenceStage.querySelector("img")?.remove();
+  elements.referenceStage.hidden = true;
   elements.referenceStatus.hidden = false;
   elements.referenceFull.hidden = true;
   elements.referenceFull.removeAttribute("href");
@@ -635,11 +636,13 @@ async function renderReference(record) {
       photograph.addEventListener("error", () => {
         if (!isCurrent()) return;
         photograph.remove();
+        elements.referenceStage.hidden = true;
         elements.referenceStatus.hidden = false;
         elements.referenceStatus.textContent = "The photograph could not load. Try the full-resolution link.";
       }, { once: true });
       elements.referenceStatus.textContent = "Loading photograph…";
       elements.referenceStage.append(photograph);
+      elements.referenceStage.hidden = false;
       photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`;
     }
     if (entry.referenceCount) {
@@ -756,7 +759,9 @@ elements.dialog.addEventListener("close", () => {
   clearReference();
   resetDialogVideo();
   state.activeRecord = null;
-  if (location.hash.startsWith("#record=")) history.replaceState(null, "", location.pathname);
+  if (location.hash.startsWith("#record=")) {
+    history.replaceState(null, "", `${location.pathname}${location.search}`);
+  }
 });
 
 elements.showMore.addEventListener("click", () => {
@@ -777,7 +782,11 @@ elements.retryPhotoFilter.addEventListener("click", () => {
 
 function openHashRecord() {
   const match = location.hash.match(/^#record=(tla-[a-f0-9]+)$/);
-  if (!match || !state.records.length) return;
+  if (!match) {
+    if (elements.dialog.open) elements.dialog.close();
+    return;
+  }
+  if (!state.records.length) return;
   const record = state.records.find((item) => item.recordId === match[1]);
   if (record) openRecord(record, false);
 }
@@ -822,8 +831,11 @@ async function initialize() {
     elements.dateCoverage.textContent = `${oldest.date.slice(0, 4)}–${newest.date.slice(0, 4)}`;
 
     populateFilters();
+    if (new URLSearchParams(location.search).get("photograph") === "with") {
+      elements.filters.elements.photograph.value = "with";
+    }
     renderFeatured();
-    applyFilters();
+    await applyFilters();
     openHashRecord();
   } catch (error) {
     const code = error instanceof RecordsDataError ? error.code : "unexpected";
