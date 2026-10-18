@@ -123,7 +123,9 @@ try {
     throw new Error("Refusing to replace a directory containing files outside the anchor manifest/output contract");
   }
 } catch (error) { if (error.code !== "ENOENT") throw error; }
-const reusable = previous?.schemaVersion === 1 && previous.sourceRevision === recordData.sourceRevision &&
+// A new index revision alone does not change image bytes. Each cache entry must
+// still match the exact preview bytes, recording identity and processing below.
+const reusable = previous?.schemaVersion === 1 &&
   JSON.stringify(previous.processing) === JSON.stringify(processing);
 const selected = limit === null ? recordData.records : recordData.records.slice(0, limit);
 // Stage a complete replacement beside the output. Never modify published files

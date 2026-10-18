@@ -65,7 +65,9 @@ Git history only to reproduce historical rendered index snapshots. Use
 ## Refreshing previews
 
 Run `node tools/generate-previews.mjs --concurrency 6` on a machine with FFmpeg
-and network access, then run `REQUIRE_PREVIEWS=1 node tools/validate.mjs`.
+and network access, then `node tools/generate-record-anchors.mjs` before running
+`REQUIRE_PREVIEWS=1 node tools/validate.mjs`. Commit both `previews` and
+`assets/record-anchors`; the preview workflow performs these steps in that order.
 
 Each silent H.264 preview samples up to four seconds beginning at 82% of the
 documented source duration, at 12 frames per second and a 480-pixel long edge.
@@ -97,6 +99,8 @@ Sharp 0.35.5 with its bundled libvips 8.18.7 and run
 inputs. For a small source without a display JPEG, supply the published JPEG,
 named `<source SHA>.jpg`, in `VISUAL_ANCHOR_SOURCE_DIRECTORY`. Input hashes are
 checked, existing output bytes are cached, and no network access is used.
+All three images and their manifest are staged together before replacing the
+published directory; a failed build preserves the previous complete set.
 
 The gallery shows only unambiguous primary drawing photographs with a direct
 owner-confirmed identification and exact confirmed source bytes. The same rule
