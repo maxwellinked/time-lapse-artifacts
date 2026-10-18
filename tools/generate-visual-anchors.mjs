@@ -1,7 +1,7 @@
-import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { createHash, randomUUID } from "node:crypto";
+import { lstat, mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDisplayReference } from "../assets/reference-policy.js";
 
@@ -40,68 +40,116 @@ const processing = {
 };
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 let previous;
-try { previous = JSON.parse(await readFile(manifestPath, "utf8")); } catch { /* First build. */ }
+try { previous = JSON.parse(await readFile(manifestPath, "utf8")); }
+catch (error) { if (error.code !== "ENOENT") throw error; }
+let outputExists = false;
+try {
+  const current = await lstat(directory);
+  if (!current.isDirectory() || current.isSymbolicLink()) throw new Error("Output must be a regular dedicated directory");
+  outputExists = true;
+  const contents = await readdir(directory, { withFileTypes: true });
+  if ((contents.length && (previous?.schemaVersion !== 1 || !previous.images)) ||
+      contents.some((entry) => !entry.isFile() || entry.isSymbolicLink() ||
+        (entry.name !== "manifest.json" && !/^[a-f0-9]{64}\.webp$/.test(entry.name)))) {
+    throw new Error("Refusing to replace a directory containing files outside the anchor manifest/output contract");
+  }
+} catch (error) { if (error.code !== "ENOENT") throw error; }
 const reusable = JSON.stringify(previous?.processing) === JSON.stringify(processing);
-await mkdir(directory, { recursive: true });
+const token = randomUUID();
+const staging = join(dirname(directory), `.visual-anchors-stage-${token}`);
+const backup = join(dirname(directory), `.visual-anchors-backup-${token}`);
+await mkdir(dirname(directory), { recursive: true });
+await mkdir(staging);
+let stagingExists = true;
 const images = {};
 let generated = 0;
-for (const sourceSha of sources) {
-  const image = selected.get(sourceSha);
-  const preview = previews.images?.[sourceSha];
-  if (!image || (preview && preview.sourceUrl !== image.fullResolutionUrl)) {
-    throw new Error("Decorative source is not an eligible published photograph");
-  }
-  const sourcePath = preview ? `reference-previews/${sourceSha}.jpg` : image.fullResolutionUrl;
-  const sourceSha256 = preview ? preview.sha256 : sourceSha;
-  const sourceSize = preview ? preview.sizeBytes : Number(image.size_bytes);
-  const output = join(directory, `${sourceSha}.webp`);
-  const cached = reusable && previous.images?.[sourceSha];
-  if (cached && cached.sourceSha256 === sourceSha256 && cached.sourcePath === sourcePath &&
-      cached.sourceUrl === image.fullResolutionUrl && cached.workId === image.work_id) {
-    try {
-      const bytes = await readFile(output);
-      if (sha256(bytes) === cached.sha256 && bytes.length === cached.sizeBytes) {
+try {
+  for (const sourceSha of sources) {
+    const image = selected.get(sourceSha);
+    const preview = previews.images?.[sourceSha];
+    if (!image || (preview && preview.sourceUrl !== image.fullResolutionUrl)) {
+      throw new Error("Decorative source is not an eligible published photograph");
+    }
+    const sourcePath = preview ? `reference-previews/${sourceSha}.jpg` : image.fullResolutionUrl;
+    const sourceSha256 = preview ? preview.sha256 : sourceSha;
+    const sourceSize = preview ? preview.sizeBytes : Number(image.size_bytes);
+    const output = join(staging, `${sourceSha}.webp`);
+    const cached = reusable && previous.images?.[sourceSha];
+    if (cached && cached.sourceSha256 === sourceSha256 && cached.sourcePath === sourcePath &&
+        cached.sourceUrl === image.fullResolutionUrl && cached.workId === image.work_id) {
+      let cachedBytes;
+      try {
+        const bytes = await readFile(join(directory, `${sourceSha}.webp`));
+        if (sha256(bytes) === cached.sha256 && bytes.length === cached.sizeBytes) {
+          cachedBytes = bytes;
+        }
+      } catch { /* Regenerate a missing or damaged small derivative. */ }
+      if (cachedBytes) {
+        await writeFile(output, cachedBytes);
         images[sourceSha] = cached;
         continue;
       }
-    } catch { /* Regenerate a missing or damaged small derivative. */ }
+    }
+    if (!preview && (!process.env.VISUAL_ANCHOR_SOURCE_DIRECTORY ||
+        Math.max(Number(image.width_px), Number(image.height_px)) > 1024 || sourceSize > 512 * 1024)) {
+      throw new Error("Provide the small published JPEG in VISUAL_ANCHOR_SOURCE_DIRECTORY, named <source SHA>.jpg");
+    }
+    const inputPath = preview ? join(root, sourcePath)
+      : join(process.env.VISUAL_ANCHOR_SOURCE_DIRECTORY, `${sourceSha}.jpg`);
+    const source = await readFile(inputPath);
+    if (sha256(source) !== sourceSha256 || source.length !== sourceSize) {
+      throw new Error("Published input identity mismatch");
+    }
+    const { data, info } = await sharp(source)
+      .autoOrient()
+      .resize({ width: 48, height: 48, fit: "inside", withoutEnlargement: true, kernel: "lanczos3" })
+      .withIccProfile("srgb")
+      .webp({ quality: 45, effort: 6 })
+      .toBuffer({ resolveWithObject: true });
+    if (data.length > 4096) throw new Error("Decorative image exceeds 4 KiB budget");
+    await writeFile(output, data);
+    images[sourceSha] = {
+      sourcePath,
+      sourceSha256,
+      sourceUrl: image.fullResolutionUrl,
+      workId: image.work_id,
+      sha256: sha256(data),
+      width: info.width,
+      height: info.height,
+      sizeBytes: data.length,
+    };
+    generated += 1;
   }
-  if (!preview && (!process.env.VISUAL_ANCHOR_SOURCE_DIRECTORY ||
-      Math.max(Number(image.width_px), Number(image.height_px)) > 1024 || sourceSize > 512 * 1024)) {
-    throw new Error("Provide the small published JPEG in VISUAL_ANCHOR_SOURCE_DIRECTORY, named <source SHA>.jpg");
+  await writeFile(join(staging, "manifest.json"), `${JSON.stringify({
+    schemaVersion: 1,
+    sourceRevision: references.sourceRevision,
+    processing,
+    images,
+  }, null, 2)}\n`);
+  const stagedNames = new Set(await readdir(staging));
+  if (stagedNames.size !== sources.length + 1 || !stagedNames.has("manifest.json") ||
+      sources.some((sourceSha) => !stagedNames.has(`${sourceSha}.webp`))) {
+    throw new Error("Staged files differ from the exact manifest coverage");
   }
-  const inputPath = preview ? join(root, sourcePath)
-    : join(process.env.VISUAL_ANCHOR_SOURCE_DIRECTORY, `${sourceSha}.jpg`);
-  const source = await readFile(inputPath);
-  if (sha256(source) !== sourceSha256 || source.length !== sourceSize) {
-    throw new Error("Published input identity mismatch");
+  // Publish only a complete set, using the recording-image generator's rollback
+  // pattern. Decoding, input validation and manifest writes never touch live files.
+  if (outputExists) await rename(directory, backup);
+  try {
+    await rename(staging, directory);
+    stagingExists = false;
+  } catch (error) {
+    if (outputExists) {
+      try { await rename(backup, directory); }
+      catch (rollbackError) {
+        throw new AggregateError([error, rollbackError], `Publish and rollback failed; previous complete output remains at ${backup}`);
+      }
+    }
+    throw error;
   }
-  const { data, info } = await sharp(source)
-    .autoOrient()
-    .resize({ width: 48, height: 48, fit: "inside", withoutEnlargement: true, kernel: "lanczos3" })
-    .withIccProfile("srgb")
-    .webp({ quality: 45, effort: 6 })
-    .toBuffer({ resolveWithObject: true });
-  if (data.length > 4096) throw new Error("Decorative image exceeds 4 KiB budget");
-  await writeFile(output, data);
-  images[sourceSha] = {
-    sourcePath,
-    sourceSha256,
-    sourceUrl: image.fullResolutionUrl,
-    workId: image.work_id,
-    sha256: sha256(data),
-    width: info.width,
-    height: info.height,
-    sizeBytes: data.length,
-  };
-  generated += 1;
+  if (outputExists) await rm(backup, { recursive: true, force: true });
+} finally {
+  if (stagingExists) await rm(staging, { recursive: true, force: true });
 }
-await writeFile(manifestPath, `${JSON.stringify({
-  schemaVersion: 1,
-  sourceRevision: references.sourceRevision,
-  processing,
-  images,
-}, null, 2)}\n`);
 console.log(JSON.stringify({
   images: sources.length,
   generated,
