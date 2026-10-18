@@ -1,0 +1,21 @@
+.drawing-archive { padding-top: 52px; padding-bottom: 90px; }
+.drawing-archive h1 { font-size: clamp(38px, 6vw, 76px); letter-spacing: -.04em; margin: 12px 0 24px; }
+.drawing-archive h2 { font-size: 25px; margin-top: 36px; }
+.archive-note { color: var(--muted); max-width: 760px; line-height: 1.7; }
+.archive-search { display: grid; gap: 10px; margin: 34px 0; max-width: 650px; }
+.archive-search input { padding: 14px; background: var(--surface); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; width: 100%; }
+.drawing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.drawing-card { min-width: 0; border: 1px solid var(--rule); background: var(--surface); }
+.drawing-image-link { display: grid; place-items: center; padding: 14px; height: 320px; }
+.drawing-image-link img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.drawing-caption { padding: 18px; border-top: 1px solid var(--rule); }
+.drawing-caption h3, .pending-drawing h3 { font-family: monospace; font-size: 13px; overflow-wrap: anywhere; }
+.drawing-date { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+.recording-links { padding-left: 18px; font-size: 12px; line-height: 1.7; overflow-wrap: anywhere; }
+.drawing-archive summary { cursor: pointer; line-height: 1.5; }
+.awaiting-photographs { margin-top: 40px; border-top: 1px solid var(--rule); padding-top: 24px; }
+.pending-drawing { padding: 18px 0; border-bottom: 1px solid var(--rule); }
+.pending-drawing p { color: var(--muted); font-size: 13px; }
+.image-error { padding: 20px; line-height: 1.6; }
+@media (max-width: 950px) { .drawing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 600px) { .drawing-grid { grid-template-columns: minmax(0, 1fr); } .drawing-image-link { height: 350px; } }

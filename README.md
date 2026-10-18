@@ -15,6 +15,20 @@ shared work, session, or completion state.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
+The [drawing photograph view](drawings.html) groups the existing Standard
+recording lookup by its established work IDs. Each work appears once. It uses
+the same strict photograph policy as the recording browser and only displays
+images at most 1024 pixels on the long edge and 512 KiB. Larger sources require
+an existing verified display preview; unavailable previews never fall back to
+large originals. Other works remain searchable with their recording links.
+This is a presentation view, not a new work registry.
+
+An optional Hugging Face Parquet export embeds those same small images, with a
+null image for the other works. With Python `pyarrow` and `Pillow`, Git and Node:
+`python tools/build-drawing-parquet.py --root . --revision <exact-site-commit> --output drawing_photographs.parquet`.
+The exporter reads committed inputs, verifies every image hash and size, and
+writes a source/output hash receipt. It never reads private originals or uploads.
+
 ## Validation
 
 Run the dependency-free checks before publishing:
