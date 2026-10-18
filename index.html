@@ -27,8 +27,8 @@
       rel="canonical"
       href="https://maxwellinked.github.io/time-lapse-artifacts/"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20261018-visual-anchors" />
-    <script src="assets/app.js?v=20261018-visual-anchors" type="module"></script>
+    <link rel="stylesheet" href="assets/style.css?v=20261018-photograph-browsing" />
+    <script src="assets/app.js?v=20261018-photograph-browsing" type="module"></script>
   </head>
   <body>
     <a class="skip-link" href="#recordings">Skip to recordings</a>
@@ -130,6 +130,11 @@
             pinned source videos. Full playback remains user-initiated.
           </p>
         </div>
+
+        <p class="photograph-browse">
+          Photographs are published for part of the archive.
+          <a href="?photograph=with#recordings">Browse confirmed photograph pairs →</a>
+        </p>
 
         <form class="filter-panel" id="filters">
           <div class="search-field">
@@ -280,11 +285,11 @@
               <h3 id="dialog-reference-label">Drawing reference photograph</h3>
               <p class="paired-media-role" id="dialog-reference-role">Loading reference…</p>
             </header>
-            <div class="reference-stage paired-media-stage" id="dialog-reference-stage">
-              <p class="reference-status" id="dialog-reference-status" role="status">Loading physical reference…</p>
-            </div>
+            <p class="reference-status" id="dialog-reference-status" role="status">Loading physical reference…</p>
+            <div class="reference-stage paired-media-stage" id="dialog-reference-stage" hidden></div>
             <div class="reference-actions">
               <a id="dialog-reference-full" target="_blank" rel="noreferrer" hidden>Open full-resolution photograph ↗</a>
+              <a href="?photograph=with#recordings">Browse confirmed photograph pairs →</a>
             </div>
             <p class="reference-representation" id="dialog-reference-representation" hidden></p>
             <details class="reference-details" id="dialog-reference-details" hidden>

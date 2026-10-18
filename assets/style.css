@@ -466,6 +466,20 @@ button {
   margin: 0;
 }
 
+.photograph-browse {
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0 0 20px;
+}
+
+.photograph-browse a {
+  color: var(--ink);
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .filter-panel {
   border-block: 1px solid var(--rule);
   margin-bottom: 58px;
@@ -991,17 +1005,13 @@ button {
 }
 
 .reference-status {
-  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--rule);
   color: var(--muted);
-  display: flex;
   font-size: 12px;
-  inset: 0;
-  justify-content: center;
   line-height: 1.6;
   margin: 0;
-  padding: 20px;
-  position: absolute;
-  text-align: center;
+  padding: 16px;
 }
 
 .reference-actions,
@@ -1014,6 +1024,9 @@ button {
 }
 
 .reference-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin-top: 14px;
 }
 

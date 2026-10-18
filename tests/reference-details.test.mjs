@@ -47,6 +47,7 @@ test("qualified links restore access while the strict population and source evid
   ]) {
     const ui = renderer(); await ui.show(id);
     assert.equal(ui.elements.referenceStage.children.length, 0, id);
+    assert.equal(ui.elements.referenceStage.hidden, true, id);
     assert.equal(ui.elements.referenceFull.hidden, true, id);
     assert.equal(ui.elements.referenceDetails.hidden, false, id);
     assert.equal(links(ui).length, 1, id);
@@ -70,6 +71,7 @@ test("missing photographs are distinguished from an unresolved work identity", a
   const ui = renderer(); await ui.show("tla-f667e7cf1e5da54e");
   assert.equal(ui.elements.referenceRole.textContent, "No published photograph");
   assert.match(ui.elements.referenceStatus.textContent, /established work link/);
+  assert.equal(ui.elements.referenceStage.hidden, true);
   assert.equal(links(ui).length, 0);
   assert.match(referenceExclusion({ workId: null })[0], /Work link unresolved/);
 });
@@ -93,7 +95,12 @@ test("unavailable premise evidence keeps an honest proposed label and preserves 
 });
 
 test("navigation clears prior links and does not leak a prior record's evidence", async () => {
-  const ui = renderer(); await ui.show("tla-d9c55c2215a49da7");
+  const ui = renderer(); await ui.show("tla-b3e2b99b4ba1030e");
+  assert.equal(ui.elements.referenceStage.hidden, false);
+  assert.equal(ui.elements.referenceStage.children.length, 1);
+  await ui.show("tla-d9c55c2215a49da7");
+  assert.equal(ui.elements.referenceStage.hidden, true);
+  assert.equal(ui.elements.referenceStage.children.length, 0);
   await ui.show("tla-f667e7cf1e5da54e");
   assert.equal(links(ui).length, 0);
   assert.equal(ui.elements.referenceDetails.hidden, true);
