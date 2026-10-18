@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Drawing photographs · Time-Lapse Artifacts</title>
+    <meta name="description" content="Browse one entry per registered Standard drawing, with small confirmed photographs and explicit coverage gaps." />
+    <link rel="stylesheet" href="assets/style.css?v=20261018-drawings" />
+    <link rel="stylesheet" href="assets/drawing-archive.css" />
+    <script type="module" src="assets/drawing-archive.js"></script>
+  </head>
+  <body>
+    <header class="site-header shell">
+      <a class="brand" href="./">Time-Lapse Artifacts</a>
+      <nav aria-label="Primary navigation"><a href="./#recordings">Browse recordings</a></nav>
+    </header>
+    <main class="shell drawing-archive">
+      <p class="eyebrow">Analog drawings · Physical references</p>
+      <h1>Drawing photographs</h1>
+      <p id="archive-summary" role="status">Loading the drawing index…</p>
+      <p class="archive-note">Browse one entry per registered Standard drawing. Recording links and other reference details remain available.</p>
+      <details class="archive-about"><summary>About these photographs</summary>
+        <p>Small photographs show directly confirmed drawing references. Photographs do not establish a recording’s endpoint.</p>
+        <p><a id="drawing-source">Source snapshot</a> · <a href="REFERENCE_POLICY.md">Photograph policy</a></p>
+      </details>
+      <label class="archive-search" for="drawing-search">Find a drawing, recording or date
+        <input id="drawing-search" type="search" placeholder="Work ID, recording ID, date or filename" disabled />
+      </label>
+      <h2>Confirmed photographs</h2>
+      <p id="visible-summary" role="status"></p>
+      <p id="empty-gallery" hidden>No confirmed photographs match this search.</p>
+      <div id="drawing-grid" class="drawing-grid"></div>
+      <details class="awaiting-photographs">
+        <summary id="pending-summary">Drawings without a confirmed display photograph</summary>
+        <p>These entries remain in the archive. No photograph has been inferred or substituted.</p>
+        <div id="pending-drawings"></div>
+      </details>
+    </main>
+  </body>
+</html>
