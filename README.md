@@ -77,6 +77,27 @@ across source-revision refreshes while new or changed records are regenerated.
 
 ## Physical-reference display previews
 
+Every recording card and detail heading has a 48-by-48-pixel decorative anchor taken from
+the first frame of that record's existing public motion preview. The complete
+set is required by validation; no photograph availability is implied. These
+small images load lazily and do not fetch the photograph lookup. Generate them
+offline with `node tools/generate-record-anchors.mjs`, using the existing FFmpeg
+binary through `FFMPEG_PATH`. The manifest binds every output to its recording,
+source preview bytes and existing source integrity reference. Original footage
+and all photograph associations remain unchanged. Unchanged outputs are reused;
+the generator stages the complete set before replacing the current directory.
+
+Three fixed, decorative photographs in the page heading use separate 48-pixel
+WebP derivatives of already published, eligible photographs. Their source
+and output hashes are recorded in `assets/visual-anchors/manifest.json`. They add
+no recording associations or interactive behavior and do not load the photograph
+lookup. The combined image budget is 12 KiB. To regenerate them locally, use
+Sharp 0.35.5 with its bundled libvips 8.18.7 and run
+`node tools/generate-visual-anchors.mjs`. Existing display JPEGs are reused as
+inputs. For a small source without a display JPEG, supply the published JPEG,
+named `<source SHA>.jpg`, in `VISUAL_ANCHOR_SOURCE_DIRECTORY`. Input hashes are
+checked, existing output bytes are cached, and no network access is used.
+
 The gallery shows only unambiguous primary drawing photographs with a direct
 owner-confirmed identification and exact confirmed source bytes. The same rule
 governs the photograph filter, recording dialogs, and full-resolution links.

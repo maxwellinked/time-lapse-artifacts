@@ -174,11 +174,138 @@ if (
   !app.includes('addEventListener("canplay"') ||
   !app.includes("prefers-reduced-motion: reduce") ||
   !app.includes("video.play()") ||
-  /thumbnails?\//i.test(app) ||
-  /<img\b/i.test(html)
+  /thumbnails?\//i.test(app)
 ) {
-  throw new Error("Dynamic motion previews are missing or static images remain active");
+  throw new Error("Dynamic motion previews are missing or static recording thumbnails remain active");
 }
+
+// Decorative hero anchors and source-less card/detail anchors are allowed.
+// Recording cards and the featured recording retain dynamic motion previews.
+const anchorBlocks = [...html.matchAll(/<div\b(?=[^>]*\bclass="visual-anchors")(?=[^>]*\baria-hidden="true")[^>]*>([\s\S]*?)<\/div>/g)];
+const anchorBlock = anchorBlocks[0];
+const anchorTags = [...(anchorBlock?.[1] ?? "").matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
+const cardTemplates = [...html.matchAll(/<template\b(?=[^>]*\bid="record-card-template")[^>]*>([\s\S]*?)<\/template>/g)];
+const cardTemplate = cardTemplates[0];
+const cardAnchorTags = [...(cardTemplate?.[1] ?? "").matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
+const cardAnchorTag = cardAnchorTags[0];
+const dialogAnchorTags = [...html.matchAll(/<img\b(?=[^>]*\bid="dialog-record-anchor")[^>]*>/g)].map(([tag]) => tag);
+const dialogAnchorTag = dialogAnchorTags[0];
+const heroCopyStart = html.indexOf('<div class="hero-copy">');
+const featuredStart = html.indexOf('<figure class="hero-recording"');
+if (anchorBlocks.length !== 1 || anchorTags.length !== 3 ||
+    cardTemplates.length !== 1 || cardAnchorTags.length !== 1 || dialogAnchorTags.length !== 1 ||
+    heroCopyStart < 0 || anchorBlock.index < heroCopyStart || anchorBlock.index > featuredStart ||
+    anchorBlock[1].replace(/<\/?span\b[^>]*>/g, "").replace(/<img\b[^>]*>/g, "").trim() ||
+    /<img\b/i.test(html.replace(anchorBlock[0], "").replace(cardAnchorTag, "").replace(dialogAnchorTag, ""))) {
+  throw new Error("Static images must be limited to three hero anchors and one card/detail anchor each");
+}
+const cardAnchorAttributes = Object.fromEntries([...cardAnchorTag.matchAll(/([\w-]+)="([^"]*)"/g)]
+  .map(([, name, value]) => [name, value]));
+const recordSummaryIndex = cardTemplate[1].indexOf('class="record-summary"');
+if (recordSummaryIndex < 0 || cardTemplate[1].indexOf(cardAnchorTag) < recordSummaryIndex ||
+    cardAnchorAttributes.class !== "record-anchor-image" || cardAnchorAttributes.alt !== "" ||
+    cardAnchorAttributes["aria-hidden"] !== "true" || cardAnchorAttributes.loading !== "lazy" ||
+    cardAnchorAttributes.decoding !== "async" || cardAnchorAttributes.width !== "48" ||
+    cardAnchorAttributes.height !== "48" || "src" in cardAnchorAttributes ||
+    "srcset" in cardAnchorAttributes || "sizes" in cardAnchorAttributes ||
+    !app.includes('card.querySelector(".record-anchor-image").src = `assets/record-anchors/${record.recordId}.webp`;')) {
+  throw new Error("Recording anchors must be decorative lazy-loaded images from the local derived record path");
+}
+const dialogAnchorAttributes = Object.fromEntries([...dialogAnchorTag.matchAll(/([\w-]+)="([^"]*)"/g)]
+  .map(([, name, value]) => [name, value]));
+const dialogHeaderStart = html.indexOf('<header class="dialog-header">');
+const dialogHeaderEnd = html.indexOf("</header>", dialogHeaderStart);
+const dialogAnchorIndex = html.indexOf(dialogAnchorTag);
+if (dialogHeaderStart < 0 || dialogAnchorIndex < dialogHeaderStart || dialogAnchorIndex > dialogHeaderEnd ||
+    dialogAnchorAttributes.class !== "dialog-record-anchor" || dialogAnchorAttributes.alt !== "" ||
+    dialogAnchorAttributes["aria-hidden"] !== "true" || dialogAnchorAttributes.decoding !== "async" ||
+    dialogAnchorAttributes.width !== "48" || dialogAnchorAttributes.height !== "48" ||
+    "src" in dialogAnchorAttributes || "srcset" in dialogAnchorAttributes || "sizes" in dialogAnchorAttributes ||
+    !app.includes('elements.dialogAnchor.src = `assets/record-anchors/${record.recordId}.webp`;')) {
+  throw new Error("Detail anchors must be decorative 48-pixel images using the same local recording path");
+}
+const anchorManifest = JSON.parse(readFileSync(join(root, "assets/visual-anchors/manifest.json"), "utf8"));
+if (anchorManifest.schemaVersion !== 1 || anchorManifest.sourceRevision !== payload.sourceRevision ||
+    anchorManifest.processing?.longEdgePixels !== 48 || anchorManifest.processing?.withoutEnlargement !== true ||
+    Object.keys(anchorManifest.images ?? {}).length !== 3) {
+  throw new Error("Decorative hero anchor manifest has an invalid snapshot or size bound");
+}
+const anchorSources = new Set();
+const eligibleAnchorPhotos = new Map(displayedReferences.map((photo) => [photo.sha256, photo]));
+let anchorBytes = 0;
+for (const tag of anchorTags) {
+  const attributes = Object.fromEntries([...tag.matchAll(/([\w-]+)="([^"]*)"/g)]
+    .map(([, name, value]) => [name, value]));
+  if (!/^assets\/visual-anchors\/[a-f0-9]{64}\.webp$/.test(attributes.src) ||
+      attributes.alt !== "" || attributes.decoding !== "async" ||
+      !/^\d+$/.test(attributes.width) || !/^\d+$/.test(attributes.height) ||
+      Number(attributes.width) < 1 || Number(attributes.height) < 1 ||
+      Math.max(Number(attributes.width), Number(attributes.height)) > 48 ||
+      "srcset" in attributes || "sizes" in attributes) {
+    throw new Error("Decorative hero anchors must have bounded local sources and explicit dimensions");
+  }
+  const sourceHash = attributes.src.match(/([a-f0-9]{64})\.webp$/)[1];
+  const anchor = anchorManifest.images[sourceHash];
+  const preview = photoPreviews.images[sourceHash];
+  const photo = eligibleAnchorPhotos.get(sourceHash);
+  const usesPreview = anchor && preview && anchor.sourcePath === `reference-previews/${sourceHash}.jpg` &&
+    anchor.sourceSha256 === preview.sha256 && anchor.sourceUrl === preview.sourceUrl;
+  const usesSmallPublicSource = anchor && photo && anchor.sourcePath === photo.fullResolutionUrl &&
+    anchor.sourceSha256 === sourceHash && Math.max(Number(photo.width_px), Number(photo.height_px)) <= 1024 &&
+    Number(photo.size_bytes) <= 512 * 1024;
+  if (anchorSources.has(sourceHash) || !anchor || !photo || (!usesPreview && !usesSmallPublicSource) ||
+      anchor.sourceUrl !== photo.fullResolutionUrl || anchor.workId !== photo.work_id ||
+      !Number.isInteger(anchor.width) || !Number.isInteger(anchor.height) ||
+      anchor.width !== Number(attributes.width) || anchor.height !== Number(attributes.height) ||
+      !/^[a-f0-9]{64}$/.test(anchor.sha256)) {
+    throw new Error(`Invalid decorative hero anchor binding: ${sourceHash}`);
+  }
+  const bytes = readFileSync(join(root, attributes.src));
+  if (bytes.length > 4096 || bytes.length !== anchor.sizeBytes ||
+      bytes.toString("ascii", 0, 4) !== "RIFF" || bytes.toString("ascii", 8, 12) !== "WEBP" ||
+      createHash("sha256").update(bytes).digest("hex") !== anchor.sha256) {
+    throw new Error(`Decorative hero anchor fixity or byte limit failed: ${sourceHash}`);
+  }
+  anchorSources.add(sourceHash);
+  anchorBytes += bytes.length;
+}
+if (anchorBytes > 12 * 1024) throw new Error("Decorative hero anchors exceed the 12 KiB transfer limit");
+
+const recordAnchorDirectory = join(root, "assets/record-anchors");
+const recordAnchorManifest = JSON.parse(readFileSync(join(recordAnchorDirectory, "manifest.json"), "utf8"));
+const recordAnchorProcessing = recordAnchorManifest.processing;
+if (recordAnchorManifest.schemaVersion !== 1 || recordAnchorManifest.sourceRevision !== payload.sourceRevision ||
+    Object.keys(recordAnchorManifest.records ?? {}).length !== payload.records.length ||
+    recordAnchorProcessing?.frameIndex !== 0 || recordAnchorProcessing?.width !== 48 ||
+    recordAnchorProcessing?.height !== 48 || recordAnchorProcessing?.fit !== "contain" ||
+    recordAnchorProcessing?.quality !== 45 || recordAnchorProcessing?.audio !== false ||
+    typeof recordAnchorProcessing?.ffmpegVersion !== "string" || !recordAnchorProcessing.ffmpegVersion.trim()) {
+  throw new Error("Recording anchor manifest has an invalid snapshot, coverage or processing contract");
+}
+const expectedRecordAnchorFiles = new Set(payload.records.map(({ recordId }) => `${recordId}.webp`));
+const unexpectedRecordAnchors = readdirSync(recordAnchorDirectory)
+  .filter((name) => /\.webp$/i.test(name) && !expectedRecordAnchorFiles.has(name));
+if (unexpectedRecordAnchors.length) throw new Error(`Unexpected recording anchors: ${unexpectedRecordAnchors.join(", ")}`);
+let recordAnchorBytes = 0;
+for (const record of payload.records) {
+  const anchor = recordAnchorManifest.records[record.recordId];
+  if (!anchor || anchor.sourcePath !== `previews/${record.recordId}.mp4` ||
+      anchor.sourceIntegrityReference !== record.integrityReference ||
+      !/^[a-f0-9]{64}$/.test(anchor.sourceSha256) || !/^[a-f0-9]{64}$/.test(anchor.sha256) ||
+      anchor.width !== 48 || anchor.height !== 48) {
+    throw new Error(`Invalid recording anchor binding: ${record.recordId}`);
+  }
+  const source = readFileSync(join(root, anchor.sourcePath));
+  const bytes = readFileSync(join(recordAnchorDirectory, `${record.recordId}.webp`));
+  if (createHash("sha256").update(source).digest("hex") !== anchor.sourceSha256 ||
+      bytes.length > 2048 || bytes.length !== anchor.sizeBytes ||
+      bytes.toString("ascii", 0, 4) !== "RIFF" || bytes.toString("ascii", 8, 12) !== "WEBP" ||
+      createHash("sha256").update(bytes).digest("hex") !== anchor.sha256) {
+    throw new Error(`Recording anchor fixity or byte limit failed: ${record.recordId}`);
+  }
+  recordAnchorBytes += bytes.length;
+}
+if (recordAnchorBytes > 2 * 1024 * 1024) throw new Error("Recording anchors exceed the 2 MiB total transfer limit");
 if (/bd5a3c|a54831|brown|rust/i.test(css)) {
   throw new Error("Warm brown accent remains in the stylesheet");
 }
@@ -271,6 +398,9 @@ console.log(
       records: payload.records.length,
       unknownFinishTimes: payload.records.filter((record) => !record.time).length,
       previews: previewFilenames.length,
+      recordAnchors: Object.keys(recordAnchorManifest.records).length,
+      recordAnchorBytes,
+      heroAnchorBytes: anchorBytes,
       photographPreviews: selectedPhotos.size,
       displayedDrawingReferences: displayedReferences.length,
       displayedDrawingPhotographs: new Set(displayedReferences.map((image) => image.sha256)).size,

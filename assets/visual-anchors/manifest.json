@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "042469fe4bff3c7ffad36b47be25503bf73f0da6",
+  "processing": {
+    "sharp": "0.35.5",
+    "libvips": "8.18.7",
+    "longEdgePixels": 48,
+    "fit": "inside",
+    "withoutEnlargement": true,
+    "orientation": "EXIF auto-orient once; existing display previews have no orientation tag",
+    "colour": "sRGB with embedded ICC; no EXIF or private metadata",
+    "kernel": "lanczos3",
+    "webpQuality": 45,
+    "effort": 6
+  },
+  "images": {
+    "383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be": {
+      "sourcePath": "reference-previews/383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be.jpg",
+      "sourceSha256": "a4b2c4059c6814a348896021689739ec5a4847426a30329924462b9297a7aca8",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/042469fe4bff3c7ffad36b47be25503bf73f0da6/Physical_References/Photographs/images/tlaw-3c632c55f324b287/383812a0374f75bfb4c8285b.jpg",
+      "workId": "tlaw-3c632c55f324b287",
+      "sha256": "aacd256af210e0ececaa932c3ec682651072b7cc296a8cdd247562508fd7f388",
+      "width": 48,
+      "height": 36,
+      "sizeBytes": 988
+    },
+    "fe572fc188835c4fb57c1a182cba0e5f75c52d828056a0f21f20ff5dad74246b": {
+      "sourcePath": "reference-previews/fe572fc188835c4fb57c1a182cba0e5f75c52d828056a0f21f20ff5dad74246b.jpg",
+      "sourceSha256": "c0f5eddd13f0a7607dabc4bd52acaaa3d4018074b34345af35b9d146ccdc2ee9",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/042469fe4bff3c7ffad36b47be25503bf73f0da6/Physical_References/Photographs/images/tlaw-0a80992c0574443f/fe572fc188835c4fb57c1a18.jpg",
+      "workId": "tlaw-0a80992c0574443f",
+      "sha256": "b632156776fa9e0c809310f69469255a6de040d8afe4eec65f425dd8a03a0a8e",
+      "width": 36,
+      "height": 48,
+      "sizeBytes": 778
+    },
+    "a804b44c29b7b972eae46a5af40a66fea82ad0a61226c0de8acddc1a9089f853": {
+      "sourcePath": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/042469fe4bff3c7ffad36b47be25503bf73f0da6/Physical_References/Photographs/images/tlaw-0e12d45e3d7b4f59/a804b44c29b7b972eae46a5a.jpg",
+      "sourceSha256": "a804b44c29b7b972eae46a5af40a66fea82ad0a61226c0de8acddc1a9089f853",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/042469fe4bff3c7ffad36b47be25503bf73f0da6/Physical_References/Photographs/images/tlaw-0e12d45e3d7b4f59/a804b44c29b7b972eae46a5a.jpg",
+      "workId": "tlaw-0e12d45e3d7b4f59",
+      "sha256": "e52b7e0cc145d5df149da5f80ed4f2866348e661f5ae6bfda7bc24976d32fa21",
+      "width": 36,
+      "height": 48,
+      "sizeBytes": 718
+    }
+  }
+}
