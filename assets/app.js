@@ -49,6 +49,7 @@ const elements = {
   dialog: document.querySelector("#record-dialog"),
   dialogRecordId: document.querySelector("#dialog-record-id"),
   dialogTitle: document.querySelector("#dialog-title"),
+  dialogAnchor: document.querySelector("#dialog-record-anchor"),
   dialogMetadata: document.querySelector("#dialog-metadata"),
   dialogFilename: document.querySelector("#dialog-filename"),
   dialogHash: document.querySelector("#dialog-hash"),
@@ -429,6 +430,7 @@ function renderRecords() {
     );
     card.querySelector(".preview-fallback strong").textContent = record.date.slice(0, 4);
     card.querySelector(".record-id").textContent = record.recordId;
+    card.querySelector(".record-anchor-image").src = `assets/record-anchors/${record.recordId}.webp`;
     if (recordingPart) {
       const partLabel = card.querySelector(".record-part");
       partLabel.textContent = recordingPart.label;
@@ -678,6 +680,7 @@ async function renderReference(record) {
 function renderDialog(record) {
   state.activeRecord = record;
   elements.dialogRecordId.textContent = `Standard Time Lapse · ${record.recordId}`;
+  elements.dialogAnchor.src = `assets/record-anchors/${record.recordId}.webp`;
   elements.dialogTitle.textContent = `${formatDate(record.date)} — ${formatTime(record.time)}`;
   elements.dialogFilename.textContent = record.filename;
   elements.dialogHash.textContent = record.integrityReference;

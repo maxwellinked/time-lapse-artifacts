@@ -27,8 +27,8 @@
       rel="canonical"
       href="https://maxwellinked.github.io/time-lapse-artifacts/"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20260829-sequence-continuity" />
-    <script src="assets/app.js?v=20261017-qualified-reference-links-v2" type="module"></script>
+    <link rel="stylesheet" href="assets/style.css?v=20261018-visual-anchors" />
+    <script src="assets/app.js?v=20261018-visual-anchors" type="module"></script>
   </head>
   <body>
     <a class="skip-link" href="#recordings">Skip to recordings</a>
@@ -61,6 +61,11 @@
     <main id="top">
       <section class="hero shell" aria-labelledby="hero-title">
         <div class="hero-copy">
+          <div class="visual-anchors" aria-hidden="true">
+            <span><img src="assets/visual-anchors/383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be.webp" alt="" width="48" height="36" decoding="async" /></span>
+            <span><img src="assets/visual-anchors/fe572fc188835c4fb57c1a182cba0e5f75c52d828056a0f21f20ff5dad74246b.webp" alt="" width="36" height="48" decoding="async" /></span>
+            <span><img src="assets/visual-anchors/a804b44c29b7b972eae46a5af40a66fea82ad0a61226c0de8acddc1a9089f853.webp" alt="" width="36" height="48" decoding="async" /></span>
+          </div>
           <p class="eyebrow">Standard time-lapse recordings · Public browser</p>
           <h1 id="hero-title">Analog drawing,<br />recorded and indexed.</h1>
           <p class="lede">
@@ -238,10 +243,13 @@
 
       <article class="dialog-content">
         <header class="dialog-header">
-          <div>
-            <p class="eyebrow" id="dialog-record-id">Standard Time Lapse</p>
-            <p class="dialog-finish-label" id="dialog-finish-label">Documented finish</p>
-            <h2 id="dialog-title">Recording</h2>
+          <div class="dialog-heading">
+            <img id="dialog-record-anchor" class="dialog-record-anchor" alt="" aria-hidden="true" width="48" height="48" decoding="async" />
+            <div class="dialog-heading-copy">
+              <p class="eyebrow" id="dialog-record-id">Standard Time Lapse</p>
+              <p class="dialog-finish-label" id="dialog-finish-label">Documented finish</p>
+              <h2 id="dialog-title">Recording</h2>
+            </div>
           </div>
           <a id="dialog-source-top" target="_blank" rel="noreferrer"
             >Source MP4 <span aria-hidden="true">↗</span></a
@@ -344,9 +352,14 @@
               <span class="record-id"></span>
               <span class="record-part" hidden></span>
             </span>
-            <strong class="record-date"></strong>
-            <span class="record-facts"></span>
-            <span class="record-link">Open recording →</span>
+            <span class="record-summary">
+              <img class="record-anchor-image" alt="" aria-hidden="true" width="48" height="48" loading="lazy" decoding="async" />
+              <span class="record-copy">
+                <strong class="record-date"></strong>
+                <span class="record-facts"></span>
+                <span class="record-link">Open recording →</span>
+              </span>
+            </span>
           </span>
         </button>
       </article>

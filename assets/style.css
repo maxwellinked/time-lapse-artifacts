@@ -197,6 +197,32 @@ button {
   padding-block: clamp(48px, 7vh, 78px);
 }
 
+.visual-anchors {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+.visual-anchors > span {
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  display: flex;
+  height: 52px;
+  justify-content: center;
+  padding: 2px;
+  width: 40px;
+}
+
+.visual-anchors img {
+  display: block;
+  image-rendering: pixelated;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 .eyebrow {
   color: var(--accent);
   font-size: 9px;
@@ -608,6 +634,34 @@ button {
   margin-top: 15px;
 }
 
+.record-summary {
+  align-items: start;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 48px minmax(0, 1fr);
+  margin-top: 10px;
+}
+
+.record-anchor-image,
+.dialog-record-anchor {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  display: block;
+  height: 48px;
+  image-rendering: pixelated;
+  object-fit: contain;
+  width: 48px;
+}
+
+.record-copy {
+  display: grid;
+  min-width: 0;
+}
+
+.record-copy .record-date {
+  margin-top: 0;
+}
+
 .record-identity {
   align-items: center;
   display: flex;
@@ -803,6 +857,22 @@ button {
 
 .dialog-header .eyebrow {
   margin-bottom: 12px;
+}
+
+.dialog-heading {
+  align-items: start;
+  display: flex;
+  gap: 16px;
+  min-width: 0;
+}
+
+.dialog-heading-copy {
+  min-width: 0;
+}
+
+.dialog-record-anchor {
+  flex: 0 0 48px;
+  margin-top: 4px;
 }
 
 .dialog-header h2 {
