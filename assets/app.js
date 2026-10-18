@@ -759,7 +759,9 @@ elements.dialog.addEventListener("close", () => {
   clearReference();
   resetDialogVideo();
   state.activeRecord = null;
-  if (location.hash.startsWith("#record=")) history.replaceState(null, "", location.pathname);
+  if (location.hash.startsWith("#record=")) {
+    history.replaceState(null, "", `${location.pathname}${location.search}`);
+  }
 });
 
 elements.showMore.addEventListener("click", () => {
@@ -780,7 +782,11 @@ elements.retryPhotoFilter.addEventListener("click", () => {
 
 function openHashRecord() {
   const match = location.hash.match(/^#record=(tla-[a-f0-9]+)$/);
-  if (!match || !state.records.length) return;
+  if (!match) {
+    if (elements.dialog.open) elements.dialog.close();
+    return;
+  }
+  if (!state.records.length) return;
   const record = state.records.find((item) => item.recordId === match[1]);
   if (record) openRecord(record, false);
 }
