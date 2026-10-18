@@ -45,7 +45,7 @@ function render(works) {
   const awaiting = visible.filter((work) => !work.photograph);
   gallery.replaceChildren();
   pending.replaceChildren();
-  document.querySelector("#visible-summary").textContent = `${visible.length} drawings · ${ready.length} with confirmed photographs`;
+  document.querySelector("#visible-summary").textContent = `${visible.length} drawing${visible.length === 1 ? "" : "s"} · ${ready.length} with confirmed photographs`;
   document.querySelector("#pending-summary").textContent = `${awaiting.length} drawings without a confirmed display photograph`;
   document.querySelector("#empty-gallery").hidden = ready.length > 0;
   for (const work of ready) {
@@ -83,7 +83,7 @@ try {
     fetch("reference-previews/manifest.json").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
   ]);
   const works = buildDrawingArchive(recordData, references, previews);
-  summary.textContent = `${works.length} registered drawings represented in the Standard recording index. ${works.filter((work) => work.photograph).length} have a confirmed photograph available here.`;
+  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.photograph).length} confirmed photographs`;
   const source = document.querySelector("#drawing-source");
   source.href = `https://huggingface.co/datasets/${recordData.sourceRepository}/tree/${recordData.sourceRevision}/Work_Identity`;
   source.textContent = `Source snapshot ${recordData.sourceRevision.slice(0, 8)}`;
