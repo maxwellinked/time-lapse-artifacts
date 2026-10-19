@@ -82,6 +82,12 @@ Run `node tools/generate-previews.mjs --concurrency 6` on a machine with FFmpeg
 and network access, then `node tools/generate-record-anchors.mjs` before running
 `REQUIRE_PREVIEWS=1 node tools/validate.mjs`. Commit both `previews` and
 `assets/record-anchors`; the preview workflow performs these steps in that order.
+On `main`, that workflow submits changes on a new `automation/recording-previews-*`
+branch and opens a pull request instead of pushing to the protected branch.
+It explicitly dispatches **Validate site** on the generated branch (including
+strict preview validation); merge only after the required `validate` check passes.
+GitHub Actions must be allowed to create pull requests in the repository settings.
+A run with no asset changes creates no commit or pull request.
 
 Each silent H.264 preview samples up to four seconds beginning at 82% of the
 documented source duration, at 12 frames per second and a 480-pixel long edge.
@@ -102,6 +108,11 @@ binary through `FFMPEG_PATH`. The manifest binds every output to its recording,
 source preview bytes and existing source integrity reference. Original footage
 and all photograph associations remain unchanged. Unchanged outputs are reused;
 the generator stages the complete set before replacing the current directory.
+An FFmpeg version difference alone does not invalidate verified image bytes.
+Image settings, source-preview hashes, recording identities, and output hashes
+must still match. The manifest's `processing.ffmpegVersion` is the default encoder
+provenance; an entry's optional `ffmpegVersion` overrides it for newly encoded
+images from a different toolchain. Reused images retain their original provenance.
 
 Three fixed, decorative photographs in the page heading use separate 48-pixel
 WebP derivatives of already published, eligible photographs. Their source

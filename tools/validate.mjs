@@ -291,6 +291,8 @@ for (const record of payload.records) {
   const anchor = recordAnchorManifest.records[record.recordId];
   if (!anchor || anchor.sourcePath !== `previews/${record.recordId}.mp4` ||
       anchor.sourceIntegrityReference !== record.integrityReference ||
+      (Object.hasOwn(anchor, "ffmpegVersion") &&
+        (typeof anchor.ffmpegVersion !== "string" || !anchor.ffmpegVersion.trim())) ||
       !/^[a-f0-9]{64}$/.test(anchor.sourceSha256) || !/^[a-f0-9]{64}$/.test(anchor.sha256) ||
       anchor.width !== 48 || anchor.height !== 48) {
     throw new Error(`Invalid recording anchor binding: ${record.recordId}`);
