@@ -38,14 +38,16 @@ function links(ui) { return ui.elements.additionalReferences.children.map((p) =>
 
 test("qualified links restore access while the strict population and source evidence stay unchanged", async () => {
   const before = JSON.stringify(lookup);
-  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 303);
+  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 624);
   for (const [id, title] of [
     ["tla-f0885e72d6cf24d8", /inferred source variant/],
     ["tla-d9c55c2215a49da7", /Supported indirect reference/],
     ["tla-3f49a8917fe22676", /support not verified here/],
     ["tla-4db13002f09ad61e", /Supplemental documentation/],
   ]) {
-    const ui = renderer(); await ui.show(id);
+    const fixture = structuredClone(lookup);
+    if (id === "tla-f0885e72d6cf24d8") fixture.records[id].mainImage.source_binding_method = "inferred_same_capture_export_variant";
+    const ui = renderer(evidence, async () => fixture); await ui.show(id);
     assert.equal(ui.elements.referenceStage.children.length, 0, id);
     assert.equal(ui.elements.referenceStage.hidden, true, id);
     assert.equal(ui.elements.referenceFull.hidden, true, id);
