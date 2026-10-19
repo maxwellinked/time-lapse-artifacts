@@ -33,8 +33,11 @@ existing Reference details area. Recording playback remains available.
 
 The original source lookup and photograph bytes are preserved as provenance.
 Their presence in the archive does not mean they qualify as displayed pairs.
-As of the pinned source snapshot, the policy retains 303 recording pairings
-using 40 unique photographs and withholds 660 formerly displayed pairings.
+In `data/physical-references.json` at pinned Hugging Face revision
+`a849eb13c7af60d8b5ac0d7d16a4cd8661f0405d`, the policy retains 624 recording
+pairings using 78 unique photographs. Of 963 pairings with a selected
+`mainImage`, 339 are withheld from primary display (963 minus 624). The two
+unresolved selections have no `mainImage` and are outside that total.
 
 ## Qualified documentation access
 
