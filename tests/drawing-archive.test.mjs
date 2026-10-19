@@ -14,8 +14,8 @@ test("groups the committed snapshot once per work without changing source eviden
   const works = buildDrawingArchive(data, references, previews);
   assert.equal(works.length, 431);
   assert.equal(new Set(works.map((work) => work.workId)).size, 431);
-  assert.equal(works.filter((work) => work.photograph).length, 40);
-  assert.equal(works.filter((work) => work.status === "reference_review").length, 328);
+  assert.equal(works.filter((work) => work.photograph).length, 78);
+  assert.equal(works.filter((work) => work.status === "reference_review").length, 290);
   assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 63);
   assert.deepEqual(works.flatMap((work) => work.records.map((record) => record.recordId)).sort(),
     data.records.map((record) => record.recordId).sort());
@@ -45,7 +45,7 @@ test("withholds a work image if its recordings disagree about primary eligibilit
 test("large photographs require a correctly bound small preview and never fall back", () => {
   const works = buildDrawingArchive(data, references, previews);
   const large = works.filter((work) => work.displayUrl?.startsWith("reference-previews/"));
-  assert.equal(large.length, 3);
+  assert.equal(large.length, 41);
   for (const work of large) {
     for (const replacement of [null, { ...previews.images[work.photograph.sha256], sourceUrl: "https://example.com/other.jpg" },
       { ...previews.images[work.photograph.sha256], width: 2048 }]) {
@@ -75,7 +75,7 @@ test("work links preserve every published candidate, evidence class and missing 
     else assert.ok(work.referenceLinks.length >= 1);
   }
   assert.deepEqual(counts, {
-    supplemental: 13, inferred_same_capture_export_variant: 38, unresolved: 1,
+    supplemental: 13, unresolved: 1,
     provenance_bound_review_derivative: 53, exact_historical_reference_bytes: 223,
   });
   for (const work of works) {
@@ -104,7 +104,7 @@ test("work evidence fails closed for stale bytes, revision or unavailable hashin
     const proposed = works.flatMap((work) => work.referenceLinks).filter((r) => r.photo.relationship_status === "proposed");
     assert.ok(proposed.length > 0);
     assert.ok(proposed.every((r) => !r.description.supportedIndirect && /support not verified/.test(r.description.title)));
-    assert.equal(works.filter((work) => work.photograph).length, 40);
+    assert.equal(works.filter((work) => work.photograph).length, 78);
   }
 });
 

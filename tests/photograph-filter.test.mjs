@@ -39,11 +39,11 @@ async function filter(records, lookup, values = { photograph: "with" }) {
   return { records: state.filtered, lookupLoads };
 }
 
-test("only 303 confirmed drawing pairings qualify; unresolved published candidates remain excluded", async () => {
+test("only 624 confirmed drawing pairings qualify; unresolved published candidates remain excluded", async () => {
   const before = JSON.stringify(published);
   const result = await filter(payload.records, published);
   const ids = new Set(result.records.map((record) => record.recordId));
-  assert.equal(ids.size, 303);
+  assert.equal(ids.size, 624);
   for (const recordId of ids) {
     const entry = published.records[recordId];
     assert.equal(entry.selectionStatus, "primary_inspection");

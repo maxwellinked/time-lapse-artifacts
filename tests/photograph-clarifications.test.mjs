@@ -11,15 +11,16 @@ const lookup = read("../data/physical-references.json");
 const evidence = read("../data/reference-link-evidence.json");
 const reasons = (id, proof = evidence) => clarificationReasons(lookup.records[id], proof, payload.sourceRevision);
 
-test("the July 2 drawing is findable by its stable identity and full unchanged filename", () => {
+test("the confirmed July 2 drawing leaves the review queue while retaining its stable identity and filename", () => {
   const works = collectClarifications(payload, lookup, evidence);
   const work = works.find(({ workId }) => workId === "tlaw-110a1832f358f7cc");
-  assert.ok(work.reasons.includes("source_variant"));
-  const record = work.records.find(({ recordId }) => recordId === "tla-f0885e72d6cf24d8");
+  assert.equal(work, undefined);
+  assert.ok(getDisplayReference(lookup.records["tla-f0885e72d6cf24d8"]));
+  const record = payload.records.find(({ recordId }) => recordId === "tla-f0885e72d6cf24d8");
   assert.equal(record.filename, "2026-07-02.UnknownTime.BallpointPen.Ink.Paper.11x14.mp4");
   const html = buildClarificationPage(payload, lookup, evidence);
-  assert.ok(html.includes(`#record=${record.recordId}`));
-  assert.ok(html.includes(record.filename));
+  assert.ok(!html.includes(`#record=${record.recordId}`));
+  assert.ok(!html.includes(record.filename));
   assert.equal(works.length, new Set(works.map((entry) => entry.key)).size);
 });
 
@@ -53,13 +54,14 @@ test("selection ambiguity, missing photographs and supplemental roles remain dis
   assert.deepEqual(clarificationReasons({ workId: null }, evidence, payload.sourceRevision), ["missing_work"]);
   collectClarifications(payload, lookup, evidence);
   assert.equal(JSON.stringify({ payload, lookup, evidence }), before);
-  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 303);
+  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 624);
 });
 
 test("the list rejects mixed snapshots and escapes archive text in recording links", () => {
   assert.throws(() => buildClarificationPage(payload, lookup, { ...evidence, sourceRevision: "0".repeat(40) }), /snapshot mismatch/);
   const changed = structuredClone(payload);
-  const record = changed.records.find(({ recordId }) => recordId === "tla-f0885e72d6cf24d8");
+  const queuedId = collectClarifications(payload, lookup, evidence)[0].records[0].recordId;
+  const record = changed.records.find(({ recordId }) => recordId === queuedId);
   record.filename = '<img src=x onerror="alert(1)">';
   const html = buildClarificationPage(changed, lookup, evidence);
   assert.ok(!html.includes('<img src=x onerror="alert(1)">'));

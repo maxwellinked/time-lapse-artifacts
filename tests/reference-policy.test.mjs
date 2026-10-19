@@ -174,12 +174,12 @@ test("handles unavailable references without creating or promoting a candidate",
   }
 });
 
-test("the pinned archive retains only its 303 direct exact drawing pairings for display", () => {
+test("the pinned archive retains only its 624 direct exact drawing pairings for display", () => {
   const source = readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8");
   const lookup = JSON.parse(source);
   const before = JSON.stringify(lookup);
   const images = Object.values(lookup.records).map(getDisplayReference).filter(Boolean);
-  assert.equal(images.length, 303);
-  assert.equal(new Set(images.map((image) => image.sha256)).size, 40);
+  assert.equal(images.length, 624);
+  assert.equal(new Set(images.map((image) => image.sha256)).size, 78);
   assert.equal(JSON.stringify(lookup), before, "eligibility must not rewrite archival source evidence");
 });
