@@ -1,7 +1,7 @@
-import { getDisplayReference } from "./reference-policy.js";
+import { getDisplayReference, describeReferenceLink } from "./reference-policy.js";
 
 // Presentation grouping only: the recording lookup supplies the existing work IDs.
-export function buildDrawingArchive(recordData, references, previews) {
+export function buildDrawingArchive(recordData, references, previews, evidence = null) {
   if (!recordData.sourceRevision || references.sourceRevision !== recordData.sourceRevision ||
       previews.sourceRevision !== recordData.sourceRevision) throw new Error("Drawing inputs have different source revisions");
   const records = recordData.records;
@@ -18,6 +18,19 @@ export function buildDrawingArchive(recordData, references, previews) {
     works.set(work.workId, work);
   }
   return [...works.values()].map(({ workId, records, entries }) => {
+    const referenceLinks = new Map();
+    for (const entry of entries) {
+      for (const photo of [entry.mainImage, ...entry.additionalReferences].filter(Boolean)) {
+        const expectedUrl = `https://huggingface.co/datasets/${recordData.sourceRepository}/resolve/${recordData.sourceRevision}/${photo.image_path}`;
+        if (photo.work_id !== workId || photo.fullResolutionUrl !== expectedUrl ||
+            !photo.image_path.startsWith(`Physical_References/Photographs/images/${workId}/`) ||
+            photo.image_path.includes("..")) throw new Error("Unexpected photograph source URL");
+        const description = describeReferenceLink(entry, photo, evidence, recordData.sourceRevision);
+        const reference = { photo, description };
+        // Collapse repeated recording references only when their evidence is identical.
+        referenceLinks.set(JSON.stringify(reference), reference);
+      }
+    }
     const candidates = entries.map(getDisplayReference);
     const image = candidates[0];
     const consistent = image && candidates.every((candidate) => candidate &&
@@ -47,6 +60,17 @@ export function buildDrawingArchive(recordData, references, previews) {
       status = displayUrl ? "confirmed_photograph" : "display_unavailable";
       if (displayUrl) photograph = image;
     }
-    return { workId, records, photograph, displayUrl, displaySha256, status };
+    return { workId, records, photograph, displayUrl, displaySha256, status, referenceLinks: [...referenceLinks.values()] };
   });
+}
+
+// Support claims must bind to the actual lookup bytes, not just its revision.
+export async function verifiedDrawingEvidence(bytes, evidence, crypto = globalThis.crypto) {
+  try {
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    const hash = [...new Uint8Array(digest)].map((byte) => byte.toString(16).padStart(2, "0")).join("");
+    return evidence?.lookupSha256 === hash ? evidence : null;
+  } catch {
+    return null;
+  }
 }

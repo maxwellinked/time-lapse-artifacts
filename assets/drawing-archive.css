@@ -21,3 +21,8 @@
 .image-error { padding: 20px; line-height: 1.6; }
 @media (max-width: 950px) { .drawing-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .drawing-grid { grid-template-columns: minmax(0, 1fr); } .drawing-image-link { height: 350px; } }
+
+.photograph-links { padding-left: 18px; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.photograph-links li { margin-bottom: 12px; }
+.photograph-links a { text-decoration: underline; }
+.photograph-links small { display: block; color: var(--muted); }

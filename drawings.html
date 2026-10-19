@@ -18,7 +18,7 @@
       <p class="eyebrow">Analog drawings · Physical references</p>
       <h1>Drawing photographs</h1>
       <p id="archive-summary" role="status">Loading the drawing index…</p>
-      <p class="archive-note">Browse one entry per registered Standard drawing. Recording links and other reference details remain available.</p>
+      <p class="archive-note">Browse one entry per registered Standard drawing. Public photograph links appear with their evidence and source limits. They do not establish a recording’s endpoint or photograph-to-video alignment.</p>
       <details class="archive-about"><summary>About these photographs</summary>
         <p>Small photographs show directly confirmed drawing references. Photographs do not establish a recording’s endpoint.</p>
         <p><a id="drawing-source">Source snapshot</a> · <a href="REFERENCE_POLICY.md">Photograph policy</a></p>
@@ -30,11 +30,11 @@
       <p id="visible-summary" role="status"></p>
       <p id="empty-gallery" hidden>No confirmed photographs match this search.</p>
       <div id="drawing-grid" class="drawing-grid"></div>
-      <details class="awaiting-photographs">
-        <summary id="pending-summary">Drawings without a confirmed display photograph</summary>
-        <p>These entries remain in the archive. No photograph has been inferred or substituted.</p>
+      <section class="awaiting-photographs" aria-labelledby="pending-summary">
+        <h2 id="pending-summary">Drawings without a confirmed display photograph</h2>
+        <p>These entries have no eligible confirmed primary display photograph. Any available public references are linked below with their existing evidence status.</p>
         <div id="pending-drawings"></div>
-      </details>
+      </section>
     </main>
   </body>
 </html>
