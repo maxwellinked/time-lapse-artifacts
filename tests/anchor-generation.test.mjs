@@ -42,13 +42,13 @@ async function fixture(t, kind) {
     previews.records = ids.length;
     previews.recordIdentities = Object.fromEntries(ids.map((id) => [id, previews.recordIdentities[id]]));
     await putJson(join(root, "previews/manifest.json"), previews);
-    manifest.records = Object.fromEntries(ids.map((id) => [id, manifest.records[id]]));
+    manifest.records = Object.fromEntries([...ids].sort().map((id) => [id, manifest.records[id]]));
     await putJson(join(output, "manifest.json"), manifest);
     for (const id of ids) await copy(`previews/${id}.mp4`);
     const encoder = join(root, "ffmpeg-test.cjs");
     await writeFile(encoder, `#!${process.execPath}\n
 const fs = require('node:fs');
-if (process.argv.includes('-version')) console.log(${JSON.stringify(manifest.processing.ffmpegVersion)});
+if (process.argv.includes('-version')) console.log(process.env.TEST_FFMPEG_VERSION || ${JSON.stringify(manifest.processing.ffmpegVersion)});
 else {
   if (process.env.TEST_NO_ENCODING === '1') throw new Error('Unexpected encoding of unchanged bytes');
   process.stdin.resume();
@@ -221,7 +221,8 @@ test("recording refresh: new revision/count reuses unchanged images and stages b
   const validation = workflow.indexOf("run: REQUIRE_PREVIEWS=1 node tools/validate.mjs");
   assert.ok(motion >= 0 && anchors > motion && validation > anchors, "generate both packs before strict validation");
   assert.match(workflow, /- tools\/generate-record-anchors\.mjs/);
-  const stageCommand = workflow.match(/^\s*(git add -- previews[^\n]*)$/m)?.[1];
+  const publisher = await readFile(join(repository, "tools/publish-previews.sh"), "utf8");
+  const stageCommand = publisher.match(/^(git add -- previews[^\n]*)$/m)?.[1];
   assert.ok(stageCommand?.includes("assets/record-anchors"));
   await exec("git", ["init", "-q", f.root]);
   await exec("git", ["add", "--", "previews", "assets/record-anchors"], { cwd: f.root });
@@ -271,7 +272,67 @@ test("recording cache rejects changed source bytes and changed recording identit
   await assert.rejects(f.run(), /Preview identity differs/);
   previews.recordIdentities[f.ids[1]] = records.records[1].integrityReference;
   await putJson(previewPath, previews);
-  const result = await f.run();
+  const result = await f.run({ TEST_FFMPEG_VERSION: "ffmpeg version 6.1.1-test" });
   assert.equal(result.generated, 2);
   assert.equal(result.reused, 1);
+});
+
+test("recording images: a different encoder preserves all verified bytes and original provenance", async (t) => {
+  const f = await fixture(t, "record"), before = await f.snapshot();
+  const result = await f.run({ TEST_FFMPEG_VERSION: "ffmpeg version 6.1.1-test", TEST_NO_ENCODING: "1" });
+  assert.equal(result.generated, 0);
+  assert.equal(result.reused, 3);
+  assert.deepEqual(await f.snapshot(), before, "including the original manifest bytes");
+});
+
+test("recording images: damage and changed image settings still require regeneration", async (t) => {
+  const f = await fixture(t, "record");
+  await writeFile(join(f.output, `${f.ids[0]}.webp`), "damaged derivative");
+  const result = await f.run({ TEST_FFMPEG_VERSION: "ffmpeg version 6.1.1-test" });
+  assert.equal(result.generated, 1);
+  assert.equal(result.reused, 2);
+  await f.forceRegeneration();
+  assert.equal((await f.run()).generated, 3);
+});
+
+test("new recording: generate its motion preview and image while preserving older encodes", async (t) => {
+  const f = await fixture(t, "record"), before = await f.snapshot();
+  const oldManifest = await json(join(f.output, "manifest.json"));
+  await copyFile(join(repository, "tools/generate-previews.mjs"), join(f.root, "tools/generate-previews.mjs"));
+  const bin = join(f.root, "bin"), log = join(f.root, "motion-calls.jsonl");
+  await mkdir(bin);
+  // Exercise the actual preview cache/orchestration without fetching source video.
+  await writeFile(join(bin, "ffmpeg"), `#!${process.execPath}\n
+const fs = require('node:fs');
+fs.appendFileSync(${JSON.stringify(log)}, JSON.stringify(process.argv.slice(2)) + '\\n');
+fs.copyFileSync(${JSON.stringify(join(f.root, `previews/${f.ids[0]}.mp4`))}, process.argv.at(-1));
+`);
+  await chmod(join(bin, "ffmpeg"), 0o755);
+  const path = join(f.root, "data/records.json"), index = await json(path);
+  const id = "tla-0000000000000000", record = { ...index.records[0], recordId: id, integrityReference: "new-source-identity" };
+  index.sourceRevision = "1".repeat(40);
+  index.records.push(record);
+  await putJson(path, index);
+  await exec(process.execPath, [join(f.root, "tools/generate-previews.mjs")], {
+    env: { ...process.env, PATH: `${bin}:${process.env.PATH}` }, timeout: 15000,
+  });
+  const calls = (await readFile(log, "utf8")).trim().split("\n").map(JSON.parse);
+  assert.equal(calls.length, 1);
+  assert.equal(calls[0].at(-1), join(f.root, `previews/${id}.mp4.part.mp4`));
+  assert.equal(calls[0][calls[0].indexOf("-i") + 1], record.videoUrl);
+  const result = await f.run({ TEST_FFMPEG_VERSION: "ffmpeg version 6.1.1-test" });
+  assert.equal(result.generated, 1);
+  assert.equal(result.reused, 3);
+  const current = await json(join(f.output, "manifest.json"));
+  assert.deepEqual(current.processing, oldManifest.processing);
+  assert.equal(current.records[id].ffmpegVersion, "ffmpeg version 6.1.1-test");
+  assert.equal(current.records[id].sourceIntegrityReference, record.integrityReference);
+  assert.equal(current.records[id].sourceSha256, hash(await readFile(join(f.root, `previews/${id}.mp4`))));
+  for (const oldId of f.ids) {
+    assert.deepEqual(current.records[oldId], oldManifest.records[oldId]);
+    assert.equal((await f.snapshot())[`${oldId}.webp`], before[`${oldId}.webp`]);
+  }
+  const mixedSnapshot = await f.snapshot();
+  assert.equal((await f.run({ TEST_FFMPEG_VERSION: "ffmpeg version 7-test", TEST_NO_ENCODING: "1" })).reused, 4);
+  assert.deepEqual(await f.snapshot(), mixedSnapshot, "mixed encoder provenance survives the next cache-only run");
 });

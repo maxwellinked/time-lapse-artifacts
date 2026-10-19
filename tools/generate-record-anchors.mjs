@@ -124,9 +124,19 @@ try {
   }
 } catch (error) { if (error.code !== "ENOENT") throw error; }
 // A new index revision alone does not change image bytes. Each cache entry must
-// still match the exact preview bytes, recording identity and processing below.
+// still match the exact preview bytes, recording identity and image settings.
+// Encoder version is provenance, not a reason to replace verified image bytes.
+function imageSettings(value = {}) {
+  return JSON.stringify(Object.entries(value).filter(([key]) => key !== "ffmpegVersion")
+    .sort(([left], [right]) => left.localeCompare(right)));
+}
 const reusable = previous?.schemaVersion === 1 &&
-  JSON.stringify(previous.processing) === JSON.stringify(processing);
+  typeof previous.processing?.ffmpegVersion === "string" && previous.processing.ffmpegVersion.trim() &&
+  imageSettings(previous.processing) === imageSettings(processing);
+// Keep the legacy default for reused entries. New encodes with a different
+// toolchain carry an entry-level override, so mixed builds remain truthful and
+// a cache-only run does not rewrite the manifest's encoder provenance.
+const manifestProcessing = reusable ? previous.processing : processing;
 const selected = limit === null ? recordData.records : recordData.records.slice(0, limit);
 // Stage a complete replacement beside the output. Never modify published files
 // during decoding, cache validation, or manifest preparation.
@@ -191,6 +201,7 @@ async function worker() {
       entries[record.recordId] = {
         sourcePath, sourceSha256, sourceIntegrityReference: record.integrityReference,
         sha256: sha256(bytes), width: 48, height: 48, sizeBytes: bytes.length,
+        ...(ffmpegVersion === manifestProcessing.ffmpegVersion ? {} : { ffmpegVersion }),
       };
       generated += 1;
     } catch (error) {
@@ -208,7 +219,7 @@ try {
     throw new Error("Anchor generation did not cover the exact selected recording set");
   }
   const manifest = {
-    schemaVersion: 1, sourceRevision: recordData.sourceRevision, processing,
+    schemaVersion: 1, sourceRevision: recordData.sourceRevision, processing: manifestProcessing,
     records: Object.fromEntries(Object.entries(entries).sort(([left], [right]) => left.localeCompare(right))),
   };
   await writeFile(join(staging, "manifest.json"), `${JSON.stringify(manifest, null, 2)}\n`);

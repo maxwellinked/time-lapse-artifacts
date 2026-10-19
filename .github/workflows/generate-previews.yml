@@ -2,29 +2,41 @@ name: Generate dynamic previews
 
 on:
   push:
+    branches: [main]
     paths:
       - .github/workflows/generate-previews.yml
       - data/records.json
       - tools/generate-previews.mjs
       - tools/generate-record-anchors.mjs
+      - tools/publish-previews.sh
       - tools/validate.mjs
   workflow_dispatch:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
+
+concurrency:
+  group: generate-previews
+  cancel-in-progress: false
 
 jobs:
   previews:
-    if: github.actor != 'github-actions[bot]'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     timeout-minutes: 360
 
     steps:
-      - name: Check out current branch
+      - name: Check out source revision
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.ref_name }}
+          ref: ${{ github.sha }}
           fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
       - name: Install FFmpeg
         run: |
@@ -54,28 +66,7 @@ jobs:
       - name: Validate complete website and preview pack
         run: REQUIRE_PREVIEWS=1 node tools/validate.mjs
 
-      - name: Commit generated previews to the branch
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- previews assets/record-anchors
-          if git diff --cached --quiet; then
-            echo "Dynamic preview pack is already complete."
-            exit 0
-          fi
-          # Persist provenance only for changed MP4s, never for cache-only runs.
-          mapfile -d '' generated_previews < <(git diff --cached --name-only --diff-filter=AM -z -- 'previews/*.mp4')
-          if (( ${#generated_previews[@]} )); then
-            mkdir -p previews/provenance
-            provenance="previews/provenance/${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}.txt"
-            cp "$RUNNER_TEMP/preview-toolchain.txt" "$provenance"
-            {
-              printf '\nSHA-256 of resulting manifest:\n'
-              sha256sum previews/manifest.json
-              printf '\nSHA-256 of added or modified previews from this run:\n'
-              sha256sum -- "${generated_previews[@]}"
-            } >> "$provenance"
-            git add -- "$provenance"
-          fi
-          git commit -m "Add dynamic recording previews"
-          git push origin HEAD:${GITHUB_REF_NAME}
+      - name: Submit generated previews for validation and review
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash tools/publish-previews.sh
