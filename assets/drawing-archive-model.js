@@ -1,4 +1,4 @@
-import { getDisplayReference, describeReferenceLink } from "./reference-policy.js";
+import { getDisplayReference, describeReferenceLink } from "./reference-policy.js?v=20261020-public-display-derivatives";
 
 // Presentation grouping only: the recording lookup supplies the existing work IDs.
 export function buildDrawingArchive(recordData, references, previews, evidence = null) {

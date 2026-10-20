@@ -71,6 +71,30 @@ test("a matching work ID never promotes a proposed or partially confirmed relati
   }
 });
 
+test("accepts only bounded, normalized and receipt-identified owner-confirmed display derivatives", () => {
+  const entry = fixture();
+  Object.assign(entry.mainImage, {
+    source_binding_method: "owner_confirmed_display_derivative",
+    processing_method: "public_display_JPEG_bytes_unchanged",
+    processing_spec: "Physical_References/Photographs/PROCESSING.json",
+    inspection_resolution_class: "limited_resolution_full_drawing_reference",
+    evidence_reference_id: "M002", size_bytes: "417210",
+  });
+  assert.strictEqual(getDisplayReference(entry), entry.mainImage);
+  for (const [field, value] of [
+    ["inspection_resolution_class", "native_full_resolution_inspection"],
+    ["processing_method", "jpeg_metadata_only_codestream_unchanged"],
+    ["source_binding_method", "exact_confirmed_source_bytes"],
+    ["processing_spec", "unbound.json"], ["evidence_reference_id", ""],
+    ["size_bytes", "524289"], ["size_bytes", undefined], ["orientation", "3"],
+    ["width_px", "1025"], ["relationship_status", "proposed"],
+  ]) {
+    const changed = structuredClone(entry);
+    changed.mainImage[field] = value;
+    assert.equal(getDisplayReference(changed), null, field);
+  }
+});
+
 test("rejects inferred exports, historical sources, and review derivatives despite owner-confirmed identity", () => {
   for (const source of ["inferred_same_capture_export_variant", "exact_historical_reference_bytes",
     "provenance_bound_review_derivative", "", undefined]) {
@@ -174,12 +198,19 @@ test("handles unavailable references without creating or promoting a candidate",
   }
 });
 
-test("the pinned archive retains only its 624 direct exact drawing pairings for display", () => {
+test("the pinned pilot preserves 624 exact pairings and adds only eight limited public-display pairings", () => {
   const source = readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8");
   const lookup = JSON.parse(source);
   const before = JSON.stringify(lookup);
   const images = Object.values(lookup.records).map(getDisplayReference).filter(Boolean);
-  assert.equal(images.length, 624);
-  assert.equal(new Set(images.map((image) => image.sha256)).size, 78);
+  assert.equal(images.length, 632);
+  assert.equal(images.filter((image) => image.source_binding_method === "exact_confirmed_source_bytes").length, 624);
+  const displayEntries = Object.entries(lookup.records).filter(([, entry]) =>
+    getDisplayReference(entry)?.source_binding_method === "owner_confirmed_display_derivative");
+  assert.deepEqual(new Set(displayEntries.map(([id]) => id)), new Set([
+    "tla-81af436a01eb6990", "tla-341e5c6f6373f95e", "tla-2e9770969c29eb5c", "tla-0ba66b3678db8d76",
+    "tla-fc5984c94e0902f7", "tla-572e318fa8396b9f", "tla-f1909a283fd71501", "tla-f667e7cf1e5da54e",
+  ]));
+  assert.equal(new Set(images.map((image) => image.sha256)).size, 80);
   assert.equal(JSON.stringify(lookup), before, "eligibility must not rewrite archival source evidence");
 });

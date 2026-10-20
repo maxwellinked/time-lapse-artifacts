@@ -94,6 +94,26 @@ class ReferenceLookupContract(unittest.TestCase):
         self.assertEqual(record["additionalReferences"][0]["source_binding_method"], "inferred_same_capture_export_variant")
         self.assertEqual(record["additionalReferences"][0]["view_purpose"], "supplemental_documentation")
 
+    def test_public_display_derivative_retains_limited_representation_and_rejects_false_fidelity(self):
+        display = self.photos[0]
+        display.update(source_binding_method="owner_confirmed_display_derivative",
+                       processing_method="public_display_JPEG_bytes_unchanged", evidence_reference_id="M002",
+                       inspection_resolution_class="limited_resolution_full_drawing_reference")
+        self.inputs[lookup.PHOTO_MANIFEST] = csv_bytes(lookup.PHOTO_FIELDS, self.photos)
+        result = self.build()["records"][RIDS[0]]
+        self.assertEqual(result["mainImage"]["source_binding_method"], "owner_confirmed_display_derivative")
+        self.assertIn("display JPEG derivative", result["referenceRole"])
+        for field, value in [("inspection_resolution_class", "native_full_resolution_inspection"),
+                             ("source_binding_method", "exact_confirmed_source_bytes"),
+                             ("processing_method", "jpeg_metadata_only_codestream_unchanged"),
+                             ("evidence_reference_id", ""), ("width_px", "1025"),
+                             ("size_bytes", "524289"), ("orientation", "3")]:
+            changed = copy.deepcopy(self.photos)
+            changed[0][field] = value
+            self.inputs[lookup.PHOTO_MANIFEST] = csv_bytes(lookup.PHOTO_FIELDS, changed)
+            with self.subTest(field=field), self.assertRaises(lookup.ContractError):
+                self.build()
+
     def test_wrong_github_pin_unknown_or_duplicate_id_rejected(self):
         variants = []
         wrong = copy.deepcopy(self.github); wrong["sourceRevision"] = "3" * 40; variants.append(wrong)

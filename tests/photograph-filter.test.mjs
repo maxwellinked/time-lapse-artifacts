@@ -39,17 +39,17 @@ async function filter(records, lookup, values = { photograph: "with" }) {
   return { records: state.filtered, lookupLoads };
 }
 
-test("only 624 confirmed drawing pairings qualify; unresolved published candidates remain excluded", async () => {
+test("632 confirmed drawing pairings qualify; unresolved published candidates remain excluded", async () => {
   const before = JSON.stringify(published);
   const result = await filter(payload.records, published);
   const ids = new Set(result.records.map((record) => record.recordId));
-  assert.equal(ids.size, 624);
+  assert.equal(ids.size, 632);
   for (const recordId of ids) {
     const entry = published.records[recordId];
     assert.equal(entry.selectionStatus, "primary_inspection");
     assert.equal(entry.mainImage.relationship_status, "owner_confirmed");
     assert.equal(entry.mainImage.view_purpose, "primary_inspection");
-    assert.equal(entry.mainImage.source_binding_method, "exact_confirmed_source_bytes");
+    assert.ok(["exact_confirmed_source_bytes", "owner_confirmed_display_derivative"].includes(entry.mainImage.source_binding_method));
   }
   for (const id of ["tla-f27d620979e140d9", "tla-bdbd7d2e290b638a"]) {
     assert.ok(!ids.has(id), `${id} has unresolved published candidates, not a confirmed drawing reference`);
