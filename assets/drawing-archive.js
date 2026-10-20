@@ -1,5 +1,6 @@
 import { loadRecords } from "./data-loader.js";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js";
+import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 
 const summary = document.querySelector("#archive-summary");
 const gallery = document.querySelector("#drawing-grid");
@@ -80,6 +81,7 @@ function render(works) {
     image.alt = `Confirmed reference photograph for drawing ${work.workId}`;
     image.loading = "lazy";
     image.decoding = "async";
+    if (getPhotographDisplayRotation(work.photograph) === 90) image.classList.add("owner-rotation-clockwise");
     image.addEventListener("error", () => {
       link.replaceWith(node("p", "Photograph could not load. The recording and reference details remain available.", "image-error"));
     }, { once: true });

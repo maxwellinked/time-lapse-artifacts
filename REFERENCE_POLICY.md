@@ -71,9 +71,25 @@ snapshot from its pinned public text inputs with
 
 Apply the source's documented EXIF orientation once. For direct source display,
 the browser honors the original EXIF; committed display JPEGs have already been
-auto-oriented during generation and must not be rotated again. Show the entire
-frame without cropping, stretching, or enhancement. Apply no additional rotation
-or mirroring beyond the documented EXIF transform.
+auto-oriented during generation and must not have EXIF applied again. Show the entire
+frame without cropping, stretching, or enhancement. Additional display rotation
+requires an explicit owner instruction bound to the exact work and photograph.
+
+On 2026-10-20 the owner requested a **90-degree clockwise** display correction
+for these four photographs and stated that all other orientations were correct:
+
+| Documented finish | Work ID | Source photograph SHA-256 |
+| --- | --- | --- |
+| 2026-08-08 | `tlaw-27d91c3c3ca5d9e3` | `c24524fc0dc6a2ae8f05175861733b246cbdf4954e4cedc9c4d80605eb651a42` |
+| 2026-08-07 | `tlaw-a77d16972149f232` | `efc4ca40a9f58cf8be4dbcf9add537ddb5b6aaa83cdf404e271e5159df9a6ed1` |
+| 2026-08-05 | `tlaw-3c632c55f324b287` | `383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be` |
+| 2026-07-08 | `tlaw-ed372076fbc9d7c6` | `f84ae9326d33cabca20f33bd5af6d2149389bd1c0876b36fbebb63365b2b5be2` |
+
+The website applies these corrections after EXIF in drawing cards and recording
+dialogs, fitting the entire rotated frame. The source photographs, committed
+preview bytes, manifests and original-file links retain their source orientation.
+The correction grants no new pairing eligibility or photograph-to-video alignment.
+Other photographs receive no additional rotation.
 
 Do not infer artistic upright orientation from portrait/landscape dimensions,
 rotate a photograph to fit a video rectangle, or change archive source bytes

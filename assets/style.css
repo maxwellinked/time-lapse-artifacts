@@ -1004,6 +1004,25 @@ button {
   image-orientation: from-image;
 }
 
+.drawing-image-link:has(> img.owner-rotation-clockwise),
+.reference-stage:has(> img.owner-rotation-clockwise) {
+  container-type: size;
+  position: relative;
+}
+
+.drawing-image-link > img.owner-rotation-clockwise,
+.reference-stage > img.owner-rotation-clockwise {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100cqh;
+  height: 100cqw;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
 .reference-status {
   background: var(--surface);
   border: 1px solid var(--rule);
