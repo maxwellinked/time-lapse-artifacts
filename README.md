@@ -38,6 +38,12 @@ node --test tests/*.test.mjs
 node tools/validate.mjs
 ```
 
+Keep the canonical dataset and license links as ordinary static HTML anchors,
+outside templates and form controls. The source-link check is conservative: it
+does not reproduce browser repairs for malformed markup, foreign-namespace
+parsing, or declarative shadow roots. Links that rely on those features do not
+replace the required ordinary anchors.
+
 The [photograph clarification list](photograph-clarifications.html), also linked
 beside the recording filters, groups questions and coverage gaps by work and
 links every listed recording by stable ID. Supported indirect references are

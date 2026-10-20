@@ -7,7 +7,9 @@ const REQUIRED_LINKS = [
   "https://creativecommons.org/licenses/by-nc/4.0/",
 ];
 
-// Inspect complete quoted attributes in the static source, not URL substrings.
+// Conservative check for this site's ordinary static HTML source links.
+// It compares complete href values without emulating browser repairs, foreign
+// namespaces, or declarative shadow roots; retain ordinary anchors for those cases.
 export function hasRequiredSourceLinks(html) {
   const links = new Set();
   const rawText = new Set(["script", "style", "textarea", "title", "xmp", "iframe", "noembed", "noframes", "noscript"]);

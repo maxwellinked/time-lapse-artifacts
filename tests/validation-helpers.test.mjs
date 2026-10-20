@@ -67,6 +67,18 @@ test("required source links exclude anchors in template and select contexts", ()
   assert.ok(hasRequiredSourceLinks(`<template><select>Ignored</select></template>${anchors}`));
 });
 
+test("required source links retain ordinary anchors beside unsupported rendering contexts", () => {
+  const anchors = `<a href="${dataset}">Dataset</a><a href="${license}">License</a>`;
+  for (const [context, markup] of [
+    ["browser-repaired select", `<select><input>${anchors}</select>`],
+    ["foreign template", `<svg><template>${anchors}</template></svg>`],
+    ["declarative shadow root", `<div><template shadowrootmode="open">${anchors}</template></div>`],
+  ]) {
+    assert.equal(hasRequiredSourceLinks(markup), false, context);
+    assert.ok(hasRequiredSourceLinks(`${markup}${anchors}`), `ordinary fallback after ${context}`);
+  }
+});
+
 test("validation HTTP preserves its seven resources and rejects filesystem paths and aliases", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "tla-validation-test-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
