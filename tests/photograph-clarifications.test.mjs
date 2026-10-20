@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
-import { buildClarificationPage, collectClarifications, clarificationReasons } from "../tools/build-photograph-clarifications.mjs";
+import { buildClarificationPage, collectClarifications, clarificationReasons, CLARIFICATION_FILTER_SCRIPT } from "../tools/build-photograph-clarifications.mjs";
 import { getDisplayReference } from "../assets/reference-policy.js";
 
 const read = (path) => JSON.parse(readFileSync(new URL(path, import.meta.url), "utf8"));
@@ -70,6 +70,7 @@ test("the list rejects mixed snapshots and escapes archive text in recording lin
 
 test("search and reason selection compose to locate a drawing or show an honest empty result", () => {
   const html = buildClarificationPage(payload, lookup, evidence);
+  assert.ok(html.includes(`<script>${CLARIFICATION_FILTER_SCRIPT}</script>`));
   const rows = [
     { textContent: "July 2, 2026 tla-f0885e72d6cf24d8", dataset: { reasons: "source_variant" } },
     { textContent: "another drawing", dataset: { reasons: "proposed_match" } },
@@ -77,7 +78,7 @@ test("search and reason selection compose to locate a drawing or show an honest 
   const search = { value: "", addEventListener() {} }, reason = { value: "", addEventListener() {} }, count = {};
   // Exercise the page's actual search and reason filtering functions.
   const context = { document: { querySelectorAll: () => rows, getElementById: (id) => ({ search, reason, "result-count": count }[id]) } };
-  const filter = runInNewContext(html.match(/<script>([\s\S]*?)<\/script>/)[1] + "\nfilterRows", context);
+  const filter = runInNewContext(CLARIFICATION_FILTER_SCRIPT + "\nfilterRows", context);
   search.value = "tla-f0885e72d6cf24d8"; reason.value = "source_variant"; filter();
   assert.equal(rows[0].hidden, false); assert.equal(rows[1].hidden, true); assert.equal(count.textContent, "1 drawing");
   reason.value = "proposed_match"; filter(); assert.equal(count.textContent, "0 drawings");

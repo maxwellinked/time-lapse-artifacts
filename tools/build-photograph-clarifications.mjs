@@ -4,6 +4,20 @@ import { describeReferenceLink } from "../assets/reference-policy.js";
 
 const ROOT = new URL("../", import.meta.url);
 const SITE = "https://maxwellinked.github.io/time-lapse-artifacts/";
+export const CLARIFICATION_FILTER_SCRIPT = `
+const rows = [...document.querySelectorAll('article[data-reasons]')];
+const search = document.getElementById('search'), reason = document.getElementById('reason');
+function filterRows() {
+  const query = search.value.trim().toLowerCase(); let count = 0;
+  for (const row of rows) {
+    row.hidden = Boolean((query && !row.textContent.toLowerCase().includes(query)) || (reason.value && !row.dataset.reasons.split(' ').includes(reason.value)));
+    if (!row.hidden) count++;
+  }
+  document.getElementById('result-count').textContent = count + (count === 1 ? ' drawing' : ' drawings');
+}
+search.addEventListener('input', filterRows); reason.addEventListener('change', filterRows);
+`;
+
 export const QUESTIONS = {
   source_variant: ["Qualified source variant", "This file has an inferred export-variant binding. Keep the drawing identification and this file's source qualification separate; the existing evidence is described under photograph links. You may identify the exact existing source or supply a new original to resolve its source qualification."],
   proposed_match: ["Photograph match needs evidence", "A complete supporting chain for this photograph has not been verified here. Check the existing evidence or identify the exact photograph. Private evidence may exist; this listing does not declare the match false."],
@@ -98,19 +112,7 @@ article { border-top:1px solid var(--rule); padding:16px 0; scroll-margin-top:16
 <p id="result-count" aria-live="polite">${works.length} drawings</p>
 <section aria-label="Drawings with photograph questions or gaps">${rows}</section>
 <p>Source snapshot: <a href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/${escape(payload.sourceRevision)}"><code>${escape(payload.sourceRevision)}</code></a>. This list describes that snapshot; archive evidence and primary-image rules are unchanged.</p>
-</main><script>
-const rows = [...document.querySelectorAll('article[data-reasons]')];
-const search = document.getElementById('search'), reason = document.getElementById('reason');
-function filterRows() {
-  const query = search.value.trim().toLowerCase(); let count = 0;
-  for (const row of rows) {
-    row.hidden = Boolean((query && !row.textContent.toLowerCase().includes(query)) || (reason.value && !row.dataset.reasons.split(' ').includes(reason.value)));
-    if (!row.hidden) count++;
-  }
-  document.getElementById('result-count').textContent = count + (count === 1 ? ' drawing' : ' drawings');
-}
-search.addEventListener('input', filterRows); reason.addEventListener('change', filterRows);
-</script></body></html>
+</main><script>${CLARIFICATION_FILTER_SCRIPT}</script></body></html>
 `.replace(/[ \t]+$/gm, "");
 }
 
