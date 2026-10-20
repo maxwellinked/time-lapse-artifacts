@@ -59,6 +59,7 @@ test("required source links exclude anchors in template and select contexts", ()
     }
   }
   assert.equal(hasRequiredSourceLinks(`<template><template></template>${anchors}</template>`), false, "nested templates");
+  assert.equal(hasRequiredSourceLinks(`<select><template></select></template>${anchors}</select>`), false, "crossed template and select closes");
   assert.equal(hasRequiredSourceLinks(`<template><script>"</template>"</script>${anchors}</template>`), false, "raw-text closing tag");
   assert.equal(hasRequiredSourceLinks(`<template><!-- </template> -->${anchors}</template>`), false, "comment closing tag");
   assert.equal(hasRequiredSourceLinks(`<template><span title="</template>"></span>${anchors}</template>`), false, "attribute closing tag");

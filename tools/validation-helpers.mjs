@@ -11,17 +11,20 @@ const REQUIRED_LINKS = [
 export function hasRequiredSourceLinks(html) {
   const links = new Set();
   const rawText = new Set(["script", "style", "textarea", "title", "xmp", "iframe", "noembed", "noframes", "noscript"]);
-  const inertDepth = new Map([["template", 0], ["select", 0]]);
+  const inertElements = new Set(["template", "select"]);
+  const inertStack = [];
   const tags = /<!--[\s\S]*?(?:-->|$)|<(\/?)([a-z][a-z0-9:-]*)(?=[\t\n\f\r />])((?:[^"'<>]|"[^"]*"|'[^']*')*)>/gi;
   let tag;
   while ((tag = tags.exec(html))) {
     if (!tag[2]) continue; // Comments are not links.
     const closing = Boolean(tag[1]);
     const name = tag[2].toLowerCase();
-    // Template contents are inert, and select contents cannot contain HTML anchors.
-    // Count nested openings until their matching closes, including a stray "/>".
-    if (inertDepth.has(name)) {
-      inertDepth.set(name, Math.max(0, inertDepth.get(name) + (closing ? -1 : 1)));
+    // Template contents are inert; select descendants do not satisfy source links.
+    // Only matching closes leave these contexts; malformed crossed closes can
+    // be ignored by HTML parsing. A stray "/>" does not close either element.
+    if (inertElements.has(name)) {
+      if (!closing) inertStack.push(name);
+      else if (inertStack.at(-1) === name) inertStack.pop();
       continue;
     }
     if (closing) continue;
@@ -32,7 +35,7 @@ export function hasRequiredSourceLinks(html) {
       tags.lastIndex = end.exec(html) ? end.lastIndex : html.length;
       continue;
     }
-    if (name !== "a" || [...inertDepth.values()].some(Boolean)) continue;
+    if (name !== "a" || inertStack.length) continue;
     // Include unquoted and valueless attributes so a later duplicate cannot win.
     const attributes = tag[3].matchAll(/([^\t\n\f\r />=]+)(?:[\t\n\f\r ]*=[\t\n\f\r ]*(?:"([^"]*)"|'([^']*)'|([^\t\n\f\r >]*)))?/g);
     for (const [, name, doubleQuoted, singleQuoted, unquoted] of attributes) {
