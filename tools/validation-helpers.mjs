@@ -11,11 +11,20 @@ const REQUIRED_LINKS = [
 export function hasRequiredSourceLinks(html) {
   const links = new Set();
   const rawText = new Set(["script", "style", "textarea", "title", "xmp", "iframe", "noembed", "noframes", "noscript"]);
-  const tags = /<!--[\s\S]*?(?:-->|$)|<([a-z][a-z0-9:-]*)(?=[\t\n\f\r />])((?:[^"'<>]|"[^"]*"|'[^']*')*)>/gi;
+  const inertDepth = new Map([["template", 0], ["select", 0]]);
+  const tags = /<!--[\s\S]*?(?:-->|$)|<(\/?)([a-z][a-z0-9:-]*)(?=[\t\n\f\r />])((?:[^"'<>]|"[^"]*"|'[^']*')*)>/gi;
   let tag;
   while ((tag = tags.exec(html))) {
-    if (!tag[1]) continue; // Comments are not links.
-    const name = tag[1].toLowerCase();
+    if (!tag[2]) continue; // Comments are not links.
+    const closing = Boolean(tag[1]);
+    const name = tag[2].toLowerCase();
+    // Template contents are inert, and select contents cannot contain HTML anchors.
+    // Count nested openings until their matching closes, including a stray "/>".
+    if (inertDepth.has(name)) {
+      inertDepth.set(name, Math.max(0, inertDepth.get(name) + (closing ? -1 : 1)));
+      continue;
+    }
+    if (closing) continue;
     if (name === "plaintext") break;
     if (rawText.has(name)) {
       const end = new RegExp(`</${name}[\\t\\n\\f\\r ]*>`, "gi");
@@ -23,9 +32,9 @@ export function hasRequiredSourceLinks(html) {
       tags.lastIndex = end.exec(html) ? end.lastIndex : html.length;
       continue;
     }
-    if (name !== "a") continue;
+    if (name !== "a" || [...inertDepth.values()].some(Boolean)) continue;
     // Include unquoted and valueless attributes so a later duplicate cannot win.
-    const attributes = tag[2].matchAll(/([^\t\n\f\r />=]+)(?:[\t\n\f\r ]*=[\t\n\f\r ]*(?:"([^"]*)"|'([^']*)'|([^\t\n\f\r >]*)))?/g);
+    const attributes = tag[3].matchAll(/([^\t\n\f\r />=]+)(?:[\t\n\f\r ]*=[\t\n\f\r ]*(?:"([^"]*)"|'([^']*)'|([^\t\n\f\r >]*)))?/g);
     for (const [, name, doubleQuoted, singleQuoted, unquoted] of attributes) {
       if (name.toLowerCase() === "href") {
         links.add(doubleQuoted ?? singleQuoted ?? unquoted ?? "");
