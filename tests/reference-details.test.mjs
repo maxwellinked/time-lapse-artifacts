@@ -3,6 +3,7 @@ import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 import { getDisplayReference, referenceExclusion, describeReferenceLink } from "../assets/reference-policy.js";
+import { getPhotographDisplayRotation } from "../assets/photograph-orientation.js";
 
 const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
 const lookup = JSON.parse(readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8"));
@@ -12,7 +13,7 @@ const renderSource = app.slice(app.indexOf("function clearReference("), app.inde
 
 // Exercise the production renderer, including links, hidden state and navigation guards.
 class Element {
-  constructor(tag = "div") { this.tag = tag; this.children = []; this.textContent = ""; this.hidden = true; }
+  constructor(tag = "div") { this.tag = tag; this.children = []; this.textContent = ""; this.hidden = true; this.classList = new Set(); }
   append(...children) { for (const child of children) { child.parent = this; this.children.push(child); } }
   replaceChildren(...children) { this.children = []; this.append(...children); }
   querySelector(tag) { return this.children.find((child) => child.tag === tag) ?? null; }
@@ -28,6 +29,7 @@ function renderer(proof = evidence, loader = async () => lookup) {
   const state = { sourceRevision: lookup.sourceRevision, activeRecord: null };
   const render = runInNewContext(`${roleSource}\n${renderSource}\nrenderReference`, {
     elements, state, referenceGeneration: 0, getDisplayReference, referenceExclusion, describeReferenceLink,
+    getPhotographDisplayRotation,
     document: { createElement: (tag) => new Element(tag) }, loadReferenceLookup: loader,
     loadReferenceEvidence: async () => proof,
   });
@@ -35,6 +37,19 @@ function renderer(proof = evidence, loader = async () => lookup) {
 }
 
 function links(ui) { return ui.elements.additionalReferences.children.map((p) => p.children[0]); }
+
+test("owner-approved rotation follows the selected photograph without leaking to the next recording", async () => {
+  const ui = renderer();
+  const before = JSON.stringify(lookup);
+  for (const id of ["tla-b82dcb656ccbe84a", "tla-0107ee972bd69249", "tla-3017b3e41ca4fde9", "tla-b711b80d21a53e47"]) {
+    await ui.show(id);
+    assert.ok(ui.elements.referenceStage.querySelector("img").classList.has("owner-rotation-clockwise"));
+    assert.equal(ui.elements.referenceFull.href, lookup.records[id].mainImage.fullResolutionUrl);
+  }
+  await ui.show("tla-f0885e72d6cf24d8");
+  assert.equal(ui.elements.referenceStage.querySelector("img").classList.has("owner-rotation-clockwise"), false);
+  assert.equal(JSON.stringify(lookup), before);
+});
 
 test("qualified links restore access while the strict population and source evidence stay unchanged", async () => {
   const before = JSON.stringify(lookup);

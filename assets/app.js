@@ -1,5 +1,6 @@
 import { loadRecords, RecordsDataError } from "./data-loader.js";
 import { getDisplayReference, referenceExclusion, describeReferenceLink } from "./reference-policy.js?v=20261017-qualified-reference-links-v2";
+import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
   deriveRecordingSequences,
   extendVisibleCount,
@@ -630,6 +631,7 @@ async function renderReference(record) {
       const photograph = document.createElement("img");
       photograph.alt = `${useSource ? "Physical reference photograph" : "Display-sized physical reference photograph"} — ${referenceRole(image)}`;
       photograph.decoding = "async";
+      if (getPhotographDisplayRotation(image) === 90) photograph.classList.add("owner-rotation-clockwise");
       photograph.addEventListener("load", () => {
         if (isCurrent()) elements.referenceStatus.hidden = true;
       }, { once: true });
