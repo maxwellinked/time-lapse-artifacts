@@ -1,12 +1,12 @@
-import { createServer } from "node:http";
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
-import { extname, join, normalize } from "node:path";
+import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { validateRecordsPayload } from "../assets/data-loader.js";
 import { getDisplayReference } from "../assets/reference-policy.js";
 import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
+import { createValidationServer, hasRequiredSourceLinks } from "./validation-helpers.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const requiredFiles = [
@@ -140,8 +140,7 @@ if (
 }
 if (
   !html.includes("CC BY-NC 4.0") ||
-  !html.includes("https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts") ||
-  !html.includes("https://creativecommons.org/licenses/by-nc/4.0/")
+  !hasRequiredSourceLinks(html)
 ) {
   throw new Error("Dataset license notice or required link is missing");
 }
@@ -351,26 +350,7 @@ if (process.env.REQUIRE_PREVIEWS === "1") {
   }
 }
 
-const types = {
-  ".css": "text/css",
-  ".html": "text/html",
-  ".js": "text/javascript",
-  ".json": "application/json",
-  ".mp4": "video/mp4",
-};
-
-const server = createServer((request, response) => {
-  const requested = request.url === "/" ? "index.html" : request.url.slice(1);
-  const safePath = normalize(requested).replace(/^\.\.(\/|\\|$)/, "");
-  try {
-    const body = readFileSync(join(root, safePath));
-    response.writeHead(200, { "content-type": types[extname(safePath)] ?? "text/plain" });
-    response.end(body);
-  } catch {
-    response.writeHead(404);
-    response.end("Not found");
-  }
-});
+const server = createValidationServer(root);
 
 await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
 const address = server.address();
