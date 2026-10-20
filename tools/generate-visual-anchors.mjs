@@ -39,6 +39,8 @@ const processing = {
   effort: 6,
 };
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
+const pinnedImagePath = (url) => typeof url === "string"
+  ? /^https:\/\/huggingface\.co\/datasets\/maxwellinked\/time-lapse-artifacts\/resolve\/[a-f0-9]{40}\/(Physical_References\/Photographs\/images\/tlaw-[a-f0-9]{16}\/[a-f0-9]{24}\.jpg)$/.exec(url)?.[1] : undefined;
 let previous;
 try { previous = JSON.parse(await readFile(manifestPath, "utf8")); }
 catch (error) { if (error.code !== "ENOENT") throw error; }
@@ -73,23 +75,6 @@ try {
     const sourcePath = preview ? `reference-previews/${sourceSha}.jpg` : image.fullResolutionUrl;
     const sourceSha256 = preview ? preview.sha256 : sourceSha;
     const sourceSize = preview ? preview.sizeBytes : Number(image.size_bytes);
-    const output = join(staging, `${sourceSha}.webp`);
-    const cached = reusable && previous.images?.[sourceSha];
-    if (cached && cached.sourceSha256 === sourceSha256 && cached.sourcePath === sourcePath &&
-        cached.sourceUrl === image.fullResolutionUrl && cached.workId === image.work_id) {
-      let cachedBytes;
-      try {
-        const bytes = await readFile(join(directory, `${sourceSha}.webp`));
-        if (sha256(bytes) === cached.sha256 && bytes.length === cached.sizeBytes) {
-          cachedBytes = bytes;
-        }
-      } catch { /* Regenerate a missing or damaged small derivative. */ }
-      if (cachedBytes) {
-        await writeFile(output, cachedBytes);
-        images[sourceSha] = cached;
-        continue;
-      }
-    }
     if (!preview && (!process.env.VISUAL_ANCHOR_SOURCE_DIRECTORY ||
         Math.max(Number(image.width_px), Number(image.height_px)) > 1024 || sourceSize > 512 * 1024)) {
       throw new Error("Provide the small published JPEG in VISUAL_ANCHOR_SOURCE_DIRECTORY, named <source SHA>.jpg");
@@ -99,6 +84,29 @@ try {
     const source = await readFile(inputPath);
     if (sha256(source) !== sourceSha256 || source.length !== sourceSize) {
       throw new Error("Published input identity mismatch");
+    }
+    const output = join(staging, `${sourceSha}.webp`);
+    const cached = reusable && previous.images?.[sourceSha];
+    const sameSourceUrl = cached && (cached.sourceUrl === image.fullResolutionUrl ||
+      (pinnedImagePath(cached.sourceUrl) && pinnedImagePath(cached.sourceUrl) === pinnedImagePath(image.fullResolutionUrl)));
+    const sameSourcePath = cached && (cached.sourcePath === sourcePath ||
+      (!preview && cached.sourcePath === cached.sourceUrl && sameSourceUrl));
+    if (cached && cached.sourceSha256 === sourceSha256 && (cached.sourceSize === undefined || cached.sourceSize === sourceSize) && sameSourcePath &&
+        sameSourceUrl && cached.workId === image.work_id) {
+      let cachedBytes;
+      try {
+        const bytes = await readFile(join(directory, `${sourceSha}.webp`));
+        if (sha256(bytes) === cached.sha256 && bytes.length === cached.sizeBytes && bytes.length <= 4096 &&
+            Number.isInteger(cached.width) && Number.isInteger(cached.height) &&
+            cached.width > 0 && cached.height > 0 && Math.max(cached.width, cached.height) <= 48) {
+          cachedBytes = bytes;
+        }
+      } catch { /* Regenerate a missing or damaged small derivative. */ }
+      if (cachedBytes) {
+        await writeFile(output, cachedBytes);
+        images[sourceSha] = { ...cached, sourcePath, sourceSize, sourceUrl: image.fullResolutionUrl };
+        continue;
+      }
     }
     const { data, info } = await sharp(source)
       .autoOrient()
@@ -111,6 +119,7 @@ try {
     images[sourceSha] = {
       sourcePath,
       sourceSha256,
+      sourceSize,
       sourceUrl: image.fullResolutionUrl,
       workId: image.work_id,
       sha256: sha256(data),

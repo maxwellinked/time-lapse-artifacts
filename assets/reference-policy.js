@@ -29,9 +29,23 @@ function hasDocumentedOrientation(image) {
     : width === encodedWidth && height === encodedHeight;
 }
 
+export function isOwnerConfirmedDisplayDerivative(image) {
+  return image?.source_binding_method === "owner_confirmed_display_derivative" &&
+    image.processing_method === "public_display_JPEG_bytes_unchanged" &&
+    image.processing_spec === "Physical_References/Photographs/PROCESSING.json" &&
+    image.inspection_resolution_class === "limited_resolution_full_drawing_reference" &&
+    image.image_role === "drawing_reference" && image.view_purpose === "primary_inspection" &&
+    Object.entries(DIRECT_RELATIONSHIP).every(([field, value]) => image[field] === value) &&
+    typeof image.evidence_reference_id === "string" && Boolean(image.evidence_reference_id.trim()) &&
+    positiveInteger(image.size_bytes) !== null && positiveInteger(image.size_bytes) <= 512 * 1024 &&
+    hasDocumentedOrientation(image) && positiveInteger(image.orientation) === 1 &&
+    Math.max(positiveInteger(image.width_px), positiveInteger(image.height_px)) <= 1024;
+}
+
 /**
  * Select only an unambiguous, directly owner-confirmed drawing photograph with
- * exact confirmed source bytes. Keep the source lookup unchanged as evidence.
+ * exact confirmed source bytes or an explicitly limited public display derivative.
+ * Keep those representations distinct and the source lookup unchanged as evidence.
  * EXIF describes the published photograph's display orientation; it does not
  * establish its alignment with a video or the recording's final drawing state.
  */
@@ -40,6 +54,7 @@ export function getDisplayReference(entry) {
       !Array.isArray(entry.additionalReferences) || !entry.mainImage) return null;
 
   const image = entry.mainImage;
+  if (image.processing_method === "public_display_JPEG_bytes_unchanged" && !isOwnerConfirmedDisplayDerivative(image)) return null;
   const images = [image, ...entry.additionalReferences];
   if (images.some((candidate) => !candidate || typeof candidate !== "object" || Array.isArray(candidate)) ||
       entry.referenceCount !== images.length || entry.primaryReferenceCount !== 1 ||
@@ -49,7 +64,7 @@ export function getDisplayReference(entry) {
   if (!/^tlaw-[a-f0-9]{16}$/.test(entry.workId ?? "") || image.work_id !== entry.workId ||
       image.image_role !== "drawing_reference" ||
       !PRIMARY_RESOLUTIONS.has(image.inspection_resolution_class) ||
-      image.source_binding_method !== "exact_confirmed_source_bytes" ||
+      (image.source_binding_method !== "exact_confirmed_source_bytes" && !isOwnerConfirmedDisplayDerivative(image)) ||
       !/^[a-f0-9]{64}$/.test(image.sha256 ?? "") ||
       Object.entries(DIRECT_RELATIONSHIP).some(([field, value]) => image[field] !== value) ||
       !hasDocumentedOrientation(image)) return null;
@@ -84,6 +99,9 @@ export function describeReferenceLink(entry, image, evidence, sourceRevision) {
   if (direct && image.source_binding_method === "inferred_same_capture_export_variant") {
     title = "Owner-identified drawing · inferred source variant";
     detail = "The historical photograph-to-work identification is owner-confirmed. This larger source is linked by an inferred same-capture connection, not direct owner confirmation of these source bytes.";
+  } else if (direct && image.source_binding_method === "owner_confirmed_display_derivative") {
+    title = "Owner-confirmed drawing · public display derivative";
+    detail = "Published display JPEG copied unchanged from its receipt-bound public bytes. This is a limited derivative; original source bytes are not represented as this file.";
   } else if (direct && image.source_binding_method === "exact_confirmed_source_bytes") {
     title = "Owner-confirmed photograph";
     detail = "Direct owner identification with an exact confirmed source binding.";

@@ -51,7 +51,7 @@ RELATIONSHIP_FIELDS = ("relationship_status", "evidence_class", "authority_class
 DIRECT_RELATIONSHIP = ("owner_confirmed", "direct_owner_confirmed", "owner_direct", "direct_confirmation")
 DERIVED_RELATIONSHIP = ("proposed", "deterministic_transitive_bridge", "derived_from_owner_confirmed_edges", "transitive_closure")
 SOURCE_BINDINGS_BY_RELATIONSHIP = {
-    DIRECT_RELATIONSHIP: {"exact_confirmed_source_bytes", "inferred_same_capture_export_variant"},
+    DIRECT_RELATIONSHIP: {"exact_confirmed_source_bytes", "inferred_same_capture_export_variant", "owner_confirmed_display_derivative"},
     DERIVED_RELATIONSHIP: {"exact_historical_reference_bytes", "provenance_bound_review_derivative"},
 }
 PROPOSED_LABEL = "Linked through recording and registered work (proposed relationship)."
@@ -94,6 +94,8 @@ def visible_reference_role(photo: dict[str, str]) -> str:
     if tuple(photo[name] for name in RELATIONSHIP_FIELDS) == DERIVED_RELATIONSHIP:
         source = EXACT_HISTORICAL_LABEL if photo["source_binding_method"] == "exact_historical_reference_bytes" else REVIEW_DERIVATIVE_LABEL
         return f"{role}. {PROPOSED_LABEL} {source}"
+    if photo["source_binding_method"] == "owner_confirmed_display_derivative":
+        return f"{role}. Owner-confirmed drawing; hash-bound public display JPEG derivative."
     return role
 
 
@@ -171,7 +173,7 @@ def build_rows(inputs: dict[str, bytes], revision: str) -> list[dict[str, str | 
                 "Unknown/inconsistent photograph purpose or resolution")
         require(photo["source_binding_method"] in SOURCE_BINDINGS_BY_RELATIONSHIP[relationship],
                 "Photograph source binding conflicts with relationship tuple")
-        require(photo["processing_method"] in {"jpeg_metadata_only_codestream_unchanged", "embedded_primary_JPEG_codestream_and_ICC_preserved"},
+        require(photo["processing_method"] in {"jpeg_metadata_only_codestream_unchanged", "embedded_primary_JPEG_codestream_and_ICC_preserved", "public_display_JPEG_bytes_unchanged"},
                 "Unknown photograph processing method")
         if photo["source_binding_method"] == "provenance_bound_review_derivative":
             require(resolution != "native_full_resolution_inspection", "Review JPEG cannot establish native original resolution")
@@ -184,6 +186,16 @@ def build_rows(inputs: dict[str, bytes], revision: str) -> list[dict[str, str | 
         encoded = (photo["encoded_width_px"], photo["encoded_height_px"])
         require((photo["width_px"], photo["height_px"]) == (encoded[::-1] if orientation >= 5 else encoded),
                 "Photograph display dimensions conflict with orientation")
+        if photo["source_binding_method"] == "owner_confirmed_display_derivative":
+            require(purpose == "primary_inspection" and resolution == "limited_resolution_full_drawing_reference",
+                    "Public display derivative must remain a limited primary representation")
+            require(photo["processing_method"] == "public_display_JPEG_bytes_unchanged" and photo["evidence_reference_id"].strip(),
+                    "Public display derivative needs its receipt identifier and unchanged-public-JPEG method")
+            require(orientation == 1 and max(int(photo["width_px"]), int(photo["height_px"])) <= 1024
+                    and int(photo["size_bytes"]) <= 512 * 1024, "Public display derivative exceeds its normalized display limits")
+        if photo["processing_method"] == "public_display_JPEG_bytes_unchanged":
+            require(photo["source_binding_method"] == "owner_confirmed_display_derivative",
+                    "Public display JPEG must not assert original-source fidelity")
         by_work.setdefault(wid, []).append(photo)
     result = []
     for record, media_path in ordered:

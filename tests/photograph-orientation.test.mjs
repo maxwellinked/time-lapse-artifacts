@@ -17,6 +17,6 @@ test("only the four exact owner-identified photographs receive an additional clo
     assert.equal(getPhotographDisplayRotation({ ...image, work_id: "tlaw-0000000000000000" }), 0);
   }
   for (const image of [null, {}, { work_id: "toString", sha256: "other" }]) assert.equal(getPhotographDisplayRotation(image), 0);
-  assert.equal(photographs.size - approved.length, 74);
+  assert.equal(photographs.size - approved.length, 76);
   assert.equal(JSON.stringify(lookup), before);
 });

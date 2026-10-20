@@ -130,11 +130,16 @@ Sharp 0.35.5 with its bundled libvips 8.18.7 and run
 inputs. For a small source without a display JPEG, supply the published JPEG,
 named `<source SHA>.jpg`, in `VISUAL_ANCHOR_SOURCE_DIRECTORY`. Input hashes are
 checked, existing output bytes are cached, and no network access is used.
+Cache reuse also verifies the current local input hash and byte size. Supply the
+small published JPEG even for a cache-only build when no display preview exists.
 All three images and their manifest are staged together before replacing the
 published directory; a failed build preserves the previous complete set.
 
 The gallery shows only unambiguous primary drawing photographs with a direct
-owner-confirmed identification and exact confirmed source bytes. The same rule
+owner-confirmed identification and either exact confirmed source bytes or an
+explicitly limited, receipt-bound public display JPEG. Public display derivatives
+must retain their distinct source class, normalized orientation, 1024-pixel and
+512-KiB limits, and unchanged-public-JPEG processing method. The same rule
 governs the photograph filter, recording dialogs, and full-resolution links.
 Proposed/transitive links, inferred export variants, supplemental-only images,
 and unresolved selections are withheld from primary display and the confirmed
@@ -157,6 +162,14 @@ full-resolution link still points to the exact
 revision-pinned photograph. Source roles, proposed relationships, and selection
 ambiguities retain their existing meanings; the inline image is labeled as a
 display-sized preview and is not fine-detail evidence.
+
+For `owner_confirmed_display_derivative`, the published-image link opens the
+limited public JPEG itself. It does not expose or claim the original photograph
+bytes. The pinned source manifest retains the review identifier, public-image
+hash, processing specification and limited-resolution class; its confirmation
+receipt keeps original-source hashes separate from public display hashes.
+The [M002/M055 public confirmation receipt](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/bfa25fb932b8103e83e8c8e96c79b5e99f4c197d/Physical_References/Photographs/Confirmations/2026-10-20-public-display-pilot.json)
+binds these two limited JPEGs to their existing works and eight recording IDs.
 
 The pinned photograph layer has no separate display-sized set for oversized
 selected images; other photographs of a work are not interchangeable with its

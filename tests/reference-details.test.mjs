@@ -53,7 +53,7 @@ test("owner-approved rotation follows the selected photograph without leaking to
 
 test("qualified links restore access while the strict population and source evidence stay unchanged", async () => {
   const before = JSON.stringify(lookup);
-  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 624);
+  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 632);
   for (const [id, title] of [
     ["tla-f0885e72d6cf24d8", /inferred source variant/],
     ["tla-d9c55c2215a49da7", /Supported indirect reference/],
@@ -76,6 +76,41 @@ test("qualified links restore access while the strict population and source evid
   assert.equal(JSON.stringify(lookup), before);
 });
 
+test("a public display derivative loads directly with a limited-source label and a published-image link", async () => {
+  const fixture = structuredClone(lookup), id = "tla-b3e2b99b4ba1030e";
+  Object.assign(fixture.records[id].mainImage, {
+    source_binding_method: "owner_confirmed_display_derivative", processing_method: "public_display_JPEG_bytes_unchanged",
+    inspection_resolution_class: "limited_resolution_full_drawing_reference", evidence_reference_id: "M002",
+    width_px: "768", height_px: "1024", encoded_width_px: "768", encoded_height_px: "1024",
+    size_bytes: "417210", orientation: "1",
+  });
+  const ui = renderer(evidence, async () => fixture); await ui.show(id);
+  assert.equal(ui.elements.referenceStage.querySelector("img").src, fixture.records[id].mainImage.fullResolutionUrl);
+  assert.match(ui.elements.referenceRepresentation.textContent, /public display JPEG; limited derivative, not original source bytes/);
+  assert.match(ui.elements.referenceFull.textContent, /published display photograph/);
+  await ui.show("tla-f0885e72d6cf24d8");
+  assert.match(ui.elements.referenceFull.textContent, /full-resolution photograph/);
+});
+
+test("both published pilot photographs render from their exact pinned public JPEGs", async () => {
+  const ui = renderer();
+  for (const [id, review, hash] of [
+    ["tla-81af436a01eb6990", "M002", "8721989cc5ce24bfda1b936dd9a57d68cabc4e2c8dc44d4bad4290f7517b20b4"],
+    ["tla-f667e7cf1e5da54e", "M055", "40a44df38b84ac625a2fdae8b3ffa5759da1fa909087e8c40867a377a7f940f5"],
+  ]) {
+    const image = lookup.records[id].mainImage;
+    assert.equal(image.sha256, hash); assert.equal(image.evidence_reference_id, review);
+    await ui.show(id);
+    const displayed = ui.elements.referenceStage.querySelector("img");
+    assert.equal(displayed.src, image.fullResolutionUrl);
+    assert.ok(displayed.src.includes(`/resolve/${lookup.sourceRevision}/`));
+    assert.equal(displayed.classList.has("owner-rotation-clockwise"), false);
+    assert.match(ui.elements.referenceRole.textContent, /limited resolution/);
+    assert.match(ui.elements.referenceRepresentation.textContent, /public display JPEG/);
+    assert.match(ui.elements.referenceFull.textContent, /published display photograph/);
+  }
+});
+
 test("unresolved candidates get equal qualified links without a chosen primary", async () => {
   const ui = renderer(); await ui.show("tla-f27d620979e140d9");
   assert.equal(links(ui).length, 2);
@@ -85,7 +120,7 @@ test("unresolved candidates get equal qualified links without a chosen primary",
 });
 
 test("missing photographs are distinguished from an unresolved work identity", async () => {
-  const ui = renderer(); await ui.show("tla-f667e7cf1e5da54e");
+  const ui = renderer(); await ui.show("tla-7500b249133719dc");
   assert.equal(ui.elements.referenceRole.textContent, "No published photograph");
   assert.match(ui.elements.referenceStatus.textContent, /established work link/);
   assert.equal(ui.elements.referenceStage.hidden, true);
@@ -118,7 +153,7 @@ test("navigation clears prior links and does not leak a prior record's evidence"
   await ui.show("tla-d9c55c2215a49da7");
   assert.equal(ui.elements.referenceStage.hidden, true);
   assert.equal(ui.elements.referenceStage.children.length, 0);
-  await ui.show("tla-f667e7cf1e5da54e");
+  await ui.show("tla-7500b249133719dc");
   assert.equal(links(ui).length, 0);
   assert.equal(ui.elements.referenceDetails.hidden, true);
   assert.equal(ui.elements.referenceFull.href, undefined);
@@ -128,7 +163,7 @@ test("a delayed lookup from a previous record cannot overwrite the current dialo
   let finishFirst, calls = 0;
   const ui = renderer(evidence, () => ++calls === 1 ? new Promise((resolve) => { finishFirst = resolve; }) : Promise.resolve(lookup));
   const first = ui.show("tla-d9c55c2215a49da7");
-  await ui.show("tla-f667e7cf1e5da54e");
+  await ui.show("tla-7500b249133719dc");
   finishFirst(lookup); await first;
   assert.equal(ui.elements.referenceRole.textContent, "No published photograph");
   assert.equal(links(ui).length, 0);

@@ -3,7 +3,7 @@ import { createHash, webcrypto } from "node:crypto";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
-import { describeReferenceLink } from "../assets/reference-policy.js";
+import { describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "../assets/reference-policy.js";
 
 const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
 const source = app.slice(app.indexOf("async function loadReferenceEvidence("), app.indexOf("function clearReference("));
@@ -19,6 +19,7 @@ function loaders(lookupBytes = raw, crypto = webcrypto) {
     REFERENCE_URL: "data/physical-references.json", state: { sourceRevision: lookup.sourceRevision,
       records: Object.keys(lookup.records).map((recordId) => ({ recordId })) },
     AbortController, AbortSignal, TextDecoder, Uint8Array,
+    isOwnerConfirmedDisplayDerivative,
     window: { setTimeout, clearTimeout, crypto },
     fetch: async (url) => {
       if (url === "data/physical-references.json") return new Response(lookupBytes);
@@ -63,6 +64,26 @@ test("an already cached proof is rechecked against every requested lookup identi
   assert.ok(await api.loadReferenceEvidence(evidence.lookupSha256));
   assert.equal(await api.loadReferenceEvidence("0".repeat(64)), null);
   assert.equal(api.proofLoads(), 1);
+});
+
+test("lookup loading accepts limited public display derivatives but rejects stronger or unbound claims", async () => {
+  const changed = structuredClone(lookup);
+  const entry = Object.values(changed.records).find((entry) => entry.mainImage?.source_binding_method === "exact_confirmed_source_bytes");
+  Object.assign(entry.mainImage, {
+    source_binding_method: "owner_confirmed_display_derivative", processing_method: "public_display_JPEG_bytes_unchanged",
+    inspection_resolution_class: "limited_resolution_full_drawing_reference", evidence_reference_id: "M002",
+    width_px: "768", height_px: "1024", encoded_width_px: "768", encoded_height_px: "1024",
+    size_bytes: "417210", orientation: "1",
+  });
+  await loaders(JSON.stringify(changed)).loadReferenceLookup();
+  for (const [field, value] of [["inspection_resolution_class", "native_full_resolution_inspection"],
+    ["size_bytes", "524289"], ["evidence_reference_id", ""], ["processing_method", "jpeg_metadata_only_codestream_unchanged"],
+    ["source_binding_method", "exact_confirmed_source_bytes"]]) {
+    const bad = structuredClone(changed);
+    const badEntry = Object.values(bad.records).find((candidate) => candidate.workId === entry.workId);
+    badEntry.mainImage[field] = value;
+    await assert.rejects(loaders(JSON.stringify(bad)).loadReferenceLookup(), /Invalid reference/, field);
+  }
 });
 
 test("unavailable hashing preserves browsing but cannot establish supported evidence", async () => {

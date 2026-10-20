@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "a849eb13c7af60d8b5ac0d7d16a4cd8661f0405d",
-  "lookupSha256": "156931a7894be0be93116670cd1bf64990246a39fa63cef8fcdb0568fdfddfe4",
+  "sourceRevision": "bfa25fb932b8103e83e8c8e96c79b5e99f4c197d",
+  "lookupSha256": "d2136d00b0a8515113fcc020144dbd9d460274aacb24b5f97d36e96ce395f03c",
   "sourceInputs": {
     "Work_Identity/works.csv": {
       "sha256": "e593abc32a969f48a39a876e88a545794ec8a3c094b30d68fd645a2b6938602d",
@@ -20,8 +20,8 @@
       "bytes": 346794
     },
     "Physical_References/Photographs/PROCESSING.json": {
-      "sha256": "773c977bb72c76142acc19e6ea3fbf4b04d795c7a6c85439f5adac7b451c7820",
-      "bytes": 391937
+      "sha256": "3d458504574be011a711086302dc0923268289ac228563d89000e8106c410f10",
+      "bytes": 392554
     }
   },
   "images": {

@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: 22
       - run: node --test tests/*.test.mjs
+      - run: python3 -B tools/test-reference-lookup.py
       - run: node tools/validate.mjs
       - name: Validate committed preview pack
         if: github.event_name != 'push'

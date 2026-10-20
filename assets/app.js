@@ -1,5 +1,5 @@
 import { loadRecords, RecordsDataError } from "./data-loader.js";
-import { getDisplayReference, referenceExclusion, describeReferenceLink } from "./reference-policy.js?v=20261017-qualified-reference-links-v2";
+import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
   deriveRecordingSequences,
@@ -488,6 +488,7 @@ function referenceRole(image) {
 function referencePresentation(image, additional = false) {
   const sources = {
     exact_confirmed_source_bytes: "Source representation: exact confirmed source bytes.",
+    owner_confirmed_display_derivative: "Source representation: owner-confirmed public display JPEG; limited derivative, not original source bytes.",
     inferred_same_capture_export_variant: additional
       ? "Source representation: inferred same capture export variant."
       : "Source representation: inferred same-capture export variant.",
@@ -553,7 +554,7 @@ async function loadReferenceLookup() {
             const relationship = [image.relationship_status, image.evidence_class,
               image.authority_class, image.derivation_method].join("|");
             const sourceBindings = relationship === "owner_confirmed|direct_owner_confirmed|owner_direct|direct_confirmation"
-              ? ["exact_confirmed_source_bytes", "inferred_same_capture_export_variant"]
+              ? ["exact_confirmed_source_bytes", "inferred_same_capture_export_variant", "owner_confirmed_display_derivative"]
               : relationship === "proposed|deterministic_transitive_bridge|derived_from_owner_confirmed_edges|transitive_closure"
                 ? ["exact_historical_reference_bytes", "provenance_bound_review_derivative"] : [];
             const validRole = image.view_purpose === "primary_inspection"
@@ -562,12 +563,15 @@ async function loadReferenceLookup() {
             const validReview = image.source_binding_method !== "provenance_bound_review_derivative" ||
               (image.inspection_resolution_class !== "native_full_resolution_inspection" &&
                 image.processing_method === "jpeg_metadata_only_codestream_unchanged");
+            const validDisplayDerivative = image.source_binding_method !== "owner_confirmed_display_derivative" ||
+              isOwnerConfirmedDisplayDerivative(image);
             if (image.work_id !== entry.workId || image.image_role !== "drawing_reference" ||
                 !/^[a-f0-9]{64}$/.test(image.sha256) ||
                 !image.fullResolutionUrl?.startsWith(prefix + entry.workId + "/") ||
-                !validRole || !validReview || !sourceBindings.includes(image.source_binding_method) ||
+                !validRole || !validReview || !validDisplayDerivative || !sourceBindings.includes(image.source_binding_method) ||
                 image.processing_spec !== "Physical_References/Photographs/PROCESSING.json" ||
-                !["jpeg_metadata_only_codestream_unchanged", "embedded_primary_JPEG_codestream_and_ICC_preserved"].includes(image.processing_method)) {
+                !(image.processing_method === "public_display_JPEG_bytes_unchanged" ? isOwnerConfirmedDisplayDerivative(image)
+                  : ["jpeg_metadata_only_codestream_unchanged", "embedded_primary_JPEG_codestream_and_ICC_preserved"].includes(image.processing_method))) {
               throw new Error("Invalid reference relationship or source URL");
             }
           }
@@ -623,6 +627,8 @@ async function renderReference(record) {
         Number(image.size_bytes) <= 512 * 1024;
       elements.referenceRole.textContent = referenceRole(image);
       elements.referenceFull.href = image.fullResolutionUrl;
+      elements.referenceFull.textContent = image.source_binding_method === "owner_confirmed_display_derivative"
+        ? "Open published display photograph ↗" : "Open full-resolution photograph ↗";
       elements.referenceFull.hidden = false;
       elements.referenceRepresentation.textContent = `${useSource ? "" : "Display-sized preview. "}${referencePresentation(image)}`;
       elements.referenceRepresentation.hidden = false;
@@ -640,7 +646,7 @@ async function renderReference(record) {
         photograph.remove();
         elements.referenceStage.hidden = true;
         elements.referenceStatus.hidden = false;
-        elements.referenceStatus.textContent = "The photograph could not load. Try the full-resolution link.";
+        elements.referenceStatus.textContent = "The photograph could not load. Try its published photograph link.";
       }, { once: true });
       elements.referenceStatus.textContent = "Loading photograph…";
       elements.referenceStage.append(photograph);

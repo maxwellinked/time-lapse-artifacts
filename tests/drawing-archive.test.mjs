@@ -14,9 +14,9 @@ test("groups the committed snapshot once per work without changing source eviden
   const works = buildDrawingArchive(data, references, previews);
   assert.equal(works.length, 431);
   assert.equal(new Set(works.map((work) => work.workId)).size, 431);
-  assert.equal(works.filter((work) => work.photograph).length, 78);
+  assert.equal(works.filter((work) => work.photograph).length, 80);
   assert.equal(works.filter((work) => work.status === "reference_review").length, 290);
-  assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 63);
+  assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 61);
   assert.deepEqual(works.flatMap((work) => work.records.map((record) => record.recordId)).sort(),
     data.records.map((record) => record.recordId).sort());
   assert.equal(JSON.stringify([data, references, previews]), before);
@@ -104,7 +104,7 @@ test("work evidence fails closed for stale bytes, revision or unavailable hashin
     const proposed = works.flatMap((work) => work.referenceLinks).filter((r) => r.photo.relationship_status === "proposed");
     assert.ok(proposed.length > 0);
     assert.ok(proposed.every((r) => !r.description.supportedIndirect && /support not verified/.test(r.description.title)));
-    assert.equal(works.filter((work) => work.photograph).length, 78);
+    assert.equal(works.filter((work) => work.photograph).length, 80);
   }
 });
 

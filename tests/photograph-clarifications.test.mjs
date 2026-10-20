@@ -49,12 +49,12 @@ test("selection ambiguity, missing photographs and supplemental roles remain dis
   const before = JSON.stringify({ payload, lookup, evidence });
   assert.ok(reasons("tla-f27d620979e140d9").includes("primary_selection"));
   assert.equal(lookup.records["tla-f27d620979e140d9"].mainImage, null);
-  assert.deepEqual(reasons("tla-f667e7cf1e5da54e"), ["missing_photo"]);
+  assert.deepEqual(reasons("tla-7500b249133719dc"), ["missing_photo"]);
   assert.deepEqual(reasons("tla-4db13002f09ad61e"), ["supplemental_only"]);
   assert.deepEqual(clarificationReasons({ workId: null }, evidence, payload.sourceRevision), ["missing_work"]);
   collectClarifications(payload, lookup, evidence);
   assert.equal(JSON.stringify({ payload, lookup, evidence }), before);
-  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 624);
+  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 632);
 });
 
 test("the list rejects mixed snapshots and escapes archive text in recording links", () => {

@@ -19,7 +19,7 @@ For the current source schema, the website requires all of the following:
 | One resolved primary photograph | `selectionStatus = primary_inspection`, exactly one primary candidate, and that candidate is `mainImage` |
 | Drawing image | `image_role = drawing_reference`, `view_purpose = primary_inspection` |
 | Owner identification | `owner_confirmed / direct_owner_confirmed / owner_direct / direct_confirmation` relationship tuple |
-| Exact identified photograph | `source_binding_method = exact_confirmed_source_bytes` |
+| Identified source representation | `exact_confirmed_source_bytes`, or `owner_confirmed_display_derivative` with the limited public-display contract below |
 | Documented inspection representation | Native or limited full-drawing inspection class; never supplemental-only |
 | Consistent orientation metadata | Valid EXIF orientation and display dimensions consistent with encoded dimensions |
 
@@ -33,11 +33,27 @@ existing Reference details area. Recording playback remains available.
 
 The original source lookup and photograph bytes are preserved as provenance.
 Their presence in the archive does not mean they qualify as displayed pairs.
-In `data/physical-references.json` at pinned Hugging Face revision
+
+A public display derivative requires the same direct owner-identification tuple,
+`limited_resolution_full_drawing_reference`, `public_display_JPEG_bytes_unchanged`,
+an explicit review/receipt identifier, normalized orientation 1, a long edge at
+most 1024 pixels, and at most 512 KiB. The public JPEG hash identifies the limited
+derivative. Original source hashes and bytes remain separate in the source
+confirmation receipt. The site labels this class as a public display derivative
+and opens the published JPEG without describing it as the original or a
+full-resolution source. This acceptance does not promote inferred exports,
+historical references, or unconfirmed review candidates.
+
+In the historical `data/physical-references.json` snapshot at Hugging Face revision
 `a849eb13c7af60d8b5ac0d7d16a4cd8661f0405d`, the policy retains 624 recording
 pairings using 78 unique photographs. Of 963 pairings with a selected
 `mainImage`, 339 are withheld from primary display (963 minus 624). The two
 unresolved selections have no `mainImage` and are outside that total.
+
+The two-work public-display pilot adds M002 and M055: eight recording pairings
+using two limited JPEGs. The refreshed lookup therefore displays 632 pairings
+and 80 unique photographs, preserving all 624 exact-source pairings and 78
+previously displayed photographs. No other reference class is promoted.
 
 ## Qualified documentation access
 

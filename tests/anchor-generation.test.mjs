@@ -4,7 +4,7 @@ import { createHash } from "node:crypto";
 import { chmod, copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import test from "node:test";
 
@@ -116,7 +116,7 @@ fs.rename = async (from, to) => {
 };
 syncBuiltinESMExports();
 `);
-  const args = ["--import", hook, join(root, script)];
+  const args = ["--import", pathToFileURL(hook).href, join(root, script)];
   if (kind === "record") args.push("--ffmpeg", join(root, "ffmpeg-test.cjs"));
   const env = (extra) => ({ ...process.env, VISUAL_ANCHOR_SOURCE_DIRECTORY: "", ...extra });
   const run = async (extra = {}) => JSON.parse((await exec(process.execPath, args, { env: env(extra), timeout: 15000 })).stdout);
@@ -212,6 +212,51 @@ for (const kind of ["record", "visual"]) {
     // or consumed by the next build and fixture teardown removes it.
   });
 }
+
+test("visual images: revision-only source pins reuse exact bytes while other bindings still fail closed", async (t) => {
+  const f = await fixture(t, "visual");
+  const previewPath = join(f.root, "reference-previews/manifest.json"), previews = await json(previewPath);
+  await f.run();
+  const before = await f.snapshot();
+  const lookupPath = join(f.root, "data/physical-references.json"), lookup = await json(lookupPath);
+  const oldRevision = lookup.sourceRevision, revision = "0".repeat(40);
+  lookup.sourceRevision = revision;
+  for (const entry of Object.values(lookup.records)) {
+    for (const image of [entry.mainImage, ...entry.additionalReferences].filter(Boolean)) {
+      image.fullResolutionUrl = image.fullResolutionUrl.replace(`/resolve/${oldRevision}/`, `/resolve/${revision}/`);
+    }
+  }
+  previews.sourceRevision = revision;
+  for (const image of Object.values(previews.images)) {
+    image.sourceUrl = image.sourceUrl.replace(`/resolve/${oldRevision}/`, `/resolve/${revision}/`);
+  }
+  await putJson(lookupPath, lookup); await putJson(previewPath, previews);
+  assert.equal((await f.run({ TEST_NO_ENCODING: "1" })).reused, 3);
+  for (const id of f.ids) assert.equal((await f.snapshot())[`${id}.webp`], before[`${id}.webp`]);
+  const manifestPath = join(f.output, "manifest.json"), current = await json(manifestPath);
+  assert.equal(current.sourceRevision, revision);
+  assert.ok(Object.values(current.images).every((image) => image.sourceUrl.includes(`/resolve/${revision}/`)));
+  for (const change of [
+    (value) => { value.images[f.ids[0]].sourceSha256 = "0".repeat(64); },
+    (value) => { value.images[f.ids[0]].workId = "tlaw-0000000000000000"; },
+    (value) => { value.images[f.ids[0]].sourceSize = 1; },
+    (value) => { value.images[f.ids[0]].width = 49; },
+    (value) => { value.images[f.ids[0]].sourceUrl = value.images[f.ids[0]].sourceUrl.replace(/[^/]+$/, "another-file.jpg"); },
+    (value) => { value.processing.previousSettings = true; },
+  ]) {
+    const changed = structuredClone(current); change(changed); await putJson(manifestPath, changed);
+    await assert.rejects(f.run({ TEST_NO_ENCODING: "1" }), /Unexpected encoding/);
+  }
+  await putJson(manifestPath, current);
+  const inputPath = join(f.root, current.images[f.ids[0]].sourcePath);
+  const changedInput = Buffer.concat([await readFile(inputPath), Buffer.from([0])]);
+  await writeFile(inputPath, changedInput);
+  previews.images[f.ids[0]].sha256 = hash(changedInput);
+  previews.images[f.ids[0]].sizeBytes = changedInput.length;
+  await putJson(previewPath, previews);
+  await assert.rejects(f.run({ TEST_NO_ENCODING: "1" }), /Unexpected encoding/);
+  await f.clean();
+});
 
 test("recording refresh: new revision/count reuses unchanged images and stages both asset sets", async (t) => {
   const f = await fixture(t, "record");

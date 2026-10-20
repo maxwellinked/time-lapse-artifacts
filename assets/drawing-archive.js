@@ -1,5 +1,5 @@
 import { loadRecords } from "./data-loader.js";
-import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js";
+import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 
 const summary = document.querySelector("#archive-summary");
@@ -38,6 +38,7 @@ function photographLinks(work) {
   const list = node("ul", undefined, "photograph-links");
   const representations = {
     exact_confirmed_source_bytes: "Exact confirmed source bytes",
+    owner_confirmed_display_derivative: "Owner-confirmed public display JPEG; limited derivative, not original source bytes",
     inferred_same_capture_export_variant: "Inferred same-capture export variant",
     exact_historical_reference_bytes: "Exact historically bound reference bytes",
     provenance_bound_review_derivative: "Review JPEG; original unavailable; limited representation",
