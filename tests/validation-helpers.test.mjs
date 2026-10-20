@@ -45,6 +45,40 @@ test("required source links compare whole href values, preserving canonical anch
   assert.equal(hasRequiredSourceLinks(`<a\u00a0href="${dataset}">Not an anchor</a><a href="${license}">License</a>`), false);
 });
 
+test("required source links exclude anchors in template and select contexts", () => {
+  const anchors = `<a href="${dataset}">Dataset</a><a href="${license}">License</a>`;
+  for (const element of ["template", "select"]) {
+    assert.equal(hasRequiredSourceLinks(`<${element}>${anchors}</${element}>`), false, element);
+    assert.equal(hasRequiredSourceLinks(`<${element}>${anchors}`), false, `unclosed ${element}`);
+    assert.equal(hasRequiredSourceLinks(`<${element.toUpperCase()}>${anchors}</${element.toUpperCase()}>`), false, `uppercase ${element}`);
+    assert.equal(hasRequiredSourceLinks(`<${element}/>${anchors}`), false, `self-closing ${element}`);
+    assert.ok(hasRequiredSourceLinks(`<${element}>Ignored</${element}>${anchors}`), `after ${element}`);
+    for (const expected of [dataset, license]) {
+      const other = expected === dataset ? license : dataset;
+      assert.equal(hasRequiredSourceLinks(`<${element}><a href="${expected}">Hidden</a></${element}><a href="${other}">Visible</a>`), false, `${expected} in ${element}`);
+    }
+  }
+  assert.equal(hasRequiredSourceLinks(`<template><template></template>${anchors}</template>`), false, "nested templates");
+  assert.equal(hasRequiredSourceLinks(`<select><template></select></template>${anchors}</select>`), false, "crossed template and select closes");
+  assert.equal(hasRequiredSourceLinks(`<template><script>"</template>"</script>${anchors}</template>`), false, "raw-text closing tag");
+  assert.equal(hasRequiredSourceLinks(`<template><!-- </template> -->${anchors}</template>`), false, "comment closing tag");
+  assert.equal(hasRequiredSourceLinks(`<template><span title="</template>"></span>${anchors}</template>`), false, "attribute closing tag");
+  assert.ok(hasRequiredSourceLinks(`<template><template>Ignored</template></template>${anchors}`));
+  assert.ok(hasRequiredSourceLinks(`<template><select>Ignored</select></template>${anchors}`));
+});
+
+test("required source links retain ordinary anchors beside unsupported rendering contexts", () => {
+  const anchors = `<a href="${dataset}">Dataset</a><a href="${license}">License</a>`;
+  for (const [context, markup] of [
+    ["browser-repaired select", `<select><input>${anchors}</select>`],
+    ["foreign template", `<svg><template>${anchors}</template></svg>`],
+    ["declarative shadow root", `<div><template shadowrootmode="open">${anchors}</template></div>`],
+  ]) {
+    assert.equal(hasRequiredSourceLinks(markup), false, context);
+    assert.ok(hasRequiredSourceLinks(`${markup}${anchors}`), `ordinary fallback after ${context}`);
+  }
+});
+
 test("validation HTTP preserves its seven resources and rejects filesystem paths and aliases", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "tla-validation-test-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
