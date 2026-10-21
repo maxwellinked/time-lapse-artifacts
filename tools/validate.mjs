@@ -1,3 +1,4 @@
+import {validateSelectedFrontAssets} from "./validate-selected-fronts.mjs";
 import { createHash } from "node:crypto";
 import { readFileSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
@@ -9,6 +10,7 @@ import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
 import { createValidationServer, hasRequiredSourceLinks } from "./validation-helpers.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
+validateSelectedFrontAssets(root);
 const requiredFiles = [
   "index.html",
   "assets/style.css",
@@ -67,9 +69,10 @@ for (const [hash, proof] of Object.entries(linkEvidence.images)) {
   }
 }
 const displayedReferences = Object.values(references.records).map(getDisplayReference).filter(Boolean);
-if (!app.includes('getDisplayReference(photoLookup.records[record.recordId])') ||
+if (!app.includes('getSelectedFrontForRecord(photoLookup, record.recordId)') ||
+    !app.includes('getSelectedFrontForRecord(await loadSelectedFrontLookup(), record.recordId)') ||
     !app.includes('const image = getDisplayReference(entry)')) {
-  throw new Error("Drawing-reference filters and dialogs must share the owner-confirmed selection policy");
+  throw new Error("Drawing-reference filters and dialogs must share the hash-bound selected-front map");
 }
 const photoPreviews = JSON.parse(readFileSync(join(root, "reference-previews/manifest.json"), "utf8"));
 if (references.sourceRevision !== payload.sourceRevision || photoPreviews.sourceRevision !== payload.sourceRevision ||

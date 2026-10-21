@@ -1,10 +1,25 @@
 # Drawing-reference policy
 
-This is the reference-display policy implemented by the GitHub website and a
-template for applying the same acceptance rules to the Hugging Face dataset.
-It does not claim that the Hugging Face repository has been changed.
+The current gallery, recording dialog and photograph filter share the selected-front
+map projected into `data/selected-fronts.json`. It contains one owner-confirmed
+front per existing work ID. Its exact bytes are checked before use, and its work-link
+input hash must match the retained recording lookup. The image assets are verified
+against the selected output hashes; all are limited display JPEGs with normalized
+orientation. Four previously approved source rotations are baked into these pixels
+and are not applied again by the UI. Two corrected assignments replace the selected
+fronts only; historical evidence remains versioned.
 
-## Acceptance
+The 431 selected fronts join to 1,205 Standard recordings through the existing work
+links. This asserts drawing identity and the selected photographed view, not a
+recording endpoint, timing calibration, complete process, or original-file quality.
+Pre-Standard records receive no invented work or photograph joins.
+
+The source-lookup policy below remains the contract for retained historical
+reference records and their qualified links. Its old display counts do not count
+the new selected-front population; existing relationship classifications are not
+silently promoted or rewritten by the display adapter.
+
+## Historical source-lookup acceptance
 
 A displayed reference must identify the same drawing and depicted surface as
 the recording. Explicit owner identification is accepted as drawing evidence.
@@ -12,7 +27,7 @@ A shared work ID, visual resemblance, filename, or transitive relationship alone
 does not establish that identification. Any known contradiction, reverse-side
 view, uncertain surface, or conflicting selection excludes the pairing.
 
-For the current source schema, the website requires all of the following:
+For historical source rendering, the retained policy requires all of the following:
 
 | Requirement | Accepted source evidence |
 | --- | --- |
@@ -50,10 +65,10 @@ pairings using 78 unique photographs. Of 963 pairings with a selected
 `mainImage`, 339 are withheld from primary display (963 minus 624). The two
 unresolved selections have no `mainImage` and are outside that total.
 
-The two-work public-display pilot adds M002 and M055: eight recording pairings
-using two limited JPEGs. The refreshed lookup therefore displays 632 pairings
-and 80 unique photographs, preserving all 624 exact-source pairings and 78
-previously displayed photographs. No other reference class is promoted.
+The historical two-work public-display pilot added M002 and M055: eight recording
+pairings using two limited JPEGs. That source-lookup snapshot qualified 632
+pairings and 80 unique photographs. These are historical eligibility counts,
+not the current selected-front coverage; no historical reference class is promoted.
 
 ## Qualified documentation access
 
@@ -101,11 +116,12 @@ for these four photographs and stated that all other orientations were correct:
 | 2026-08-05 | `tlaw-3c632c55f324b287` | `383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be` |
 | 2026-07-08 | `tlaw-ed372076fbc9d7c6` | `f84ae9326d33cabca20f33bd5af6d2149389bd1c0876b36fbebb63365b2b5be2` |
 
-The website applies these corrections after EXIF in drawing cards and recording
-dialogs, fitting the entire rotated frame. The source photographs, committed
-preview bytes, manifests and original-file links retain their source orientation.
-The correction grants no new pairing eligibility or photograph-to-video alignment.
-Other photographs receive no additional rotation.
+Historical source-image rendering applies these corrections after EXIF. Current
+selected-front JPEGs already contain the approved corrections in their pixels;
+drawing cards and recording dialogs do not add the CSS rotation again. Historical
+source photographs, preview bytes, manifests and links retain their source
+orientation. The correction adds no photograph-to-video alignment claim; other
+photographs receive no additional rotation.
 
 Do not infer artistic upright orientation from portrait/landscape dimensions,
 rotate a photograph to fit a video rectangle, or change archive source bytes
@@ -115,7 +131,7 @@ and preserves the documented source orientation; it does not certify a new
 frame-relative alignment. An alignment requiring an additional rotation or
 surface guess must remain withheld until explicitly reviewed.
 
-## Hugging Face implementation template
+## Historical Hugging Face implementation template
 
 1. Bind the recording ID and content identity, photograph SHA-256, and exact
    source revision before deciding eligibility. Re-evaluate when any identity

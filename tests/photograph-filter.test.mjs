@@ -8,6 +8,7 @@ import {
   sortRecordsForDisplay,
 } from "../assets/record-sequences.js";
 import { getDisplayReference } from "../assets/reference-policy.js";
+import { getSelectedFrontForRecord } from "../assets/selected-fronts.js";
 
 const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
 // Run the browser's actual filter functions without starting its DOM/media UI.
@@ -31,7 +32,11 @@ async function filter(records, lookup, values = { photograph: "with" }) {
   await runInNewContext(`${filterSource}\napplyFilters()`, {
     state, elements, PAGE_SIZE: 18, filterGeneration: 0,
     FormData: class { get(name) { return values[name] ?? ""; } },
-    loadReferenceLookup: async () => { lookupLoads += 1; return lookup; },
+    // Explicit resolver fixtures preserve the historical inclusion/exclusion cases.
+    // The production candidate's 1,205 joins are exercised by selected-fronts.test.mjs.
+    loadSelectedFrontLookup: async () => { lookupLoads += 1; return {byRecord: Object.fromEntries(
+      Object.entries(lookup.records).filter(([,entry]) => getDisplayReference(entry)).map(([id,entry]) => [id,entry.mainImage]))}; },
+    getSelectedFrontForRecord,
     getDisplayReference,
     sortRecordsForDisplay,
     renderRecords() {},
@@ -39,7 +44,7 @@ async function filter(records, lookup, values = { photograph: "with" }) {
   return { records: state.filtered, lookupLoads };
 }
 
-test("632 confirmed drawing pairings qualify; unresolved published candidates remain excluded", async () => {
+test("the filter respects an explicit 632-entry resolver fixture without modifying its historical evidence", async () => {
   const before = JSON.stringify(published);
   const result = await filter(payload.records, published);
   const ids = new Set(result.records.map((record) => record.recordId));

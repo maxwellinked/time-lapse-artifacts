@@ -1,3 +1,4 @@
+import { LEGACY_REFERENCE_SHA256 } from "../assets/selected-fronts.js";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, unlink, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -11,7 +12,11 @@ if (sharp.versions.sharp !== "0.34.5" || sharp.versions.vips !== "8.17.3") {
 }
 sharp.concurrency(1);
 const root = fileURLToPath(new URL("../", import.meta.url));
-const lookup = JSON.parse(await readFile(join(root, "data/physical-references.json"), "utf8"));
+const lookupBytes = await readFile(join(root, "data/physical-references.json"));
+if (createHash("sha256").update(lookupBytes).digest("hex") !== LEGACY_REFERENCE_SHA256) {
+  throw new Error("Selected-front integration retains historical previews. Changed evidence requires an explicit dependency review before pruning.");
+}
+const lookup = JSON.parse(lookupBytes);
 const records = JSON.parse(await readFile(join(root, "data/records.json"), "utf8"));
 if (lookup.sourceRevision !== records.sourceRevision) throw new Error("Reference snapshot mismatch");
 const directory = join(root, "reference-previews");

@@ -9,25 +9,39 @@ from the pinned Hugging Face source MP4s. Full playback remains user-initiated
 and streams from Hugging Face; the preview clips are presentation derivatives,
 not archive records or replacements for the source recordings.
 
+The archive documents recorded drawing processes and photographed drawing states. Their documented relationships support comparison while leaving intention, perceptual experience and unrecorded activity open to investigation.
+
 The gallery keeps strict, consecutive `Rec01` through `RecNN` filename runs in
 numbered order for viewing continuity. This presentation rule does not assert a
 shared work, session, or completion state.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
-The [drawing photograph view](drawings.html) groups the existing Standard
-recording lookup by its established work IDs. Each work appears once. It uses
-the same strict photograph policy as the recording browser and only displays
-images at most 1024 pixels on the long edge and 512 KiB. Larger sources require
-an existing verified display preview; unavailable previews never fall back to
-large originals. Other works remain searchable with their recording links.
-This is a presentation view, not a new work registry.
+The [drawing photograph view](drawings.html), recording dialog and photograph
+filter use one selected-front map: 431 registered drawings and 1,205 Standard
+recording joins. Each selected display is a bounded, normalized JPEG. The common
+map and embedded image table are hash-bound inputs; source photographs, display
+bytes and work identities remain distinct. Historical references retain their own
+evidence and qualifications under Reference details.
 
-An optional Hugging Face Parquet export embeds those same small images, with a
-null image for the other works. With Python `pyarrow` and `Pillow`, Git and Node:
-`python tools/build-drawing-parquet.py --root . --revision <exact-site-commit> --output drawing_photographs.parquet`.
-The exporter reads committed inputs, verifies every image hash and size, and
-writes a source/output hash receipt. It never reads private originals or uploads.
+Reproduce the display projection and exact JPEG assets from the validated common
+candidate (Python `pyarrow` and `Pillow` required):
+
+```console
+python tools/export-selected-fronts.py --candidate <candidate-directory> --destination . --assets
+```
+
+The candidate directory contains `selected_fronts.json` and its hash-bound
+`drawing_photographs.parquet`. The export verifies every cell before writing and
+omits private paths and confirmation objects from the public JSON projection.
+A changed projection requires an explicit update of the checked hash in
+`assets/selected-fronts.js`; it must not be accepted by weakening that check.
+Do not apply additional source rotation to these normalized display JPEGs.
+
+`tools/build-drawing-parquet.py` remains a historical export tool for older pinned
+site revisions. It rejects revisions containing the new selected-front map to
+prevent regeneration from the older primary-reference policy. Current derived
+views must use the common candidate. No export tool uploads files.
 
 ## Validation
 
@@ -135,35 +149,28 @@ small published JPEG even for a cache-only build when no display preview exists.
 All three images and their manifest are staged together before replacing the
 published directory; a failed build preserves the previous complete set.
 
-The gallery shows only unambiguous primary drawing photographs with a direct
-owner-confirmed identification and either exact confirmed source bytes or an
-explicitly limited, receipt-bound public display JPEG. Public display derivatives
-must retain their distinct source class, normalized orientation, 1024-pixel and
-512-KiB limits, and unchanged-public-JPEG processing method. The same rule
-governs the photograph filter, recording dialogs, and full-resolution links.
-Proposed/transitive links, inferred export variants, supplemental-only images,
-and unresolved selections are withheld from primary display and the confirmed
-filter. Qualified links remain accessible in Reference details with their source,
-authority and selection limits. Supported indirect links require checked public
-premises and a matching processing receipt; other proposals remain explicitly
-unverified here. The source lookup retains its original evidence.
+The retained historical source-reference renderer distinguishes directly
+owner-confirmed sources, limited receipt-bound JPEGs, inferred source variants,
+supplemental photographs and proposed relationships. Those classifications remain
+unchanged in the source lookup and qualified Reference details. They do not
+replace the common selected-front map used by the current gallery, recording
+dialogs and photograph filter. Supported indirect links still require checked
+public premises and a matching processing receipt; other proposals remain
+explicitly unverified here.
 
 Documented EXIF orientation is honored exactly once. No rotation, mirroring,
 front/back identification, or recording endpoint is inferred from dimensions,
 filenames, or a shared work ID. A direct owner identification is accepted as
 drawing evidence; the current metadata does not separately attest alignment
 relative to the video frame. See [the shared reference policy](REFERENCE_POLICY.md)
-for the GitHub rules and the template for a Hugging Face implementation.
+for current selected-front handling and the retained historical source rules.
 
-Recording dialogs reuse the selected photograph directly when its long edge is
-at most 1024 pixels and its file is at most 512 KiB. Larger photographs use a
-committed display JPEG alongside the existing motion preview. The explicit
-full-resolution link still points to the exact
-revision-pinned photograph. Source roles, proposed relationships, and selection
-ambiguities retain their existing meanings; the inline image is labeled as a
-display-sized preview and is not fine-detail evidence.
+Recording dialogs open the same bounded selected-display JPEG shown inline.
+Historical source-photograph links remain in Reference details with their own
+source and resolution limits; they are separate from the selected display.
+A small display JPEG is not evidence of original-file or fine-detail quality.
 
-For `owner_confirmed_display_derivative`, the published-image link opens the
+For the historical `owner_confirmed_display_derivative` source class, its qualified link opens the
 limited public JPEG itself. It does not expose or claim the original photograph
 bytes. The pinned source manifest retains the review identifier, public-image
 hash, processing specification and limited-resolution class; its confirmation
@@ -171,13 +178,15 @@ receipt keeps original-source hashes separate from public display hashes.
 The [M002/M055 public confirmation receipt](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/bfa25fb932b8103e83e8c8e96c79b5e99f4c197d/Physical_References/Photographs/Confirmations/2026-10-20-public-display-pilot.json)
 binds these two limited JPEGs to their existing works and eight recording IDs.
 
-The pinned photograph layer has no separate display-sized set for oversized
-selected images; other photographs of a work are not interchangeable with its
-selected main image. Dataset Viewer assets depend on successful row processing,
-so the site does not depend on them.
+Historical source previews retain their existing source bindings. Current selected
+fronts use the separately generated exact display assets. Other photographs of a
+work are not interchangeable with the selected front. The site does not depend
+on expiring Dataset Viewer image URLs.
 
-After refreshing `data/physical-references.json`, generate one preview per unique
-oversized selected source hash (no preview is selected for unresolved candidates):
+The historical preview generator accepts only the unchanged retained lookup. A
+lookup refresh requires an explicit dependency review and corresponding guard
+update before regeneration or pruning. For that retained input, generate one
+preview per oversized selected source hash:
 
 ```console
 npm install --no-save --package-lock=false sharp@0.34.5
