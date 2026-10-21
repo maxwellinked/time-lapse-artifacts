@@ -31,6 +31,13 @@ def build(root, revision, output):
     def git_file(path):
         return subprocess.check_output(["git", "-C", str(root), "show", f"{revision}:{path}"])
 
+    # A current selected-front projection must not be rebuilt from historical eligibility.
+    selected_map = subprocess.run(["git", "-C", str(root), "cat-file", "-e",
+                                   f"{revision}:data/selected-fronts.json"],
+                                  stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    if selected_map.returncode == 0:
+        raise ValueError("This revision uses the common selected-front map. Export from its canonical embedded table, not the historical source-lookup policy.")
+
     inputs = ("assets/drawing-archive-model.js", "assets/reference-policy.js",
               "data/records.json", "data/physical-references.json", "reference-previews/manifest.json")
     input_hashes = {}

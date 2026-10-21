@@ -30,6 +30,8 @@ function renderer(proof = evidence, loader = async () => lookup) {
   const render = runInNewContext(`${roleSource}\n${renderSource}\nrenderReference`, {
     elements, state, referenceGeneration: 0, getDisplayReference, referenceExclusion, describeReferenceLink,
     getPhotographDisplayRotation,
+    // Exercise retained historical source rendering; selected-front rendering has its own integration test.
+    loadSelectedFrontLookup: async () => null, getSelectedFrontForRecord: () => null,
     document: { createElement: (tag) => new Element(tag) }, loadReferenceLookup: loader,
     loadReferenceEvidence: async () => proof,
   });

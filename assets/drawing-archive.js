@@ -1,3 +1,4 @@
+import { loadSelectedFrontIndex, getSelectedFrontForWork } from "./selected-fronts.js?v=20261021-selected-fronts";
 import { loadRecords } from "./data-loader.js";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -64,8 +65,8 @@ function dates(work) {
 function render(works) {
   const query = search.value.trim().toLowerCase();
   const visible = works.filter((work) => `${work.workId} ${work.records.map((r) => `${r.recordId} ${r.filename}`).join(" ")}`.toLowerCase().includes(query));
-  const ready = visible.filter((work) => work.photograph);
-  const awaiting = visible.filter((work) => !work.photograph);
+  const ready = visible.filter((work) => work.selectedFront || work.photograph);
+  const awaiting = visible.filter((work) => !work.selectedFront && !work.photograph);
   gallery.replaceChildren();
   pending.replaceChildren();
   document.querySelector("#visible-summary").textContent = `${visible.length} drawing${visible.length === 1 ? "" : "s"} · ${ready.length} with confirmed photographs`;
@@ -82,13 +83,14 @@ function render(works) {
     image.alt = `Confirmed reference photograph for drawing ${work.workId}`;
     image.loading = "lazy";
     image.decoding = "async";
-    if (getPhotographDisplayRotation(work.photograph) === 90) image.classList.add("owner-rotation-clockwise");
+    if (!work.selectedFront && getPhotographDisplayRotation(work.photograph) === 90) image.classList.add("owner-rotation-clockwise");
     image.addEventListener("error", () => {
       link.replaceWith(node("p", "Photograph could not load. The recording and reference details remain available.", "image-error"));
     }, { once: true });
     image.src = work.displayUrl;
     link.append(image);
     const caption = node("div", undefined, "drawing-caption");
+    if (work.selectedFront) caption.append(node("p", "Owner-confirmed selected front · limited display JPEG. This photograph does not establish a recording endpoint.", "drawing-reference-note"));
     caption.append(node("p", `Documented finish: ${dates(work)}`, "drawing-date"), node("h3", work.workId), photographLinks(work), recordingLinks(work));
     card.append(link, caption);
     gallery.append(card);
@@ -112,8 +114,13 @@ try {
   ]);
   const references = JSON.parse(new TextDecoder().decode(referenceBytes));
   const proof = await verifiedDrawingEvidence(referenceBytes, evidence);
-  const works = buildDrawingArchive(recordData, references, previews, proof);
-  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.photograph).length} confirmed photographs`;
+  const selectedFronts = await loadSelectedFrontIndex(recordData, references);
+  const works = buildDrawingArchive(recordData, references, previews, proof).map((work) => {
+    const selectedFront = getSelectedFrontForWork(selectedFronts, work.workId);
+    if (!selectedFront) throw new Error("Selected front missing for registered drawing");
+    return { ...work, selectedFront, displayUrl: selectedFront.displayUrl, displaySha256: selectedFront.displaySha256 };
+  });
+  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.selectedFront || work.photograph).length} confirmed photographs`;
   const source = document.querySelector("#drawing-source");
   source.href = `https://huggingface.co/datasets/${recordData.sourceRepository}/tree/${recordData.sourceRevision}/Work_Identity`;
   source.textContent = `Source snapshot ${recordData.sourceRevision.slice(0, 8)}`;

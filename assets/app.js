@@ -1,3 +1,4 @@
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261021-selected-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -13,6 +14,7 @@ const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
 const REFERENCE_URL = "data/physical-references.json";
 let referenceLookupPromise;
+let selectedFrontLookupPromise;
 let referenceEvidencePromise;
 let referenceGeneration = 0;
 let filterGeneration = 0;
@@ -28,6 +30,7 @@ const state = {
   visibleCount: PAGE_SIZE,
   activeRecord: null,
   sourceRevision: null,
+  recordData: null,
 };
 
 const elements = {
@@ -361,7 +364,7 @@ async function applyFilters() {
     elements.showMore.disabled = true;
     elements.resultCount.textContent = "Loading photograph availability… Previous results remain below.";
     try {
-      photoLookup = await loadReferenceLookup();
+      photoLookup = await loadSelectedFrontLookup();
     } catch {
       if (generation !== filterGeneration) return;
       // Preserve browsing when the optional lookup is unavailable.
@@ -390,7 +393,7 @@ async function applyFilters() {
     return (
       (!query || searchable.includes(query)) &&
       (!year || record.date.startsWith(year)) &&
-      (!photoLookup || Boolean(getDisplayReference(photoLookup.records[record.recordId]))) &&
+      (!photoLookup || Boolean(getSelectedFrontForRecord(photoLookup, record.recordId))) &&
       recordMatches(record, "tool", String(formData.get("tool") ?? "")) &&
       recordMatches(record, "dimensions", String(formData.get("dimensions") ?? ""))
     );
@@ -595,6 +598,15 @@ async function loadReferenceLookup() {
   return referenceLookupPromise;
 }
 
+async function loadSelectedFrontLookup() {
+  if (!selectedFrontLookupPromise) {
+    selectedFrontLookupPromise = loadReferenceLookup()
+      .then((references) => loadSelectedFrontIndex(state.recordData, references))
+      .catch((error) => { selectedFrontLookupPromise = null; throw error; });
+  }
+  return selectedFrontLookupPromise;
+}
+
 function clearReference() {
   referenceGeneration += 1;
   elements.referenceStage.querySelector("img")?.remove();
@@ -619,8 +631,33 @@ async function renderReference(record) {
     const payload = await loadReferenceLookup();
     if (!isCurrent()) return;
     const entry = payload.records[record.recordId];
+    const selectedFront = getSelectedFrontForRecord(await loadSelectedFrontLookup(), record.recordId);
+    if (!isCurrent()) return;
     const image = getDisplayReference(entry);
-    if (!image) {
+    if (selectedFront) {
+      elements.referenceRole.textContent = "Owner-confirmed selected front";
+      elements.referenceFull.href = selectedFront.displayUrl;
+      elements.referenceFull.textContent = "Open selected display photograph ↗";
+      elements.referenceFull.hidden = false;
+      elements.referenceRepresentation.textContent = "Limited display JPEG; original source files are not represented by this display.";
+      elements.referenceRepresentation.hidden = false;
+      elements.pairingClarification.textContent = "Owner-confirmed drawing. The photograph does not establish this recording’s endpoint.";
+      elements.pairingClarification.hidden = false;
+      const photograph = document.createElement("img");
+      photograph.alt = "Selected front photograph of the registered drawing";
+      photograph.decoding = "async";
+      // Candidate pixels are normalized and hash-bound; do not apply legacy source rotation.
+      photograph.addEventListener("load", () => { if (isCurrent()) elements.referenceStatus.hidden = true; }, {once:true});
+      photograph.addEventListener("error", () => {
+        if (!isCurrent()) return;
+        photograph.remove(); elements.referenceStage.hidden = true; elements.referenceStatus.hidden = false;
+        elements.referenceStatus.textContent = "The selected photograph could not load. Reference details remain available.";
+      }, {once:true});
+      elements.referenceStatus.textContent = "Loading photograph…";
+      elements.referenceStage.append(photograph);
+      elements.referenceStage.hidden = false;
+      photograph.src = selectedFront.displayUrl;
+    } else if (!image) {
       [elements.referenceRole.textContent, elements.referenceStatus.textContent] = referenceExclusion(entry);
     } else {
       const useSource = Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 &&
@@ -659,9 +696,11 @@ async function renderReference(record) {
         ? await loadReferenceEvidence(payload.lookupSha256) : null;
       if (!isCurrent()) return;
       elements.referenceWork.textContent = `Recording belongs to registered work: ${entry.workId}`;
-      elements.referenceEvidence.textContent = "Links below retain their own identification and source limits. They do not establish this recording’s endpoint or photograph-to-video alignment.";
+      elements.referenceEvidence.textContent = selectedFront
+        ? "Earlier reference records retain their recorded evidence and qualifications. These are separate from the selected front above and do not establish this recording’s endpoint."
+        : "Links below retain their own identification and source limits. They do not establish this recording’s endpoint or photograph-to-video alignment.";
       for (const photo of photographs) {
-        if (photo === image) continue;
+        if (!selectedFront && photo === image) continue;
         const description = describeReferenceLink(entry, photo, evidence, state.sourceRevision);
         const paragraph = document.createElement("p");
         const link = document.createElement("a");
@@ -673,7 +712,7 @@ async function renderReference(record) {
         detail.textContent = `${referenceRole(photo)}. ${description.detail} ${referencePresentation(photo, true)}${description.surfaceScope ? ` Recorded surface scope: ${description.surfaceScope.replaceAll("_", " ")}.` : ""}${description.caution ? ` Source caution: ${description.caution}` : ""}`;
         paragraph.append(link, document.createElement("br"), detail);
         elements.additionalReferences.append(paragraph);
-        if (!image && photo === entry.mainImage && description.supportedIndirect) {
+        if (!selectedFront && !image && photo === entry.mainImage && description.supportedIndirect) {
           elements.referenceRole.textContent = "Supported indirect reference";
           elements.referenceStatus.textContent = "An indirect photograph-to-work link is supported by public premises. Its status remains proposed, so no primary photograph is displayed. The qualified link is in Reference details.";
         }
@@ -830,6 +869,7 @@ async function initialize() {
 
     const payload = await loadRecords(DATA_URL);
     state.records = payload.records;
+    state.recordData = payload;
     state.sourceRevision = payload.sourceRevision;
     state.sequenceDetails = deriveRecordingSequences(state.records);
 
