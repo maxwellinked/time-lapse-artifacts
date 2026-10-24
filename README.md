@@ -198,7 +198,7 @@ node tools/validate.mjs
 ```
 
 Sharp is a build-time dependency only. The generator verifies the downloaded source
-SHA-256, applies EXIF orientation once, fits the entire frame within 1024 Ã— 1024
+SHA-256, applies EXIF orientation once, fits the entire frame within 1024 × 1024
 without upscaling or cropping, converts to sRGB, and emits quality-82 JPEGs. It
 performs no enhancement. `reference-previews/manifest.json` binds each source hash
 and pinned URL to the preview hash, dimensions, bytes, and processing settings.
