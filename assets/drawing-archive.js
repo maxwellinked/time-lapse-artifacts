@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261023-optional-fronts";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261024-photo-downloads";
 import { loadRecords } from "./data-loader.js";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -91,6 +91,12 @@ function render(works) {
     link.append(image);
     const caption = node("div", undefined, "drawing-caption");
     if (work.selectedFront) caption.append(node("p", "Owner-confirmed selected front · limited display JPEG. This photograph does not establish a recording endpoint.", "drawing-reference-note"));
+    if (work.selectedFront?.downloadUrl) {
+      const download = node("a", `${work.selectedFront.downloadLabel} (${work.selectedFront.downloadDimensions}) ↗`, "photograph-download");
+      download.href = work.selectedFront.downloadUrl;
+      download.target = "_blank"; download.rel = "noreferrer";
+      caption.append(download);
+    }
     caption.append(node("p", `Documented finish: ${dates(work)}`, "drawing-date"), node("h3", work.workId), photographLinks(work), recordingLinks(work));
     card.append(link, caption);
     gallery.append(card);

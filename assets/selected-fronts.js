@@ -1,3 +1,4 @@
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=20261024";
 // Generated display projection of the existing selected-front map; no source-evidence edits.
 export const SELECTED_FRONTS_SHA256 = "94b72b176dd807e80c89866b1cb7504c9136886ccbbb41a37f31141a21dff684";
 export const LEGACY_REFERENCE_SHA256 = "c165e0c746b60609136408ac53373c870f0a66acce6b19f6b86fd409962c88c2";
@@ -70,5 +71,7 @@ export async function loadSelectedFrontIndex(recordData, references, fetcher = g
   const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]
     .map(value => value.toString(16).padStart(2,"0")).join("");
   if (hash !== SELECTED_FRONTS_SHA256) throw new Error("Selected-front projection hash mismatch");
-  return buildSelectedFrontIndex(JSON.parse(new TextDecoder().decode(bytes)), recordData, references);
+  const index = buildSelectedFrontIndex(JSON.parse(new TextDecoder().decode(bytes)), recordData, references);
+  try { return await loadPhotographDownloads(index, fetcher, crypto); }
+  catch (error) { console.warn("Photograph download links unavailable", error); return index; }
 }
