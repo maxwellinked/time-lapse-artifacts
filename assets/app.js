@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261023-optional-fronts";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261024-photo-downloads";
 import { loadRecords, RecordsDataError } from "./data-loader.js";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -636,10 +636,10 @@ async function renderReference(record) {
     const image = getDisplayReference(entry);
     if (selectedFront) {
       elements.referenceRole.textContent = "Owner-confirmed selected front";
-      elements.referenceFull.href = selectedFront.displayUrl;
-      elements.referenceFull.textContent = "Open selected display photograph ↗";
+      elements.referenceFull.href = selectedFront.downloadUrl ?? selectedFront.displayUrl;
+      elements.referenceFull.textContent = selectedFront.downloadUrl ? `${selectedFront.downloadLabel} ↗` : "Open selected display photograph ↗";
       elements.referenceFull.hidden = false;
-      elements.referenceRepresentation.textContent = "Limited display JPEG; original source files are not represented by this display.";
+      elements.referenceRepresentation.textContent = selectedFront.downloadUrl ? `Small display preview. Download: ${selectedFront.downloadDimensions} JPEG; camera originals remain separate.` : "Limited display JPEG; original source files are not represented by this display.";
       elements.referenceRepresentation.hidden = false;
       elements.pairingClarification.textContent = "Owner-confirmed drawing. The photograph does not establish this recording’s endpoint.";
       elements.pairingClarification.hidden = false;

@@ -208,3 +208,15 @@ and preview hashes offline, and rejects obsolete JPEGs. After a successful build
 the generator removes hash-named previews no longer in the selected set.
 A failed preview keeps the original link available;
 it never automatically downloads the full-resolution source as a fallback.
+
+## Selected photograph downloads
+
+The drawing gallery and recording dialogs offer source-bound JPEG downloads from
+the main Hugging Face archive. Inline images remain the existing bounded JPEGs.
+`data/photograph-downloads.json` pins a separate media revision and binds each
+download to the exact selected source hash and work ID. Labels distinguish
+native-resolution JPEGs, limited references and supplied source-resolution JPEGs.
+Original camera containers remain separate from their extracted renderings.
+
+Validation checks the download-manifest hash and selected-source joins. If that
+manifest cannot load, the existing photograph display remains available.
