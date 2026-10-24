@@ -97,7 +97,7 @@ with SHA-256 of the actual loaded lookup bytes. Mixed cached snapshots from the
 same Hugging Face revision, or unavailable hashing, retain unverified labels.
 
 If support is unavailable, mismatched, private-only or stale, the link says
-**Proposed reference Â· support not verified here**. This does not assert that
+**Proposed reference · support not verified here**. This does not assert that
 private evidence is absent or that a proposal is false. Reproduce the support
 snapshot from its pinned public text inputs with
 `python -B tools/build-reference-link-evidence.py --check`.
