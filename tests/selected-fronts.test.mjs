@@ -16,10 +16,12 @@ const app=readFileSync(new URL("../assets/app.js",import.meta.url),"utf8");
 const gallery=readFileSync(new URL("../assets/drawing-archive.js",import.meta.url),"utf8");
 const clone=structuredClone;
 
-test("431 selected fronts and 1205 record joins agree with gallery identities, without rewriting evidence",()=>{
+test("431 selected fronts and five explicitly unselected works agree with all gallery identities",()=>{
  const before=JSON.stringify(refs);
  const works=buildDrawingArchive(data,refs,read("../reference-previews/manifest.json"));
- assert.equal(works.length,431); assert.equal(Object.keys(index.byRecord).length,1205);
+ assert.equal(works.length,436); assert.equal(Object.keys(index.byRecord).length,1205);
+ assert.equal(index.unselectedWorkIds.length,5);
+ assert.equal(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).length,51);
  for(const work of works) for(const record of work.records) {
    assert.equal(getSelectedFrontForRecord(index,record.recordId),getSelectedFrontForWork(index,work.workId));
  }

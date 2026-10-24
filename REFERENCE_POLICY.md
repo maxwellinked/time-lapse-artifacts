@@ -14,6 +14,10 @@ links. This asserts drawing identity and the selected photographed view, not a
 recording endpoint, timing calibration, complete process, or original-file quality.
 Pre-Standard records receive no invented work or photograph joins.
 
+At dataset revision ed96dab85dea93af4e3a36785a02b90fdeebb976, five additional
+registered drawings (51 recordings) are explicitly unselected. They remain
+browsable with no selected photograph; no photograph is inherited from another work.
+
 The source-lookup policy below remains the contract for retained historical
 reference records and their qualified links. Its old display counts do not count
 the new selected-front population; existing relationship classifications are not
@@ -93,7 +97,7 @@ with SHA-256 of the actual loaded lookup bytes. Mixed cached snapshots from the
 same Hugging Face revision, or unavailable hashing, retain unverified labels.
 
 If support is unavailable, mismatched, private-only or stale, the link says
-**Proposed reference · support not verified here**. This does not assert that
+**Proposed reference Â· support not verified here**. This does not assert that
 private evidence is absent or that a proposal is false. Reproduce the support
 snapshot from its pinned public text inputs with
 `python -B tools/build-reference-link-evidence.py --check`.

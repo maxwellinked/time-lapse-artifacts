@@ -19,7 +19,10 @@ Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter use one selected-front map: 431 registered drawings and 1,205 Standard
-recording joins. Each selected display is a bounded, normalized JPEG. The common
+recording joins. At dataset revision ed96dab85dea93af4e3a36785a02b90fdeebb976,
+the browser covers 436 drawings and 1,256 Standard recordings. Five new drawings
+(51 recordings) explicitly have no selected photograph. Each selected display
+is a bounded, normalized JPEG. The common
 map and embedded image table are hash-bound inputs; source photographs, display
 bytes and work identities remain distinct. Historical references retain their own
 evidence and qualifications under Reference details.
@@ -195,7 +198,7 @@ node tools/validate.mjs
 ```
 
 Sharp is a build-time dependency only. The generator verifies the downloaded source
-SHA-256, applies EXIF orientation once, fits the entire frame within 1024 × 1024
+SHA-256, applies EXIF orientation once, fits the entire frame within 1024 Ã— 1024
 without upscaling or cropping, converts to sRGB, and emits quality-82 JPEGs. It
 performs no enhancement. `reference-previews/manifest.json` binds each source hash
 and pinned URL to the preview hash, dimensions, bytes, and processing settings.
