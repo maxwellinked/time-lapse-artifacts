@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, getSelectedFrontForWork } from "./selected-fronts.js?v=20261021-selected-fronts";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261023-optional-fronts";
 import { loadRecords } from "./data-loader.js";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -115,11 +115,7 @@ try {
   const references = JSON.parse(new TextDecoder().decode(referenceBytes));
   const proof = await verifiedDrawingEvidence(referenceBytes, evidence);
   const selectedFronts = await loadSelectedFrontIndex(recordData, references);
-  const works = buildDrawingArchive(recordData, references, previews, proof).map((work) => {
-    const selectedFront = getSelectedFrontForWork(selectedFronts, work.workId);
-    if (!selectedFront) throw new Error("Selected front missing for registered drawing");
-    return { ...work, selectedFront, displayUrl: selectedFront.displayUrl, displaySha256: selectedFront.displaySha256 };
-  });
+  const works = applySelectedFronts(buildDrawingArchive(recordData, references, previews, proof), selectedFronts);
   summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.selectedFront || work.photograph).length} confirmed photographs`;
   const source = document.querySelector("#drawing-source");
   source.href = `https://huggingface.co/datasets/${recordData.sourceRepository}/tree/${recordData.sourceRevision}/Work_Identity`;

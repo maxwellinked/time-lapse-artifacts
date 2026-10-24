@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "bfa25fb932b8103e83e8c8e96c79b5e99f4c197d",
-  "lookupSha256": "d2136d00b0a8515113fcc020144dbd9d460274aacb24b5f97d36e96ce395f03c",
+  "sourceRevision": "ed96dab85dea93af4e3a36785a02b90fdeebb976",
+  "lookupSha256": "c165e0c746b60609136408ac53373c870f0a66acce6b19f6b86fd409962c88c2",
   "sourceInputs": {
     "Work_Identity/works.csv": {
-      "sha256": "e593abc32a969f48a39a876e88a545794ec8a3c094b30d68fd645a2b6938602d",
-      "bytes": 194330
+      "sha256": "d2003bc977127f5a81c09d219f6a087a391429112bed8bfad3568261f0505c27",
+      "bytes": 196178
     },
     "Work_Identity/work_record_links.csv": {
-      "sha256": "77ce723edf309d0dfee7fdce2a2d4acf1764bd3a7520de8d77a1e57305635a1d",
-      "bytes": 416828
+      "sha256": "c67a11d4febf687b3e1e5ae9a3ff51bee51e5cfeebf101fba98e6604b85151eb",
+      "bytes": 431567
     },
     "Physical_References/work_reference_status.csv": {
       "sha256": "12ffa5fd4fe4e4bacdc3055b86bdbcc9f00e9b22ec532f3bda9329b08b5ada2e",
