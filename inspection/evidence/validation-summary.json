@@ -1,0 +1,232 @@
+{
+  "schema": "inspection-prior-validation-summary/v1",
+  "source_revision": "c3c45bc69b3ecd3f4c2e690710a5a06d55b851b3",
+  "scope": "Sanitized report of retained local validation. It is not the underlying raw audit logs and is not a new full-file decode or independent validation.",
+  "records": {
+    "tla-e1a6fa31bb8fe6ba": {
+      "source_sha256": "5408c9702d570c1503bd936edc22b08252af780de588d42308316e71edaa85f2",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-13ef1211ae353f37": {
+      "source_sha256": "f4c23605cc47eab53f4b9a03ae6ecf64fd6cbd42ae8b47d44888153094c9f09a",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-0b51a30242c7c88e": {
+      "source_sha256": "24f0c84fe46e90e1f181eb64a85172a14a4f6b44dfc6e180216e97fa4631c93c",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-4a841cee5e4b1d57": {
+      "source_sha256": "eda8eecfa1bf39307e461e84d8cbe4ce1073ea230e564d7940260dd43b82f684",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-efa5291977cfd5b7": {
+      "source_sha256": "87b7c36fcaa9cceb35c9a32c691519af49cea3dbcbda0e0bcff9a1a9134c11e3",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-c13c872f67d02ccc": {
+      "source_sha256": "7245cca8a6e31e3099def62b10e78b9e47f13405c0a34dc566f53665f0d083f1",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-2e11c17cf40d5979": {
+      "source_sha256": "bc22a59aa1e72973aae879c9085036aaeadf326c5390911a44ab12266c2e391a",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-2dcecb84feb1e1e1": {
+      "source_sha256": "ff6f2773721b2172ac2cfcdd2787f0fd6b50df37fa8e77cd1b0cdfa8f5562fa0",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    },
+    "tla-461b870d4da0e98e": {
+      "source_sha256": "d48ad0837146538cd0ed6d1c1532aaeaf601b4216567ad408e3e985eec86eed6",
+      "checks": {
+        "local_fixity": {
+          "status": "recorded_passed",
+          "summary": "Matched the archive SHA-256 and were recorded unchanged after the prototype run.",
+          "qualification": "Historical private receipt; files were not rehashed for this lookup.",
+          "new_test_performed": false
+        },
+        "inspection_samples": {
+          "status": "recorded_passed",
+          "summary": "9 exact sampled timestamps; nine native-size PNG bindings checked.",
+          "qualification": "One midpoint also matched decoded RGB through a different seek route using the same decoder. Neither check establishes full-file decoding.",
+          "sample_count": 9,
+          "new_test_performed": false
+        },
+        "browser_seek": {
+          "status": "recorded_passed",
+          "summary": "First, middle and last sampled positions matched the intended presented timestamps.",
+          "qualification": "Recorded in Chrome/155.0.8059.86 on desktop; not a test of every frame or other devices.",
+          "sample_count": 3,
+          "new_test_performed": false
+        }
+      }
+    }
+  }
+}
