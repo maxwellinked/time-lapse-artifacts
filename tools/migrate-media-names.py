@@ -161,6 +161,9 @@ def migrate_cache_tokens(text, revision):
                      "reference-link-evidence.json", "app.js", "drawing-archive.js", "real-time-recordings.js"):
         text = re.sub(re.escape(filename) + r"\?v=[A-Za-z0-9_-]+",
                       filename + "?v=media-names-" + revision, text)
+    for path in ("data/records.json", "reference-previews/manifest.json"):
+        text = re.sub(r"(?<=[\"'`])" + re.escape(path) + r"(?:\?v=[A-Za-z0-9_-]+)?(?=[\"'`])",
+                      path + "?v=media-names-" + revision, text)
     return text
 
 

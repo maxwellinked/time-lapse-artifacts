@@ -11,7 +11,7 @@ import {
   sortRecordsForDisplay,
 } from "./record-sequences.js";
 
-const DATA_URL = "data/records.json";
+const DATA_URL = "data/records.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
 const REFERENCE_URL = "data/physical-references.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";

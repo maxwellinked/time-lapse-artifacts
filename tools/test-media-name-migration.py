@@ -142,6 +142,15 @@ class NameMigrationTests(unittest.TestCase):
         self.assertNotIn("?v=old", result)
         self.assertEqual(result.count("?v=media-names-" + REV), 5)
 
+    def test_records_and_preview_manifest_fetches_share_the_migration_cache_revision(self):
+        before = ('const DATA_URL = "data/records.json"; '
+                  'loadRecords("data/records.json"); '
+                  'fetch("reference-previews/manifest.json?v=20261025-master-fronts");')
+        result = MIGRATION.migrate_cache_tokens(before, REV)
+        self.assertEqual(result.count("data/records.json?v=media-names-" + REV), 2)
+        self.assertIn("reference-previews/manifest.json?v=media-names-" + REV, result)
+        self.assertNotIn("?v=20261025-master-fronts", result)
+
 
 if __name__ == "__main__":
     unittest.main()
