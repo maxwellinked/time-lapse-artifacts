@@ -4,6 +4,7 @@ import { createRequire } from "node:module";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDisplayReference } from "../assets/reference-policy.js";
+import { referencePreviewPath } from "../assets/reference-preview-paths.js";
 
 // Build-time only. Inputs are existing public display JPEGs or small published JPEGs.
 // No network requests or private source files are used.
@@ -72,7 +73,7 @@ try {
     if (!image || (preview && preview.sourceUrl !== image.fullResolutionUrl)) {
       throw new Error("Decorative source is not an eligible published photograph");
     }
-    const sourcePath = preview ? `reference-previews/${sourceSha}.jpg` : image.fullResolutionUrl;
+    const sourcePath = preview ? referencePreviewPath(sourceSha) : image.fullResolutionUrl;
     const sourceSha256 = preview ? preview.sha256 : sourceSha;
     const sourceSize = preview ? preview.sizeBytes : Number(image.size_bytes);
     if (!preview && (!process.env.VISUAL_ANCHOR_SOURCE_DIRECTORY ||
@@ -90,6 +91,7 @@ try {
     const sameSourceUrl = cached && (cached.sourceUrl === image.fullResolutionUrl ||
       (pinnedImagePath(cached.sourceUrl) && pinnedImagePath(cached.sourceUrl) === pinnedImagePath(image.fullResolutionUrl)));
     const sameSourcePath = cached && (cached.sourcePath === sourcePath ||
+      (preview && cached.sourcePath === `reference-previews/${sourceSha}.jpg` && preview.assetPath === sourcePath) ||
       (!preview && cached.sourcePath === cached.sourceUrl && sameSourceUrl));
     if (cached && cached.sourceSha256 === sourceSha256 && (cached.sourceSize === undefined || cached.sourceSize === sourceSize) && sameSourcePath &&
         sameSourceUrl && cached.workId === image.work_id) {

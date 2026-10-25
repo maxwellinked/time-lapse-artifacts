@@ -9,9 +9,9 @@
   "candidate_table_sha256": "e19abe46afd7b84017485a3ce240ff945126d7bb68018b9295fa1848112b4f5f",
   "recording_links": {
     "repository": "main",
-    "revision": "ed96dab85dea93af4e3a36785a02b90fdeebb976",
+    "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
     "path": "Work_Identity/work_record_links.csv",
-    "sha256": "c67a11d4febf687b3e1e5ae9a3ff51bee51e5cfeebf101fba98e6604b85151eb"
+    "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b"
   },
   "selections": [
     {
@@ -2359,14 +2359,6 @@
       }
     },
     {
-      "work_id": "tlaw-b03bbfba8babbf3d",
-      "source_photograph_sha256": "9bfd1cf6c0743d687fcddb2571b092e9a467c6f7affe2150e97e70fb2353e2c7",
-      "photo_role": "front",
-      "display": {
-        "output_display_sha256": "7981cca6d78ab789149101416254f660331d4c695dc925a55634bd3c326b0890"
-      }
-    },
-    {
       "work_id": "tlaw-b0d6b0ca04bbfbf8",
       "source_photograph_sha256": "c2fb8a1f11d3501e3b3061bebfd89557b8a50f07099a5e5768682085b88b34f1",
       "photo_role": "front",
@@ -3461,13 +3453,128 @@
       "display": {
         "output_display_sha256": "8727dc60269ee356073a4c75cdabba224e4a9f75e4a2511ed8c9565043e1e0e7"
       }
+    },
+    {
+      "work_id": "tlaw-7a19b1273991da19",
+      "source_photograph_sha256": "2d746cff5dafa0ff19a28e911892f17567280a11fbf55110c3af03432ee44174",
+      "photo_role": "front",
+      "display": {
+        "output_display_sha256": "595a1463b8ca9c4c62903be604b4ea6fc88945a0fe9d86b3369e281ec4c77312"
+      }
+    },
+    {
+      "work_id": "tlaw-a826906a465003c2",
+      "source_photograph_sha256": "29faae1f146eac5832ffa384e50167a70a07298d6e954fa31350fa1f364468ff",
+      "photo_role": "front",
+      "display": {
+        "output_display_sha256": "c41f6713fa0fcf4accd67e3285b51f64171b55b984cd8f90f5ec41cae3b9d398"
+      }
+    },
+    {
+      "work_id": "tlaw-50afa6b8af39342d",
+      "source_photograph_sha256": "6c80739450195466a1335aeac49e635346856fd2d369dd3fa2f8e99043995cd8",
+      "photo_role": "front",
+      "display": {
+        "output_display_sha256": "f0d8340a9d70bd26a8ada7c456d9fea45a19ba99e7562d55365f8291694b1fff"
+      }
+    },
+    {
+      "work_id": "tlaw-8e64b069e2eff99d",
+      "source_photograph_sha256": "77fcc980bdd9c8c3ee26be461ee0d30cf7185dedb01ed52cd3ed58507df5e45b",
+      "photo_role": "front",
+      "display": {
+        "output_display_sha256": "88ff1d84d238afcfab50006ec56f138bf306956f357e2031fd54d8a6529ef27d"
+      }
+    },
+    {
+      "work_id": "tlaw-f857d7dc1b634939",
+      "source_photograph_sha256": "a557871f5bef8cf53eb63a50956488aab67ef3fd168c2b47925b9e7e998ce77d",
+      "photo_role": "front",
+      "display": {
+        "output_display_sha256": "5272448ac13b2e8fe429eb26c6a2a909c7301ebff5452e3bc862e375c29a11ad"
+      }
     }
   ],
-  "unselected_work_ids": [
-    "tlaw-50afa6b8af39342d",
-    "tlaw-7a19b1273991da19",
-    "tlaw-8e64b069e2eff99d",
-    "tlaw-a826906a465003c2",
-    "tlaw-f857d7dc1b634939"
-  ]
+  "unselected_work_ids": [],
+  "work_identity_correction": {
+    "repository": "maxwellinked/time-lapse-artifacts",
+    "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+    "base_github_revision": "26392f5c981f1d3207414f819c88ab8dbd8dc30f",
+    "base_lookup_sha256": "0b37614442ac40d6edfc3f33c4ec793e9bd039c25286ea8ceeccf6f1157b52af",
+    "ledger": {
+      "path": "Work_Identity/index_identity_correction_2026-10-25-july-25.json",
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "0b92b00a9891bf284d25a0f0edcb28d5c91164f2d88a6f42988fe95b79b95352",
+      "bytes": 2152
+    },
+    "confirmation": {
+      "path": "Work_Identity/Confirmations/2026-10-25-july-25-two-stages.md",
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "7f6826dd7ebbdd7a3eeac13a7b88b5aff7460b45828db48f0b3eaaa337b52d32",
+      "bytes": 2808
+    },
+    "superseded_work_id": "tlaw-b03bbfba8babbf3d",
+    "survivor_work_id": "tlaw-858a03eb138fbf47",
+    "donor_record_id": "tla-109ffe803a4ae0b0",
+    "affected_record_id": "tla-933e757350798d34"
+  },
+  "master_front_supplement": {
+    "repository": "maxwellinked/time-lapse-artifacts",
+    "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+    "base_github_revision": "26392f5c981f1d3207414f819c88ab8dbd8dc30f",
+    "base_projection_sha256": "94b72b176dd807e80c89866b1cb7504c9136886ccbbb41a37f31141a21dff684",
+    "baseline_selection_count": 431,
+    "surviving_baseline_selection_count": 430,
+    "supplement_selection_count": 5,
+    "inputs": {
+      "Physical_References/Selected_Front_Downloads/downloads.json": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "3a97844b64738d1dad17a565c3fe8f993a060f02de0b967ff7746e622c15b183",
+        "bytes": 285559
+      },
+      "Physical_References/Selected_Front_Downloads/Confirmations/2026-10-25-five-master-fronts.json": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "fbf76f5b53ce830c92397fbb3acd7e7abcc7ac759384470192d638bc3d78f241",
+        "bytes": 7142
+      },
+      "Work_Identity/Confirmations/2026-10-25-july-25-two-stages.md": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "7f6826dd7ebbdd7a3eeac13a7b88b5aff7460b45828db48f0b3eaaa337b52d32",
+        "bytes": 2808
+      },
+      "Work_Identity/index_identity_correction_2026-10-25-july-25.json": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "0b92b00a9891bf284d25a0f0edcb28d5c91164f2d88a6f42988fe95b79b95352",
+        "bytes": 2152
+      },
+      "Work_Identity/works.csv": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "1e7d157ea2fe219af13e078da0185dedd93c89396304e035b721f6cdee8c87bb",
+        "bytes": 196999
+      },
+      "Work_Identity/work_record_links.csv": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b",
+        "bytes": 432363
+      },
+      "metadata.csv": {
+        "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+        "sha256": "8d120d8d781a0682457e9455e30212ad88142a2216a45e8e6f8ba78f7de3addc",
+        "bytes": 1136876
+      }
+    },
+    "processing": {
+      "pillow_version": "12.2.0",
+      "jpeg_version": "8.0",
+      "littlecms_version": "2.18",
+      "exif_orientation": "applied_once_and_removed",
+      "color_space": "sRGB",
+      "long_edge_pixels": 1024,
+      "resize": "LANCZOS_no_upscale",
+      "jpeg_quality": 82,
+      "jpeg_subsampling": 2,
+      "crop": false,
+      "enhancement": false
+    }
+  }
 }

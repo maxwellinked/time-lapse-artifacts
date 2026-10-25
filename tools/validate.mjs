@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 
 import { validateRecordsPayload } from "../assets/data-loader.js";
 import { getDisplayReference } from "../assets/reference-policy.js";
+import { referencePreviewPath, SHARED_REFERENCE_PREVIEWS } from "../assets/reference-preview-paths.js";
 import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
 import { createValidationServer, hasRequiredSourceLinks } from "./validation-helpers.mjs";
 import { buildRealTimeProjection, buildRealTimePage } from "./build-real-time-recordings.mjs";
@@ -18,6 +19,7 @@ const requiredFiles = [
   "assets/app.js",
   "assets/data-loader.js",
   "assets/reference-policy.js",
+  "assets/reference-preview-paths.js",
   "assets/record-sequences.js",
   "data/records.json",
   "tools/sync-records.mjs",
@@ -96,7 +98,7 @@ const selectedPhotos = new Map(Object.values(references.records)
     !(Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 && Number(image.size_bytes) <= 512 * 1024))
   .map((image) => [image.sha256, image]));
 if (Object.keys(photoPreviews.images).length !== selectedPhotos.size) throw new Error("Photograph preview coverage mismatch");
-const expectedPhotoFiles = new Set([...selectedPhotos.keys()].map((hash) => `${hash}.jpg`));
+const expectedPhotoFiles = new Set([...selectedPhotos.keys()].filter(hash=>referencePreviewPath(hash).startsWith('reference-previews/')).map((hash) => `${hash}.jpg`));
 const obsoletePhotoFiles = readdirSync(join(root, "reference-previews"))
   .filter((name) => /\.jpe?g$/i.test(name) && !expectedPhotoFiles.has(name));
 if (obsoletePhotoFiles.length) throw new Error(`Unexpected photograph previews: ${obsoletePhotoFiles.join(", ")}`);
@@ -109,12 +111,18 @@ for (const [sourceHash, image] of selectedPhotos) {
       preview.width > Number(image.width_px) || preview.height > Number(image.height_px)) {
     throw new Error(`Invalid photograph preview binding: ${sourceHash}`);
   }
-  const bytes = readFileSync(join(root, "reference-previews", `${sourceHash}.jpg`));
+  const assetPath = referencePreviewPath(sourceHash);
+  if ((preview.assetPath ?? `reference-previews/${sourceHash}.jpg`) !== assetPath) throw new Error('Photograph preview asset path differs from the validated reuse map');
+  const bytes = readFileSync(join(root, assetPath));
   if (bytes.length !== preview.sizeBytes || createHash("sha256").update(bytes).digest("hex") !== preview.sha256) {
     throw new Error(`Photograph preview fixity mismatch: ${sourceHash}`);
   }
 }
-if (!app.includes('photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`') ||
+for (const [sourceHash, assetPath] of Object.entries(SHARED_REFERENCE_PREVIEWS)) {
+  if (!selectedPhotos.has(sourceHash) || photoPreviews.images[sourceHash]?.assetPath !== assetPath ||
+      !/^selected-fronts\/tlaw-[a-f0-9]{16}\.jpg$/.test(assetPath)) throw new Error('Shared photograph preview is unused or unsafe');
+}
+if (!app.includes('photograph.src = useSource ? image.fullResolutionUrl : referencePreviewPath(image.sha256)') ||
     !app.includes("elements.referenceFull.href = image.fullResolutionUrl") ||
     app.includes("photograph.src = image.fullResolutionUrl")) {
   throw new Error("Bounded photograph display or full-resolution access is missing");
@@ -262,7 +270,7 @@ for (const tag of anchorTags) {
   const anchor = anchorManifest.images[sourceHash];
   const preview = photoPreviews.images[sourceHash];
   const photo = eligibleAnchorPhotos.get(sourceHash);
-  const usesPreview = anchor && preview && anchor.sourcePath === `reference-previews/${sourceHash}.jpg` &&
+  const usesPreview = anchor && preview && anchor.sourcePath === referencePreviewPath(sourceHash) &&
     anchor.sourceSha256 === preview.sha256 && anchor.sourceUrl === preview.sourceUrl;
   const usesSmallPublicSource = anchor && photo && anchor.sourcePath === photo.fullResolutionUrl &&
     anchor.sourceSha256 === sourceHash && Math.max(Number(photo.width_px), Number(photo.height_px)) <= 1024 &&

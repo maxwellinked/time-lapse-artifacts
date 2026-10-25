@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "media_revision": "07df3064092099b5c97c8a4f54685b1a931d9f22",
   "selection_projection_sha256": "94b72b176dd807e80c89866b1cb7504c9136886ccbbb41a37f31141a21dff684",
   "source_photo_revision": "fd6543d7c559f23ca32858526cd3b67f8e153453",
@@ -3814,19 +3814,6 @@
       "source_filename": null
     },
     {
-      "work_id": "tlaw-b03bbfba8babbf3d",
-      "source_sha256": "9bfd1cf6c0743d687fcddb2571b092e9a467c6f7affe2150e97e70fb2353e2c7",
-      "display_sha256": "7981cca6d78ab789149101416254f660331d4c695dc925a55634bd3c326b0890",
-      "path": "Physical_References/Selected_Front_Downloads/images/tlaw-b03bbfba8babbf3d/R006.jpg",
-      "sha256": "7a00fa45143e592678587da5c4807d56b785f3998bc890674a40dcf1b3dcac8d",
-      "width_px": 6048,
-      "height_px": 8064,
-      "size_bytes": 10457097,
-      "resolution_class": "native_resolution_jpeg",
-      "representation": "extracted_native_jpeg",
-      "source_filename": "R006.DNG"
-    },
-    {
       "work_id": "tlaw-b0d6b0ca04bbfbf8",
       "source_sha256": "c2fb8a1f11d3501e3b3061bebfd89557b8a50f07099a5e5768682085b88b34f1",
       "display_sha256": "32c406b436e873f5fff6753f8cca0bb0294508285de44c01d730811df29d8243",
@@ -5606,6 +5593,113 @@
       "resolution_class": "limited_resolution_jpeg",
       "representation": "existing_published_jpeg",
       "source_filename": null
+    },
+    {
+      "work_id": "tlaw-7a19b1273991da19",
+      "source_sha256": "2d746cff5dafa0ff19a28e911892f17567280a11fbf55110c3af03432ee44174",
+      "display_sha256": null,
+      "path": "Physical_References/Selected_Front_Downloads/images/tlaw-7a19b1273991da19/c7593f2b0f22101d153e0eef.jpg",
+      "sha256": "c7593f2b0f22101d153e0eeff724fb264de9f91739b00c2d2bc918bd31b6793b",
+      "width_px": 6048,
+      "height_px": 8064,
+      "size_bytes": 10727228,
+      "resolution_class": "native_resolution_jpeg",
+      "representation": "extracted_native_jpeg",
+      "source_filename": "2026-10-19.2245.Pencil.Graphite.BallpointPen.Ink.Paper.9x12.DNG",
+      "media_revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
+    },
+    {
+      "work_id": "tlaw-a826906a465003c2",
+      "source_sha256": "29faae1f146eac5832ffa384e50167a70a07298d6e954fa31350fa1f364468ff",
+      "display_sha256": null,
+      "path": "Physical_References/Selected_Front_Downloads/images/tlaw-a826906a465003c2/68e86877fddb37c2a644712d.jpg",
+      "sha256": "68e86877fddb37c2a644712db0a5786d5afd95e4514dbf7cd858e957b88f3bfb",
+      "width_px": 6048,
+      "height_px": 8064,
+      "size_bytes": 11530853,
+      "resolution_class": "native_resolution_jpeg",
+      "representation": "extracted_native_jpeg",
+      "source_filename": "2026-10-20.1057.Pencil.Graphite.FountainPen.Ink.Paper.9x12.DNG",
+      "media_revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
+    },
+    {
+      "work_id": "tlaw-50afa6b8af39342d",
+      "source_sha256": "6c80739450195466a1335aeac49e635346856fd2d369dd3fa2f8e99043995cd8",
+      "display_sha256": null,
+      "path": "Physical_References/Selected_Front_Downloads/images/tlaw-50afa6b8af39342d/e8860d30359140d7858ce0ad.jpg",
+      "sha256": "e8860d30359140d7858ce0adf9e68ace4a8150438fa7969d47ae1c2924946372",
+      "width_px": 6048,
+      "height_px": 8064,
+      "size_bytes": 12147292,
+      "resolution_class": "native_resolution_jpeg",
+      "representation": "extracted_native_jpeg",
+      "source_filename": "2026-10-21.1522.1057.BallpointPen.Ink.Paper.9x12.DNG",
+      "media_revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
+    },
+    {
+      "work_id": "tlaw-8e64b069e2eff99d",
+      "source_sha256": "77fcc980bdd9c8c3ee26be461ee0d30cf7185dedb01ed52cd3ed58507df5e45b",
+      "display_sha256": null,
+      "path": "Physical_References/Selected_Front_Downloads/images/tlaw-8e64b069e2eff99d/96e9674f187ba0e8257c5700.jpg",
+      "sha256": "96e9674f187ba0e8257c5700e47b1deef0753ea8fbf2e2f6d669408d313dfd1c",
+      "width_px": 6048,
+      "height_px": 8064,
+      "size_bytes": 11484830,
+      "resolution_class": "native_resolution_jpeg",
+      "representation": "extracted_native_jpeg",
+      "source_filename": "2026-10-22.0430.Pencil.Graphite.FountainPen.Ink.Paper.9x12.DNG",
+      "media_revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
+    },
+    {
+      "work_id": "tlaw-f857d7dc1b634939",
+      "source_sha256": "a557871f5bef8cf53eb63a50956488aab67ef3fd168c2b47925b9e7e998ce77d",
+      "display_sha256": null,
+      "path": "Physical_References/Selected_Front_Downloads/images/tlaw-f857d7dc1b634939/37da175a3829a9393d16445c.jpg",
+      "sha256": "37da175a3829a9393d16445cb4743c395122d8a17ab5ff952a46d2270922f1b4",
+      "width_px": 6048,
+      "height_px": 8064,
+      "size_bytes": 11207938,
+      "resolution_class": "native_resolution_jpeg",
+      "representation": "extracted_native_jpeg",
+      "source_filename": "2026-10-22.1639.BallpointPPen.Ink.Paper.9x12.DNG",
+      "media_revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
     }
-  ]
+  ],
+  "baseline_row_count": 431,
+  "media_revision_policy": "Use row.media_revision when present; otherwise use the historical media_revision. Five additions use the immutable release ref resolving to the same single public commit. Registry is the corrected base plus the linked direct-owner correction.",
+  "additional_selection_receipts": [
+    {
+      "path": "Physical_References/Selected_Front_Downloads/Confirmations/2026-10-25-five-master-fronts.json",
+      "sha256": "fbf76f5b53ce830c92397fbb3acd7e7abcc7ac759384470192d638bc3d78f241",
+      "work_ids": [
+        "tlaw-50afa6b8af39342d",
+        "tlaw-7a19b1273991da19",
+        "tlaw-8e64b069e2eff99d",
+        "tlaw-a826906a465003c2",
+        "tlaw-f857d7dc1b634939"
+      ]
+    }
+  ],
+  "active_registered_works": 435,
+  "resolution_class_counts": {
+    "limited_resolution_jpeg": 274,
+    "native_resolution_jpeg": 159,
+    "available_source_resolution_jpeg": 2
+  },
+  "registry_base_revision": "d5d9d2011bb98c50197f11f4071385c2e60f25f2",
+  "registry_correction_confirmation": "Work_Identity/Confirmations/2026-10-25-july-25-two-stages.md",
+  "baseline_retained_row_count": 430,
+  "retirement_receipts": [
+    "Physical_References/Selected_Front_Downloads/Retirements/2026-10-25-july-25-duplicate.json"
+  ],
+  "registry_correction_confirmation_sha256": "7f6826dd7ebbdd7a3eeac13a7b88b5aff7460b45828db48f0b3eaaa337b52d32",
+  "source_index": {
+    "repository": "maxwellinked/time-lapse-artifacts",
+    "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+    "path": "Physical_References/Selected_Front_Downloads/downloads.json",
+    "sha256": "3a97844b64738d1dad17a565c3fe8f993a060f02de0b967ff7746e622c15b183",
+    "resolved_media_refs": {
+      "master-fronts-435-2026-10-25": "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
+    }
+  }
 }

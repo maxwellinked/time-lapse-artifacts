@@ -58,15 +58,16 @@ else {
     await chmod(encoder, 0o755);
   } else {
     ids = Object.keys(manifest.images);
-    for (const path of ["assets/reference-policy.js", "data/physical-references.json", "reference-previews/manifest.json"]) await copy(path);
+    for (const path of ["assets/reference-policy.js", "assets/reference-preview-paths.js", "data/physical-references.json", "reference-previews/manifest.json"]) await copy(path);
     const previews = await json(join(root, "reference-previews/manifest.json"));
     const first = previews.images[ids[0]];
     for (const id of ids) {
-      if (previews.images[id]) await copy(`reference-previews/${id}.jpg`);
+      if (previews.images[id]) await copy(previews.images[id].assetPath ?? `reference-previews/${id}.jpg`);
       else {
         // Supply a third verified display-preview fixture, avoiding any download
         // of the small public original that is deliberately not stored in Git.
         previews.images[id] = { ...first, sourceUrl: manifest.images[id].sourceUrl };
+        delete previews.images[id].assetPath;
         await copyFile(join(root, `reference-previews/${ids[0]}.jpg`), join(root, `reference-previews/${id}.jpg`));
       }
     }

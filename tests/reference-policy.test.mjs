@@ -198,13 +198,13 @@ test("handles unavailable references without creating or promoting a candidate",
   }
 });
 
-test("the pinned pilot preserves 624 exact pairings and adds only eight limited public-display pairings", () => {
+test("the corrected lookup preserves the pilot and repeats the confirmed survivor for the second July 25 stage", () => {
   const source = readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8");
   const lookup = JSON.parse(source);
   const before = JSON.stringify(lookup);
   const images = Object.values(lookup.records).map(getDisplayReference).filter(Boolean);
-  assert.equal(images.length, 632);
-  assert.equal(images.filter((image) => image.source_binding_method === "exact_confirmed_source_bytes").length, 624);
+  assert.equal(images.length, 633);
+  assert.equal(images.filter((image) => image.source_binding_method === "exact_confirmed_source_bytes").length, 625);
   const displayEntries = Object.entries(lookup.records).filter(([, entry]) =>
     getDisplayReference(entry)?.source_binding_method === "owner_confirmed_display_derivative");
   assert.deepEqual(new Set(displayEntries.map(([id]) => id)), new Set([

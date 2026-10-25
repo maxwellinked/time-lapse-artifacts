@@ -1,5 +1,5 @@
 // Independent download projection; selected display images remain unchanged.
-export const PHOTOGRAPH_DOWNLOADS_SHA256 = "cc72c9f418534890e6de573866d6b366b4130a9a3f168b09749c91706884f8c5";
+export const PHOTOGRAPH_DOWNLOADS_SHA256 = "9d12d9738b9418b2f894ffd5586b12b2acc2b1a2db9a6052be577f3cb0d92de3";
 const HASH = /^[a-f0-9]{64}$/;
 const REVISION = /^[a-f0-9]{40}$/;
 const PREFIXES = ['Physical_References/Photographs/', 'Physical_References/Selected_Front_Downloads/'];
@@ -14,6 +14,8 @@ export function attachPhotographDownloads(index, manifest) {
       manifest.rows.length !== Object.keys(index.byWork).length) throw new Error('Invalid photograph download manifest');
   const byWork = Object.create(null);
   for (const row of manifest.rows) {
+    const mediaRevision = Object.hasOwn(row, 'media_revision') ? row.media_revision : manifest.media_revision;
+    if (!REVISION.test(mediaRevision ?? '')) throw new Error('Invalid photograph media revision');
     const front = index.byWork[row.work_id];
     if (!front || byWork[row.work_id] || row.source_sha256 !== front.sourcePhotographSha256) {
       throw new Error('Photograph download differs from selected source');
@@ -30,7 +32,7 @@ export function attachPhotographDownloads(index, manifest) {
     }
     const path = row.path.split('/').map(encodeURIComponent).join('/');
     byWork[row.work_id] = Object.freeze({...front,
-      downloadUrl: `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/${manifest.media_revision}/${path}?download=true`,
+      downloadUrl: `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/${mediaRevision}/${path}?download=true`,
       downloadLabel: LABELS[row.resolution_class],
       downloadSha256: row.sha256,
       downloadDimensions: `${row.width_px} × ${row.height_px}`,
@@ -41,7 +43,7 @@ export function attachPhotographDownloads(index, manifest) {
 }
 
 export async function loadPhotographDownloads(index, fetcher = globalThis.fetch, crypto = globalThis.crypto) {
-  const response = await fetcher('data/photograph-downloads.json', {signal:AbortSignal.timeout(8000)});
+  const response = await fetcher(`data/photograph-downloads.json?v=${PHOTOGRAPH_DOWNLOADS_SHA256}`, {signal:AbortSignal.timeout(8000)});
   if (!response.ok) throw new Error('Photograph downloads unavailable');
   const bytes = await response.arrayBuffer();
   const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(v=>v.toString(16).padStart(2,'0')).join('');

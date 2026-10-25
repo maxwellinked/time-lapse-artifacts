@@ -1,6 +1,6 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261025-canonical-metadata";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261025-master-fronts";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
-import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261020-public-display-derivatives";
+import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261025-master-fronts";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 
 const summary = document.querySelector("#archive-summary");
@@ -111,10 +111,10 @@ function render(works) {
 try {
   const [recordData, referenceBytes, previews, evidence] = await Promise.all([
     loadRecords("data/records.json"),
-    fetch("data/physical-references.json").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
-    fetch("reference-previews/manifest.json").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
+    fetch("data/physical-references.json?v=20261025-master-fronts").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
+    fetch("reference-previews/manifest.json?v=20261025-master-fronts").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
     (async () => {
-      const response = await fetch("data/reference-link-evidence.json", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=20261025-master-fronts", { signal: AbortSignal.timeout(5000) });
       return response.ok ? response.json() : null;
     })().catch(() => null),
   ]);

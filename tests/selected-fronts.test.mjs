@@ -16,12 +16,12 @@ const app=readFileSync(new URL("../assets/app.js",import.meta.url),"utf8");
 const gallery=readFileSync(new URL("../assets/drawing-archive.js",import.meta.url),"utf8");
 const clone=structuredClone;
 
-test("431 selected fronts and five explicitly unselected works agree with all gallery identities",()=>{
+test("435 selected fronts agree with all gallery identities and 1256 recording joins",()=>{
  const before=JSON.stringify(refs);
  const works=buildDrawingArchive(data,refs,read("../reference-previews/manifest.json"));
- assert.equal(works.length,436); assert.equal(Object.keys(index.byRecord).length,1205);
- assert.equal(index.unselectedWorkIds.length,5);
- assert.equal(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).length,51);
+ assert.equal(works.length,435); assert.equal(Object.keys(index.byRecord).length,1256);
+ assert.equal(index.unselectedWorkIds.length,0);
+ assert.equal(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).length,0);
  for(const work of works) for(const record of work.records) {
    assert.equal(getSelectedFrontForRecord(index,record.recordId),getSelectedFrontForWork(index,work.workId));
  }
@@ -36,9 +36,27 @@ test("wrong work-link hash, duplicate selection, missing output hash and wrong w
 });
 test("loader rejects any unbound projection bytes before exposing selected fronts",async()=>{
  const bytes=readFileSync(new URL("../data/selected-fronts.json",import.meta.url));
- const ok=await loadSelectedFrontIndex(data,refs,async()=>new Response(bytes),webcrypto);
- assert.equal(Object.keys(ok.byWork).length,431);
+ const downloads=readFileSync(new URL('../data/photograph-downloads.json',import.meta.url));
+ const requests=[];
+ const ok=await loadSelectedFrontIndex(data,refs,async path=>{
+  requests.push(path);return new Response(path.startsWith('data/selected-fronts.json?')?bytes:downloads);
+ },webcrypto);
+ assert.equal(Object.keys(ok.byWork).length,435);
+ const newWorks=['tlaw-7a19b1273991da19','tlaw-a826906a465003c2','tlaw-50afa6b8af39342d',
+  'tlaw-8e64b069e2eff99d','tlaw-f857d7dc1b634939'];
+ for(const workId of newWorks) {
+  assert.ok(ok.byWork[workId].downloadUrl.includes(`/resolve/${projection.master_front_supplement.revision}/`));
+  assert.equal(ok.byWork[workId].downloadLabel,'Download full-resolution JPEG');
+ }
+ assert.ok(requests.every(path=>/\.json\?v=[a-f0-9]{64}$/.test(path)));
  await assert.rejects(loadSelectedFrontIndex(data,refs,async()=>new Response(Buffer.concat([bytes,Buffer.from(" ")])),webcrypto),/hash mismatch/);
+});
+test("creator-confirmed July 25 stages share one surviving work and selected display",()=>{
+ const first=index.byRecord['tla-109ffe803a4ae0b0'], second=index.byRecord['tla-933e757350798d34'];
+ assert.equal(first,second);assert.equal(first.workId,'tlaw-858a03eb138fbf47');
+ assert.equal(index.byWork['tlaw-b03bbfba8babbf3d'],undefined);
+ assert.equal(projection.work_identity_correction.superseded_work_id,'tlaw-b03bbfba8babbf3d');
+ assert.equal(refs.workIdentityCorrection.affected_record_id,'tla-933e757350798d34');
 });
 class Element {
  constructor(tag="div"){this.tag=tag;this.children=[];this.textContent="";this.hidden=true;this.classList=new Set();}
@@ -74,11 +92,11 @@ test("all four corrected and two replaced fronts render without legacy rotation;
  assert.equal(new Set(legacy.filter(p=>getPhotographDisplayRotation(p)===90).map(p=>p.work_id)).size,4);
  assert.ok(gallery.includes('!work.selectedFront && getPhotographDisplayRotation(work.photograph) === 90'));
 });
-test("actual photograph filter uses the common map for all 1205 Standard records",async()=>{
+test("actual photograph filter uses the common map for all 1256 Standard records",async()=>{
  const state={records:data.records,sourceRevision:data.sourceRevision,sequenceDetails:deriveRecordingSequences(data.records)};
  const elements={filters:{elements:{photograph:{value:"with"}}},grid:{setAttribute(){},removeAttribute(){}},showMore:{},resultCount:{},retryPhotoFilter:{}};
  const source=app.slice(app.indexOf("function recordMatches("),app.indexOf("function renderRecords("));
  await runInNewContext(`${source}\napplyFilters()`,{state,elements,PAGE_SIZE:18,filterGeneration:0,
   FormData:class{get(k){return k==="photograph"?"with":"";}},loadSelectedFrontLookup:async()=>index,getSelectedFrontForRecord,sortRecordsForDisplay,renderRecords(){}});
- assert.equal(state.filtered.length,1205);
+ assert.equal(state.filtered.length,1256);
 });

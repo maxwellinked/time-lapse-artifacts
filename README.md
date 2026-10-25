@@ -70,14 +70,24 @@ fabricated gallery link. Source metadata and relationship authority remain on
 Hugging Face; this access projection does not change them.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
-filter use one selected-front map: 431 registered drawings and 1,205 Standard
-recording joins. At dataset revision 0a323dd51ae7a2f5176dd5f85bcedd50cbc66420,
-the browser covers 436 drawings and 1,256 Standard recordings. Five new drawings
-(51 recordings) explicitly have no selected photograph. Each selected display
-is a bounded, normalized JPEG. The common
-map and embedded image table are hash-bound inputs; source photographs, display
-bytes and work identities remain distinct. Historical references retain their own
-evidence and qualifications under Reference details.
+filter use one selected-front map: 435 active registered drawings and 1,256 Standard
+recording joins. The 430 surviving earlier displays retain their exact candidate bytes.
+Five additional displays (51 recording joins) are bounded derivatives of the
+owner-confirmed fronts in the separate Hugging Face master release, at the exact
+revision recorded in `data/selected-fronts.json`. The projection records the original
+candidate's hashes and a separate hash-bound master supplement; the original
+embedded image table still covers 431 works. Each selected display is a bounded,
+normalized JPEG. Source photographs, display bytes and work identities remain
+distinct. Historical references retain their own evidence and qualifications
+under Reference details.
+
+The creator confirmed that the July 25 recordings at 10:17 and 19:16 show two
+stages of one physical drawing. Both now join `tlaw-858a03eb138fbf47` and share its
+existing selected display. Superseded ID `tlaw-b03bbfba8babbf3d` and its former
+selection remain in the immutable Git baseline. The explicit current-identity
+overlay binds the new Hugging Face registry, correction ledger and creator note;
+the original photograph evidence and video-source revision pins retain their
+historical scope. Recording IDs, media bytes and documented times are unchanged.
 
 Reproduce the display projection and exact JPEG assets from the validated common
 candidate (Python `pyarrow` and `Pillow` required):
@@ -93,6 +103,31 @@ A changed projection requires an explicit update of the checked hash in
 `assets/selected-fronts.js`; it must not be accepted by weakening that check.
 Do not apply additional source rotation to these normalized display JPEGs.
 
+Reproduce the five-work supplement from the exact published inputs and masters
+under their Hugging Face repository paths (Pillow 12.2.0, JPEG 8.0 and LittleCMS
+2.18), while retaining the Git baseline identified by the tool:
+
+```console
+python tools/extend-selected-fronts.py --source-root <downloaded-hf-root> --source-revision <40-character-HF-commit> --destination .
+python tools/extend-selected-fronts.py --source-root <downloaded-hf-root> --source-revision <40-character-HF-commit> --destination . --check
+node tools/build-photograph-clarifications.mjs
+```
+
+The tool verifies the exact committed input bytes, owner receipts, all five master
+hashes, source/work joins, supersession and existing recording memberships before writing.
+It applies EXIF orientation once, converts to sRGB, fits the complete frame within
+1024 pixels without upscaling or cropping, and saves quality-82 JPEGs. It preserves
+the 430 surviving earlier selections and display assets. Full-size masters stay on Hugging
+Face. The source index retains null display hashes for the five additions; their
+new display hashes belong only to this derived access projection.
+
+The same tool removes 38 exact JPEG copies by reusing their existing selected-front
+paths. `reference-previews/manifest.json` retains each historical source binding,
+output hash and dimensions, with an explicit `assetPath` for shared bytes.
+`assets/reference-preview-paths.js` is the generated, validated local-path map used
+by the browser and preview tools. Obsolete current assets are retired; old Git
+revisions preserve their paths and bytes. No source photograph authority changes.
+
 `tools/build-drawing-parquet.py` remains a historical export tool for older pinned
 site revisions. It rejects revisions containing the new selected-front map to
 prevent regeneration from the older primary-reference policy. Current derived
@@ -104,6 +139,7 @@ Run the dependency-free checks before publishing:
 
 ```console
 node --test tests/*.test.mjs
+node tools/validate-image-dedup.mjs
 node tools/validate.mjs
 ```
 
@@ -120,12 +156,15 @@ not treated as unverified matches merely because their status is proposed.
 Refresh it from the bundled, reviewed snapshot with
 `node tools/build-photograph-clarifications.mjs`; validation rejects a stale list.
 
-The photograph lookup generator's `--check` also requires the Git objects for
+The historical photograph lookup generator's `--check` also requires the Git objects for
 the lookup's `githubRevision` and Hugging Face `sourceRevision`. Use full-history
 checkouts, or fetch those exact commits before checking a shallow checkout.
 Inputs must retain their committed bytes; clone with `-c core.autocrlf=false`
 when local Git settings would convert line endings. A missing baseline object
 does not mean that the recorded baseline is invalid or should be replaced.
+For the current correction overlay, use `extend-selected-fronts.py --check` instead:
+it verifies the historical Git baseline and the current canonical Hugging Face
+inputs separately, without claiming the new projection existed in the old commit.
 
 The browser validates the bundled index before rendering it, retries transient
 same-origin failures with a bounded timeout, and offers a visible retry action
@@ -269,6 +308,10 @@ the main Hugging Face archive. Inline images remain the existing bounded JPEGs.
 download to the exact selected source hash and work ID. Labels distinguish
 native-resolution JPEGs, limited references and supplied source-resolution JPEGs.
 Original camera containers remain separate from their extracted renderings.
+An entry's optional full-SHA `media_revision` overrides the historical default.
+The five new entries resolve the published master-release ref to its exact commit;
+the 430 surviving earlier row objects and download URLs are preserved. `source_index`
+records the published manifest's exact revision, path and SHA-256.
 
 Validation checks the download-manifest hash and selected-source joins. If that
 manifest cannot load, the existing photograph display remains available.

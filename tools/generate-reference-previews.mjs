@@ -1,4 +1,5 @@
 import { LEGACY_REFERENCE_SHA256 } from "../assets/selected-fronts.js";
+import { referencePreviewPath } from "../assets/reference-preview-paths.js";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, readdir, unlink, writeFile } from "node:fs/promises";
 import { createRequire } from "node:module";
@@ -56,7 +57,8 @@ const queue = [...images.values()].sort((a, b) => a.sha256.localeCompare(b.sha25
 async function worker() {
   while (queue.length) {
     const image = queue.shift();
-    const output = join(directory, `${image.sha256}.jpg`);
+    const assetPath = referencePreviewPath(image.sha256);
+    const output = join(root, assetPath);
     const cached = reusable && previous.images?.[image.sha256];
     if (cached) {
       try {
@@ -67,6 +69,7 @@ async function worker() {
         }
       } catch { /* Regenerate a missing or damaged display preview. */ }
     }
+    if (assetPath.startsWith('selected-fronts/')) throw new Error('Shared preview requires its verified existing selected-front bytes');
     let source;
     for (let attempt = 0; attempt < 3; attempt += 1) {
       try {
@@ -102,7 +105,8 @@ await Promise.all([worker(), worker()]);
 // A failed source download/build must not retire the previous display set.
 let pruned = 0;
 for (const name of await readdir(directory)) {
-  if (/^[a-f0-9]{64}\.jpg$/.test(name) && !Object.hasOwn(previews, name.slice(0, -4))) {
+  if (/^[a-f0-9]{64}\.jpg$/.test(name) && (!Object.hasOwn(previews, name.slice(0, -4)) ||
+      referencePreviewPath(name.slice(0, -4)) !== `reference-previews/${name}`)) {
     await unlink(join(directory, name));
     pruned += 1;
   }
@@ -112,5 +116,6 @@ await writeFile(manifestPath, `${JSON.stringify({
   sourceRevision: lookup.sourceRevision,
   processing,
   images: Object.fromEntries(Object.entries(previews).sort(([a], [b]) => a.localeCompare(b))),
+  ...(previous?.workIdentityCorrection ? {workIdentityCorrection: previous.workIdentityCorrection} : {}),
 }, null, 2)}\n`);
 console.log(JSON.stringify({ previews: images.size, generated, pruned }));

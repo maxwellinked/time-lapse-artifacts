@@ -1,7 +1,7 @@
-import { loadPhotographDownloads } from "./photograph-downloads.js?v=20261024";
-// Generated display projection of the existing selected-front map; no source-evidence edits.
-export const SELECTED_FRONTS_SHA256 = "94b72b176dd807e80c89866b1cb7504c9136886ccbbb41a37f31141a21dff684";
-export const LEGACY_REFERENCE_SHA256 = "0b37614442ac40d6edfc3f33c4ec793e9bd039c25286ea8ceeccf6f1157b52af";
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=20261025-master-fronts";
+// Derived access projection: retained candidate plus the separately bound HF master supplement.
+export const SELECTED_FRONTS_SHA256 = "87172bd08fb37ea79a14df602c6327a3cb6dd9ca02ce65652850f1380b3d168a";
+export const LEGACY_REFERENCE_SHA256 = "d77111d6daa233178ce518cf5289ea3c0fad8a7c51bab65de5ab83fa3dc4a10c";
 const HASH = /^[a-f0-9]{64}$/;
 const WORK = /^tlaw-[a-f0-9]{16}$/;
 const LINK_PATH = "Work_Identity/work_record_links.csv";
@@ -65,7 +65,7 @@ export function applySelectedFronts(works, index) {
 }
 
 export async function loadSelectedFrontIndex(recordData, references, fetcher = globalThis.fetch, crypto = globalThis.crypto) {
-  const response = await fetcher("data/selected-fronts.json", {signal: AbortSignal.timeout(8000)});
+  const response = await fetcher(`data/selected-fronts.json?v=${SELECTED_FRONTS_SHA256}`, {signal: AbortSignal.timeout(8000)});
   if (!response.ok) throw new Error("Selected fronts unavailable");
   const bytes = await response.arrayBuffer();
   const hash = [...new Uint8Array(await crypto.subtle.digest("SHA-256", bytes))]

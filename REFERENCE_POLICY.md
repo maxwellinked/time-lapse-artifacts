@@ -9,14 +9,29 @@ orientation. Four previously approved source rotations are baked into these pixe
 and are not applied again by the UI. Two corrected assignments replace the selected
 fronts only; historical evidence remains versioned.
 
-The 431 selected fronts join to 1,205 Standard recordings through the existing work
+The 435 active selected fronts join to 1,256 Standard recordings through the existing work
 links. This asserts drawing identity and the selected photographed view, not a
 recording endpoint, timing calibration, complete process, or original-file quality.
 Pre-Standard records receive no invented work or photograph joins.
 
-At dataset revision ed96dab85dea93af4e3a36785a02b90fdeebb976, five additional
-registered drawings (51 recordings) are explicitly unselected. They remain
-browsable with no selected photograph; no photograph is inherited from another work.
+The 430 surviving earlier selected fronts retain their exact candidate and display bytes.
+Five further fronts (51 recordings) are derived from the directly owner-confirmed
+master release at the exact Hugging Face revision in `master_front_supplement`.
+The projection's separate `master_front_supplement` binds that source index and
+owner receipt; the old candidate hashes retain their original 431-work scope.
+No photograph is inherited from another work. The native master downloads and
+bounded display JPEGs have distinct hashes and representation roles.
+
+The separate `work_identity_correction` binds the creator's July 25 two-stage
+confirmation, correction ledger and current registry. Both recordings use active
+ID `tlaw-858a03eb138fbf47` and its existing selected display. Superseded ID
+`tlaw-b03bbfba8babbf3d` and its former selected display remain historical evidence;
+the current map counts the physical drawing once. Historical photograph fields,
+evidence classes and media pins are not relabeled or promoted by this overlay.
+
+Thirty-eight historical preview entries reuse byte-identical selected-front files
+through a validated local `assetPath`. Output hashes, source bindings and image
+bounds remain unchanged; reuse adds no photograph association or quality claim.
 
 The source-lookup policy below remains the contract for retained historical
 reference records and their qualified links. Its old display counts do not count
