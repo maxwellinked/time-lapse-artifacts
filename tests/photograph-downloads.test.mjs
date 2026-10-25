@@ -14,6 +14,18 @@ test('downloads use a pinned HF revision and preserve small display URLs',()=>{
  assert.equal(result.byWork[work].downloadLabel,'Download full-resolution JPEG');
  assert.equal(front.downloadUrl,undefined);
 });
+test('a source-specific media revision overrides the historical revision',()=>{
+ const m=manifest();m.rows[0].media_revision='e'.repeat(40);
+ const result=attachPhotographDownloads(index,m);
+ assert.match(result.byWork[work].downloadUrl,/resolve\/e{40}\//);
+ assert.equal(result.byRecord['tla-record'],result.byWork[work]);
+});
+test('a row cannot replace a pinned media revision with a branch or invalid value',()=>{
+ for(const revision of ['main','master-fronts-436-2026-10-25','',null]) {
+  const m=manifest();m.rows[0].media_revision=revision;
+  assert.throws(()=>attachPhotographDownloads(index,m));
+ }
+});
 test('rejects a different source for the same work',()=>{
  const m=manifest();m.rows[0].source_sha256='d'.repeat(64);
  assert.throws(()=>attachPhotographDownloads(index,m));

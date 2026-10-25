@@ -54,7 +54,7 @@ test("selection ambiguity, missing photographs and supplemental roles remain dis
   assert.deepEqual(clarificationReasons({ workId: null }, evidence, payload.sourceRevision), ["missing_work"]);
   collectClarifications(payload, lookup, evidence);
   assert.equal(JSON.stringify({ payload, lookup, evidence }), before);
-  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 632);
+  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 633);
 });
 
 test("the list rejects mixed snapshots and escapes archive text in recording links", () => {

@@ -4,6 +4,7 @@ import test from "node:test";
 import { runInNewContext } from "node:vm";
 import { getDisplayReference, referenceExclusion, describeReferenceLink } from "../assets/reference-policy.js";
 import { getPhotographDisplayRotation } from "../assets/photograph-orientation.js";
+import { referencePreviewPath } from "../assets/reference-preview-paths.js";
 
 const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
 const lookup = JSON.parse(readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8"));
@@ -29,7 +30,7 @@ function renderer(proof = evidence, loader = async () => lookup) {
   const state = { sourceRevision: lookup.sourceRevision, activeRecord: null };
   const render = runInNewContext(`${roleSource}\n${renderSource}\nrenderReference`, {
     elements, state, referenceGeneration: 0, getDisplayReference, referenceExclusion, describeReferenceLink,
-    getPhotographDisplayRotation,
+    getPhotographDisplayRotation, referencePreviewPath,
     // Exercise retained historical source rendering; selected-front rendering has its own integration test.
     loadSelectedFrontLookup: async () => null, getSelectedFrontForRecord: () => null,
     document: { createElement: (tag) => new Element(tag) }, loadReferenceLookup: loader,
@@ -55,7 +56,7 @@ test("owner-approved rotation follows the selected photograph without leaking to
 
 test("qualified links restore access while the strict population and source evidence stay unchanged", async () => {
   const before = JSON.stringify(lookup);
-  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 632);
+  assert.equal(Object.values(lookup.records).filter(getDisplayReference).length, 633);
   for (const [id, title] of [
     ["tla-f0885e72d6cf24d8", /inferred source variant/],
     ["tla-d9c55c2215a49da7", /Supported indirect reference/],

@@ -12,10 +12,10 @@ const previews = read("../reference-previews/manifest.json");
 test("groups the committed snapshot once per work without changing source evidence", () => {
   const before = JSON.stringify([data, references, previews]);
   const works = buildDrawingArchive(data, references, previews);
-  assert.equal(works.length, 436);
-  assert.equal(new Set(works.map((work) => work.workId)).size, 436);
+  assert.equal(works.length, 435);
+  assert.equal(new Set(works.map((work) => work.workId)).size, 435);
   assert.equal(works.filter((work) => work.photograph).length, 80);
-  assert.equal(works.filter((work) => work.status === "reference_review").length, 290);
+  assert.equal(works.filter((work) => work.status === "reference_review").length, 289);
   assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 66);
   assert.deepEqual(works.flatMap((work) => work.records.map((record) => record.recordId)).sort(),
     data.records.map((record) => record.recordId).sort());
@@ -44,7 +44,7 @@ test("withholds a work image if its recordings disagree about primary eligibilit
 
 test("large photographs require a correctly bound small preview and never fall back", () => {
   const works = buildDrawingArchive(data, references, previews);
-  const large = works.filter((work) => work.displayUrl?.startsWith("reference-previews/"));
+  const large = works.filter((work) => work.photograph && Math.max(Number(work.photograph.width_px),Number(work.photograph.height_px))>1024);
   assert.equal(large.length, 41);
   for (const work of large) {
     for (const replacement of [null, { ...previews.images[work.photograph.sha256], sourceUrl: "https://example.com/other.jpg" },
@@ -75,7 +75,7 @@ test("work links preserve every published candidate, evidence class and missing 
     else assert.ok(work.referenceLinks.length >= 1);
   }
   assert.deepEqual(counts, {
-    supplemental: 13, unresolved: 1,
+    supplemental: 12, unresolved: 1,
     provenance_bound_review_derivative: 53, exact_historical_reference_bytes: 223,
   });
   for (const work of works) {

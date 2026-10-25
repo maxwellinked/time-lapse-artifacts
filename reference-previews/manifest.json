@@ -18,7 +18,8 @@
       "sha256": "cbf48ab754af635aac32177f2335286a0d192d1407621fa6c3fb51a8e2a4edb2",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 194136
+      "sizeBytes": 194136,
+      "assetPath": "selected-fronts/tlaw-3c5a2cda1f8af4ed.jpg"
     },
     "023bc724c7b925da96bf071139fcb672fef5f8ba3c200235549ced6ac03027b8": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-9b6a8ec87c98db5b/023bc724c7b925da96bf0711.jpg",
@@ -32,28 +33,32 @@
       "sha256": "2cdd3bd75ca7b2ea46d3c9bac3579ee46417373ae7a84ce62b21e13841f3e299",
       "width": 1024,
       "height": 768,
-      "sizeBytes": 135187
+      "sizeBytes": 135187,
+      "assetPath": "selected-fronts/tlaw-a1b90fdd616142b5.jpg"
     },
     "0a3d27c7516081c5dfc4a8ca0e89f9ff006a7ef0ad71d14bb230dc7f91e64282": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-9cf28a70e60256c2/0a3d27c7516081c5dfc4a8ca.jpg",
       "sha256": "11678d8ef5f1a5e839d703a59eb1ccb1ddbbd087f6f5a61fd84fea793bc685af",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 145996
+      "sizeBytes": 145996,
+      "assetPath": "selected-fronts/tlaw-9cf28a70e60256c2.jpg"
     },
     "0b80edf0065922860b075015472c8de20e3963bdf8dbfb8d66f5f7b0ebc87d8c": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-c65e890e2b6c4829/0b80edf0065922860b075015.jpg",
       "sha256": "3fc67594930a6b6f1604f1fdf3a0d964c30993db51c3904894c4a1cd52cc68b5",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 162115
+      "sizeBytes": 162115,
+      "assetPath": "selected-fronts/tlaw-c65e890e2b6c4829.jpg"
     },
     "13751b0acb551ac36901fa900283e275d3bd2edcb963df660f9eeb6572b039f7": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-38b931288029860b/13751b0acb551ac36901fa90.jpg",
       "sha256": "3de34c0215997cb054b26d629a44481d7d90b47694b692391948195bc9896d1e",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 223223
+      "sizeBytes": 223223,
+      "assetPath": "selected-fronts/tlaw-38b931288029860b.jpg"
     },
     "1445de70227d1f06e5f8b6895261ca822e6ca16d305ed73b9c3fc20965904ef2": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1fe680c64d9801c2/1445de70227d1f06e5f8b689.jpg",
@@ -88,7 +93,8 @@
       "sha256": "438853763a2cf91597fc42dad1eb1be76da66e9025b7ffdea8aeb0335388ebd0",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 185204
+      "sizeBytes": 185204,
+      "assetPath": "selected-fronts/tlaw-f64d2298a03cb2ce.jpg"
     },
     "1c7a5a502f1fa1067529836b1f424ccd66e78d028777246aaa8e102d158564e0": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-19ab3db1a1bd0b5f/1c7a5a502f1fa1067529836b.jpg",
@@ -116,7 +122,8 @@
       "sha256": "c7e6c5e8023fb56129fd4fac6df852758c01136d6593180009fa35c5e26015ac",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 148499
+      "sizeBytes": 148499,
+      "assetPath": "selected-fronts/tlaw-b8c1e65c73b6678e.jpg"
     },
     "260b11d128f346221858a1bd495de9f56c1c524efeb32257b02887059f5d3fce": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-bfbd3ce7077df5ca/260b11d128f346221858a1bd.jpg",
@@ -144,7 +151,8 @@
       "sha256": "b14ddba56ed30f4fda3c21790e069c264c9f4bcea5be1fcad6c3435deece670f",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 143882
+      "sizeBytes": 143882,
+      "assetPath": "selected-fronts/tlaw-5c9756be8aced916.jpg"
     },
     "2e86a8e2fef07b85769444745f559e73a17bc75c4f442dea320d93ce25b37da8": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-aae074105457dc06/2e86a8e2fef07b8576944474.jpg",
@@ -179,7 +187,8 @@
       "sha256": "57c08b43e283538a51da66d1f97993b637ed7f4645357d417eaf63ac35cfcd4b",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 228605
+      "sizeBytes": 228605,
+      "assetPath": "selected-fronts/tlaw-16eaec1e76a631ac.jpg"
     },
     "383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3c632c55f324b287/383812a0374f75bfb4c8285b.jpg",
@@ -193,21 +202,24 @@
       "sha256": "7507b3952886e2d8683d0275989e7257e48934cdd8433031fe94973b9d30118d",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 189713
+      "sizeBytes": 189713,
+      "assetPath": "selected-fronts/tlaw-86f12eb653005457.jpg"
     },
     "4982a780f1f63c9f3ef841d51bbcf239693ad2bd3a51bbaa7406ab34496b0cf2": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-bff77ac26d12fc92/4982a780f1f63c9f3ef841d5.jpg",
       "sha256": "f1afbb9f0c97ef9915cb7ef2b639434499e733b102c5a98bd7088bf94cbf1fe3",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 175532
+      "sizeBytes": 175532,
+      "assetPath": "selected-fronts/tlaw-bff77ac26d12fc92.jpg"
     },
     "4a18a544e7cd1943fdfb9b9d5a1475b70b5d80eab370f896d032d169391299c8": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-ca69b6829d1ed22f/4a18a544e7cd1943fdfb9b9d.jpg",
       "sha256": "357888595b9419b72dc85399bf5bb97770fb0b085fdd7365069dc3b99adabeef",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 217311
+      "sizeBytes": 217311,
+      "assetPath": "selected-fronts/tlaw-ca69b6829d1ed22f.jpg"
     },
     "4f094304dcf3ff690265fa3594f7cd2cb2a49aba93ade18dbead65ba59131a54": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-608cc2ee8bf34c11/4f094304dcf3ff690265fa35.jpg",
@@ -221,14 +233,16 @@
       "sha256": "3190443d76a742c6c23ff051f809adfd260f89f06039c25b445372572e96ec54",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 132275
+      "sizeBytes": 132275,
+      "assetPath": "selected-fronts/tlaw-6a46483eabc0cf74.jpg"
     },
     "55202c9576ecdc5c617dc84a1cb2238d81b7f2baa64c3d73eb262851492ad5c4": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-03de49d37230a75a/55202c9576ecdc5c617dc84a.jpg",
       "sha256": "2a968cbf9df4693f421f6dce4887f3214cd1aebbea76d4fa67d2489225a76f74",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 204343
+      "sizeBytes": 204343,
+      "assetPath": "selected-fronts/tlaw-03de49d37230a75a.jpg"
     },
     "5cb6aaa715b0611754641ea0aed42d4c1f7c608954bf250060008ab12ab09ee7": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-97cb0020b7c7f3fe/5cb6aaa715b0611754641ea0.jpg",
@@ -263,7 +277,8 @@
       "sha256": "7b3ce10174e44ef78a75b7d0d0c0d28a2d8acb508f79e7ca60b3d70f07c6aa9c",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 138834
+      "sizeBytes": 138834,
+      "assetPath": "selected-fronts/tlaw-5c8e23c6cd5cbf10.jpg"
     },
     "76a5efe9c8e7140dbbad7c3de35bcff91f00c3dbc857f87060c941be836810df": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d2abf5591447c4cf/76a5efe9c8e7140dbbad7c3d.jpg",
@@ -277,7 +292,8 @@
       "sha256": "49e197fef767be245456f49f0283a6f69eeea6dadd6740fb2dedc7a824621ef5",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 110141
+      "sizeBytes": 110141,
+      "assetPath": "selected-fronts/tlaw-35a79d007a456769.jpg"
     },
     "79ef960949ab459f780f3d650eff2335e9926eb6178a78f96195b80a738ab981": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2e108882e6a577f4/79ef960949ab459f780f3d65.jpg",
@@ -291,7 +307,8 @@
       "sha256": "128def759e6c36388eebbf8fb86cbd788b34b24189dd43ad94e8de838f50ed75",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 205127
+      "sizeBytes": 205127,
+      "assetPath": "selected-fronts/tlaw-858a03eb138fbf47.jpg"
     },
     "7b8d2722c7eb0ff321a6115bea7d738281c94eb74c8581d4f53601c8668e4a72": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d93300bddbe18c01/7b8d2722c7eb0ff321a6115b.jpg",
@@ -319,7 +336,8 @@
       "sha256": "678b68f9e0aeb96afa8b4a71985b5bc9fdaa78a9f02a0143f111768123963128",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 148515
+      "sizeBytes": 148515,
+      "assetPath": "selected-fronts/tlaw-f7a4f15633d9e60c.jpg"
     },
     "853f36060c8422aad271dbe3015dc88471c979771604bff8793132e6a2051b47": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-472d22ce8c57765d/853f36060c8422aad271dbe3.jpg",
@@ -340,7 +358,8 @@
       "sha256": "dfe385440b40297a03a90ddedfe0c55bcf76cb37d88a9755c64d150e98e31c19",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 164579
+      "sizeBytes": 164579,
+      "assetPath": "selected-fronts/tlaw-3b35ae0eb5f961d1.jpg"
     },
     "8cb33fa0fc7c563a871bbeb57bf7f2b46728de41c9ad70bcd5df379e0c575592": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-791bbe1fb2ee5e4f/8cb33fa0fc7c563a871bbeb5.jpg",
@@ -396,21 +415,16 @@
       "sha256": "5ee745f15ef5efbb90a7bacb6a5196d802cd912a4d05a349647b521d7db64792",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 260147
-    },
-    "99480ccca77f2969a1f181b96793527f02fe5639d6c3e5e32cc6e4f0ab522b54": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-b03bbfba8babbf3d/99480ccca77f2969a1f181b9.jpg",
-      "sha256": "06cb066f789ae00a6337cdc969d09567f092b58a88df1fae17e79f2bb2787865",
-      "width": 768,
-      "height": 1024,
-      "sizeBytes": 35369
+      "sizeBytes": 260147,
+      "assetPath": "selected-fronts/tlaw-3a1f97419d4e98bd.jpg"
     },
     "9a1666fc99b5d6e34ffedffcccad265a21ecf8732e57d9607b5a8435f252c1dd": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-de5b317d67e455f7/9a1666fc99b5d6e34ffedffc.jpg",
       "sha256": "1c9800e33ae4704a04ffa7c55aaea41fcb00a2e9a538f2b78dc5490a8ce94dbb",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 157005
+      "sizeBytes": 157005,
+      "assetPath": "selected-fronts/tlaw-de5b317d67e455f7.jpg"
     },
     "9a1b4b64503f1d65c4d677c03d199308c2d830eba5161e3f326eed483c6837d3": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-38c45a927a2bacb6/9a1b4b64503f1d65c4d677c0.jpg",
@@ -438,7 +452,8 @@
       "sha256": "00cc0ff3c147fe1ba6560998cefef62ad43db8bd2699395bf954e81149dad803",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 175283
+      "sizeBytes": 175283,
+      "assetPath": "selected-fronts/tlaw-e1fc0e8d25170047.jpg"
     },
     "a7590ffc5afe04aaa73a276d1602fdf003a67fcd3dece016c1713a51fe8c9400": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-26fa28cf2857329d/a7590ffc5afe04aaa73a276d.jpg",
@@ -452,14 +467,16 @@
       "sha256": "533e2bcabf57a49727b9d6db7d5c773d1294c29da3b12faaaf8b79a8946298b6",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 203682
+      "sizeBytes": 203682,
+      "assetPath": "selected-fronts/tlaw-b5b0a88b4692e027.jpg"
     },
     "af47cbba0b3c0129421544cc98fb1801882a1a18498bdc91b35762199ff51036": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-5833401cddd8f48e/af47cbba0b3c0129421544cc.jpg",
       "sha256": "a144f4d59168c4b80a74ccb94d8b0eab68eee60c1e875e9eecff44f6cd74aa22",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 178028
+      "sizeBytes": 178028,
+      "assetPath": "selected-fronts/tlaw-5833401cddd8f48e.jpg"
     },
     "b7101a726643f0bccd90f547cfdfdc907b4084e210c201dde875c7b0a9e8354e": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-6df77e705cc3f78d/b7101a726643f0bccd90f547.jpg",
@@ -473,21 +490,24 @@
       "sha256": "78257ebeef947991425ee4aed617f846653890baf37701272e71bb6f5f6952e9",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 168466
+      "sizeBytes": 168466,
+      "assetPath": "selected-fronts/tlaw-8db68321d40ab0b8.jpg"
     },
     "bc3206563abe12ed8461b83e53a633e9318c8d7002cb6850385f490ef33be0dc": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-110a1832f358f7cc/bc3206563abe12ed8461b83e.jpg",
       "sha256": "4da008f1fa0595a04568100273a85a5adef6b0f334fb612140b1e4fdd1b8d117",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 170076
+      "sizeBytes": 170076,
+      "assetPath": "selected-fronts/tlaw-110a1832f358f7cc.jpg"
     },
     "c1b600e4cc6c53116048d734ca4cb6738b0b597282231dc7f9d483993d9712a4": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-4afbbe266e14c6ae/c1b600e4cc6c53116048d734.jpg",
       "sha256": "253fa1a1362b94ce62edf1cecca1c5b44046726b3bfdb256ca9e526637d0f4e4",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 142135
+      "sizeBytes": 142135,
+      "assetPath": "selected-fronts/tlaw-4afbbe266e14c6ae.jpg"
     },
     "c24524fc0dc6a2ae8f05175861733b246cbdf4954e4cedc9c4d80605eb651a42": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-27d91c3c3ca5d9e3/c24524fc0dc6a2ae8f051758.jpg",
@@ -522,7 +542,8 @@
       "sha256": "0c1504dbe86994f6b7a56c20da5605a6907101176ead150edb82422b963a84d9",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 132797
+      "sizeBytes": 132797,
+      "assetPath": "selected-fronts/tlaw-48fd2da5fde33251.jpg"
     },
     "cab4cb77b5761fc9a1b47645bf1997559701daf9453154af48fc90db1510887e": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d87ad2091a29ef58/cab4cb77b5761fc9a1b47645.jpg",
@@ -543,7 +564,8 @@
       "sha256": "f50a5c80d3d9837bb92549bfa032f3ac45a11fc25d8baf8d9b7cfd6e98d3560b",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 208165
+      "sizeBytes": 208165,
+      "assetPath": "selected-fronts/tlaw-bd21c3eb4aa77e8a.jpg"
     },
     "d240edc7bcf09cfeb29bc2125fac136ace49fc2bf8f751a6361ef0caee452668": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-494a5ce1d84077bd/d240edc7bcf09cfeb29bc212.jpg",
@@ -557,56 +579,64 @@
       "sha256": "3b911a12bd42894f234c59d6c198e5314d9be441111cc3e29382727ea3841fef",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 240326
+      "sizeBytes": 240326,
+      "assetPath": "selected-fronts/tlaw-efda767e54a09ff8.jpg"
     },
     "d806249aa506ec3cf022328b8bed0d349c8f3bc1a072becd000f2a9a00cb394b": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-498ba4236b8f3e42/d806249aa506ec3cf022328b.jpg",
       "sha256": "7ea7c77c09032e92cbe7a5557d34d85d938438886e46358f04f98e3fd7955db9",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 199789
+      "sizeBytes": 199789,
+      "assetPath": "selected-fronts/tlaw-498ba4236b8f3e42.jpg"
     },
     "d98f19b9d2b4a2871aed67b5d355776b73506b08433d97362e25e942bbfb8a88": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2298169195d8fe30/d98f19b9d2b4a2871aed67b5.jpg",
       "sha256": "ee3ef67915bcc0a4cfc154a97a3434d922c8ae5b48e4c07f1e0aa975a879fd1b",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 202288
+      "sizeBytes": 202288,
+      "assetPath": "selected-fronts/tlaw-2298169195d8fe30.jpg"
     },
     "db426ecd5810bbc19b5a841d06fac70bbd42604426425df9d77c1f756d6ffe9f": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-579e4906a048d2c2/db426ecd5810bbc19b5a841d.jpg",
       "sha256": "68a66d2a2fcf416068575e89d7520b20da9f5fe500998dfac9f1d91ca235f32a",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 157355
+      "sizeBytes": 157355,
+      "assetPath": "selected-fronts/tlaw-579e4906a048d2c2.jpg"
     },
     "dcfea6afa02c7bc29f77392c8483ddf9563870fe29900a6ed20b161a377811e8": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-e14ea05330961373/dcfea6afa02c7bc29f77392c.jpg",
       "sha256": "93678fc960ec6571616c952c24210475d28fa5f7edd1de1d2e86dfc190cb7647",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 172214
+      "sizeBytes": 172214,
+      "assetPath": "selected-fronts/tlaw-e14ea05330961373.jpg"
     },
     "dd962bce5c0ad908d277790b6937b4643d35323edf73bf15886ba1307ea22f05": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1ba168cee8c57491/dd962bce5c0ad908d277790b.jpg",
       "sha256": "38396e1fdd4ce9ac5cdd5a12e72f7d3d293512f3933f64f654900926d12b0eb5",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 177139
+      "sizeBytes": 177139,
+      "assetPath": "selected-fronts/tlaw-1ba168cee8c57491.jpg"
     },
     "e4657895f659ac99df9ed3bf7dea7b6ea90b37e49a4727955eca7d7bf81dd45f": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2a979ceabecd913e/e4657895f659ac99df9ed3bf.jpg",
       "sha256": "35663437ce2f29ace6f8efc3d27987034123dbb067978ec1f705206e5f164e27",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 146199
+      "sizeBytes": 146199,
+      "assetPath": "selected-fronts/tlaw-2a979ceabecd913e.jpg"
     },
     "eb5ffb1a425a5de4f2379d18295cd9fc278030cffe4b8e4469eca61bb9da37b6": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1788946c0d815f7a/eb5ffb1a425a5de4f2379d18.jpg",
       "sha256": "b6de3556b1973c527fe68f1a87832a34fd1f32b385d88efecd8d782543fe906b",
       "width": 767,
       "height": 1024,
-      "sizeBytes": 179458
+      "sizeBytes": 179458,
+      "assetPath": "selected-fronts/tlaw-1788946c0d815f7a.jpg"
     },
     "ee9fa982f60dfcbde51172d010e5847825b11940e838b7bd87b6eba05ef71f25": {
       "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-a0cfc4950a627158/ee9fa982f60dfcbde51172d0.jpg",
@@ -641,7 +671,30 @@
       "sha256": "c0f5eddd13f0a7607dabc4bd52acaaa3d4018074b34345af35b9d146ccdc2ee9",
       "width": 768,
       "height": 1024,
-      "sizeBytes": 107088
+      "sizeBytes": 107088,
+      "assetPath": "selected-fronts/tlaw-0a80992c0574443f.jpg"
     }
+  },
+  "workIdentityCorrection": {
+    "repository": "maxwellinked/time-lapse-artifacts",
+    "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+    "base_github_revision": "26392f5c981f1d3207414f819c88ab8dbd8dc30f",
+    "base_lookup_sha256": "0b37614442ac40d6edfc3f33c4ec793e9bd039c25286ea8ceeccf6f1157b52af",
+    "ledger": {
+      "path": "Work_Identity/index_identity_correction_2026-10-25-july-25.json",
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "0b92b00a9891bf284d25a0f0edcb28d5c91164f2d88a6f42988fe95b79b95352",
+      "bytes": 2152
+    },
+    "confirmation": {
+      "path": "Work_Identity/Confirmations/2026-10-25-july-25-two-stages.md",
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "7f6826dd7ebbdd7a3eeac13a7b88b5aff7460b45828db48f0b3eaaa337b52d32",
+      "bytes": 2808
+    },
+    "superseded_work_id": "tlaw-b03bbfba8babbf3d",
+    "survivor_work_id": "tlaw-858a03eb138fbf47",
+    "donor_record_id": "tla-109ffe803a4ae0b0",
+    "affected_record_id": "tla-933e757350798d34"
   }
 }

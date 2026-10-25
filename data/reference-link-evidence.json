@@ -1,15 +1,17 @@
 {
   "schemaVersion": 1,
   "sourceRevision": "0a323dd51ae7a2f5176dd5f85bcedd50cbc66420",
-  "lookupSha256": "0b37614442ac40d6edfc3f33c4ec793e9bd039c25286ea8ceeccf6f1157b52af",
+  "lookupSha256": "d77111d6daa233178ce518cf5289ea3c0fad8a7c51bab65de5ab83fa3dc4a10c",
   "sourceInputs": {
     "Work_Identity/works.csv": {
-      "sha256": "d2003bc977127f5a81c09d219f6a087a391429112bed8bfad3568261f0505c27",
-      "bytes": 196178
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "1e7d157ea2fe219af13e078da0185dedd93c89396304e035b721f6cdee8c87bb",
+      "bytes": 196999
     },
     "Work_Identity/work_record_links.csv": {
-      "sha256": "c67a11d4febf687b3e1e5ae9a3ff51bee51e5cfeebf101fba98e6604b85151eb",
-      "bytes": 431567
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b",
+      "bytes": 432363
     },
     "Physical_References/work_reference_status.csv": {
       "sha256": "12ffa5fd4fe4e4bacdc3055b86bdbcc9f00e9b22ec532f3bda9329b08b5ada2e",
@@ -2201,5 +2203,27 @@
       "surfaceScope": "front_surface",
       "caution": "Record link is confirmed; exact temporal endpoint equivalence is not independently encoded here."
     }
+  },
+  "workIdentityCorrection": {
+    "repository": "maxwellinked/time-lapse-artifacts",
+    "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+    "base_github_revision": "26392f5c981f1d3207414f819c88ab8dbd8dc30f",
+    "base_lookup_sha256": "0b37614442ac40d6edfc3f33c4ec793e9bd039c25286ea8ceeccf6f1157b52af",
+    "ledger": {
+      "path": "Work_Identity/index_identity_correction_2026-10-25-july-25.json",
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "0b92b00a9891bf284d25a0f0edcb28d5c91164f2d88a6f42988fe95b79b95352",
+      "bytes": 2152
+    },
+    "confirmation": {
+      "path": "Work_Identity/Confirmations/2026-10-25-july-25-two-stages.md",
+      "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
+      "sha256": "7f6826dd7ebbdd7a3eeac13a7b88b5aff7460b45828db48f0b3eaaa337b52d32",
+      "bytes": 2808
+    },
+    "superseded_work_id": "tlaw-b03bbfba8babbf3d",
+    "survivor_work_id": "tlaw-858a03eb138fbf47",
+    "donor_record_id": "tla-109ffe803a4ae0b0",
+    "affected_record_id": "tla-933e757350798d34"
   }
 }

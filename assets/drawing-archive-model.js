@@ -1,4 +1,5 @@
 import { getDisplayReference, describeReferenceLink } from "./reference-policy.js?v=20261020-public-display-derivatives";
+import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 
 // Presentation grouping only: the recording lookup supplies the existing work IDs.
 export function buildDrawingArchive(recordData, references, previews, evidence = null) {
@@ -53,7 +54,7 @@ export function buildDrawingArchive(recordData, references, previews, evidence =
         if (preview?.sourceUrl === image.fullResolutionUrl && /^[a-f0-9]{64}$/.test(preview.sha256 ?? "") &&
             preview.width > 0 && preview.height > 0 && Math.max(preview.width, preview.height) <= 1024 &&
             preview.sizeBytes > 0 && preview.sizeBytes <= 512 * 1024) {
-          displayUrl = `reference-previews/${image.sha256}.jpg`;
+          displayUrl = referencePreviewPath(image.sha256);
           displaySha256 = preview.sha256;
         }
       }

@@ -33,7 +33,7 @@ async function filter(records, lookup, values = { photograph: "with" }) {
     state, elements, PAGE_SIZE: 18, filterGeneration: 0,
     FormData: class { get(name) { return values[name] ?? ""; } },
     // Explicit resolver fixtures preserve the historical inclusion/exclusion cases.
-    // The production candidate's 1,205 joins are exercised by selected-fronts.test.mjs.
+    // The production projection's 1,256 joins are exercised by selected-fronts.test.mjs.
     loadSelectedFrontLookup: async () => { lookupLoads += 1; return {byRecord: Object.fromEntries(
       Object.entries(lookup.records).filter(([,entry]) => getDisplayReference(entry)).map(([id,entry]) => [id,entry.mainImage]))}; },
     getSelectedFrontForRecord,
@@ -44,11 +44,11 @@ async function filter(records, lookup, values = { photograph: "with" }) {
   return { records: state.filtered, lookupLoads };
 }
 
-test("the filter respects an explicit 632-entry resolver fixture without modifying its historical evidence", async () => {
+test("the filter respects the corrected 633-entry resolver without modifying its source evidence", async () => {
   const before = JSON.stringify(published);
   const result = await filter(payload.records, published);
   const ids = new Set(result.records.map((record) => record.recordId));
-  assert.equal(ids.size, 632);
+  assert.equal(ids.size, 633);
   for (const recordId of ids) {
     const entry = published.records[recordId];
     assert.equal(entry.selectionStatus, "primary_inspection");

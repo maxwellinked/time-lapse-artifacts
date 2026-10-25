@@ -1,4 +1,5 @@
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261025-canonical-metadata";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261025-master-fronts";
+import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
 import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel } from "./real-time-recordings.js?v=20261025";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
@@ -13,7 +14,7 @@ import {
 const DATA_URL = "data/records.json";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
-const REFERENCE_URL = "data/physical-references.json";
+const REFERENCE_URL = "data/physical-references.json?v=20261025-master-fronts";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
 let referenceEvidencePromise;
@@ -547,7 +548,7 @@ async function loadReferenceEvidence(lookupSha256) {
   if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
-      const response = await fetch("data/reference-link-evidence.json", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=20261025-master-fronts", { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Qualified-link evidence unavailable");
       const evidence = await response.json();
       if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {
@@ -728,7 +729,7 @@ async function renderReference(record) {
       elements.referenceStatus.textContent = "Loading photograph…";
       elements.referenceStage.append(photograph);
       elements.referenceStage.hidden = false;
-      photograph.src = useSource ? image.fullResolutionUrl : `reference-previews/${image.sha256}.jpg`;
+      photograph.src = useSource ? image.fullResolutionUrl : referencePreviewPath(image.sha256);
     }
     if (entry.referenceCount) {
       const photographs = [entry.mainImage, ...entry.additionalReferences].filter(Boolean);
