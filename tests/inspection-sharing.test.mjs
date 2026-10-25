@@ -120,7 +120,8 @@ test('only the exact nonempty #view= fragment form is accepted',()=>{
 test('unencoded, malformed, noncanonical and truncated payloads are rejected',()=>{
  const api=codec(),text=JSON.stringify(location()),hash=fragment(text);
  const invalid=['#view='+text,'#view=%','#view=%2','#view=%GG','#view=%C0%AF','#view=%ED%A0%80',
-  hash.replace('%7B','%7b'),hash.replace('%22','"'),hash.replace('schema','%73chema'),
+  // Deliberately malformed opening tokens, not a decoding or escaping function.
+  '#view=%7b'+hash.slice('#view=%7B'.length),'#view=%7B"'+hash.slice('#view=%7B%22'.length),hash.replace('schema','%73chema'),
   hash.slice(0,-1),hash.slice(0,-3),fragment(text.slice(0,-1)),
   '#view='+encodeURIComponent(encodeURIComponent(text)),fragment(text)+'+',fragment(text)+'%20 '];
  for(const input of invalid)assert.throws(()=>api.parseFragment(input,manifest),undefined,input.slice(0,70));
