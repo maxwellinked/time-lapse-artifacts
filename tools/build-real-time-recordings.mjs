@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { parseCsv } from "./parse-csv.mjs";
-import { REAL_TIME_REPOSITORY, REAL_TIME_FIELDS, validateRealTimePayload, realTimeSourceUrl, realTimeStatusLabel } from "../assets/real-time-recordings.js";
+import { REAL_TIME_REPOSITORY, REAL_TIME_FIELDS, validateRealTimePayload, realTimeSourceUrl, realTimeStatusLabel, realTimeDisplayFilename } from "../assets/real-time-recordings.js";
 
 const ROOT = new URL("../", import.meta.url);
 const INPUT_PATHS = ["Real_Time_Recordings/metadata.csv","Real_Time_Recordings/SHA256SUMS","Real_Time_Recordings/README.md","Real_Time_Recordings/SCHEMA.md"];
@@ -47,7 +47,7 @@ export function buildRealTimePage(payload, recordData) {
     const related = target ? `<a href="./#record=${escape(target.recordId)}">${escape(target.filename)}</a> <code>${escape(target.recordId)}</code>`
       : r.paired_record_id ? `<code>${escape(r.paired_record_id)}</code> — not included in this Standard browser snapshot` : "No related recording listed in the source index";
     return `<article id="${escape(r.record_id)}">
-<h2>${escape(r.original_filename)}</h2><p class="record-id"><strong>Real-time</strong> · <code>${escape(r.record_id)}</code></p>
+<h2>${escape(realTimeDisplayFilename(r))}</h2><p class="record-id"><strong>Real-time</strong> · <code>${escape(r.record_id)}</code></p>
 <p><a href="${source(r.file_name,"resolve")}">Open source MOV (${(Number(r.size_bytes)/1e9).toFixed(2)} GB)</a></p>
 <div class="relationship"><h3>Related time-lapse recording</h3><p>${related}</p><p><strong>${escape(realTimeStatusLabel(r.pairing_status))}</strong></p></div>
 <dl class="metadata">
@@ -59,7 +59,7 @@ ${entry("Demux check",realTimeStatusLabel(r.demux_status))}${entry("Work identit
 </dl>
 ${r.notes?`<h3>Source notes</h3><p class="notes">${escape(r.notes)}</p>`:""}
 <details><summary>File identity and encoded-stream details</summary><dl class="metadata">
-${entry("Repository path",r.file_name)}${entry("Size",r.size_bytes+" bytes")}${entry("SHA-256",r.sha256)}${entry("Hub Xet identity",r.hub_xet_hash)}
+${entry("Repository path",r.file_name)}${entry("Original filename",r.original_filename)}${entry("Size",r.size_bytes+" bytes")}${entry("SHA-256",r.sha256)}${entry("Hub Xet identity",r.hub_xet_hash)}
 ${entry("Video codec",r.video_codec)}${entry("Pixel format",r.pixel_format)}${entry("Time base",r.time_base)}${entry("Frame count",r.nb_frames)}
 </dl></details><p><a href="${source(INPUT_PATHS[0])}">Source metadata</a> · <a href="${source(INPUT_PATHS[2])}">Pairing and timestamp evidence</a> · <a href="#${escape(r.record_id)}">Link to this record</a></p>
 </article>`;
@@ -75,7 +75,7 @@ ${entry("Video codec",r.video_codec)}${entry("Pixel format",r.pixel_format)}${en
 <p>${payload.records.length} separately indexed MOV recordings, with their published metadata and candidate time-lapse relationships. Recording mode ${payload.recordingModeBasis === "source_metadata" ? "is read from the pinned source metadata" : "follows the documented collection"}.</p>
 <p>Encoded durations describe the media timeline. Candidate links retain their published status; they do not assign a work identity or a calibrated temporal alignment.</p>
 <p><a href="data/real-time-recordings.json">Download browser metadata (JSON)</a> · <a href="${source(INPUT_PATHS[0],"resolve")}">Source metadata (CSV)</a> · <a href="${source(INPUT_PATHS[3])}">Field definitions</a></p>
-<nav aria-label="Real-time records"><ul>${payload.records.map(r=>`<li><a href="#${escape(r.record_id)}">${escape(r.original_filename)}</a></li>`).join("")}</ul></nav>
+<nav aria-label="Real-time records"><ul>${payload.records.map(r=>`<li><a href="#${escape(r.record_id)}">${escape(realTimeDisplayFilename(r))}</a></li>`).join("")}</ul></nav>
 ${articles}
 <footer><p>Source snapshot: <a href="https://huggingface.co/datasets/${REAL_TIME_REPOSITORY}/tree/${revision}"><code>${revision}</code></a>. Full source values and the metadata/checksum bindings are retained in the JSON download.</p>
 <p><a href="https://huggingface.co/datasets/${REAL_TIME_REPOSITORY}">Source dataset</a> · <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> · <a href="./">Recording browser</a></p></footer>

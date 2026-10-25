@@ -1,7 +1,7 @@
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261025-master-fronts";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
-import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel } from "./real-time-recordings.js?v=20261025";
+import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
@@ -11,10 +11,10 @@ import {
   sortRecordsForDisplay,
 } from "./record-sequences.js";
 
-const DATA_URL = "data/records.json";
+const DATA_URL = "data/records.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
-const REFERENCE_URL = "data/physical-references.json?v=20261025-master-fronts";
+const REFERENCE_URL = "data/physical-references.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
 let referenceEvidencePromise;
@@ -108,7 +108,7 @@ const relatedRecordings = createRelatedRecordingsController({
     for (const record of result.records) {
       const line = document.createElement("p"), link = document.createElement("a");
       link.href = `real-time-recordings.html#${record.record_id}`;
-      link.textContent = record.original_filename;
+      link.textContent = realTimeDisplayFilename(record);
       line.append(link, ` — ${realTimeStatusLabel(record.pairing_status)}`);
       elements.relatedRecordings.append(line);
     }
@@ -548,7 +548,7 @@ async function loadReferenceEvidence(lookupSha256) {
   if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=20261025-master-fronts", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73", { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Qualified-link evidence unavailable");
       const evidence = await response.json();
       if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {

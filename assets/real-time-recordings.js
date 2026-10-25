@@ -67,6 +67,11 @@ export function relatedRealTimeRecords(payload, recordId) {
   return payload.records.filter(r => r.paired_record_id === recordId);
 }
 
+export function realTimeDisplayFilename(record) {
+  requireValue(PATH.test(record?.file_name ?? ""), "display filename");
+  return record.file_name.slice(record.file_name.lastIndexOf("/") + 1);
+}
+
 export async function loadRealTimeMetadata(recordData, fetchImpl = globalThis.fetch) {
   const response = await fetchImpl("data/real-time-recordings.json", {cache:"no-store", signal:AbortSignal.timeout(8000)});
   if (!response.ok) throw new Error(`Real-time index returned ${response.status}`);

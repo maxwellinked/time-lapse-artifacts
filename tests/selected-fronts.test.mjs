@@ -45,7 +45,10 @@ test("loader rejects any unbound projection bytes before exposing selected front
  const newWorks=['tlaw-7a19b1273991da19','tlaw-a826906a465003c2','tlaw-50afa6b8af39342d',
   'tlaw-8e64b069e2eff99d','tlaw-f857d7dc1b634939'];
  for(const workId of newWorks) {
-  assert.ok(ok.byWork[workId].downloadUrl.includes(`/resolve/${projection.master_front_supplement.revision}/`));
+  const sourceDownloads=JSON.parse(downloads);
+  const sourceRow=sourceDownloads.rows.find(row=>row.work_id===workId);
+  const expectedRevision=sourceRow.media_revision ?? sourceDownloads.media_revision;
+  assert.ok(ok.byWork[workId].downloadUrl.includes(`/resolve/${expectedRevision}/`));
   assert.equal(ok.byWork[workId].downloadLabel,'Download full-resolution JPEG');
  }
  assert.ok(requests.every(path=>/\.json\?v=[a-f0-9]{64}$/.test(path)));
