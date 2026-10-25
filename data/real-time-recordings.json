@@ -1,21 +1,21 @@
 {
   "schemaVersion": 1,
   "sourceRepository": "maxwellinked/time-lapse-artifacts",
-  "sourceRevision": "0a323dd51ae7a2f5176dd5f85bcedd50cbc66420",
+  "sourceRevision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
   "collection": "Real_Time_Recordings",
   "recordingModeBasis": "source_metadata",
   "sourceInputs": {
     "Real_Time_Recordings/metadata.csv": {
-      "sha256": "3a6d7d907df4ec8d3c268b25206878dadd062a4f511a03b2ac8711d3dbe99769",
-      "sizeBytes": 3364
+      "sha256": "dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b",
+      "sizeBytes": 3732
     },
     "Real_Time_Recordings/SHA256SUMS": {
-      "sha256": "74882df14014e53bf3a22659f0ae2e4a13826bd625bcf90ae8ef3f1c4c7525a6",
-      "sizeBytes": 547
+      "sha256": "e7373c5c2e903d65da23038b7acc0d8856b941fab8eb99177144db5a7cef873b",
+      "sizeBytes": 910
     },
     "Real_Time_Recordings/README.md": {
-      "sha256": "e59399bb2c95bc1d93b571f1d5609450b48a5d4b602c59b404b413dc9e5fda26",
-      "sizeBytes": 3715
+      "sha256": "9fe17e56564cf1a231aa6d6beec9755e781e52902a00085950854d6b41a28262",
+      "sizeBytes": 6010
     },
     "Real_Time_Recordings/SCHEMA.md": {
       "sha256": "dd9bdaf13e69e024bc79c6194a168dcaa999185a821d5ad245e5df870fc98ac4",
@@ -51,7 +51,7 @@
   "records": [
     {
       "record_id": "tla-086bbc187b9b862f",
-      "file_name": "Real_Time_Recordings/2026-10/IMG_E3206.MOV",
+      "file_name": "Real_Time_Recordings/2026-10/2026-10-20.1057.RealTime.Candidate.Rec01.tla-086bbc187b9b862f.Seq0548.c695fe3fc778.MOV",
       "original_filename": "IMG_E3206.MOV",
       "sha256": "c695fe3fc778f94f52e1d59939d4c870ad0f17989b1deeba280067f08dd07322",
       "hub_xet_hash": "085b2a09d2ccef9cd655c8fffa37f7080528ccf23759a40db47203d8315bcb83",
@@ -77,7 +77,7 @@
     },
     {
       "record_id": "tla-5cc8bff9d170577f",
-      "file_name": "Real_Time_Recordings/2026-10/IMG_E3221.MOV",
+      "file_name": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec01.tla-5cc8bff9d170577f.Seq0549.281ac10e7815.MOV",
       "original_filename": "IMG_E3221.MOV",
       "sha256": "281ac10e7815dae62e1f57a7b34b42fede760f849111ad1e48ebcd29fdb45427",
       "hub_xet_hash": "fcbe68a1bdb52e4a75da6396e6d13e58b0c944dca370cc24404e8e559f566995",
@@ -103,7 +103,7 @@
     },
     {
       "record_id": "tla-910c68c14d743e13",
-      "file_name": "Real_Time_Recordings/2026-10/IMG_3222.MOV",
+      "file_name": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec02.tla-910c68c14d743e13.Seq0545.d6e7a551d54d.MOV",
       "original_filename": "IMG_3222.MOV",
       "sha256": "d6e7a551d54d203fce283d1c0e4e08a08fbc2023cc4098de1b41b714e30423c5",
       "hub_xet_hash": "1e47521ac308c7950c4029d9dacacf85e8686421e8ec8a003466cde8942d1457",
@@ -129,7 +129,7 @@
     },
     {
       "record_id": "tla-1173f78b2c88e6ca",
-      "file_name": "Real_Time_Recordings/2026-10/IMG_3223.MOV",
+      "file_name": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec03.tla-1173f78b2c88e6ca.Seq0546.2973d1ab13cf.MOV",
       "original_filename": "IMG_3223.MOV",
       "sha256": "2973d1ab13cf114d738e2f1bd918717dbba049f7c326db30527c83196ef8d1a4",
       "hub_xet_hash": "3ad5fd7d446d146dc404effc43c1fc1cde5c935804f6bd45b7d9802cd5ef1e52",
@@ -155,7 +155,7 @@
     },
     {
       "record_id": "tla-32e62eed05b62568",
-      "file_name": "Real_Time_Recordings/2026-10/IMG_3225.MOV",
+      "file_name": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec05.tla-32e62eed05b62568.Seq0547.7d4cd6668ab3.MOV",
       "original_filename": "IMG_3225.MOV",
       "sha256": "7d4cd6668ab3b5d0fa0b8e91bca9b45c73a6cf3a92ae7e27095419c8df577739",
       "hub_xet_hash": "8c556d2b5c7881574880494f84d6968493e3dc459912326e9294e81ab4c23fda",

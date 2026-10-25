@@ -41,7 +41,7 @@ const processing = {
 };
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 const pinnedImagePath = (url) => typeof url === "string"
-  ? /^https:\/\/huggingface\.co\/datasets\/maxwellinked\/time-lapse-artifacts\/resolve\/[a-f0-9]{40}\/(Physical_References\/Photographs\/images\/tlaw-[a-f0-9]{16}\/[a-f0-9]{24}\.jpg)$/.exec(url)?.[1] : undefined;
+  ? /^https:\/\/huggingface\.co\/datasets\/maxwellinked\/time-lapse-artifacts\/resolve\/[a-f0-9]{40}\/(Physical_References\/Photographs\/images\/tlaw-[a-f0-9]{16}\/(?:[a-f0-9]{24}|(?:\d{4}-\d{2}-\d{2}(?:_to_\d{4}-\d{2}-\d{2})?|UnknownDate)\.(?:\d{4}|UnknownTime|MultipleTimes)\.PhotographReference\.(?:(?:Proposed|OwnerConfirmed)\.)?tlaw-[a-f0-9]{16}\.Seq\d{4,}\.[a-f0-9]{12})\.jpg)$/.exec(url)?.[1] : undefined;
 let previous;
 try { previous = JSON.parse(await readFile(manifestPath, "utf8")); }
 catch (error) { if (error.code !== "ENOENT") throw error; }

@@ -143,3 +143,9 @@ python tools/validate_metadata.py metadata.csv \
 - **`tools/enrich_prestandard.py`** — Reproduces Pre-Standard technical fields from pinned Hub inventory and MP4 container headers (uses HTTP range requests; does not download complete videos)
 - **`tools/capture_hub_inventory.py`** — Records Xet file IDs without following redirects or transferring payloads
 - **`tools/repair_metadata.py`** — Regenerates index from source plus audited additions
+
+## Media filename convention
+
+The source naming policy is maintained on Hugging Face in [Media_Naming/README.md](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/main/Media_Naming/README.md) and its checksum-bound rename map. Readable media names begin with their documented date/time context, followed by the media role and recording number where known. Photograph labels describe associated recording context, not photograph capture time. Candidate pairings, unknown dates/times, and multiple documented labels remain explicit. Original filenames, permanent IDs and media bytes are retained.
+
+`tools/migrate-media-names.py` prepares a bounded browser update from an immutable source migration commit and an immutable browser baseline. It verifies old/new LFS object identities, preserves selection and relationship evidence, copies authoritative download metadata with its declared media pins, updates current access bindings and cache versions, and preserves local derivative media bytes. Rebuild the real-time and photograph clarification pages and run the full validation suite before publishing the browser. Historical source URLs keep their original revision/path pairs.

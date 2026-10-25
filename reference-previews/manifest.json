@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "0a323dd51ae7a2f5176dd5f85bcedd50cbc66420",
+  "sourceRevision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
   "processing": {
     "sharp": "0.34.5",
     "libvips": "8.17.3",
@@ -14,7 +14,7 @@
   },
   "images": {
     "01bdf487b8ee934478b18275bee2b51eaaeefb127113683801baf9ba589f6ad4": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3c5a2cda1f8af4ed/01bdf487b8ee934478b18275.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3c5a2cda1f8af4ed/2026-08-25.1941.PhotographReference.OwnerConfirmed.tlaw-3c5a2cda1f8af4ed.Seq0113.01bdf487b8ee.jpg",
       "sha256": "cbf48ab754af635aac32177f2335286a0d192d1407621fa6c3fb51a8e2a4edb2",
       "width": 767,
       "height": 1024,
@@ -22,14 +22,14 @@
       "assetPath": "selected-fronts/tlaw-3c5a2cda1f8af4ed.jpg"
     },
     "023bc724c7b925da96bf071139fcb672fef5f8ba3c200235549ced6ac03027b8": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-9b6a8ec87c98db5b/023bc724c7b925da96bf0711.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-9b6a8ec87c98db5b/2025-07-25.1431.PhotographReference.Proposed.tlaw-9b6a8ec87c98db5b.Seq0273.023bc724c7b9.jpg",
       "sha256": "a601092b7925e99404573c32a54fb3851ae3d93b006f943c994d821ec9f3e176",
       "width": 768,
       "height": 1024,
       "sizeBytes": 235413
     },
     "0394d43b558792c6ae6f46887fa853d27140b8884932f31b27cc0eb8f63255e3": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-a1b90fdd616142b5/0394d43b558792c6ae6f4688.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-a1b90fdd616142b5/2026-08-24.0638.PhotographReference.OwnerConfirmed.tlaw-a1b90fdd616142b5.Seq0282.0394d43b5587.jpg",
       "sha256": "2cdd3bd75ca7b2ea46d3c9bac3579ee46417373ae7a84ce62b21e13841f3e299",
       "width": 1024,
       "height": 768,
@@ -37,7 +37,7 @@
       "assetPath": "selected-fronts/tlaw-a1b90fdd616142b5.jpg"
     },
     "0a3d27c7516081c5dfc4a8ca0e89f9ff006a7ef0ad71d14bb230dc7f91e64282": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-9cf28a70e60256c2/0a3d27c7516081c5dfc4a8ca.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-9cf28a70e60256c2/2026-09-01.1413.PhotographReference.OwnerConfirmed.tlaw-9cf28a70e60256c2.Seq0274.0a3d27c75160.jpg",
       "sha256": "11678d8ef5f1a5e839d703a59eb1ccb1ddbbd087f6f5a61fd84fea793bc685af",
       "width": 767,
       "height": 1024,
@@ -45,7 +45,7 @@
       "assetPath": "selected-fronts/tlaw-9cf28a70e60256c2.jpg"
     },
     "0b80edf0065922860b075015472c8de20e3963bdf8dbfb8d66f5f7b0ebc87d8c": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-c65e890e2b6c4829/0b80edf0065922860b075015.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-c65e890e2b6c4829/2026-08-18.0020.PhotographReference.OwnerConfirmed.tlaw-c65e890e2b6c4829.Seq0343.0b80edf00659.jpg",
       "sha256": "3fc67594930a6b6f1604f1fdf3a0d964c30993db51c3904894c4a1cd52cc68b5",
       "width": 768,
       "height": 1024,
@@ -53,7 +53,7 @@
       "assetPath": "selected-fronts/tlaw-c65e890e2b6c4829.jpg"
     },
     "13751b0acb551ac36901fa900283e275d3bd2edcb963df660f9eeb6572b039f7": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-38b931288029860b/13751b0acb551ac36901fa90.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-38b931288029860b/2026-08-03.2203.PhotographReference.OwnerConfirmed.tlaw-38b931288029860b.Seq0100.13751b0acb55.jpg",
       "sha256": "3de34c0215997cb054b26d629a44481d7d90b47694b692391948195bc9896d1e",
       "width": 768,
       "height": 1024,
@@ -61,35 +61,35 @@
       "assetPath": "selected-fronts/tlaw-38b931288029860b.jpg"
     },
     "1445de70227d1f06e5f8b6895261ca822e6ca16d305ed73b9c3fc20965904ef2": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1fe680c64d9801c2/1445de70227d1f06e5f8b689.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-1fe680c64d9801c2/2025-07-28.1424.PhotographReference.Proposed.tlaw-1fe680c64d9801c2.Seq0060.1445de70227d.jpg",
       "sha256": "4d6ae916187a88f2f9def3773afd9e28b9212723cabef2bfb5ac2141ffe6017c",
       "width": 768,
       "height": 1024,
       "sizeBytes": 186949
     },
     "1490a6193d8b8c0ec9e8906593e5afdd7ea4cd19ff8de720ae9cf885fd34f0f6": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2d67f7f4f897cb5b/1490a6193d8b8c0ec9e89065.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-2d67f7f4f897cb5b/2025-08-09.2210.PhotographReference.Proposed.tlaw-2d67f7f4f897cb5b.Seq0081.1490a6193d8b.jpg",
       "sha256": "7432157b804a9f2b0fb3c6f51f33f6c190e141d450db116b58ba36a8a3e28cff",
       "width": 768,
       "height": 1024,
       "sizeBytes": 143390
     },
     "16ada608357ff35df4abeb57f8e55681ad09b8add658c694413a1a0d023ed93f": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1e6a248d610042bb/16ada608357ff35df4abeb57.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-1e6a248d610042bb/2025-08-01.0849.PhotographReference.Proposed.tlaw-1e6a248d610042bb.Seq0058.16ada608357f.jpg",
       "sha256": "4640c86d2894ce40c3d885ce333a02ec29c67499896a67bf5d2ef4f5605bbc1b",
       "width": 768,
       "height": 1024,
       "sizeBytes": 245072
     },
     "19fabe984a5e45aacd60bda0cde68bb69744fd6a028f93dce8512fcdb49c5c8b": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-5bebd1b80927a35e/19fabe984a5e45aacd60bda0.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-5bebd1b80927a35e/2025-07-24.UnknownTime.PhotographReference.Proposed.tlaw-5bebd1b80927a35e.Seq0155.19fabe984a5e.jpg",
       "sha256": "22e1e2dca642aa1f934ecb05f34d9d94dc8e931720c100ef6af4e28618358e75",
       "width": 768,
       "height": 1024,
       "sizeBytes": 198134
     },
     "1bb5b33899b37d34cb181011e516211eccdf5f166e6417be02ed76b4e3b2127d": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-f64d2298a03cb2ce/1bb5b33899b37d34cb181011.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-f64d2298a03cb2ce/2026-09-22.1257.PhotographReference.OwnerConfirmed.tlaw-f64d2298a03cb2ce.Seq0429.1bb5b33899b3.jpg",
       "sha256": "438853763a2cf91597fc42dad1eb1be76da66e9025b7ffdea8aeb0335388ebd0",
       "width": 767,
       "height": 1024,
@@ -97,28 +97,28 @@
       "assetPath": "selected-fronts/tlaw-f64d2298a03cb2ce.jpg"
     },
     "1c7a5a502f1fa1067529836b1f424ccd66e78d028777246aaa8e102d158564e0": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-19ab3db1a1bd0b5f/1c7a5a502f1fa1067529836b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-19ab3db1a1bd0b5f/2026-08-27.0856.PhotographReference.OwnerConfirmed.tlaw-19ab3db1a1bd0b5f.Seq0049.1c7a5a502f1f.jpg",
       "sha256": "6f525efe4caf308991d0dc75d1400429d3b46eefaf7fee68837c4dfdb3e26315",
       "width": 768,
       "height": 1024,
       "sizeBytes": 47562
     },
     "21a501f092bb82f921c4ed4a93d000d9545dd67024ccaa1ea6df5cbe79e53350": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3af097fb83cca97d/21a501f092bb82f921c4ed4a.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3af097fb83cca97d/2025-08-22.1456.PhotographReference.Proposed.tlaw-3af097fb83cca97d.Seq0108.21a501f092bb.jpg",
       "sha256": "028c83c44ec51f1c215eb8e6604e1c561fc14e152212bf0b08f64dc6aa8d43c0",
       "width": 1024,
       "height": 768,
       "sizeBytes": 234074
     },
     "22418aea092e7f60553357058e0c71ddab2fc30fbed74f228624eae726419c90": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-f21cfff76f023062/22418aea092e7f6055335705.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-f21cfff76f023062/2025-11-13.1307.PhotographReference.Proposed.tlaw-f21cfff76f023062.Seq0424.22418aea092e.jpg",
       "sha256": "b3b57ab549053cdda613a7066e7763ce88173c29cf3bcfdee5acc90b6237ede1",
       "width": 768,
       "height": 1024,
       "sizeBytes": 252941
     },
     "252f6252bc53da90517d0b93820a2809147e04c4b0837eb0043435904936dff4": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-b8c1e65c73b6678e/252f6252bc53da90517d0b93.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-b8c1e65c73b6678e/2026-08-29.0254.PhotographReference.OwnerConfirmed.tlaw-b8c1e65c73b6678e.Seq0319.252f6252bc53.jpg",
       "sha256": "c7e6c5e8023fb56129fd4fac6df852758c01136d6593180009fa35c5e26015ac",
       "width": 768,
       "height": 1024,
@@ -126,28 +126,28 @@
       "assetPath": "selected-fronts/tlaw-b8c1e65c73b6678e.jpg"
     },
     "260b11d128f346221858a1bd495de9f56c1c524efeb32257b02887059f5d3fce": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-bfbd3ce7077df5ca/260b11d128f346221858a1bd.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-bfbd3ce7077df5ca/2025-08-24.1549.PhotographReference.Proposed.tlaw-bfbd3ce7077df5ca.Seq0330.260b11d128f3.jpg",
       "sha256": "4b92f8c24ee2fa957b70eaf6a628175e640f191d750f1983541022e5975549e1",
       "width": 768,
       "height": 1024,
       "sizeBytes": 226988
     },
     "2a69ffc43f59509882032f5b40154b5638002b6fffd1765748e6eb5fb1394c19": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-34a72ca73c2bebb9/2a69ffc43f59509882032f5b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-34a72ca73c2bebb9/2025-09-06.0714.PhotographReference.Proposed.tlaw-34a72ca73c2bebb9.Seq0094.2a69ffc43f59.jpg",
       "sha256": "fc04071b60e9082702ada61eaa39136863833168abd336354da8cb56d9ff7da0",
       "width": 768,
       "height": 1024,
       "sizeBytes": 198967
     },
     "2a960694a6b5e24ae0e27ad4096c8c359a33652e561ae5783e800c4ba1eab819": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-46ddeaf1d3269931/2a960694a6b5e24ae0e27ad4.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-46ddeaf1d3269931/2025-08-19.1614.PhotographReference.Proposed.tlaw-46ddeaf1d3269931.Seq0121.2a960694a6b5.jpg",
       "sha256": "7bca072ba1e52abdf31647b8f0a3bd727b3a8d13be52187b58c058e5cff583e4",
       "width": 1024,
       "height": 768,
       "sizeBytes": 233276
     },
     "2cc2c0a68cddc79f53c29f395eee0ca158e9619c53e75fb989d561564bc19b7c": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-5c9756be8aced916/2cc2c0a68cddc79f53c29f39.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-5c9756be8aced916/2026-09-01.2356.PhotographReference.OwnerConfirmed.tlaw-5c9756be8aced916.Seq0160.2cc2c0a68cdd.jpg",
       "sha256": "b14ddba56ed30f4fda3c21790e069c264c9f4bcea5be1fcad6c3435deece670f",
       "width": 767,
       "height": 1024,
@@ -155,35 +155,35 @@
       "assetPath": "selected-fronts/tlaw-5c9756be8aced916.jpg"
     },
     "2e86a8e2fef07b85769444745f559e73a17bc75c4f442dea320d93ce25b37da8": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-aae074105457dc06/2e86a8e2fef07b8576944474.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-aae074105457dc06/2025-09-13.0411.PhotographReference.Proposed.tlaw-aae074105457dc06.Seq0296.2e86a8e2fef0.jpg",
       "sha256": "48fae376f0e044170e4c957bdc4ce05041cd087a6cbbe831f33ab55fd0ee5452",
       "width": 1024,
       "height": 768,
       "sizeBytes": 185575
     },
     "2f9214f0c3c09eda6d6dbb4b24eb5b5e18f5ce571e93d3d3799d463662edc85b": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2e802d659a20d68c/2f9214f0c3c09eda6d6dbb4b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-2e802d659a20d68c/2025-08-23.1030.PhotographReference.Proposed.tlaw-2e802d659a20d68c.Seq0085.2f9214f0c3c0.jpg",
       "sha256": "b6399c8b2c853c1c368c905f534df2e101e66e31798e0ff5f3355e6587e6ba72",
       "width": 768,
       "height": 1024,
       "sizeBytes": 227402
     },
     "30ff277210b2028d05bd36c1b4dab4c8111fb422a4315723181287232cf3f376": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-406e7dd53d42c6b0/30ff277210b2028d05bd36c1.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-406e7dd53d42c6b0/2025-08-26.1735.PhotographReference.Proposed.tlaw-406e7dd53d42c6b0.Seq0116.30ff277210b2.jpg",
       "sha256": "089b5a3405ea8b2b8e74514d88f3ec527e8130b112a2a9986bf6385250c96210",
       "width": 768,
       "height": 1024,
       "sizeBytes": 240230
     },
     "351f120f8468765d7e670201f1391235c6710fca5b4a5b72d42da3d47d2dfe59": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-dca7503a7fcfb840/351f120f8468765d7e670201.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-dca7503a7fcfb840/2025-07-21.0429.PhotographReference.Proposed.tlaw-dca7503a7fcfb840.Seq0380.351f120f8468.jpg",
       "sha256": "ef89afbee100effb3194d6f24e3186f3fe58d437fc72c75b6260607dce11a9a4",
       "width": 768,
       "height": 1024,
       "sizeBytes": 288845
     },
     "3665478b748fc25fd26091b2a19d45c594f62198dc91cc4981d6f7b07ac366e7": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-16eaec1e76a631ac/3665478b748fc25fd26091b2.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-16eaec1e76a631ac/2026-08-24.0157.PhotographReference.OwnerConfirmed.tlaw-16eaec1e76a631ac.Seq0044.3665478b748f.jpg",
       "sha256": "57c08b43e283538a51da66d1f97993b637ed7f4645357d417eaf63ac35cfcd4b",
       "width": 768,
       "height": 1024,
@@ -191,14 +191,14 @@
       "assetPath": "selected-fronts/tlaw-16eaec1e76a631ac.jpg"
     },
     "383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3c632c55f324b287/383812a0374f75bfb4c8285b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3c632c55f324b287/2026-08-05.1920.PhotographReference.OwnerConfirmed.tlaw-3c632c55f324b287.Seq0114.383812a0374f.jpg",
       "sha256": "a4b2c4059c6814a348896021689739ec5a4847426a30329924462b9297a7aca8",
       "width": 1024,
       "height": 768,
       "sizeBytes": 234698
     },
     "448a71d6a62c023def48232d9b3185ea769c39ce2d8b7b57ab47a5a8bbb20cbd": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-86f12eb653005457/448a71d6a62c023def48232d.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-86f12eb653005457/2026-08-29.1450.PhotographReference.OwnerConfirmed.tlaw-86f12eb653005457.Seq0235.448a71d6a62c.jpg",
       "sha256": "7507b3952886e2d8683d0275989e7257e48934cdd8433031fe94973b9d30118d",
       "width": 768,
       "height": 1024,
@@ -206,7 +206,7 @@
       "assetPath": "selected-fronts/tlaw-86f12eb653005457.jpg"
     },
     "4982a780f1f63c9f3ef841d51bbcf239693ad2bd3a51bbaa7406ab34496b0cf2": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-bff77ac26d12fc92/4982a780f1f63c9f3ef841d5.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-bff77ac26d12fc92/2026-08-31.0732.PhotographReference.OwnerConfirmed.tlaw-bff77ac26d12fc92.Seq0333.4982a780f1f6.jpg",
       "sha256": "f1afbb9f0c97ef9915cb7ef2b639434499e733b102c5a98bd7088bf94cbf1fe3",
       "width": 768,
       "height": 1024,
@@ -214,7 +214,7 @@
       "assetPath": "selected-fronts/tlaw-bff77ac26d12fc92.jpg"
     },
     "4a18a544e7cd1943fdfb9b9d5a1475b70b5d80eab370f896d032d169391299c8": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-ca69b6829d1ed22f/4a18a544e7cd1943fdfb9b9d.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-ca69b6829d1ed22f/2026-08-31.0009.PhotographReference.OwnerConfirmed.tlaw-ca69b6829d1ed22f.Seq0350.4a18a544e7cd.jpg",
       "sha256": "357888595b9419b72dc85399bf5bb97770fb0b085fdd7365069dc3b99adabeef",
       "width": 768,
       "height": 1024,
@@ -222,14 +222,14 @@
       "assetPath": "selected-fronts/tlaw-ca69b6829d1ed22f.jpg"
     },
     "4f094304dcf3ff690265fa3594f7cd2cb2a49aba93ade18dbead65ba59131a54": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-608cc2ee8bf34c11/4f094304dcf3ff690265fa35.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-608cc2ee8bf34c11/2025-07-26.0710.PhotographReference.Proposed.tlaw-608cc2ee8bf34c11.Seq0173.4f094304dcf3.jpg",
       "sha256": "af16d9c62bf1fb5794d771fd52e5f6606805755519361a87c5575e7b21dcaaef",
       "width": 768,
       "height": 1024,
       "sizeBytes": 197843
     },
     "531479512e7a01e61485923f51fdd21679ec3957466aea07aa33217d45ccee69": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-6a46483eabc0cf74/531479512e7a01e61485923f.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-6a46483eabc0cf74/2026-09-01.0237.PhotographReference.OwnerConfirmed.tlaw-6a46483eabc0cf74.Seq0188.531479512e7a.jpg",
       "sha256": "3190443d76a742c6c23ff051f809adfd260f89f06039c25b445372572e96ec54",
       "width": 767,
       "height": 1024,
@@ -237,7 +237,7 @@
       "assetPath": "selected-fronts/tlaw-6a46483eabc0cf74.jpg"
     },
     "55202c9576ecdc5c617dc84a1cb2238d81b7f2baa64c3d73eb262851492ad5c4": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-03de49d37230a75a/55202c9576ecdc5c617dc84a.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-03de49d37230a75a/2026-09-26.1946.PhotographReference.OwnerConfirmed.tlaw-03de49d37230a75a.Seq0016.55202c9576ec.jpg",
       "sha256": "2a968cbf9df4693f421f6dce4887f3214cd1aebbea76d4fa67d2489225a76f74",
       "width": 767,
       "height": 1024,
@@ -245,35 +245,35 @@
       "assetPath": "selected-fronts/tlaw-03de49d37230a75a.jpg"
     },
     "5cb6aaa715b0611754641ea0aed42d4c1f7c608954bf250060008ab12ab09ee7": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-97cb0020b7c7f3fe/5cb6aaa715b0611754641ea0.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-97cb0020b7c7f3fe/2025-08-24.2028.PhotographReference.Proposed.tlaw-97cb0020b7c7f3fe.Seq0266.5cb6aaa715b0.jpg",
       "sha256": "3a4eedc764b638e37f9ae937a78e154cdbe36cd8896d510ec84d5cc182eef01b",
       "width": 768,
       "height": 1024,
       "sizeBytes": 254017
     },
     "626287ed757eedfecf00f99f3999e0659224f540b7512e9828f69e59e2e93415": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-909a9425b0bd951c/626287ed757eedfecf00f99f.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-909a9425b0bd951c/2025-08-13.0015.PhotographReference.Proposed.tlaw-909a9425b0bd951c.Seq0259.626287ed757e.jpg",
       "sha256": "416a3d5407073d67a23a8afb400d0dbec20ea9fb7e4d79b0d23709aa772a0dba",
       "width": 768,
       "height": 1024,
       "sizeBytes": 213713
     },
     "63ce803cc84ad6c2d8c06732bf4c8bd1a49abc7016f5deffbb081b209cb8594d": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-8ed51abe0c1af69b/63ce803cc84ad6c2d8c06732.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-8ed51abe0c1af69b/2025-07-29.0927.PhotographReference.Proposed.tlaw-8ed51abe0c1af69b.Seq0255.63ce803cc84a.jpg",
       "sha256": "41a21830dc2909330ac2c446937f6bb041f353df065214bc5d8635b36e64b89e",
       "width": 768,
       "height": 1024,
       "sizeBytes": 238527
     },
     "6432e0f143285505979b9b4016d10ec6a2902681295e5f0afd333596de08e5c1": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2ab948acbe85d4b7/6432e0f143285505979b9b40.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-2ab948acbe85d4b7/2025-08-27.0324.PhotographReference.Proposed.tlaw-2ab948acbe85d4b7.Seq0080.6432e0f14328.jpg",
       "sha256": "8846ab37ebb8d00df2bc81e341c95879334d7fa40b49b9e2883a33640f1a0ceb",
       "width": 767,
       "height": 1024,
       "sizeBytes": 228866
     },
     "74d8e9beecc7ff120fb754052516f7ad347c62371d400101d676688ca6481923": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-5c8e23c6cd5cbf10/74d8e9beecc7ff120fb75405.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-5c8e23c6cd5cbf10/2026-09-02.0813.PhotographReference.OwnerConfirmed.tlaw-5c8e23c6cd5cbf10.Seq0157.74d8e9beecc7.jpg",
       "sha256": "7b3ce10174e44ef78a75b7d0d0c0d28a2d8acb508f79e7ca60b3d70f07c6aa9c",
       "width": 767,
       "height": 1024,
@@ -281,14 +281,14 @@
       "assetPath": "selected-fronts/tlaw-5c8e23c6cd5cbf10.jpg"
     },
     "76a5efe9c8e7140dbbad7c3de35bcff91f00c3dbc857f87060c941be836810df": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d2abf5591447c4cf/76a5efe9c8e7140dbbad7c3d.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-d2abf5591447c4cf/2025-10-04.1334.PhotographReference.Proposed.tlaw-d2abf5591447c4cf.Seq0362.76a5efe9c8e7.jpg",
       "sha256": "e8597edeba88cdd1eecd9f3e1940f6b3af0c4b05ddf1281480d22934b0eb431f",
       "width": 768,
       "height": 1024,
       "sizeBytes": 111618
     },
     "78ca4d08515a33e810fc5ebebcc6379bb3a2b3a2731fc124c3e1a181171732e8": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-35a79d007a456769/78ca4d08515a33e810fc5ebe.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-35a79d007a456769/2026-08-31.1039.PhotographReference.OwnerConfirmed.tlaw-35a79d007a456769.Seq0096.78ca4d08515a.jpg",
       "sha256": "49e197fef767be245456f49f0283a6f69eeea6dadd6740fb2dedc7a824621ef5",
       "width": 768,
       "height": 1024,
@@ -296,14 +296,14 @@
       "assetPath": "selected-fronts/tlaw-35a79d007a456769.jpg"
     },
     "79ef960949ab459f780f3d650eff2335e9926eb6178a78f96195b80a738ab981": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2e108882e6a577f4/79ef960949ab459f780f3d65.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-2e108882e6a577f4/2026-07-01.UnknownTime.PhotographReference.OwnerConfirmed.tlaw-2e108882e6a577f4.Seq0084.79ef960949ab.jpg",
       "sha256": "cdeddbb0468e8ccf2b0f00016246a5cfab6700c0fcb608901c2a22e2756d3286",
       "width": 767,
       "height": 1024,
       "sizeBytes": 51258
     },
     "7a00fa45143e592678587da5c4807d56b785f3998bc890674a40dcf1b3dcac8d": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-858a03eb138fbf47/7a00fa45143e592678587da5.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-858a03eb138fbf47/2026-07-25.MultipleTimes.PhotographReference.OwnerConfirmed.tlaw-858a03eb138fbf47.Seq0232.7a00fa45143e.jpg",
       "sha256": "128def759e6c36388eebbf8fb86cbd788b34b24189dd43ad94e8de838f50ed75",
       "width": 768,
       "height": 1024,
@@ -311,28 +311,28 @@
       "assetPath": "selected-fronts/tlaw-858a03eb138fbf47.jpg"
     },
     "7b8d2722c7eb0ff321a6115bea7d738281c94eb74c8581d4f53601c8668e4a72": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d93300bddbe18c01/7b8d2722c7eb0ff321a6115b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-d93300bddbe18c01/2025-07-27.UnknownTime.PhotographReference.Proposed.tlaw-d93300bddbe18c01.Seq0374.7b8d2722c7eb.jpg",
       "sha256": "414ea70b9094910d4e9e3e7b6a4fbf81c04fd395a03f91279297d4e205468783",
       "width": 1024,
       "height": 768,
       "sizeBytes": 255148
     },
     "7d8f3bac0b398879f2c026eee0b599b9f8abc194ab67c8db6cfd30233e8f8487": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d4a4a1d3ab3d9c1b/7d8f3bac0b398879f2c026ee.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-d4a4a1d3ab3d9c1b/2025-09-18.1156.PhotographReference.Proposed.tlaw-d4a4a1d3ab3d9c1b.Seq0368.7d8f3bac0b39.jpg",
       "sha256": "6d3a5bc27bef8dea577e8f975e1ab62cddb124d310d002daa2a70e62b86269b7",
       "width": 1024,
       "height": 768,
       "sizeBytes": 205784
     },
     "7e1b0201a7b4e8dcb4004b7d6cc36c25ec17f963a4046e84625822bc3261c14b": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-9f432d60610a18ea/7e1b0201a7b4e8dcb4004b7d.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-9f432d60610a18ea/2025-08-05.1348.PhotographReference.Proposed.tlaw-9f432d60610a18ea.Seq0277.7e1b0201a7b4.jpg",
       "sha256": "6480424fd520169214860c51f6e249b3e2d82bdde1af3561eec57d60e09b7578",
       "width": 768,
       "height": 1024,
       "sizeBytes": 170243
     },
     "82267b71093f9ffe540e9bffe9339614d86176d06ec57a07901491191301b4c4": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-f7a4f15633d9e60c/82267b71093f9ffe540e9bff.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-f7a4f15633d9e60c/2026-09-21.1931.PhotographReference.OwnerConfirmed.tlaw-f7a4f15633d9e60c.Seq0433.82267b71093f.jpg",
       "sha256": "678b68f9e0aeb96afa8b4a71985b5bc9fdaa78a9f02a0143f111768123963128",
       "width": 767,
       "height": 1024,
@@ -340,21 +340,21 @@
       "assetPath": "selected-fronts/tlaw-f7a4f15633d9e60c.jpg"
     },
     "853f36060c8422aad271dbe3015dc88471c979771604bff8793132e6a2051b47": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-472d22ce8c57765d/853f36060c8422aad271dbe3.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-472d22ce8c57765d/2025-08-22.UnknownTime.PhotographReference.Proposed.tlaw-472d22ce8c57765d.Seq0124.853f36060c84.jpg",
       "sha256": "d0895191d7405aa5ab32348f602f4748527df9bb89b1a1c0ff3241858e0edf53",
       "width": 768,
       "height": 1024,
       "sizeBytes": 257699
     },
     "8c2407eca8240bbc1ed4e552532619ae96a5eba7bbc2f463bebcaf21da5bedfd": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-55979e805f2bab33/8c2407eca8240bbc1ed4e552.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-55979e805f2bab33/2025-12-02.2254.PhotographReference.Proposed.tlaw-55979e805f2bab33.Seq0143.8c2407eca824.jpg",
       "sha256": "20aa62a1484dd1a9d526695f6c52b2fe09a0fd6d5999a91dd2499ee4082e55d7",
       "width": 768,
       "height": 1024,
       "sizeBytes": 194270
     },
     "8c88b28e8716ba7ff4d5dcf3649d32f03c1df5940f8e51e84da0a9f26db5b204": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3b35ae0eb5f961d1/8c88b28e8716ba7ff4d5dcf3.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3b35ae0eb5f961d1/2026-08-30.1712.PhotographReference.OwnerConfirmed.tlaw-3b35ae0eb5f961d1.Seq0111.8c88b28e8716.jpg",
       "sha256": "dfe385440b40297a03a90ddedfe0c55bcf76cb37d88a9755c64d150e98e31c19",
       "width": 768,
       "height": 1024,
@@ -362,56 +362,56 @@
       "assetPath": "selected-fronts/tlaw-3b35ae0eb5f961d1.jpg"
     },
     "8cb33fa0fc7c563a871bbeb57bf7f2b46728de41c9ad70bcd5df379e0c575592": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-791bbe1fb2ee5e4f/8cb33fa0fc7c563a871bbeb5.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-791bbe1fb2ee5e4f/2025-08-06.UnknownTime.PhotographReference.Proposed.tlaw-791bbe1fb2ee5e4f.Seq0213.8cb33fa0fc7c.jpg",
       "sha256": "623f6f3ca7b861ef446b40cbd2be93e60e35fc26c4a33cc9d02a48baa0f1feeb",
       "width": 768,
       "height": 1024,
       "sizeBytes": 191320
     },
     "8cc58ab1fba791bb416ffc532be2a5ac07a9f91eaf5eed143f40d8e99d2f961c": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d88aabcaa3ecec31/8cc58ab1fba791bb416ffc53.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-d88aabcaa3ecec31/2026-08-29.0602.PhotographReference.OwnerConfirmed.tlaw-d88aabcaa3ecec31.Seq0373.8cc58ab1fba7.jpg",
       "sha256": "010f9e23931745c2f08ebf46baf45a3fd797eaa30e7a7ef3058febfbd9b6d427",
       "width": 768,
       "height": 1024,
       "sizeBytes": 42559
     },
     "90c517ea018aec2b387f02b9c3d925ae77c2a40bb14700fb211b622e0bd10aa7": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-a1e1ab8a7199f1a1/90c517ea018aec2b387f02b9.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-a1e1ab8a7199f1a1/2025-08-25.1700.PhotographReference.Proposed.tlaw-a1e1ab8a7199f1a1.Seq0283.90c517ea018a.jpg",
       "sha256": "c2fbadec5678f00875bd8b974c323546e771c60f62a64aff70ab3311779f72fe",
       "width": 1024,
       "height": 768,
       "sizeBytes": 201399
     },
     "914e627c594c8d12c4834fddeccb2b31110de46e0b8dcdbfec0cbc052f474d3d": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-6890eb803a6f504c/914e627c594c8d12c4834fdd.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-6890eb803a6f504c/2025-09-22.0252.PhotographReference.Proposed.tlaw-6890eb803a6f504c.Seq0182.914e627c594c.jpg",
       "sha256": "78b6d11fe79c8aa5ed9559ce161cdb1ed15b8de456615a7f023900743107fabe",
       "width": 768,
       "height": 1024,
       "sizeBytes": 235347
     },
     "91a0ce7814f1df29198b718886675033e20f089f11d5c62becfbdfc00f5e716c": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-472b6176735b8ab7/91a0ce7814f1df29198b7188.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-472b6176735b8ab7/2025-07-31.1448.PhotographReference.Proposed.tlaw-472b6176735b8ab7.Seq0123.91a0ce7814f1.jpg",
       "sha256": "489c80ea8192fcafa5125859a2dca8c44c02e796c485df66efe0e60cada19d9c",
       "width": 1024,
       "height": 768,
       "sizeBytes": 237323
     },
     "92b45f96b8e51ba463633e1868fe8dee2ed3547a827a3e074ea482a6b43f7287": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-273721735ceb6374/92b45f96b8e51ba463633e18.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-273721735ceb6374/2025-07-23.1724.PhotographReference.Proposed.tlaw-273721735ceb6374.Seq0076.92b45f96b8e5.jpg",
       "sha256": "742972e4dba64e816b70f2575c755c90c481fc4e404eb73f5fb13a1c88d0a087",
       "width": 768,
       "height": 1024,
       "sizeBytes": 317056
     },
     "9485ea41a2e2a220ade6d5c01f096f2010a2639765edbf20b2dd6d553d3bb31a": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-a64ee074d6f16f5a/9485ea41a2e2a220ade6d5c0.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-a64ee074d6f16f5a/2025-07-16.0953.PhotographReference.Proposed.tlaw-a64ee074d6f16f5a.Seq0290.9485ea41a2e2.jpg",
       "sha256": "3adb7bd279ea412eb3efe2882a826cb00ec7a45001370e285be0374b05e0ac91",
       "width": 1024,
       "height": 768,
       "sizeBytes": 230775
     },
     "95b196a5de656ecd592465acb734e72e021bb45277eb7126378c7b1532323e47": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3a1f97419d4e98bd/95b196a5de656ecd592465ac.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3a1f97419d4e98bd/2025-09-21.1754.PhotographReference.OwnerConfirmed.tlaw-3a1f97419d4e98bd.Seq0105.95b196a5de65.jpg",
       "sha256": "5ee745f15ef5efbb90a7bacb6a5196d802cd912a4d05a349647b521d7db64792",
       "width": 768,
       "height": 1024,
@@ -419,7 +419,7 @@
       "assetPath": "selected-fronts/tlaw-3a1f97419d4e98bd.jpg"
     },
     "9a1666fc99b5d6e34ffedffcccad265a21ecf8732e57d9607b5a8435f252c1dd": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-de5b317d67e455f7/9a1666fc99b5d6e34ffedffc.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-de5b317d67e455f7/2026-08-26.1229.PhotographReference.OwnerConfirmed.tlaw-de5b317d67e455f7.Seq0383.9a1666fc99b5.jpg",
       "sha256": "1c9800e33ae4704a04ffa7c55aaea41fcb00a2e9a538f2b78dc5490a8ce94dbb",
       "width": 768,
       "height": 1024,
@@ -427,28 +427,28 @@
       "assetPath": "selected-fronts/tlaw-de5b317d67e455f7.jpg"
     },
     "9a1b4b64503f1d65c4d677c03d199308c2d830eba5161e3f326eed483c6837d3": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-38c45a927a2bacb6/9a1b4b64503f1d65c4d677c0.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-38c45a927a2bacb6/2026-07-21.2102.PhotographReference.OwnerConfirmed.tlaw-38c45a927a2bacb6.Seq0101.9a1b4b64503f.jpg",
       "sha256": "682684d20ac6a9baf0d76ab75c73d89e968b2aaa1752510ff90dfea146ca313b",
       "width": 768,
       "height": 1024,
       "sizeBytes": 42082
     },
     "9fe221c08f249ed2f72be08fe512a95ed6ac8944b867100b12ec9bd667aafc1c": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-23a6457f25d50df1/9fe221c08f249ed2f72be08f.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-23a6457f25d50df1/2025-10-22.0842.PhotographReference.Proposed.tlaw-23a6457f25d50df1.Seq0072.9fe221c08f24.jpg",
       "sha256": "9768c3e79218cc2a9e7e40ee512c0370d784f7999e9e827919d031dd2f677485",
       "width": 1024,
       "height": 768,
       "sizeBytes": 109228
     },
     "a40da8332e63470a018234a3db24be347be274b44512ac9b38db7babacfbae24": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3af9586b916a371e/a40da8332e63470a018234a3.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3af9586b916a371e/2026-07-22_to_2026-07-23.MultipleTimes.PhotographReference.OwnerConfirmed.tlaw-3af9586b916a371e.Seq0109.a40da8332e63.jpg",
       "sha256": "df724101d07abfd3e1551692c9f211fe2960a66b4fb543cb9dcdd486c6f38bfd",
       "width": 768,
       "height": 1024,
       "sizeBytes": 42862
     },
     "a5ffdecf4d01b3d49f8bdde4a6d3cdad875ce0f0219116b9ab50789eec4e7702": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-e1fc0e8d25170047/a5ffdecf4d01b3d49f8bdde4.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-e1fc0e8d25170047/2026-09-02.0301.PhotographReference.OwnerConfirmed.tlaw-e1fc0e8d25170047.Seq0394.a5ffdecf4d01.jpg",
       "sha256": "00cc0ff3c147fe1ba6560998cefef62ad43db8bd2699395bf954e81149dad803",
       "width": 767,
       "height": 1024,
@@ -456,14 +456,14 @@
       "assetPath": "selected-fronts/tlaw-e1fc0e8d25170047.jpg"
     },
     "a7590ffc5afe04aaa73a276d1602fdf003a67fcd3dece016c1713a51fe8c9400": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-26fa28cf2857329d/a7590ffc5afe04aaa73a276d.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-26fa28cf2857329d/2025-08-08.2122.PhotographReference.Proposed.tlaw-26fa28cf2857329d.Seq0075.a7590ffc5afe.jpg",
       "sha256": "2e890fc38ac9f59079d485a1d30535452288e8ba16b6af17b3a62f7f24d1e101",
       "width": 767,
       "height": 1024,
       "sizeBytes": 248463
     },
     "adc2d2c1d1a504a064b8cc956d8abd0cf27278d7c98b0e343e8b9da367f03584": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-b5b0a88b4692e027/adc2d2c1d1a504a064b8cc95.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-b5b0a88b4692e027/2026-08-29.1849.PhotographReference.OwnerConfirmed.tlaw-b5b0a88b4692e027.Seq0316.adc2d2c1d1a5.jpg",
       "sha256": "533e2bcabf57a49727b9d6db7d5c773d1294c29da3b12faaaf8b79a8946298b6",
       "width": 768,
       "height": 1024,
@@ -471,7 +471,7 @@
       "assetPath": "selected-fronts/tlaw-b5b0a88b4692e027.jpg"
     },
     "af47cbba0b3c0129421544cc98fb1801882a1a18498bdc91b35762199ff51036": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-5833401cddd8f48e/af47cbba0b3c0129421544cc.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-5833401cddd8f48e/2026-09-26.0029.PhotographReference.OwnerConfirmed.tlaw-5833401cddd8f48e.Seq0149.af47cbba0b3c.jpg",
       "sha256": "a144f4d59168c4b80a74ccb94d8b0eab68eee60c1e875e9eecff44f6cd74aa22",
       "width": 767,
       "height": 1024,
@@ -479,14 +479,14 @@
       "assetPath": "selected-fronts/tlaw-5833401cddd8f48e.jpg"
     },
     "b7101a726643f0bccd90f547cfdfdc907b4084e210c201dde875c7b0a9e8354e": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-6df77e705cc3f78d/b7101a726643f0bccd90f547.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-6df77e705cc3f78d/2025-07-15.0448.PhotographReference.Proposed.tlaw-6df77e705cc3f78d.Seq0191.b7101a726643.jpg",
       "sha256": "b554aa6c6d8070222a6269f78f587b99066f9eeac656cc763167fd8068b67ebd",
       "width": 1024,
       "height": 768,
       "sizeBytes": 198036
     },
     "b79f6f0641192fe61cc450102f320e0c2fe8063cd9c2585cd7e34d8ea43af783": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-8db68321d40ab0b8/b79f6f0641192fe61cc45010.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-8db68321d40ab0b8/2026-08-30.0022.PhotographReference.OwnerConfirmed.tlaw-8db68321d40ab0b8.Seq0253.b79f6f064119.jpg",
       "sha256": "78257ebeef947991425ee4aed617f846653890baf37701272e71bb6f5f6952e9",
       "width": 768,
       "height": 1024,
@@ -494,7 +494,7 @@
       "assetPath": "selected-fronts/tlaw-8db68321d40ab0b8.jpg"
     },
     "bc3206563abe12ed8461b83e53a633e9318c8d7002cb6850385f490ef33be0dc": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-110a1832f358f7cc/bc3206563abe12ed8461b83e.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-110a1832f358f7cc/2026-07-02.UnknownTime.PhotographReference.OwnerConfirmed.tlaw-110a1832f358f7cc.Seq0031.bc3206563abe.jpg",
       "sha256": "4da008f1fa0595a04568100273a85a5adef6b0f334fb612140b1e4fdd1b8d117",
       "width": 767,
       "height": 1024,
@@ -502,7 +502,7 @@
       "assetPath": "selected-fronts/tlaw-110a1832f358f7cc.jpg"
     },
     "c1b600e4cc6c53116048d734ca4cb6738b0b597282231dc7f9d483993d9712a4": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-4afbbe266e14c6ae/c1b600e4cc6c53116048d734.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-4afbbe266e14c6ae/2026-09-16.2043.PhotographReference.OwnerConfirmed.tlaw-4afbbe266e14c6ae.Seq0133.c1b600e4cc6c.jpg",
       "sha256": "253fa1a1362b94ce62edf1cecca1c5b44046726b3bfdb256ca9e526637d0f4e4",
       "width": 767,
       "height": 1024,
@@ -510,35 +510,35 @@
       "assetPath": "selected-fronts/tlaw-4afbbe266e14c6ae.jpg"
     },
     "c24524fc0dc6a2ae8f05175861733b246cbdf4954e4cedc9c4d80605eb651a42": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-27d91c3c3ca5d9e3/c24524fc0dc6a2ae8f051758.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-27d91c3c3ca5d9e3/2026-08-08.0320.PhotographReference.OwnerConfirmed.tlaw-27d91c3c3ca5d9e3.Seq0077.c24524fc0dc6.jpg",
       "sha256": "5182dfc315f8aaf2ef9b604cbee54d033e30e41a525615865f5b40acebce0fd3",
       "width": 1024,
       "height": 768,
       "sizeBytes": 91705
     },
     "c37048302be752b61746bcb4114b3e1c7ec0467332a98a452ac241bd02fcd264": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-543f655f19908873/c37048302be752b61746bcb4.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-543f655f19908873/2025-12-17.0212.PhotographReference.Proposed.tlaw-543f655f19908873.Seq0141.c37048302be7.jpg",
       "sha256": "5762af052d5f7de7ed7a3cdc446e65ebc80dc072ceecf19fd04bb0b452c271f8",
       "width": 768,
       "height": 1024,
       "sizeBytes": 92138
     },
     "c57cf0790c9d1e7e46f524c144ef40222107c38292300c264fb75864c01d0674": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-213bccd5c11ec676/c57cf0790c9d1e7e46f524c1.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-213bccd5c11ec676/2025-08-07.2222.PhotographReference.Proposed.tlaw-213bccd5c11ec676.Seq0063.c57cf0790c9d.jpg",
       "sha256": "ce44e9ac3583bb4f79d219bafa403e60d67250acf304d9407192d58eb1f25b94",
       "width": 768,
       "height": 1024,
       "sizeBytes": 249751
     },
     "c85ab3748fbff5285a1e5a92189ec0b01b85763751b628062bbed4127e4c6d03": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-3a3a56acaae9f780/c85ab3748fbff5285a1e5a92.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-3a3a56acaae9f780/2025-09-13.1438.PhotographReference.Proposed.tlaw-3a3a56acaae9f780.Seq0106.c85ab3748fbf.jpg",
       "sha256": "028917eb56d74507cb47f5b997b428afc7933cae382aa21f658553b80577767f",
       "width": 767,
       "height": 1024,
       "sizeBytes": 162653
     },
     "ca811e0b9944ebd3221fc3dd4f57ccbb088de05fb9fd3d5c04029321f29519ac": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-48fd2da5fde33251/ca811e0b9944ebd3221fc3dd.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-48fd2da5fde33251/2026-09-01.0619.PhotographReference.OwnerConfirmed.tlaw-48fd2da5fde33251.Seq0128.ca811e0b9944.jpg",
       "sha256": "0c1504dbe86994f6b7a56c20da5605a6907101176ead150edb82422b963a84d9",
       "width": 767,
       "height": 1024,
@@ -546,21 +546,21 @@
       "assetPath": "selected-fronts/tlaw-48fd2da5fde33251.jpg"
     },
     "cab4cb77b5761fc9a1b47645bf1997559701daf9453154af48fc90db1510887e": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-d87ad2091a29ef58/cab4cb77b5761fc9a1b47645.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-d87ad2091a29ef58/2026-07-23_to_2026-07-24.MultipleTimes.PhotographReference.OwnerConfirmed.tlaw-d87ad2091a29ef58.Seq0372.cab4cb77b576.jpg",
       "sha256": "c775abf48c93c83a290efb8fa21ec4b5e785af2043256db505489073aa72152c",
       "width": 768,
       "height": 1024,
       "sizeBytes": 44892
     },
     "cd04218bc7c91bbea7d99d418cdc289c856a78dcace0f0d9a933b34bdb927006": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-66d74373722cc152/cd04218bc7c91bbea7d99d41.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-66d74373722cc152/2025-09-04.UnknownTime.PhotographReference.Proposed.tlaw-66d74373722cc152.Seq0179.cd04218bc7c9.jpg",
       "sha256": "af8659678bcee81120f79567b198f7cbf2763ecaabb8f6869c73f2402c1c5c31",
       "width": 767,
       "height": 1024,
       "sizeBytes": 211202
     },
     "d1950d8ceeac1c27261ac4efe9cfc7b1ef654a63ef961b82f3137b36790d2331": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-bd21c3eb4aa77e8a/d1950d8ceeac1c27261ac4ef.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-bd21c3eb4aa77e8a/2026-09-23.0915.PhotographReference.OwnerConfirmed.tlaw-bd21c3eb4aa77e8a.Seq0326.d1950d8ceeac.jpg",
       "sha256": "f50a5c80d3d9837bb92549bfa032f3ac45a11fc25d8baf8d9b7cfd6e98d3560b",
       "width": 767,
       "height": 1024,
@@ -568,14 +568,14 @@
       "assetPath": "selected-fronts/tlaw-bd21c3eb4aa77e8a.jpg"
     },
     "d240edc7bcf09cfeb29bc2125fac136ace49fc2bf8f751a6361ef0caee452668": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-494a5ce1d84077bd/d240edc7bcf09cfeb29bc212.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-494a5ce1d84077bd/2025-08-28.2020.PhotographReference.Proposed.tlaw-494a5ce1d84077bd.Seq0130.d240edc7bcf0.jpg",
       "sha256": "e6915cb07863071da65ebddf4b6d6b443fda2f2bf133231c9fe2b133ccafbe35",
       "width": 768,
       "height": 1024,
       "sizeBytes": 156024
     },
     "d6dc24d48c01b0a9f01b291e67044193c768412fd8c6d0198927ac01f5700f35": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-efda767e54a09ff8/d6dc24d48c01b0a9f01b291e.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-efda767e54a09ff8/2026-09-26.0704.PhotographReference.OwnerConfirmed.tlaw-efda767e54a09ff8.Seq0422.d6dc24d48c01.jpg",
       "sha256": "3b911a12bd42894f234c59d6c198e5314d9be441111cc3e29382727ea3841fef",
       "width": 767,
       "height": 1024,
@@ -583,7 +583,7 @@
       "assetPath": "selected-fronts/tlaw-efda767e54a09ff8.jpg"
     },
     "d806249aa506ec3cf022328b8bed0d349c8f3bc1a072becd000f2a9a00cb394b": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-498ba4236b8f3e42/d806249aa506ec3cf022328b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-498ba4236b8f3e42/2026-08-30.1126.PhotographReference.OwnerConfirmed.tlaw-498ba4236b8f3e42.Seq0131.d806249aa506.jpg",
       "sha256": "7ea7c77c09032e92cbe7a5557d34d85d938438886e46358f04f98e3fd7955db9",
       "width": 768,
       "height": 1024,
@@ -591,7 +591,7 @@
       "assetPath": "selected-fronts/tlaw-498ba4236b8f3e42.jpg"
     },
     "d98f19b9d2b4a2871aed67b5d355776b73506b08433d97362e25e942bbfb8a88": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2298169195d8fe30/d98f19b9d2b4a2871aed67b5.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-2298169195d8fe30/2026-09-16.0122.PhotographReference.OwnerConfirmed.tlaw-2298169195d8fe30.Seq0068.d98f19b9d2b4.jpg",
       "sha256": "ee3ef67915bcc0a4cfc154a97a3434d922c8ae5b48e4c07f1e0aa975a879fd1b",
       "width": 767,
       "height": 1024,
@@ -599,7 +599,7 @@
       "assetPath": "selected-fronts/tlaw-2298169195d8fe30.jpg"
     },
     "db426ecd5810bbc19b5a841d06fac70bbd42604426425df9d77c1f756d6ffe9f": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-579e4906a048d2c2/db426ecd5810bbc19b5a841d.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-579e4906a048d2c2/2026-08-29.0716.PhotographReference.OwnerConfirmed.tlaw-579e4906a048d2c2.Seq0146.db426ecd5810.jpg",
       "sha256": "68a66d2a2fcf416068575e89d7520b20da9f5fe500998dfac9f1d91ca235f32a",
       "width": 768,
       "height": 1024,
@@ -607,7 +607,7 @@
       "assetPath": "selected-fronts/tlaw-579e4906a048d2c2.jpg"
     },
     "dcfea6afa02c7bc29f77392c8483ddf9563870fe29900a6ed20b161a377811e8": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-e14ea05330961373/dcfea6afa02c7bc29f77392c.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-e14ea05330961373/2026-08-31.1212.PhotographReference.OwnerConfirmed.tlaw-e14ea05330961373.Seq0391.dcfea6afa02c.jpg",
       "sha256": "93678fc960ec6571616c952c24210475d28fa5f7edd1de1d2e86dfc190cb7647",
       "width": 767,
       "height": 1024,
@@ -615,7 +615,7 @@
       "assetPath": "selected-fronts/tlaw-e14ea05330961373.jpg"
     },
     "dd962bce5c0ad908d277790b6937b4643d35323edf73bf15886ba1307ea22f05": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1ba168cee8c57491/dd962bce5c0ad908d277790b.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-1ba168cee8c57491/2026-09-20.1738.PhotographReference.OwnerConfirmed.tlaw-1ba168cee8c57491.Seq0052.dd962bce5c0a.jpg",
       "sha256": "38396e1fdd4ce9ac5cdd5a12e72f7d3d293512f3933f64f654900926d12b0eb5",
       "width": 767,
       "height": 1024,
@@ -623,7 +623,7 @@
       "assetPath": "selected-fronts/tlaw-1ba168cee8c57491.jpg"
     },
     "e4657895f659ac99df9ed3bf7dea7b6ea90b37e49a4727955eca7d7bf81dd45f": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-2a979ceabecd913e/e4657895f659ac99df9ed3bf.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-2a979ceabecd913e/2026-09-24.2205.PhotographReference.OwnerConfirmed.tlaw-2a979ceabecd913e.Seq0079.e4657895f659.jpg",
       "sha256": "35663437ce2f29ace6f8efc3d27987034123dbb067978ec1f705206e5f164e27",
       "width": 767,
       "height": 1024,
@@ -631,7 +631,7 @@
       "assetPath": "selected-fronts/tlaw-2a979ceabecd913e.jpg"
     },
     "eb5ffb1a425a5de4f2379d18295cd9fc278030cffe4b8e4469eca61bb9da37b6": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-1788946c0d815f7a/eb5ffb1a425a5de4f2379d18.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-1788946c0d815f7a/2026-09-25.1825.PhotographReference.OwnerConfirmed.tlaw-1788946c0d815f7a.Seq0047.eb5ffb1a425a.jpg",
       "sha256": "b6de3556b1973c527fe68f1a87832a34fd1f32b385d88efecd8d782543fe906b",
       "width": 767,
       "height": 1024,
@@ -639,35 +639,35 @@
       "assetPath": "selected-fronts/tlaw-1788946c0d815f7a.jpg"
     },
     "ee9fa982f60dfcbde51172d010e5847825b11940e838b7bd87b6eba05ef71f25": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-a0cfc4950a627158/ee9fa982f60dfcbde51172d0.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-a0cfc4950a627158/2025-09-10.2158.PhotographReference.Proposed.tlaw-a0cfc4950a627158.Seq0281.ee9fa982f60d.jpg",
       "sha256": "b1012ee7e9131547e816c085d74914d6455adf55000c8ab41a4fd119ca59914c",
       "width": 1024,
       "height": 768,
       "sizeBytes": 189419
     },
     "efc4ca40a9f58cf8be4dbcf9add537ddb5b6aaa83cdf404e271e5159df9a6ed1": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-a77d16972149f232/efc4ca40a9f58cf8be4dbcf9.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-a77d16972149f232/2026-08-07.0251.PhotographReference.OwnerConfirmed.tlaw-a77d16972149f232.Seq0294.efc4ca40a9f5.jpg",
       "sha256": "a43e5d30e5943bf3dc2c5d072e93b29208f2ab719c3e94b2e343b3cc07bbfd76",
       "width": 1024,
       "height": 768,
       "sizeBytes": 201877
     },
     "f9c4ed780edd76eba696c42ced49fb56b66824f116078503f7cea9b9d2e94267": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-794f3c7a1e5a05b6/f9c4ed780edd76eba696c42c.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-794f3c7a1e5a05b6/2026-02-04.UnknownTime.PhotographReference.Proposed.tlaw-794f3c7a1e5a05b6.Seq0214.f9c4ed780edd.jpg",
       "sha256": "c6da8e6523cb5e27492cd017bd01682166b1d1e88fdc253294b0f30ec6971f9c",
       "width": 768,
       "height": 1024,
       "sizeBytes": 163727
     },
     "f9ea449fa8d8d6562550e83e51aa97a6cf26f6b9fecc8bef41adafad47cd3c83": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-5f895280cb37cb5b/f9ea449fa8d8d6562550e83e.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-5f895280cb37cb5b/2025-08-11.0702.PhotographReference.Proposed.tlaw-5f895280cb37cb5b.Seq0169.f9ea449fa8d8.jpg",
       "sha256": "8da5ced2ec9341be2eb9f7055aae2f87a38ec334b65bb34e0f3022cb1f5e37c3",
       "width": 768,
       "height": 1024,
       "sizeBytes": 200060
     },
     "fe572fc188835c4fb57c1a182cba0e5f75c52d828056a0f21f20ff5dad74246b": {
-      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/0a323dd51ae7a2f5176dd5f85bcedd50cbc66420/Physical_References/Photographs/images/tlaw-0a80992c0574443f/fe572fc188835c4fb57c1a18.jpg",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/12d5713326886bc18669f2a5c571c4fe7ac1fb73/Physical_References/Photographs/images/tlaw-0a80992c0574443f/2026-10-01.1713.PhotographReference.OwnerConfirmed.tlaw-0a80992c0574443f.Seq0025.fe572fc18883.jpg",
       "sha256": "c0f5eddd13f0a7607dabc4bd52acaaa3d4018074b34345af35b9d146ccdc2ee9",
       "width": 768,
       "height": 1024,

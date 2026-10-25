@@ -111,9 +111,21 @@ test("static real-time page escapes source notes, preserves status and uses pinn
   assert.ok(html.includes("Encoded media timeline"));assert.ok(html.includes("Not assigned in the source index"));
   assert.doesNotMatch(html,/<(?:video|audio|iframe|img)\b/i);
 });
+test("renamed MOVs use the published filename as their label and retain the original filename as provenance",async()=>{
+  const renamed={...row,file_name:"Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec03.MOV"};
+  const {m,p}=await projection([renamed]);
+  assert.equal(m.realTimeDisplayFilename(p.records[0]),"2026-10-22.0430.RealTime.Candidate.Rec03.MOV");
+  assert.equal(p.records[0].original_filename,"IMG_3223.MOV");
+  const html=m.buildRealTimePage(p,recordData);
+  assert.match(html,/<h2>2026-10-22\.0430\.RealTime\.Candidate\.Rec03\.MOV<\/h2>/);
+  assert.match(html,/<dt>Original filename<\/dt><dd>IMG_3223\.MOV<\/dd>/);
+  assert.ok(html.includes("Candidate; timing not calibrated"));
+  assert.equal(p.records[0].work_id,"");
+});
 test("published real-time projection retains all five original records and remains reproducible offline",async()=>{
   const m=await modules();const csv=read("data/real-time-source/metadata.csv"),sums=read("data/real-time-source/SHA256SUMS"),manifest=JSON.parse(read("data/real-time-source/manifest.json"));
-  assert.equal(hash(csv),"3a6d7d907df4ec8d3c268b25206878dadd062a4f511a03b2ac8711d3dbe99769");
+  assert.equal(hash(csv),"dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b");
+  assert.equal(hash(csv),manifest.inputs["Real_Time_Recordings/metadata.csv"].sha256);
   const p=m.buildRealTimeProjection(recordData,{manifest,csv,sums});assert.equal(p.records.length,5);
   assert.equal(p.recordingModeBasis,"source_metadata");
   assert.equal(p.sourceFields.length,24);assert.ok(p.sourceFields.includes("recording_mode"));

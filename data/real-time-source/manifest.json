@@ -1,18 +1,18 @@
 {
   "sourceRepository": "maxwellinked/time-lapse-artifacts",
-  "sourceRevision": "0a323dd51ae7a2f5176dd5f85bcedd50cbc66420",
+  "sourceRevision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
   "inputs": {
     "Real_Time_Recordings/metadata.csv": {
-      "sha256": "3a6d7d907df4ec8d3c268b25206878dadd062a4f511a03b2ac8711d3dbe99769",
-      "sizeBytes": 3364
+      "sha256": "dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b",
+      "sizeBytes": 3732
     },
     "Real_Time_Recordings/SHA256SUMS": {
-      "sha256": "74882df14014e53bf3a22659f0ae2e4a13826bd625bcf90ae8ef3f1c4c7525a6",
-      "sizeBytes": 547
+      "sha256": "e7373c5c2e903d65da23038b7acc0d8856b941fab8eb99177144db5a7cef873b",
+      "sizeBytes": 910
     },
     "Real_Time_Recordings/README.md": {
-      "sha256": "e59399bb2c95bc1d93b571f1d5609450b48a5d4b602c59b404b413dc9e5fda26",
-      "sizeBytes": 3715
+      "sha256": "9fe17e56564cf1a231aa6d6beec9755e781e52902a00085950854d6b41a28262",
+      "sizeBytes": 6010
     },
     "Real_Time_Recordings/SCHEMA.md": {
       "sha256": "dd9bdaf13e69e024bc79c6194a168dcaa999185a821d5ad245e5df870fc98ac4",
