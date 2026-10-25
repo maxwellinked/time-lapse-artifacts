@@ -17,6 +17,40 @@ shared work, session, or completion state.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
+## Recording mode and real-time evidence
+
+The [real-time recording list](real-time-recordings.html) exposes the separately
+indexed MOV collection and all of its original metadata values in
+[`data/real-time-recordings.json`](data/real-time-recordings.json). Each entry
+retains its published candidate relationship, timing basis, source-role status,
+demux result and notes. Standard recording dialogs link to their listed
+real-time candidates. A candidate does not inherit the time-lapse record's work
+identity, photograph or finish label.
+
+`recordingMode` in the Standard browser index is `time_lapse`; `recording_mode`
+in the real-time projection is `real_time`. These values describe the documented
+collections. They are separate from file extension, encoded frame rate and the
+existing `captureType` field, which is retained as the acquisition-protocol
+version for compatibility. Dialogs label that value **Acquisition protocol**.
+Durations are labeled as encoded video duration.
+
+The real-time projection preserves every source CSV field as a string, including
+blank values, and adds only its explicit recording mode. Its source revision
+matches the Standard browser snapshot. The small retained CSV/checksum inputs
+and their hashes support deterministic offline regeneration:
+
+```console
+node tools/build-real-time-recordings.mjs --check
+node tools/build-real-time-recordings.mjs
+```
+
+After reviewing a changed source snapshot, `--sync` downloads only the four
+metadata/definition files at `data/records.json`'s pinned revision, validates the
+CSV and checksum coverage, and rebuilds the projection and page. It does not
+download MOVs. IDs outside the Standard gallery remain visible without a
+fabricated gallery link. Source metadata and relationship authority remain on
+Hugging Face; this access projection does not change them.
+
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter use one selected-front map: 431 registered drawings and 1,205 Standard
 recording joins. At dataset revision ed96dab85dea93af4e3a36785a02b90fdeebb976,

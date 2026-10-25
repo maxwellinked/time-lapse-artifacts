@@ -25,6 +25,7 @@ function navigation(url) {
     history: { replaceState(_state, _title, next) { location.href = new URL(next, location).href; } },
     window: { addEventListener(name, listener) { events.set(name, listener); } },
     clearReference() { calls.referenceClears++; },
+    relatedRecordings: { clear() {} },
     resetDialogVideo() { calls.videoResets++; },
     openRecord(record, updateHash) { calls.opened.push({ record, updateHash }); state.activeRecord = record; dialog.open = true; },
   });
