@@ -31,9 +31,21 @@ test('committed navigation thumbnails match their receipt hashes',()=>{
  for(const r of records)for(const f of r.frames)assert.equal(digest(path.join(root,f.thumbnail)),f.thumbnail_sha256);
  for(const c of manifest.cases)if(c.photograph)assert.equal(digest(path.join(root,c.photograph.thumbnail)),c.photograph.thumbnail_sha256);
 });
-test('known first-case reference correction remains explicit',()=>{
- assert.match(manifest.cases[0].presentation_note,/correction pending/);
- assert.match(manifest.cases[0].presentation_note,/Two drawings/);
+test('the two first-case drawings have separate references without a work reassignment',()=>{
+ const c=manifest.cases[0];
+ assert.equal(c.work_id,'tlaw-6df77e705cc3f78d');
+ assert.equal(c.photograph.source_sha256,'b7101a726643f0bccd90f547cfdfdc907b4084e210c201dde875c7b0a9e8354e');
+ assert.equal(c.photograph.work_id,c.work_id);
+ assert.equal(c.recording_references?.length,1,'The additional drawing needs its separate recording reference');
+ const p=c.recording_references[0];
+ assert.equal(p.work_id,null);assert.equal(p.record_id,'tla-e1a6fa31bb8fe6ba');
+ assert.equal(p.sha256,'4d8d5421e55c39555fe0e39cce3f6232cde4e803c2fed1753a80ce646e182453');
+ assert.equal(p.size_bytes,1261470);assert.equal(p.width,1535);assert.equal(p.height,2048);
+ assert.equal(p.association,'creator_confirmed_supplementary_recording_reference');
+ assert.equal(p.exact_endpoint,false);assert.equal(p.creation_order,null);
+ assert.match(p.image_url,/^https:\/\/huggingface\.co\/datasets\/maxwellinked\/time-lapse-artifacts-derived\/resolve\/[0-9a-f]{40}\/artifacts\/inspection-v1-2026-10-25\/references\/tla-e1a6fa31bb8fe6ba\/4d8d5421e55c39555fe0e39c\.jpg$/);
+ assert.match(p.evidence_url,/\/blob\/[0-9a-f]{40}\/artifacts\/inspection-v1-2026-10-25\/references\/tla-e1a6fa31bb8fe6ba\/reference\.json$/);
+ assert.ok(!manifest.cases[1].recording_references);assert.ok(!manifest.cases[2].recording_references);
 });
 test('all samples and viewing rotations can be saved and resolved',()=>{
  let count=0;

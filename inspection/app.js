@@ -17,8 +17,14 @@
   const c=currentCase();$('case-title').textContent=c.title;$('work-id').textContent=c.work_id;$('selection').textContent=c.selection_reason;
   $('photo').replaceChildren();
   if(c.presentation_note)$('photo').append(p(c.presentation_note,'muted'));
+  for(const reference of c.recording_references||[]){
+   const h=document.createElement('h3');h.textContent=reference.label;
+   const img=document.createElement('img');img.src=reference.image_url;img.alt='Creator-confirmed photograph of an additional drawing in this recording';img.loading='lazy';img.width=reference.width;img.height=reference.height;
+   const links=p('');links.append(a('Open photograph',reference.image_url),document.createTextNode(' · '),a('Reference evidence',reference.evidence_url));
+   $('photo').append(h,img,p('Creator-confirmed recording reference. No work ID assigned here.','muted'),links);
+  }
   if(c.photograph){
-   const photo=c.photograph;const h=document.createElement('h3');h.textContent='Selected work photograph';const img=document.createElement('img');img.src=photo.thumbnail;img.alt='Selected photograph of this work; not an exact recording endpoint';
+   const photo=c.photograph;const h=document.createElement('h3');h.textContent=c.recording_references?.length?'Indexed work photograph':'Selected work photograph';const img=document.createElement('img');img.src=photo.thumbnail;img.alt='Selected photograph of this work; not an exact recording endpoint';
    $('photo').append(h,img,p(photo.resolution_class.replaceAll('_',' '),'muted'),p('Work reference only—not an exact recording endpoint or a verified pixel alignment.','muted'),a('Open source-bound photograph',photo.local_path));
   }else{$('photo').append(p('No selected photograph at this revision.'),p('This is an absent selection, not evidence that no photograph exists.','muted'));}
   renderRecords();renderRecord(frameIndex);
@@ -101,7 +107,7 @@
  $('fit').onclick=()=>sizing(false);$('native').onclick=()=>sizing(true);$('seek-source').onclick=loadSource;
  $('rotate-ccw').onclick=()=>rotateView(presentationRotation+90);$('reset-rotation').onclick=()=>rotateView(0);
  new ResizeObserver(()=>layoutFrame()).observe($('frame-viewport'));
- window.installSavedLocationControls({
+ const locationControls=window.installSavedLocationControls({
   manifest:data,
   getPosition:()=>({caseIndex:ci,recordIndex:ri,frameIndex:fi,rotation:presentationRotation}),
   getViewVersion:()=>interactionVersion,
@@ -114,4 +120,9 @@
  document.addEventListener('keydown',e=>{if(['INPUT','TEXTAREA','VIDEO'].includes(document.activeElement.tagName))return;if(e.key==='ArrowRight'&&fi<record().frames.length-1){e.preventDefault();selectFrame(fi+1);}if(e.key==='ArrowLeft'&&fi>0){e.preventDefault();selectFrame(fi-1);}});
  $('revision').textContent=`Source revision ${data.source_revision} · Three inspection cases, not a representative sample`;
  renderCase();
+ window.installSharedLocationControls({
+  manifest:data,
+  getPosition:()=>({caseIndex:ci,recordIndex:ri,frameIndex:fi,rotation:presentationRotation}),
+  openLocation:hash=>locationControls.openSharedLocation(hash)
+ });
 })();

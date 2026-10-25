@@ -211,7 +211,7 @@
           ]
         }
       ],
-      "presentation_note": "Reference-image correction pending for this case. Two drawings occur in this recording; the selected work photograph is not a unique recording endpoint.",
+      "presentation_note": "Two drawings are visible in this recording. The photographs below retain separate associations; neither is an exact recording endpoint.",
       "photograph": {
         "work_id": "tlaw-6df77e705cc3f78d",
         "source_sha256": "b7101a726643f0bccd90f547cfdfdc907b4084e210c201dde875c7b0a9e8354e",
@@ -227,7 +227,25 @@
         "thumbnail_sha256": "e853480e66a3bfb60a42a87ba60b493be7bd48d2947ea13078e69447702cd6c0",
         "role": "Selected work photograph, not a recording endpoint or a verified pixel alignment.",
         "local_path": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/07df3064092099b5c97c8a4f54685b1a931d9f22/Physical_References/Photographs/images/tlaw-6df77e705cc3f78d/b7101a726643f0bccd90f547.jpg?download=true"
-      }
+      },
+      "recording_references": [
+        {
+          "record_id": "tla-e1a6fa31bb8fe6ba",
+          "work_id": null,
+          "association": "creator_confirmed_supplementary_recording_reference",
+          "label": "Additional drawing in this recording",
+          "image_url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/de8d9b7052d81ee8ce09ff6b1582c63158d78c77/artifacts/inspection-v1-2026-10-25/references/tla-e1a6fa31bb8fe6ba/4d8d5421e55c39555fe0e39c.jpg",
+          "sha256": "4d8d5421e55c39555fe0e39cce3f6232cde4e803c2fed1753a80ce646e182453",
+          "size_bytes": 1261470,
+          "width": 1535,
+          "height": 2048,
+          "representation": "exact_creator_supplied_jpeg",
+          "exact_endpoint": false,
+          "creation_order": null,
+          "evidence_url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/blob/de8d9b7052d81ee8ce09ff6b1582c63158d78c77/artifacts/inspection-v1-2026-10-25/references/tla-e1a6fa31bb8fe6ba/reference.json",
+          "evidence_sha256": "646a3ab2850387f60932735bd62457bb9d7e8809cd6aab06b96ff560022a4b81"
+        }
+      ]
     },
     {
       "id": "multi",
