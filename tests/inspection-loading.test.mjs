@@ -27,13 +27,15 @@ function harness(){
   clearTimeout:id=>timers.delete(id)});
  context.window=context;
  for(const file of ['saved_location.js','saved_location_controls.js'])vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),context);
- context.installSavedLocationControls({manifest,getPosition:()=>({caseIndex:0,recordIndex:0,frameIndex:0,rotation:90}),getViewVersion:()=>view,restoreLocation:r=>restored.push(JSON.parse(JSON.stringify(r)))});
+ if(fs.existsSync(path.join(root,'shared_location.js')))vm.runInContext(fs.readFileSync(path.join(root,'shared_location.js'),'utf8'),context);
+ const controls=context.installSavedLocationControls({manifest,getPosition:()=>({caseIndex:0,recordIndex:0,frameIndex:0,rotation:90}),getViewVersion:()=>view,restoreLocation:r=>restored.push(JSON.parse(JSON.stringify(r)))});
  const good=()=>JSON.parse(JSON.stringify(context.SavedLocation.createSavedLocation(manifest,1,1,4,90)));
  return {manifest,images,timers,restored,elements,good,
   state:()=>elements['saved-location-status'].dataset.state,
   message:()=>elements['saved-location-status'].textContent,
   reads:()=>reads,
   changeView:()=>{view++;},
+  share:async hash=>{assert.equal(typeof controls?.openSharedLocation,'function','Shared locations must use the existing loader');controls.openSharedLocation(hash);await flush();},
   select:async(value=good(),options={})=>{
    const text=typeof value==='string'?value:JSON.stringify(value);
    elements['saved-location-file'].files=[{size:options.size??Buffer.byteLength(text),text:()=>{reads++;return options.read?options.read():Promise.resolve(text);}}];
@@ -108,4 +110,42 @@ test('opening the file picker cancels an outstanding restore even if no new file
 test('recovery buttons are ordinary hidden controls, not a style change',()=>{
  const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
  for(const id of ['retry-location','cancel-location'])assert.match(html,new RegExp(`<button[^>]+id="${id}"[^>]+hidden`));
+});
+
+const fragment=value=>'#view='+encodeURIComponent(JSON.stringify(value));
+test('a shared location restores through the same slow-loading path without reading a file',async()=>{
+ const h=harness();await h.share(fragment(h.good()));await h.tick(16000);
+ assert.equal(h.state(),'waiting');assert.equal(h.restored.length,0);assert.equal(h.reads(),0);
+ await h.success();assert.deepEqual(h.restored,[{caseIndex:1,recordIndex:1,frameIndex:4,rotation:90}]);
+});
+test('an unavailable shared image can retry without reopening a file',async()=>{
+ const h=harness();await h.share(fragment(h.good()));await h.failure();assert.equal(h.state(),'image-unavailable');
+ await h.retry();await h.success();assert.equal(h.state(),'restored');assert.equal(h.reads(),0);
+});
+test('malformed and changed-identity links request no target image and preserve the current view',async()=>{
+ for(const hash of ['#view=%',fragment({...harness().good(),source_revision:'0'.repeat(40)}),'#view=','#!other']){
+  const h=harness();await h.share(hash);assert.equal(h.state(),'rejected');assert.equal(h.images.length,0);assert.equal(h.restored.length,0);
+ }
+});
+test('a later shared link supersedes a pending file or link, including late callbacks',async()=>{
+ for(const first of ['file','link']){
+  const h=harness();if(first==='file')await h.select();else await h.share(fragment(h.good()));
+  const late=h.images[0].onload;const other={...h.good(),presentation_rotation_ccw_degrees:270};
+  await h.share(fragment(other));late();await flush();assert.equal(h.restored.length,0);
+  await h.success();assert.deepEqual(h.restored,[{caseIndex:1,recordIndex:1,frameIndex:4,rotation:270}]);
+ }
+});
+test('clearing or rejecting the URL fragment cancels an earlier pending shared image',async()=>{
+ for(const hash of ['', '#view=%']){
+  const h=harness();await h.share(fragment(h.good()));const late=h.images[0].onload;
+  await h.share(hash);late();await h.tick(20000);assert.equal(h.restored.length,0);assert.equal(h.timers.size,0);
+  assert.equal(h.state(),hash?'rejected':'cancelled');
+ }
+});
+test('navigation and Cancel prevent a pending shared link from replacing the new view',async()=>{
+ for(const action of ['navigate','cancel']){
+  const h=harness();await h.share(fragment(h.good()));const late=h.images[0].onload;
+  if(action==='navigate')h.changeView();else await h.cancel();late();await flush();
+  assert.equal(h.state(),'cancelled');assert.equal(h.restored.length,0);
+ }
 });

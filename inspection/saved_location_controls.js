@@ -1,5 +1,5 @@
 'use strict';
-// Local file controls. Imported URLs are never used to load images or media.
+// File and shared-location loading. Imported URLs never load images or media.
 window.installSavedLocationControls=function({manifest,getPosition,getViewVersion,restoreLocation}){
  const open=document.getElementById('open-location'),input=document.getElementById('saved-location-file');
  const status=document.getElementById('saved-location-status'),save=document.getElementById('bookmark');
@@ -93,4 +93,17 @@ window.installSavedLocationControls=function({manifest,getPosition,getViewVersio
   }catch(error){if(!pending)announce('rejected',error instanceof Error?error.message:'The location could not be saved.');}
  };
  recovery(false,false);
+ return Object.freeze({openSharedLocation(hash){
+  const wasPending=Boolean(pending);stopPending();
+  if(hash===''){
+   if(wasPending)announce('cancelled','Opening cancelled because the shared location was removed. Your current selection is unchanged.');
+   return;
+  }
+  const job={ticket:generation,viewVersion:getViewVersion(),text:null,stop:null};pending=job;
+  try{
+   if(!window.SharedLocation)throw new Error('Shared-location support is unavailable.');
+   job.text=window.SharedLocation.parseFragment(hash,manifest);
+   loadImage(job);
+  }catch(error){reject(job,error);}
+ }});
 };

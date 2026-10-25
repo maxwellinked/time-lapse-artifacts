@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Time-Lapse Artifacts · Recording inspection</title>
-<link rel="stylesheet" href="style.css"><script src="data.js" defer></script><script src="recorded_checks_data.js" defer></script><script src="recorded_checks.js" defer></script><script src="saved_location.js" defer></script><script src="saved_location_controls.js" defer></script><script src="app.js" defer></script>
+<link rel="stylesheet" href="style.css"><script src="data.js" defer></script><script src="recorded_checks_data.js" defer></script><script src="recorded_checks.js" defer></script><script src="saved_location.js" defer></script><script src="shared_location.js" defer></script><script src="saved_location_controls.js" defer></script><script src="shared_location_controls.js" defer></script><script src="app.js" defer></script>
 </head><body>
 <header><div class="eyebrow">TIME-LAPSE ARTIFACTS / RECORDING INSPECTION</div><h1>Inspect the recording.</h1><p class="intro">Source-linked frames, visible file boundaries, and native-dimension detail. No process labels or inferred timing.</p><div id="revision" class="muted"></div></header>
 <nav id="cases" aria-label="Inspection cases"></nav>
@@ -14,8 +14,10 @@
 <div class="frame-caption"><strong id="sample-title"></strong><span id="sample-time"></span></div>
 <div id="frame-viewport" class="frame-viewport"><div id="frame-stage" class="frame-stage"><img id="frame" alt="Selected decoded frame, full uncropped image"></div></div>
 <p id="resolution-note" class="muted"></p>
-<div class="actions"><button id="seek-source">Load source at this position</button><button id="bookmark">Save exact location</button><button id="open-location">Open saved location</button><button id="retry-location" type="button" hidden>Retry</button><button id="cancel-location" type="button" hidden>Cancel</button><input id="saved-location-file" type="file" accept=".json,application/json" aria-label="Choose saved location JSON" hidden><a id="png-link" target="_blank" rel="noopener">Open decoded PNG</a><a id="hub-link" target="_blank" rel="noopener">Pinned source on Hugging Face</a></div>
+<div class="actions"><button id="seek-source">Load source at this position</button><button id="bookmark">Save exact location</button><button id="open-location">Open saved location</button><button id="copy-location-link" type="button">Copy link to this view</button><button id="retry-location" type="button" hidden>Retry</button><button id="cancel-location" type="button" hidden>Cancel</button><input id="saved-location-file" type="file" accept=".json,application/json" aria-label="Choose saved location JSON" hidden><a id="png-link" target="_blank" rel="noopener">Open decoded PNG</a><a id="hub-link" target="_blank" rel="noopener">Pinned source on Hugging Face</a></div>
 <p id="saved-location-status" class="muted" role="status" aria-live="polite" hidden></p>
+<p id="shared-location-status" class="muted" role="status" aria-live="polite" hidden></p>
+<div id="shared-location-fallback" hidden><label for="shared-location-url">View link</label><input id="shared-location-url" type="text" readonly aria-label="Exact view link for manual copying"></div>
 <section id="playback-panel" hidden><h3>Source recording playback</h3><p class="muted">Loaded only on request. Starts paused and muted. A browser seek is not an assertion of frame-exact decoding.</p><video id="video" controls muted playsinline preload="none"></video><p id="seek-status" role="status" aria-live="polite"></p><p id="presented-time" class="mono"></p></section>
 <details id="recorded-checks-detail"><summary>Recorded checks</summary><div id="recorded-checks"><p class="muted">Recorded checks are unavailable until their source bindings are loaded.</p></div></details>
 <details><summary>Source, timestamp and transformation evidence</summary><div id="evidence"></div></details>
