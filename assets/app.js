@@ -1,5 +1,6 @@
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261024-photo-downloads";
-import { loadRecords, RecordsDataError } from "./data-loader.js";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=20261025-canonical-metadata";
+import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
+import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel } from "./real-time-recordings.js?v=20261025";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
@@ -18,6 +19,7 @@ let selectedFrontLookupPromise;
 let referenceEvidencePromise;
 let referenceGeneration = 0;
 let filterGeneration = 0;
+let realTimeLookupPromise;
 
 // Initialize Dynamic Video Preview System
 let dynamicPreview;
@@ -75,7 +77,45 @@ const elements = {
   additionalReferences: document.querySelector("#dialog-additional-references"),
   referenceManifest: document.querySelector("#dialog-reference-manifest"),
   pairingClarification: document.querySelector("#dialog-pairing-clarification"),
+  relatedRecordings: document.querySelector("#dialog-related-recordings"),
+  retryRelated: document.querySelector("#retry-related-recordings"),
 };
+
+const relatedRecordings = createRelatedRecordingsController({
+  load: () => {
+    realTimeLookupPromise ??= loadRealTimeMetadata(state.recordData).catch(error => {
+      realTimeLookupPromise = null;
+      throw error;
+    });
+    return realTimeLookupPromise;
+  },
+  show: result => {
+    if (state.activeRecord?.recordId !== result.recordId) return;
+    elements.relatedRecordings.replaceChildren();
+    elements.relatedRecordings.dataset.state = result.state;
+    elements.retryRelated.hidden = result.state !== "unavailable";
+    if (result.state !== "ready") {
+      elements.relatedRecordings.textContent = result.state === "loading"
+        ? "Checking the published real-time index…"
+        : "The related-recording index could not load. The real-time list below remains available.";
+      return;
+    }
+    if (!result.records.length) {
+      elements.relatedRecordings.textContent = "No real-time relationship is listed for this record in the source snapshot.";
+      return;
+    }
+    for (const record of result.records) {
+      const line = document.createElement("p"), link = document.createElement("a");
+      link.href = `real-time-recordings.html#${record.record_id}`;
+      link.textContent = record.original_filename;
+      line.append(link, ` — ${realTimeStatusLabel(record.pairing_status)}`);
+      elements.relatedRecordings.append(line);
+    }
+  },
+});
+elements.retryRelated.addEventListener("click", () => {
+  if (state.activeRecord) relatedRecordings.open(state.activeRecord.recordId);
+});
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
   dateStyle: "long",
@@ -737,6 +777,8 @@ function renderDialog(record) {
   elements.dialogSource.href = record.sourceUrl;
   elements.dialogSourceTop.href = record.sourceUrl;
   elements.dialogMetadata.replaceChildren(
+    metadataRow("Recording mode", "Time-lapse"),
+    metadataRow("Acquisition protocol", record.captureType),
     metadataRow("Finish date", record.date),
     metadataRow(
       "Finish time",
@@ -746,8 +788,10 @@ function renderDialog(record) {
     metadataRow("Medium", humanizeToken(record.medium)),
     metadataRow("Surface", humanizeToken(record.support)),
     metadataRow("Dimensions", formatDimensions(record.dimensions)),
-    metadataRow("Duration", formatDuration(record.durationSeconds)),
+    metadataRow("Encoded video duration", formatDuration(record.durationSeconds)),
   );
+
+  relatedRecordings.open(record.recordId);
 
   resetDialogVideo();
   preparePreview(elements.dialogPreview, record, true);
@@ -803,6 +847,7 @@ elements.nextRecord.addEventListener("click", () => navigateDialog(elements.next
 
 elements.dialog.addEventListener("close", () => {
   if (elements.dialog.open) return;
+  relatedRecordings.clear();
   clearReference();
   resetDialogVideo();
   state.activeRecord = null;

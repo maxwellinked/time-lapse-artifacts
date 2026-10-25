@@ -27,8 +27,8 @@
       rel="canonical"
       href="https://maxwellinked.github.io/time-lapse-artifacts/"
     />
-    <link rel="stylesheet" href="assets/style.css?v=20261020-owner-rotation" />
-    <script src="assets/app.js?v=20261024-photo-downloads" type="module"></script>
+    <link rel="stylesheet" href="assets/style.css?v=20261025-recording-metadata" />
+    <script src="assets/app.js?v=20261025-recording-metadata" type="module"></script>
   </head>
   <body>
     <a class="skip-link" href="#recordings">Skip to recordings</a>
@@ -42,6 +42,7 @@
       <div class="header-actions">
         <nav aria-label="Primary navigation">
           <a href="#recordings">Browse recordings</a>
+          <a href="real-time-recordings.html">Real-time recordings</a>
           <a href="drawings.html">Drawing photographs</a>
           <a href="inspection/">Recording inspection</a>
           <a
@@ -132,6 +133,11 @@
             pinned source videos. Full playback remains user-initiated.
           </p>
         </div>
+
+        <p class="photograph-browse">
+          Real-time recordings are also published with their source metadata and candidate time-lapse relationships.
+          <a href="real-time-recordings.html">Browse real-time recordings →</a>
+        </p>
 
         <p class="photograph-browse">
           Photographs are published for part of the archive.
@@ -334,6 +340,13 @@
             </details>
           </section>
         </div>
+
+        <section class="related-recordings" aria-labelledby="related-recordings-title">
+          <h3 id="related-recordings-title">Related real-time recordings</h3>
+          <div id="dialog-related-recordings" role="status" aria-live="polite"></div>
+          <button id="retry-related-recordings" type="button" hidden>Retry related-recording lookup</button>
+          <p><a href="real-time-recordings.html">Browse the real-time records and their published evidence →</a></p>
+        </section>
 
         <nav class="record-navigation" aria-label="Recording navigation">
           <button type="button" id="previous-record">← Previous</button>

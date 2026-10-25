@@ -1,3 +1,4 @@
+import { parseCsv } from "./parse-csv.mjs";
 import { writeFileSync } from "node:fs";
 import { basename, join } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -11,62 +12,6 @@ function option(name) {
   return index >= 0 ? process.argv[index + 1] : null;
 }
 
-function parseCsv(text) {
-  const rows = [];
-  let row = [];
-  let field = "";
-  let quoted = false;
-
-  for (let index = 0; index < text.length; index += 1) {
-    const character = text[index];
-    if (quoted) {
-      if (character === '"') {
-        if (text[index + 1] === '"') {
-          field += '"';
-          index += 1;
-        } else {
-          quoted = false;
-        }
-      } else {
-        field += character;
-      }
-    } else if (character === '"') {
-      quoted = true;
-    } else if (character === ",") {
-      row.push(field);
-      field = "";
-    } else if (character === "\n") {
-      row.push(field);
-      rows.push(row);
-      row = [];
-      field = "";
-    } else if (character !== "\r") {
-      field += character;
-    }
-  }
-
-  if (quoted) throw new Error("metadata.csv ends inside a quoted field");
-  if (field || row.length) {
-    row.push(field);
-    rows.push(row);
-  }
-
-  const [headers, ...values] = rows;
-  if (!headers?.length) throw new Error("metadata.csv has no header row");
-  return values
-    .filter((columns) => columns.some(Boolean))
-    .map((columns, rowIndex) => {
-      if (columns.length !== headers.length) {
-        throw new Error(
-          `metadata.csv row ${rowIndex + 2} has ${columns.length} fields; expected ${headers.length}`,
-        );
-      }
-      return {
-        rowIndex,
-        values: Object.fromEntries(headers.map((header, index) => [header, columns[index]])),
-      };
-    });
-}
 
 function pinnedVideoUrl(revision, path) {
   const encodedPath = path.split("/").map(encodeURIComponent).join("/");
@@ -124,6 +69,14 @@ const records = canonicalRows.map(({ rowIndex, values }) => {
     if (!values[field]) throw new Error(`Canonical row ${rowIndex + 2} lacks ${field}`);
   }
 
+  // Older pinned CSVs document this Standard collection without a mode column.
+  const recordingMode = Object.hasOwn(values, "recording_mode")
+    ? values.recording_mode
+    : "time_lapse";
+  if (recordingMode !== "time_lapse") {
+    throw new Error(`Canonical row ${rowIndex + 2} has an invalid recording_mode`);
+  }
+
   const durationSeconds = Number(values.duration_seconds);
   if (!Number.isFinite(durationSeconds) || durationSeconds <= 0) {
     throw new Error(`Canonical row ${rowIndex + 2} has an invalid duration`);
@@ -150,6 +103,7 @@ const records = canonicalRows.map(({ rowIndex, values }) => {
     dimensions: values.dimensions,
     durationSeconds,
     orientation: values.orientation,
+    recordingMode,
     captureType: values.acquisition_protocol_version,
     integrityReference: values.hub_xet_hash,
   };

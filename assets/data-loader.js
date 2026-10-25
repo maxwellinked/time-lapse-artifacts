@@ -28,7 +28,7 @@ function isNonEmptyString(value) {
   return typeof value === "string" && value.length > 0;
 }
 
-export function validateRecordsPayload(payload) {
+export function validateRecordsPayload(payload, { allowLegacyMode = false } = {}) {
   if (!payload || typeof payload !== "object" || Array.isArray(payload)) {
     invalidPayload("The recording index must be a JSON object.");
   }
@@ -56,6 +56,9 @@ export function validateRecordsPayload(payload) {
       invalidPayload(`Record ID ${record.recordId} appears more than once.`);
     }
     recordIds.add(record.recordId);
+    if (record.recordingMode !== "time_lapse" && !(allowLegacyMode && record.recordingMode === undefined)) {
+      invalidPayload(`Record ${record.recordId} has no valid documented time-lapse mode.`);
+    }
     if (!Number.isInteger(record.rowIndex) || record.rowIndex < 0) {
       invalidPayload(`Record ${record.recordId} has an invalid source row index.`);
     }
@@ -194,7 +197,9 @@ export async function loadRecords(
           cause: error,
         });
       }
-      return validateRecordsPayload(payload);
+      // Previously cached Standard indexes predate recordingMode. Keep their exact
+      // Standard source contract usable; current publication validation is strict.
+      return validateRecordsPayload(payload, { allowLegacyMode: true });
     } catch (error) {
       lastError = normalizeRequestError(error, {
         timedOut,

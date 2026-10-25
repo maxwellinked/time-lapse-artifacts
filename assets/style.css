@@ -1344,6 +1344,24 @@ button {
   }
 }
 
+.related-recordings {
+  border-top: 1px solid currentColor;
+  margin-top: 24px;
+  padding-top: 16px;
+  font-size: 14px;
+  overflow-wrap: anywhere;
+}
+
+.related-recordings h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.related-recordings a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

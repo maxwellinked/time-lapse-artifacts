@@ -19,6 +19,8 @@ const record = {
   support: "Paper",
   dimensions: "9x12",
   durationSeconds: 81.566,
+  recordingMode: "time_lapse",
+  captureType: "standard-2026-08-27",
   integrityReference: "b".repeat(64),
   videoUrl:
     `https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/${revision}/` +
@@ -46,6 +48,16 @@ const fastOptions = {
 
 test("validates a pinned, newest-first payload", () => {
   assert.equal(validateRecordsPayload(payload()).records[0].recordId, record.recordId);
+});
+
+test("Standard recording mode is explicit and separate from acquisition protocol", () => {
+  const valid = validateRecordsPayload(payload()).records[0];
+  assert.equal(valid.recordingMode, "time_lapse");
+  assert.equal(valid.captureType, "standard-2026-08-27");
+  for (const recordingMode of [undefined, "real_time", "standard-2026-08-27", "mp4", 30]) {
+    assert.throws(() => validateRecordsPayload(payload([{ ...record, recordingMode }])),
+      (error) => error instanceof RecordsDataError && error.code === "invalid_payload");
+  }
 });
 
 test("rejects duplicate record IDs", () => {
@@ -76,6 +88,15 @@ test("loads and validates a recording index", async () => {
   const fetchImpl = async () => jsonResponse(payload());
   const result = await loadRecords("data/records.json", { fetchImpl, ...fastOptions });
   assert.equal(result.records.length, 1);
+});
+
+test("cached legacy Standard payloads remain loadable while strict publication checks require mode", async () => {
+  const { recordingMode, ...legacy } = record;
+  assert.throws(() => validateRecordsPayload(payload([legacy])), /mode/);
+  const result = await loadRecords("data/records.json", {fetchImpl:async()=>jsonResponse(payload([legacy])), ...fastOptions});
+  assert.equal(result.records[0].recordId, record.recordId);
+  assert.equal(result.records[0].sourceUrl, record.sourceUrl);
+  await assert.rejects(loadRecords("data/records.json", {fetchImpl:async()=>jsonResponse(payload([{...legacy, recordingMode:"real_time"}])), ...fastOptions}), /mode/);
 });
 
 test("retries transient HTTP failures and bypasses cache on retry", async () => {

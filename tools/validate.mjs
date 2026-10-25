@@ -8,6 +8,7 @@ import { validateRecordsPayload } from "../assets/data-loader.js";
 import { getDisplayReference } from "../assets/reference-policy.js";
 import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
 import { createValidationServer, hasRequiredSourceLinks } from "./validation-helpers.mjs";
+import { buildRealTimeProjection, buildRealTimePage } from "./build-real-time-recordings.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 validateSelectedFrontAssets(root);
@@ -39,6 +40,17 @@ const dataLoader = readFileSync(join(root, "assets/data-loader.js"), "utf8");
 const recordSequences = readFileSync(join(root, "assets/record-sequences.js"), "utf8");
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
 validateRecordsPayload(payload);
+
+const realTime = buildRealTimeProjection(payload, {
+  manifest: JSON.parse(readFileSync(join(root, "data/real-time-source/manifest.json"), "utf8")),
+  csv: readFileSync(join(root, "data/real-time-source/metadata.csv")),
+  sums: readFileSync(join(root, "data/real-time-source/SHA256SUMS")),
+});
+if (readFileSync(join(root, "data/real-time-recordings.json"), "utf8") !== JSON.stringify(realTime, null, 2) + "\n" ||
+    readFileSync(join(root, "real-time-recordings.html"), "utf8") !== buildRealTimePage(realTime, payload) ||
+    !html.includes('href="real-time-recordings.html"') || !html.includes('id="dialog-related-recordings"')) {
+  throw new Error("Real-time metadata or its public access page is missing, stale or unreachable");
+}
 
 // Display JPEGs are bound to the selected photograph bytes, never to video frames
 // or a substitute photo of the same work. Validation is offline and dependency-free.
@@ -151,7 +163,7 @@ if (/CC BY 4\.0/i.test(html)) {
   throw new Error("Dataset license notice is missing the NonCommercial restriction");
 }
 if (
-  !app.includes('from "./data-loader.js"') ||
+  !app.includes('from "./data-loader.js?v=20261025-canonical-metadata"') ||
   !app.includes('from "./record-sequences.js"') ||
   !app.includes("loadRecords(DATA_URL)") ||
   !html.includes('id="retry-data"') ||
