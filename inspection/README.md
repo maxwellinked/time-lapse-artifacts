@@ -7,3 +7,5 @@ Known presentation issue: the first case has a deferred reference-image correcti
 Recorded checks link published source evidence and a clearly identified sanitized summary of local prototype checks. Raw local audit commands, filesystem paths, private review packets and supplementary photographs are excluded. This is not a representative sample, benchmark or inference model.
 
 The native-image pack manifest documents exact file hashes, source hashes, presentation timestamps and transforms. The page retains the tested private prototype presentation; public access adaptations use pinned media URLs and public-safe evidence references.
+
+A matched saved location keeps loading if image delivery is slow. After 15 seconds a waiting notice offers **Retry** or **Cancel**; it is not treated as an identity mismatch. Retry reuses and revalidates the saved JSON without another file selection. No automatic retries occur, and the current selection stays unchanged until the requested image loads.
