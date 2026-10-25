@@ -69,6 +69,14 @@ const records = canonicalRows.map(({ rowIndex, values }) => {
     if (!values[field]) throw new Error(`Canonical row ${rowIndex + 2} lacks ${field}`);
   }
 
+  // Older pinned CSVs document this Standard collection without a mode column.
+  const recordingMode = Object.hasOwn(values, "recording_mode")
+    ? values.recording_mode
+    : "time_lapse";
+  if (recordingMode !== "time_lapse") {
+    throw new Error(`Canonical row ${rowIndex + 2} has an invalid recording_mode`);
+  }
+
   const durationSeconds = Number(values.duration_seconds);
   if (!Number.isFinite(durationSeconds) || durationSeconds <= 0) {
     throw new Error(`Canonical row ${rowIndex + 2} has an invalid duration`);
@@ -95,7 +103,7 @@ const records = canonicalRows.map(({ rowIndex, values }) => {
     dimensions: values.dimensions,
     durationSeconds,
     orientation: values.orientation,
-    recordingMode: "time_lapse",
+    recordingMode,
     captureType: values.acquisition_protocol_version,
     integrityReference: values.hub_xet_hash,
   };

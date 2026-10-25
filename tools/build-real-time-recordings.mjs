@@ -18,6 +18,7 @@ export function buildRealTimeProjection(recordData, {manifest, csv, sums}) {
   if (!rows.length) throw new Error("Real-time source metadata is empty");
   const sourceFields = Object.keys(rows[0].values);
   if (!REAL_TIME_FIELDS.every(f => sourceFields.includes(f))) throw new Error("Real-time source fields are incomplete");
+  const hasSourceMode = sourceFields.includes("recording_mode");
   const checksums = new Map();
   for (const line of sums.toString("utf8").split(/\r?\n/).filter(Boolean)) {
     const match = line.match(/^([a-f0-9]{64})  (Real_Time_Recordings\/[^\r\n]+)$/);
@@ -27,10 +28,13 @@ export function buildRealTimeProjection(recordData, {manifest, csv, sums}) {
   if (checksums.size !== rows.length) throw new Error("Real-time checksum coverage mismatch");
   const records = rows.map(({values}) => {
     if (checksums.get(values.file_name) !== values.sha256) throw new Error(`Real-time SHA-256 mismatch: ${values.file_name}`);
-    return {...values, recording_mode:"real_time"};
+    // Preserve an explicit source mode so validation rejects contradictions or blanks.
+    // Older pinned indexes predate this field and use the documented collection.
+    return hasSourceMode ? {...values} : {...values, recording_mode:"real_time"};
   });
   return validateRealTimePayload({schemaVersion:1, sourceRepository:REAL_TIME_REPOSITORY, sourceRevision:manifest.sourceRevision,
-    collection:"Real_Time_Recordings", recordingModeBasis:"documented_collection", sourceInputs:manifest.inputs, sourceFields, records}, recordData);
+    collection:"Real_Time_Recordings", recordingModeBasis:hasSourceMode ? "source_metadata" : "documented_collection",
+    sourceInputs:manifest.inputs, sourceFields, records}, recordData);
 }
 
 export function buildRealTimePage(payload, recordData) {
@@ -68,7 +72,7 @@ ${entry("Video codec",r.video_codec)}${entry("Pixel format",r.pixel_format)}${en
 *{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:28px 20px 70px}h1{font:400 34px/1.2 Georgia,serif}h2{font-size:23px}h3{font-size:16px;margin-bottom:4px}a{color:inherit;text-decoration:underline;text-underline-offset:3px}p,dd,code,a{overflow-wrap:anywhere}code{font-size:13px}.metadata{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}.metadata div{min-width:0}dt{font-size:13px;opacity:.75}dd{margin:2px 0 0}.notes{white-space:pre-wrap}.relationship{border-left:3px solid var(--rule);padding-left:16px}article{border-top:1px solid var(--rule);padding:20px 0;scroll-margin-top:16px}summary{cursor:pointer;padding:10px 0}:focus-visible{outline:2px solid currentColor;outline-offset:4px}nav ul{padding-left:22px}@media(max-width:600px){.metadata{grid-template-columns:1fr}h1{font-size:29px}}
 </style></head><body><main>
 <a href="./">← Browse time-lapse recordings</a><h1>Real-time recordings</h1>
-<p>${payload.records.length} separately indexed MOV recordings, with their published metadata and candidate time-lapse relationships. Recording mode follows the documented collection.</p>
+<p>${payload.records.length} separately indexed MOV recordings, with their published metadata and candidate time-lapse relationships. Recording mode ${payload.recordingModeBasis === "source_metadata" ? "is read from the pinned source metadata" : "follows the documented collection"}.</p>
 <p>Encoded durations describe the media timeline. Candidate links retain their published status; they do not assign a work identity or a calibrated temporal alignment.</p>
 <p><a href="data/real-time-recordings.json">Download browser metadata (JSON)</a> · <a href="${source(INPUT_PATHS[0],"resolve")}">Source metadata (CSV)</a> · <a href="${source(INPUT_PATHS[3])}">Field definitions</a></p>
 <nav aria-label="Real-time records"><ul>${payload.records.map(r=>`<li><a href="#${escape(r.record_id)}">${escape(r.original_filename)}</a></li>`).join("")}</ul></nav>

@@ -1,7 +1,7 @@
 import { loadPhotographDownloads } from "./photograph-downloads.js?v=20261024";
 // Generated display projection of the existing selected-front map; no source-evidence edits.
 export const SELECTED_FRONTS_SHA256 = "94b72b176dd807e80c89866b1cb7504c9136886ccbbb41a37f31141a21dff684";
-export const LEGACY_REFERENCE_SHA256 = "c165e0c746b60609136408ac53373c870f0a66acce6b19f6b86fd409962c88c2";
+export const LEGACY_REFERENCE_SHA256 = "0b37614442ac40d6edfc3f33c4ec793e9bd039c25286ea8ceeccf6f1157b52af";
 const HASH = /^[a-f0-9]{64}$/;
 const WORK = /^tlaw-[a-f0-9]{16}$/;
 const LINK_PATH = "Work_Identity/work_record_links.csv";

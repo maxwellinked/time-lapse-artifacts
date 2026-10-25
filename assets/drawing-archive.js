@@ -1,5 +1,5 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261024-photo-downloads";
-import { loadRecords } from "./data-loader.js";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=20261025-canonical-metadata";
+import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 

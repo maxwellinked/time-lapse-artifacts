@@ -163,7 +163,7 @@ if (/CC BY 4\.0/i.test(html)) {
   throw new Error("Dataset license notice is missing the NonCommercial restriction");
 }
 if (
-  !app.includes('from "./data-loader.js"') ||
+  !app.includes('from "./data-loader.js?v=20261025-canonical-metadata"') ||
   !app.includes('from "./record-sequences.js"') ||
   !app.includes("loadRecords(DATA_URL)") ||
   !html.includes('id="retry-data"') ||

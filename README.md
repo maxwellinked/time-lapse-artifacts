@@ -17,6 +17,20 @@ shared work, session, or completion state.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
+## Source authority
+
+**Hugging Face owns the data and metadata. GitHub consumes and presents them.**
+The canonical dataset holds recording facts, field definitions, relationships,
+and evidence qualifications. Its derived repository holds published evidence
+derivatives. This repository supplies a lightweight browser and reproducible,
+revision-pinned access projections.
+
+A metadata enrichment is completed in the Hugging Face indexes, schemas,
+validators, and affected dataset exports first. The browser then reads and
+validates those published fields. A browser-only label or JSON field does not
+complete a source-metadata change. Retained source snapshots and display assets
+remain derived access aids. See [project guidance](AGENTS.md).
+
 ## Recording mode and real-time evidence
 
 The [real-time recording list](real-time-recordings.html) exposes the separately
@@ -28,14 +42,18 @@ real-time candidates. A candidate does not inherit the time-lapse record's work
 identity, photograph or finish label.
 
 `recordingMode` in the Standard browser index is `time_lapse`; `recording_mode`
-in the real-time projection is `real_time`. These values describe the documented
-collections. They are separate from file extension, encoded frame rate and the
+in the real-time projection is `real_time`. Both import the source CSV's explicit
+`recording_mode` when present and reject blank or contradictory source values.
+Older pinned source indexes without that column retain a documented-collection
+fallback. These values are separate from file extension, encoded frame rate and the
 existing `captureType` field, which is retained as the acquisition-protocol
 version for compatibility. Dialogs label that value **Acquisition protocol**.
 Durations are labeled as encoded video duration.
 
 The real-time projection preserves every source CSV field as a string, including
-blank values, and adds only its explicit recording mode. Its source revision
+blank values and an explicit source recording mode. Its `recordingModeBasis` is
+`source_metadata` when the source supplies the field; older pinned inputs use
+`documented_collection` and add only that derived mode. Its source revision
 matches the Standard browser snapshot. The small retained CSV/checksum inputs
 and their hashes support deterministic offline regeneration:
 
@@ -53,7 +71,7 @@ Hugging Face; this access projection does not change them.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter use one selected-front map: 431 registered drawings and 1,205 Standard
-recording joins. At dataset revision ed96dab85dea93af4e3a36785a02b90fdeebb976,
+recording joins. At dataset revision 0a323dd51ae7a2f5176dd5f85bcedd50cbc66420,
 the browser covers 436 drawings and 1,256 Standard recordings. Five new drawings
 (51 recordings) explicitly have no selected photograph. Each selected display
 is a bounded, normalized JPEG. The common

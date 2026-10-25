@@ -23,10 +23,12 @@ export function validateRealTimePayload(payload, recordData) {
   requireValue(payload?.schemaVersion === 1 && payload.sourceRepository === REAL_TIME_REPOSITORY &&
     REVISION.test(payload.sourceRevision ?? "") && payload.sourceRevision === recordData?.sourceRevision,
     "source snapshot differs from the recording browser");
-  requireValue(payload.collection === "Real_Time_Recordings" && payload.recordingModeBasis === "documented_collection", "collection mode basis");
   requireValue(Array.isArray(payload.sourceFields) && new Set(payload.sourceFields).size === payload.sourceFields.length &&
-    payload.sourceFields.every(f => typeof f === "string" && /^[a-z][a-z0-9_]*$/.test(f) && f !== "recording_mode") &&
+    payload.sourceFields.every(f => typeof f === "string" && /^[a-z][a-z0-9_]*$/.test(f)) &&
     REAL_TIME_FIELDS.every(f => payload.sourceFields.includes(f)), "source fields");
+  const hasSourceMode = payload.sourceFields.includes("recording_mode");
+  requireValue(payload.collection === "Real_Time_Recordings" &&
+    payload.recordingModeBasis === (hasSourceMode ? "source_metadata" : "documented_collection"), "collection mode basis");
   for (const path of SOURCE_PATHS) {
     const input = payload.sourceInputs?.[path];
     requireValue(HASH.test(input?.sha256 ?? "") && Number.isSafeInteger(input?.sizeBytes) && input.sizeBytes > 0, "source input binding");
@@ -36,7 +38,8 @@ export function validateRealTimePayload(payload, recordData) {
   const paths = new Set(), hashes = new Set();
   for (const r of payload.records) {
     requireValue(r && typeof r === "object" && !Array.isArray(r) &&
-      Object.keys(r).length === payload.sourceFields.length + 1 && payload.sourceFields.every(f => typeof r[f] === "string"), "source values");
+      Object.keys(r).length === payload.sourceFields.length + (hasSourceMode ? 0 : 1) &&
+      payload.sourceFields.every(f => Object.hasOwn(r,f) && typeof r[f] === "string"), "source values");
     requireValue(ID.test(r.record_id) && !ids.has(r.record_id), "duplicate or invalid recording ID"); ids.add(r.record_id);
     requireValue(r.recording_mode === "real_time", "recording mode");
     requireValue(PATH.test(r.file_name) && !paths.has(r.file_name), "duplicate or invalid MOV path"); paths.add(r.file_name);

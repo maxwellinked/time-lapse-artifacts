@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { existsSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { parseCsv } from "../tools/parse-csv.mjs";
 
 const root = new URL("../", import.meta.url);
 const read = (p) => readFileSync(new URL(p, root));
@@ -20,8 +21,8 @@ const row = {
   demux_status:"passed_no_logged_errors", notes:'Creator-reported unchanged source; review said "candidate",\nnot an assigned work.'
 };
 const quote = (v) => /[,"\r\n]/.test(v) ? '"'+v.replaceAll('"','""')+'"' : v;
-function sources(rows=[row]) {
-  const csv=Buffer.from(fields.join(",")+"\r\n"+rows.map(r=>fields.map(f=>quote(r[f])).join(",")).join("\r\n")+"\r\n");
+function sources(rows=[row], sourceFields=fields) {
+  const csv=Buffer.from(sourceFields.join(",")+"\r\n"+rows.map(r=>sourceFields.map(f=>quote(r[f])).join(",")).join("\r\n")+"\r\n");
   const sums=Buffer.from(rows.map(r=>`${r.sha256}  ${r.file_name}`).join("\r\n")+"\r\n");
   const manifest={sourceRepository:"maxwellinked/time-lapse-artifacts",sourceRevision:revision,
     inputs:{"Real_Time_Recordings/metadata.csv":{sha256:hash(csv),sizeBytes:csv.length},"Real_Time_Recordings/SHA256SUMS":{sha256:hash(sums),sizeBytes:sums.length}}};
@@ -32,14 +33,53 @@ async function modules() {
   assert.ok(existsSync(new URL("assets/real-time-recordings.js",root)),"Real-time relationship access is not implemented yet");
   return {...await import("../tools/build-real-time-recordings.mjs"),...await import("../assets/real-time-recordings.js")};
 }
-async function projection(rows=[row]) { const m=await modules(); return {m,p:m.buildRealTimeProjection(recordData,sources(rows))}; }
+async function projection(rows=[row], sourceFields=fields) { const m=await modules(); return {m,p:m.buildRealTimeProjection(recordData,sources(rows,sourceFields))}; }
 
-test("real-time projection preserves every source value, blank identity, and explicit mode",async()=>{
-  const {p}=await projection();
+test("legacy real-time projection preserves source values and identifies its derived mode",async()=>{
+  // Deliberately remove only the new column to reproduce the older CSV schema.
+  // sources() serializes those values and binds the fixture's own bytes and hashes.
+  const legacyRows=parseCsv(read("data/real-time-source/metadata.csv").toString("utf8"))
+    .map(({values:{recording_mode,...original}})=>original);
+  const m=await modules(),s=sources(legacyRows);
+  const p=m.buildRealTimeProjection(recordData,s);
   assert.equal(p.sourceRevision,revision);assert.deepEqual(p.sourceFields,fields);
-  const {recording_mode,...original}=p.records[0];assert.deepEqual(original,row);assert.equal(recording_mode,"real_time");
-  assert.equal(p.sourceInputs["Real_Time_Recordings/metadata.csv"].sha256,sources().manifest.inputs["Real_Time_Recordings/metadata.csv"].sha256);
+  assert.deepEqual(p.records.map(({recording_mode,...original})=>original),legacyRows);
+  assert.ok(p.records.every(r=>r.recording_mode==="real_time"));
+  assert.equal(p.recordingModeBasis,"documented_collection");
+  assert.equal(p.sourceInputs["Real_Time_Recordings/metadata.csv"].sha256,s.manifest.inputs["Real_Time_Recordings/metadata.csv"].sha256);
   assert.equal(p.records[0].work_id,"");assert.equal(p.records[0].pairing_status,"candidate_not_calibrated");
+});
+test("real-time projection preserves the source-declared mode among all 24 original fields",async()=>{
+  const sourceRow={...row,recording_mode:"real_time"};
+  const sourceFields=[...fields,"recording_mode"];
+  const {p}=await projection([sourceRow],sourceFields);
+  assert.equal(p.recordingModeBasis,"source_metadata");
+  assert.deepEqual(p.sourceFields,sourceFields);
+  assert.deepEqual(p.records[0],sourceRow);
+  assert.equal(Object.keys(p.records[0]).length,24);
+});
+test("real-time projection rejects blank or contradictory source modes without replacing them",async()=>{
+  const m=await modules();
+  for(const recording_mode of ["","time_lapse","real-time","standard-2026-08-27"]){
+    assert.throws(()=>m.buildRealTimeProjection(recordData,sources([{...row,recording_mode}],[...fields,"recording_mode"])),/recording mode/i);
+  }
+});
+test("real-time validation binds the mode basis and field counts to the source schema",async()=>{
+  const {m,p:legacy}=await projection();
+  const explicit={...legacy,sourceFields:[...fields,"recording_mode"],recordingModeBasis:"source_metadata"};
+  assert.equal(m.validateRealTimePayload(explicit,recordData),explicit);
+  for(const [payload,mutate] of [
+    [legacy,q=>q.recordingModeBasis="source_metadata"],
+    [explicit,q=>q.recordingModeBasis="documented_collection"],
+    [explicit,q=>q.sourceFields.push("recording_mode")],
+    [explicit,q=>q.records[0].unexpected="new value"],
+    [explicit,q=>delete q.records[0].notes],
+    [explicit,q=>delete q.records[0].recording_mode],
+    [explicit,q=>q.records[0].recording_mode="time_lapse"],
+  ]){
+    const q=structuredClone(payload);mutate(q);
+    assert.throws(()=>m.validateRealTimePayload(q,recordData));
+  }
 });
 test("real-time projection rejects altered source bytes and mismatched checksum entries",async()=>{
   const m=await modules(),s=sources();
@@ -73,8 +113,11 @@ test("static real-time page escapes source notes, preserves status and uses pinn
 });
 test("published real-time projection retains all five original records and remains reproducible offline",async()=>{
   const m=await modules();const csv=read("data/real-time-source/metadata.csv"),sums=read("data/real-time-source/SHA256SUMS"),manifest=JSON.parse(read("data/real-time-source/manifest.json"));
-  assert.equal(hash(csv),"da903daccf89abe0d047a2e248499d95a78b7690322dca62ba2b638907c5136b");
+  assert.equal(hash(csv),"3a6d7d907df4ec8d3c268b25206878dadd062a4f511a03b2ac8711d3dbe99769");
   const p=m.buildRealTimeProjection(recordData,{manifest,csv,sums});assert.equal(p.records.length,5);
+  assert.equal(p.recordingModeBasis,"source_metadata");
+  assert.equal(p.sourceFields.length,24);assert.ok(p.sourceFields.includes("recording_mode"));
+  assert.deepEqual(p.records,parseCsv(csv.toString("utf8")).map(({values})=>values));
   assert.deepEqual(JSON.parse(read("data/real-time-recordings.json")),p);
   assert.equal(read("real-time-recordings.html").toString(),m.buildRealTimePage(p,recordData));
   assert.equal(p.records.filter(r=>r.demux_status==="completed_with_timestamp_errors").length,2);
