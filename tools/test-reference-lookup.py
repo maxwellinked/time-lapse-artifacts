@@ -156,6 +156,127 @@ class ReferenceLookupContract(unittest.TestCase):
     def repack_photos(self):
         self.inputs[lookup.PHOTO_MANIFEST] = csv_bytes(lookup.PHOTO_FIELDS, self.photos)
 
+    def rename_photo(self, index=0, context="2026-01-08.1610", status="OwnerConfirmed"):
+        image = self.photos[index]
+        image["sha256"] = f"{index + 1:012x}" + "abcdef0123456" * 4
+        image["image_path"] = (f"Physical_References/Photographs/images/{image['work_id']}/"
+                               f"{context}.PhotographReference.{status}.{image['work_id']}."
+                               f"Seq0012.{image['sha256'][:12]}.jpg")
+        self.repack_photos()
+        return image
+
+    def test_renamed_photos_keep_exact_manifest_evidence_and_pinned_links(self):
+        for context, status in [("2026-01-08.1610", "Proposed"),
+                                ("2026-07-02.UnknownTime", "OwnerConfirmed"),
+                                ("UnknownDate.UnknownTime", "OwnerConfirmed"),
+                                ("2026-07-19_to_2026-07-20.MultipleTimes", "Proposed"),
+                                ("2026-07-19.MultipleTimes", "OwnerConfirmed")]:
+            with self.subTest(context=context, status=status):
+                self.inputs, self.github, self.photos = fixture()
+                if status == "Proposed":
+                    self.derived(self.photos[0])
+                photo = self.rename_photo(context=context, status=status)
+                record = self.build()["records"][RIDS[0]]
+                image = record["mainImage"]
+                self.assertEqual({key: image[key] for key in lookup.PHOTO_FIELDS}, photo)
+                self.assertEqual(image["fullResolutionUrl"],
+                                 f"https://huggingface.co/datasets/{lookup.REPOSITORY}/resolve/{REV}/{photo['image_path']}")
+                self.assertEqual(image["hfPath"], f"hf://datasets/{lookup.REPOSITORY}@{REV}/{photo['image_path']}")
+                self.assertEqual(record["clarification"], lookup.CLARIFICATION)
+                self.assertEqual("(proposed relationship)" in record["referenceRole"], status == "Proposed")
+
+    def test_published_renamed_photograph_examples_are_accepted(self):
+        # Exact examples from HF 12d5713326886bc18669f2a5c571c4fe7ac1fb73.
+        examples = [
+            ("tlaw-006d0454b98f434d", "2026-01-08.1610.PhotographReference.Proposed.tlaw-006d0454b98f434d.Seq0012.16a8cd1ec396.jpg",
+             '16a8cd1ec39682aa4750267af77b16f8707663af4d2c6d435d44cc8b5c78cc45', "proposed"),
+            ("tlaw-0308e9ad083f859a", "2026-09-30.1643.PhotographReference.OwnerConfirmed.tlaw-0308e9ad083f859a.Seq0015.7a2051a946c4.jpg",
+             "7a2051a946c424fe030effd7904e71beb5c21c1a5307540a5c0f30ce9a783733", "owner_confirmed"),
+            ("tlaw-3af9586b916a371e", "2026-07-22_to_2026-07-23.MultipleTimes.PhotographReference.OwnerConfirmed.tlaw-3af9586b916a371e.Seq0109.a40da8332e63.jpg",
+             "a40da8332e63470a018234a3db24be347be274b44512ac9b38db7babacfbae24", "owner_confirmed"),
+        ]
+        for wid, name, sha, status in examples:
+            with self.subTest(name=name):
+                lookup.validate_photo_path(dict(image_path=f"Physical_References/Photographs/images/{wid}/{name}",
+                                                work_id=wid, sha256=sha, relationship_status=status))
+
+    def test_renamed_photograph_rejects_hash_work_status_and_shape_mismatches(self):
+        image = self.rename_photo()
+        valid = copy.deepcopy(self.photos)
+        path, sha = image["image_path"], image["sha256"]
+        variants = [
+            ("sha256", "f" + sha[1:]), ("sha256", sha[:12]), ("sha256", sha.upper()),
+            ("image_path", path.replace(sha[:12] + ".jpg", "f" * 12 + ".jpg")),
+            ("image_path", path.replace(sha[:12] + ".jpg", sha[:11] + ".jpg")),
+            ("image_path", path.replace(sha[:12] + ".jpg", sha[:13] + ".jpg")),
+            ("image_path", path.replace("/" + WIDS[0] + "/", "/" + WIDS[1] + "/")),
+            ("image_path", path.replace("." + WIDS[0] + ".", "." + WIDS[1] + ".")),
+            ("image_path", path.replace(".OwnerConfirmed.", ".Proposed.")),
+            ("image_path", path.replace(".OwnerConfirmed.", ".")),
+            ("image_path", path.replace("PhotographReference", "PhotographSelectedFront")),
+            ("image_path", path.replace("Seq0012", "Seq12")),
+            ("image_path", path.replace("Seq0012", "Seq0000")),
+            ("image_path", path.replace("2026-01-08", "2026-01")),
+            ("image_path", path.replace(".jpg", ".JPG")),
+            ("image_path", path + ".extra"), ("image_path", path + "\n"),
+            ("image_path", path.replace("/images/", "/other/")),
+            ("work_id", WIDS[1]),
+        ]
+        for field, value in variants:
+            with self.subTest(field=field, value=value):
+                self.photos = copy.deepcopy(valid)
+                self.photos[0][field] = value
+                self.repack_photos()
+                with self.assertRaisesRegex(lookup.ContractError, "photograph|Photograph"):
+                    self.build()
+
+    def test_renamed_photograph_rejects_unsafe_paths(self):
+        path = self.rename_photo()["image_path"]
+        for value in ("/" + path, "../" + path, path.replace("/images/", "/images/../images/"),
+                      path.replace("/images/", "/images//"), path.replace("/images/", "/images/./"),
+                      path.replace("/images/", "/images/%2e%2e/"), path.replace("/", "\\"),
+                      path + "?download=true", path + "#fragment", path + "\0"):
+            with self.subTest(path=value):
+                self.photos[0]["image_path"] = value
+                self.repack_photos()
+                with self.assertRaisesRegex(lookup.ContractError, "unsafe/noncanonical path"):
+                    self.build()
+
+    def test_renamed_photograph_duplicates_still_fail_closed(self):
+        self.rename_photo()
+        valid = copy.deepcopy(self.photos)
+        for same_path, same_bytes in ((True, True), (False, True), (True, False)):
+            with self.subTest(same_path=same_path, same_bytes=same_bytes):
+                duplicate = copy.deepcopy(valid[0])
+                if not same_path:
+                    duplicate["image_path"] = duplicate["image_path"].replace("Seq0012", "Seq0013")
+                if not same_bytes:
+                    # Same filename prefix, distinct full hashes: reject by path.
+                    duplicate["sha256"] = duplicate["sha256"][:-1] + "0"
+                self.photos = valid + [duplicate]
+                self.repack_photos()
+                with self.assertRaisesRegex(lookup.ContractError, "Duplicate photograph path/bytes"):
+                    self.build()
+
+    def test_legacy_photograph_hash_binding_still_fails_closed(self):
+        for sha in ("f" * 64, self.photos[0]["sha256"][:24], "A" * 64):
+            with self.subTest(sha=sha):
+                self.photos[0]["sha256"] = sha
+                self.repack_photos()
+                with self.assertRaisesRegex(lookup.ContractError, "Invalid photograph path/SHA binding"):
+                    self.build()
+
+    def test_renamed_photograph_cannot_bypass_active_work_check(self):
+        self.rename_photo()
+        _, works = lookup.table(self.inputs[lookup.SOURCES[2]], "works")
+        works[0].update(status="superseded", superseded_by_work_id=WIDS[1])
+        self.inputs[lookup.SOURCES[2]] = csv_bytes(list(works[0]), works)
+        # No positive recording link remains on the retired work.
+        for name in (lookup.SOURCES[0], lookup.SOURCES[3]):
+            self.inputs[name] = self.inputs[name].replace(WIDS[0].encode(), WIDS[1].encode())
+        with self.assertRaisesRegex(lookup.ContractError, "Photograph is not linked to an active registered work"):
+            self.build()
+
     def test_derived_photo_keeps_all_manifest_fields_and_visible_proposed_qualification(self):
         self.derived(self.photos[0])
         self.repack_photos()
