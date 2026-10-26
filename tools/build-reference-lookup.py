@@ -45,6 +45,17 @@ WID = re.compile(r"tlaw-[0-9a-f]{16}\Z")
 
 SHA = re.compile(r"[0-9a-f]{64}\Z")
 
+# HF Media_Naming/policy.json and tools/uniform_media_names.py at 12d5713.
+# Dates are associated finish-label context, not photograph capture times.
+PHOTO_DATE = r"[0-9]{4}-[0-9]{2}-[0-9]{2}"
+READABLE_PHOTO = re.compile(
+    rf"(?:UnknownDate\.UnknownTime|{PHOTO_DATE}\.(?:[0-9]{{4}}|UnknownTime|MultipleTimes)"
+    rf"|{PHOTO_DATE}_to_{PHOTO_DATE}\.MultipleTimes)"
+    r"\.PhotographReference\.(?P<status>Proposed|OwnerConfirmed)\."
+    r"(?P<work_id>tlaw-[0-9a-f]{16})\.Seq(?P<sequence>[0-9]{4,})\."
+    r"(?P<sha_prefix>[0-9a-f]{12})\.jpg"
+)
+
 PRIMARY_CLASSES = {"native_full_resolution_inspection": "native full drawing",
                    "limited_resolution_full_drawing_reference": "limited"}
 RELATIONSHIP_FIELDS = ("relationship_status", "evidence_class", "authority_class", "derivation_method")
@@ -83,6 +94,21 @@ def path_check(value: str, label: str) -> PurePosixPath:
             and ".." not in path.parts and not any(c in value for c in "\\:%?#*[]")
             and not any(ord(c) < 32 for c in value), f"{label}: unsafe/noncanonical path")
     return path
+
+def validate_photo_path(photo: dict[str, str]) -> None:
+    path = path_check(photo["image_path"], "photograph")
+    wid, sha = photo["work_id"], photo["sha256"]
+    require(bool(WID.fullmatch(wid)) and bool(SHA.fullmatch(sha))
+            and path.parent.as_posix() == f"Physical_References/Photographs/images/{wid}",
+            "Invalid photograph path/SHA binding")
+    if re.fullmatch(r"[0-9a-f]{24}\.jpg", path.name):
+        require(path.stem == sha[:24], "Invalid photograph path/SHA binding")
+        return
+    match = READABLE_PHOTO.fullmatch(path.name)
+    require(bool(match) and match["work_id"] == wid and match["sha_prefix"] == sha[:12]
+            and int(match["sequence"]) > 0
+            and match["status"] == {"proposed": "Proposed", "owner_confirmed": "OwnerConfirmed"}.get(photo["relationship_status"]),
+            "Invalid photograph path/SHA binding")
 
 def urls(path: str, revision: str) -> tuple[str, str]:
     return (f"hf://datasets/{REPOSITORY}@{revision}/{path}",
@@ -156,10 +182,7 @@ def build_rows(inputs: dict[str, bytes], revision: str) -> list[dict[str, str | 
     for photo in photos:
         wid, name = photo["work_id"], photo["image_path"]
         require(work_states.get(wid) == "active", "Photograph is not linked to an active registered work")
-        path_check(name, "photograph")
-        require(bool(re.fullmatch(r"Physical_References/Photographs/images/tlaw-[0-9a-f]{16}/[0-9a-f]{24}\.jpg", name))
-                and name.split("/")[3] == wid and bool(SHA.fullmatch(photo["sha256"]))
-                and PurePosixPath(name).stem == photo["sha256"][:24], "Invalid photograph path/SHA binding")
+        validate_photo_path(photo)
         require(name not in photo_paths and photo["sha256"] not in photo_hashes, "Duplicate photograph path/bytes")
         photo_paths.add(name)
         photo_hashes.add(photo["sha256"])
