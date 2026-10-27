@@ -32,11 +32,12 @@ jobs:
     timeout-minutes: 10
     env:
       GIT_LFS_SKIP_SMUDGE: "1"
-      HF_SOURCE_ROOT: ${{ runner.temp }}/time-lapse-artifacts-source
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Set isolated source checkout path
+        run: echo "HF_SOURCE_ROOT=$RUNNER_TEMP/time-lapse-artifacts-source" >> "$GITHUB_ENV"
       - name: Fetch immutable Hugging Face metadata and pointer objects
         run: |
           git -c core.autocrlf=false init "$HF_SOURCE_ROOT"
