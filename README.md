@@ -89,11 +89,37 @@ overlay binds the new Hugging Face registry, correction ledger and creator note;
 the original photograph evidence and video-source revision pins retain their
 historical scope. Recording IDs, media bytes and documented times are unchanged.
 
-Reproduce the display projection and exact JPEG assets from the validated common
-candidate (Python `pyarrow` and `Pillow` required):
+Verify the current projection from a full-history checkout of this browser and a
+metadata-only Git clone of the authoritative Hugging Face repository. Preserve
+committed line endings and skip LFS media downloads:
 
 ```console
-python tools/export-selected-fronts.py --candidate <candidate-directory> --destination . --assets
+GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
+python3 -B tools/migrate-media-names.py --source-root /path/to/hf-git --source-revision 12d5713326886bc18669f2a5c571c4fe7ac1fb73 --browser-root . --browser-base bfe047340508ef4cbb9c685bca72a632b5b6fccb --output . --check
+HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
+```
+
+The supported check starts from the retained creator-corrected browser baseline
+`bfe047340508ef4cbb9c685bca72a632b5b6fccb` and verifies its migration to the pinned
+current media names. The source migration's base is
+`253e2ad859ea93b183110f19b5bbd78fc0bd6289`; the authoritative download index also
+declares media at `dcfe6cb22fe20bc6677464875f2333600f32bf64`. Keep all three source
+commits and their ancestry available. The checks read committed Git blobs and
+local browser files and use only Python's standard library and Git. Partial Git
+clones may fetch missing pinned metadata and LFS pointer objects during a check;
+no media payloads are downloaded. The pinned-input CI job runs the same
+integration check. This verifies the current migration and retained display
+bytes; it does not reconstruct the original candidate selection or encode JPEGs.
+Future source or selection publications require explicit review and updates to
+the reproduction pins, preserving the exact comparisons.
+
+The earlier stages can be reconstructed separately in isolated destinations.
+The original display export requires the private validated common candidate and
+Python `pyarrow` and `Pillow`:
+
+```console
+python tools/export-selected-fronts.py --candidate <candidate-directory> --destination <historical-browser-directory> --assets
 ```
 
 The candidate directory contains `selected_fronts.json` and its hash-bound
@@ -103,16 +129,22 @@ A changed projection requires an explicit update of the checked hash in
 `assets/selected-fronts.js`; it must not be accepted by weakening that check.
 Do not apply additional source rotation to these normalized display JPEGs.
 
-Reproduce the five-work supplement from the exact published inputs and masters
-under their Hugging Face repository paths (Pillow 12.2.0, JPEG 8.0 and LittleCMS
-2.18), while retaining the Git baseline identified by the tool:
+To check the later creator correction and five-work supplement, use a separate
+browser checkout at `bfe047340508ef4cbb9c685bca72a632b5b6fccb` that also retains
+Git baseline `26392f5c981f1d3207414f819c88ab8dbd8dc30f`. Its separate Hugging Face
+source checkout must be at `253e2ad859ea93b183110f19b5bbd78fc0bd6289`, with the
+seven `SOURCE_INPUTS` paths in `tools/extend-selected-fronts.py` unchanged from
+that commit. Materialize the five exact published masters at the paths named by
+that revision's download index; LFS pointer files alone are insufficient. Exact
+JPEG reproduction requires Pillow 12.2.0, JPEG 8.0 and LittleCMS 2.18:
 
 ```console
-python tools/extend-selected-fronts.py --source-root <downloaded-hf-root> --source-revision <40-character-HF-commit> --destination .
-python tools/extend-selected-fronts.py --source-root <downloaded-hf-root> --source-revision <40-character-HF-commit> --destination . --check
-node tools/build-photograph-clarifications.mjs
+python3 /path/to/browser-overlay/tools/extend-selected-fronts.py --source-root /path/to/hf-overlay --source-revision 253e2ad859ea93b183110f19b5bbd78fc0bd6289 --destination /path/to/browser-overlay --check
 ```
 
+To regenerate that historical stage, omit `--check` in the isolated browser
+checkout, then run `node tools/build-photograph-clarifications.mjs` there. Do not
+run this stage against the current renamed source or current browser output.
 The tool verifies the exact committed input bytes, owner receipts, all five master
 hashes, source/work joins, supersession and existing recording memberships before writing.
 It applies EXIF orientation once, converts to sRGB, fits the complete frame within
@@ -131,7 +163,7 @@ revisions preserve their paths and bytes. No source photograph authority changes
 `tools/build-drawing-parquet.py` remains a historical export tool for older pinned
 site revisions. It rejects revisions containing the new selected-front map to
 prevent regeneration from the older primary-reference policy. Current derived
-views must use the common candidate. No export tool uploads files.
+views follow the pinned overlay and migration stages above. No export tool uploads files.
 
 ## Validation
 
@@ -158,13 +190,14 @@ Refresh it from the bundled, reviewed snapshot with
 
 The historical photograph lookup generator's `--check` also requires the Git objects for
 the lookup's `githubRevision` and Hugging Face `sourceRevision`. Use full-history
-checkouts, or fetch those exact commits before checking a shallow checkout.
-Inputs must retain their committed bytes; clone with `-c core.autocrlf=false`
-when local Git settings would convert line endings. A missing baseline object
-does not mean that the recorded baseline is invalid or should be replaced.
-For the current correction overlay, use `extend-selected-fronts.py --check` instead:
-it verifies the historical Git baseline and the current canonical Hugging Face
-inputs separately, without claiming the new projection existed in the old commit.
+checkouts, or fetch the required commits and ancestry before checking a shallow
+checkout. Inputs must retain their committed bytes; clone with
+`-c core.autocrlf=false` when local Git settings would convert line endings. A
+missing baseline object does not mean that the recorded baseline is invalid or
+should be replaced. Use the pinned migration and integration commands above for
+current verification. The historical overlay's guards and evidence pins retain
+their original scope; a later filename migration does not authorize relaxing
+those guards or transferring historical evidence to new bindings.
 
 The browser validates the bundled index before rendering it, retries transient
 same-origin failures with a bounded timeout, and offers a visible retry action
