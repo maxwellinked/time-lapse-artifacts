@@ -167,7 +167,7 @@ def migrate_cache_tokens(text, revision):
     return text
 
 
-def migrate(source, revision, browser, baseline):
+def migrate(source, revision, browser, baseline, asset_revision=None):
     mapping, binding = verified_mapping(source, revision)
     outputs = {}
     current_paths = set(subprocess.check_output(["git", "ls-tree", "-r", "-z", "--name-only", revision], cwd=source).decode().split("\0"))
@@ -182,6 +182,11 @@ def migrate(source, revision, browser, baseline):
 
     def read(path):
         return json.loads(git_bytes(browser, baseline, path))
+
+    def asset_text(path):
+        # Historical reproduction must not incorporate later application code.
+        return (git_bytes(browser, asset_revision, path).decode("utf-8")
+                if asset_revision else (browser / path).read_text())
 
     def bind(path):
         raw = git_bytes(source, revision, path)
@@ -273,7 +278,7 @@ def migrate(source, revision, browser, baseline):
         "assets/selected-fronts.js": {"SELECTED_FRONTS_SHA256": "data/selected-fronts.json", "LEGACY_REFERENCE_SHA256": "data/physical-references.json"},
         "assets/photograph-downloads.js": {"PHOTOGRAPH_DOWNLOADS_SHA256": "data/photograph-downloads.json"},
     }.items():
-        text = (browser / path).read_text()
+        text = asset_text(path)
         for constant, output in constants.items():
             text, count = re.subn(r'(' + re.escape(constant) + r' = ")[a-f0-9]{64}(";)',
                                   lambda match: match[1] + digest(outputs[output]) + match[2], text)
@@ -281,7 +286,7 @@ def migrate(source, revision, browser, baseline):
         outputs[path] = text.encode()
     for path in ("assets/selected-fronts.js", "assets/photograph-downloads.js", "assets/app.js",
                  "assets/drawing-archive.js", "index.html", "drawings.html"):
-        text = outputs[path].decode() if path in outputs else (browser / path).read_text()
+        text = outputs[path].decode() if path in outputs else asset_text(path)
         outputs[path] = migrate_cache_tokens(text, revision).encode()
     return outputs, binding
 

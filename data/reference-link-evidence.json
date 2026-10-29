@@ -1,42 +1,42 @@
 {
   "schemaVersion": 1,
-  "sourceRevision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
-  "lookupSha256": "dc0d131c3cdb7056e9f7cdfc84a69d1d572646920ca33bbeb47035cc216c878d",
+  "sourceRevision": "4f563085afacfc454496ac2d61606614268b2cb8",
+  "lookupSha256": "a93a5d9a0905cf8f7410fad2f8bdb367018b86336c61f4ed658b6653f9f799e4",
   "sourceInputs": {
     "Work_Identity/works.csv": {
       "path": "Work_Identity/works.csv",
-      "revision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
-      "sha256": "1e7d157ea2fe219af13e078da0185dedd93c89396304e035b721f6cdee8c87bb",
       "bytes": 196999,
-      "gitBlobOid": "aef9597d6178db6b9d390bdcb24119d6a58f856d"
+      "sha256": "1e7d157ea2fe219af13e078da0185dedd93c89396304e035b721f6cdee8c87bb",
+      "gitBlobOid": "aef9597d6178db6b9d390bdcb24119d6a58f856d",
+      "revision": "4f563085afacfc454496ac2d61606614268b2cb8"
     },
     "Work_Identity/work_record_links.csv": {
       "path": "Work_Identity/work_record_links.csv",
-      "revision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
-      "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b",
       "bytes": 432363,
-      "gitBlobOid": "76c7863786f2d6042c311addd3f3fa6a61d7771e"
+      "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b",
+      "gitBlobOid": "76c7863786f2d6042c311addd3f3fa6a61d7771e",
+      "revision": "4f563085afacfc454496ac2d61606614268b2cb8"
     },
     "Physical_References/work_reference_status.csv": {
       "path": "Physical_References/work_reference_status.csv",
-      "revision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
-      "sha256": "12ffa5fd4fe4e4bacdc3055b86bdbcc9f00e9b22ec532f3bda9329b08b5ada2e",
       "bytes": 84078,
-      "gitBlobOid": "c1840ad375fbb71904790aa11a995a50d0467f65"
+      "sha256": "12ffa5fd4fe4e4bacdc3055b86bdbcc9f00e9b22ec532f3bda9329b08b5ada2e",
+      "gitBlobOid": "c1840ad375fbb71904790aa11a995a50d0467f65",
+      "revision": "4f563085afacfc454496ac2d61606614268b2cb8"
     },
     "Physical_References/endpoint_references.csv": {
       "path": "Physical_References/endpoint_references.csv",
-      "revision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
-      "sha256": "5f3e1ed6c484853cd6df8722e3916b111fc280a1e02a4f9272c0566172821c3a",
       "bytes": 346794,
-      "gitBlobOid": "ef480989b60d21da68e0fec239da36c97ccc95d9"
+      "sha256": "5f3e1ed6c484853cd6df8722e3916b111fc280a1e02a4f9272c0566172821c3a",
+      "gitBlobOid": "ef480989b60d21da68e0fec239da36c97ccc95d9",
+      "revision": "4f563085afacfc454496ac2d61606614268b2cb8"
     },
     "Physical_References/Photographs/PROCESSING.json": {
       "path": "Physical_References/Photographs/PROCESSING.json",
-      "revision": "12d5713326886bc18669f2a5c571c4fe7ac1fb73",
-      "sha256": "3d458504574be011a711086302dc0923268289ac228563d89000e8106c410f10",
       "bytes": 392554,
-      "gitBlobOid": "c204b440e38df72af2e6e1f41ebc9ceaf00e19c1"
+      "sha256": "3d458504574be011a711086302dc0923268289ac228563d89000e8106c410f10",
+      "gitBlobOid": "c204b440e38df72af2e6e1f41ebc9ceaf00e19c1",
+      "revision": "4f563085afacfc454496ac2d61606614268b2cb8"
     }
   },
   "images": {

@@ -1,5 +1,6 @@
 import { getDisplayReference, describeReferenceLink } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
+import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
 
 // Presentation grouping only: the recording lookup supplies the existing work IDs.
 export function buildDrawingArchive(recordData, references, previews, evidence = null) {
@@ -12,6 +13,7 @@ export function buildDrawingArchive(recordData, references, previews, evidence =
   const works = new Map();
   for (const record of records) {
     const entry = references.records[record.recordId];
+    if (isUnlinkedRecording(entry)) continue;
     if (!/^tlaw-[a-f0-9]{16}$/.test(entry?.workId ?? "")) throw new Error("Recording has no established work ID");
     const work = works.get(entry.workId) ?? { workId: entry.workId, records: [], entries: [] };
     work.records.push(record);

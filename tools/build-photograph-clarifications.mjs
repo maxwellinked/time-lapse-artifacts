@@ -13,7 +13,7 @@ function filterRows() {
     row.hidden = Boolean((query && !row.textContent.toLowerCase().includes(query)) || (reason.value && !row.dataset.reasons.split(' ').includes(reason.value)));
     if (!row.hidden) count++;
   }
-  document.getElementById('result-count').textContent = count + (count === 1 ? ' drawing' : ' drawings');
+  document.getElementById('result-count').textContent = count + (count === 1 ? ' entry' : ' entries');
 }
 search.addEventListener('input', filterRows); reason.addEventListener('change', filterRows);
 `;
@@ -53,7 +53,7 @@ export function collectClarifications(payload, lookup, evidence) {
     const entry = lookup.records[record.recordId];
     const reasons = clarificationReasons(entry, evidence, payload.sourceRevision);
     // A missing work link must never merge unrelated recordings into one work.
-    const key = entry?.workId ?? record.recordId;
+    const key = entry?.workId || record.recordId;
     if (!works.has(key)) works.set(key, { key, workId: entry?.workId, reasons: new Set(), records: [], photos: new Map() });
     const work = works.get(key);
     for (const reason of reasons) work.reasons.add(reason);
@@ -83,7 +83,7 @@ export function buildClarificationPage(payload, lookup, evidence) {
   const counts = Object.fromEntries(Object.keys(QUESTIONS).map((key) => [key, works.filter((work) => work.reasons.includes(key)).length]));
   const recordLink = (record) => `<a href="${SITE}#record=${escape(record.recordId)}">${escape(record.filename)}</a> <code>${escape(record.recordId)}</code>`;
   const rows = works.map((work) => `<article id="${escape(work.key)}" data-reasons="${work.reasons.join(" ")}">
-  <h2>${escape(work.records[0].date)} · ${escape(work.records[0].tool)} · ${escape(work.records[0].dimensions)} in</h2>
+  <h2>${escape(work.records[0].date)} · ${escape(work.records[0].tool)} · ${escape(work.records[0].dimensions)}</h2>
   <p><code>${escape(work.key)}</code> · ${work.records.length} recording${work.records.length === 1 ? "" : "s"}</p>
   ${work.reasons.map((key) => `<p><strong>${escape(QUESTIONS[key][0])}.</strong> ${escape(QUESTIONS[key][1])}</p>`).join("\n  ")}
   <p>${recordLink(work.records[0])}</p>
@@ -105,12 +105,12 @@ article { border-top:1px solid var(--rule); padding:16px 0; scroll-margin-top:16
 </style></head><body><main>
 <a href="${SITE}">← Browse recordings</a>
 <h1>Photograph clarification list</h1>
-<p>One entry per drawing, with direct links to its recordings. Source-file questions, unverified photograph matches and unresolved primary choices remain distinct. Missing or supplemental-only photographs are coverage gaps; their work links are established.</p>
+<p>One entry per registered drawing or recording without an established work link, with direct recording links. Source-file questions, unverified photograph matches and unresolved primary choices remain distinct. Missing or supplemental-only photographs on registered drawings are coverage gaps; their work links are established.</p>
 <p>A listed question does not require a new photograph. Supported indirect links remain qualified references, even when their recorded status is proposed.</p>
-<div class="controls"><label>Find a drawing, date, filename or ID<input id="search" type="search" autocomplete="off"></label>
-<label>Reason<select id="reason"><option value="">All listed drawings (${works.length})</option>${Object.entries(QUESTIONS).filter(([key]) => counts[key]).map(([key, [label]]) => `<option value="${key}">${escape(label)} (${counts[key]})</option>`).join("")}</select></label></div>
-<p id="result-count" aria-live="polite">${works.length} drawings</p>
-<section aria-label="Drawings with photograph questions or gaps">${rows}</section>
+<div class="controls"><label>Find a drawing, recording, date, filename or ID<input id="search" type="search" autocomplete="off"></label>
+<label>Reason<select id="reason"><option value="">All listed entries (${works.length})</option>${Object.entries(QUESTIONS).filter(([key]) => counts[key]).map(([key, [label]]) => `<option value="${key}">${escape(label)} (${counts[key]})</option>`).join("")}</select></label></div>
+<p id="result-count" aria-live="polite">${works.length} entries</p>
+<section aria-label="Drawing and recording reference questions or gaps">${rows}</section>
 <p>Source snapshot: <a href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/${escape(payload.sourceRevision)}"><code>${escape(payload.sourceRevision)}</code></a>. This list describes that snapshot; archive evidence and primary-image rules are unchanged.</p>
 </main><script>${CLARIFICATION_FILTER_SCRIPT}</script></body></html>
 `.replace(/[ \t]+$/gm, "");

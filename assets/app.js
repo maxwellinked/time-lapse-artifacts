@@ -1,7 +1,7 @@
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
-import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
+import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
@@ -11,10 +11,10 @@ import {
   sortRecordsForDisplay,
 } from "./record-sequences.js";
 
-const DATA_URL = "data/records.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
+const DATA_URL = "data/records.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
-const REFERENCE_URL = "data/physical-references.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
+const REFERENCE_URL = "data/physical-references.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
 let referenceEvidencePromise;
@@ -154,7 +154,7 @@ function humanizeToken(value) {
 }
 
 function formatDimensions(value) {
-  return `${value.replace("x", " × ")} in`;
+  return value.replace("x", " × ");
 }
 
 function applyAppearance(appearance) {
@@ -548,7 +548,7 @@ async function loadReferenceEvidence(lookupSha256) {
   if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8", { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Qualified-link evidence unavailable");
       const evidence = await response.json();
       if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {

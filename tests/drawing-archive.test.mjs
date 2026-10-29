@@ -18,7 +18,7 @@ test("groups the committed snapshot once per work without changing source eviden
   assert.equal(works.filter((work) => work.status === "reference_review").length, 289);
   assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 66);
   assert.deepEqual(works.flatMap((work) => work.records.map((record) => record.recordId)).sort(),
-    data.records.map((record) => record.recordId).sort());
+    data.records.filter((record) => references.records[record.recordId].workId).map((record) => record.recordId).sort());
   assert.equal(JSON.stringify([data, references, previews]), before);
 });
 
