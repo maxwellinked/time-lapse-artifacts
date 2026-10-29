@@ -71,7 +71,11 @@ Hugging Face; this access projection does not change them.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter use one selected-front map: 435 active registered drawings and 1,256 Standard
-recording joins. The 430 surviving earlier displays retain their exact candidate bytes.
+recording joins. The current Standard index contains 1,303 recordings at Hugging Face
+revision `4f563085afacfc454496ac2d61606614268b2cb8`. Its 47 additions have no assigned
+work IDs or photograph links; they remain available in the recording browser and
+are omitted from registered-drawing grouping. File counts do not establish the
+number of drawings or complete sessions. The 430 surviving earlier displays retain their exact candidate bytes.
 Five additional displays (51 recording joins) are bounded derivatives of the
 owner-confirmed fronts in the separate Hugging Face master release, at the exact
 revision recorded in `data/selected-fronts.json`. The projection records the original
@@ -95,22 +99,28 @@ committed line endings and skip LFS media downloads:
 
 ```console
 GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
-GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
-python3 -B tools/migrate-media-names.py --source-root /path/to/hf-git --source-revision 12d5713326886bc18669f2a5c571c4fe7ac1fb73 --browser-root . --browser-base bfe047340508ef4cbb9c685bca72a632b5b6fccb --output . --check
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
+python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision 4f563085afacfc454496ac2d61606614268b2cb8 --browser-root . --browser-base 19ac65ee020f8b40c332fb5e1bb022b1610f99b1 --generated-at 2026-10-29 --expected-additions 47 --output . --check
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
 
-The supported check starts from the retained creator-corrected browser baseline
-`bfe047340508ef4cbb9c685bca72a632b5b6fccb` and verifies its migration to the pinned
-current media names. The source migration's base is
+The current additive check starts from browser baseline
+`19ac65ee020f8b40c332fb5e1bb022b1610f99b1`. It preserves the corrected lookup and
+all existing relationship inputs and adds only the 47 explicitly unlinked rows.
+`data/source-refresh.json` records the exact source pin, generation date, prior
+population and byte bindings; its browser baseline is not a commit containing the
+new records. The separate historical check reproduces the original 18 migration
+outputs against the retained browser snapshot, starting from creator-corrected
+baseline `bfe047340508ef4cbb9c685bca72a632b5b6fccb`. The source migration's base is
 `253e2ad859ea93b183110f19b5bbd78fc0bd6289`; the authoritative download index also
 declares media at `dcfe6cb22fe20bc6677464875f2333600f32bf64`. Keep all three source
 commits and their ancestry available. The checks read committed Git blobs and
 local browser files and use only Python's standard library and Git. Partial Git
 clones may fetch missing pinned metadata and LFS pointer objects during a check;
 no media payloads are downloaded. The pinned-input CI job runs the same
-integration check. This verifies the current migration and retained display
-bytes; it does not reconstruct the original candidate selection or encode JPEGs.
+integration checks, plus two unchanged source-ledger path/symlink guard tests on
+Linux. These verify the current additive projection, exact historical migration
+and retained display bytes; they do not reconstruct the original candidate selection or encode JPEGs.
 Future source or selection publications require explicit review and updates to
 the reproduction pins, preserving the exact comparisons.
 

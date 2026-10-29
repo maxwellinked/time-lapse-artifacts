@@ -21,7 +21,8 @@ test("435 selected fronts agree with all gallery identities and 1256 recording j
  const works=buildDrawingArchive(data,refs,read("../reference-previews/manifest.json"));
  assert.equal(works.length,435); assert.equal(Object.keys(index.byRecord).length,1256);
  assert.equal(index.unselectedWorkIds.length,0);
- assert.equal(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).length,0);
+ assert.deepEqual(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).map(r=>r.recordId).sort(),
+   data.records.filter(r=>refs.records[r.recordId].selectionStatus==="missing_work_link").map(r=>r.recordId).sort());
  for(const work of works) for(const record of work.records) {
    assert.equal(getSelectedFrontForRecord(index,record.recordId),getSelectedFrontForWork(index,work.workId));
  }

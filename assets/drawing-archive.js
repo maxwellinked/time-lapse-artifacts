@@ -1,6 +1,6 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
-import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261025-master-fronts";
+import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261029-unlinked-recordings";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 
 const summary = document.querySelector("#archive-summary");
@@ -110,11 +110,11 @@ function render(works) {
 
 try {
   const [recordData, referenceBytes, previews, evidence] = await Promise.all([
-    loadRecords("data/records.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73"),
-    fetch("data/physical-references.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
-    fetch("reference-previews/manifest.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
+    loadRecords("data/records.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8"),
+    fetch("data/physical-references.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
+    fetch("reference-previews/manifest.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
     (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8", { signal: AbortSignal.timeout(5000) });
       return response.ok ? response.json() : null;
     })().catch(() => null),
   ]);
@@ -122,7 +122,9 @@ try {
   const proof = await verifiedDrawingEvidence(referenceBytes, evidence);
   const selectedFronts = await loadSelectedFrontIndex(recordData, references);
   const works = applySelectedFronts(buildDrawingArchive(recordData, references, previews, proof), selectedFronts);
-  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.selectedFront || work.photograph).length} confirmed photographs`;
+  const unlinkedCount = recordData.records.length - works.reduce((total, work) => total + work.records.length, 0);
+  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.selectedFront || work.photograph).length} confirmed photographs` +
+    (unlinkedCount ? `. ${unlinkedCount} recordings have no assigned work ID and remain available in the recording browser.` : "");
   const source = document.querySelector("#drawing-source");
   source.href = `https://huggingface.co/datasets/${recordData.sourceRepository}/tree/${recordData.sourceRevision}/Work_Identity`;
   source.textContent = `Source snapshot ${recordData.sourceRevision.slice(0, 8)}`;

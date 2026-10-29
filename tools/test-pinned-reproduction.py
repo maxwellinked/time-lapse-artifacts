@@ -19,6 +19,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE_REVISION = "12d5713326886bc18669f2a5c571c4fe7ac1fb73"
 SOURCE_BASE = "253e2ad859ea93b183110f19b5bbd78fc0bd6289"
 BROWSER_BASE = "bfe047340508ef4cbb9c685bca72a632b5b6fccb"
+MIGRATION_BROWSER = "19ac65ee020f8b40c332fb5e1bb022b1610f99b1"
 EXPECTED_OUTPUTS = {
     "data/records.json", "data/physical-references.json",
     "data/reference-link-evidence.json", "data/selected-fronts.json",
@@ -40,16 +41,34 @@ def baseline_json(path):
 
 
 class PinnedReproductionTests(unittest.TestCase):
-    def test_published_inputs_reproduce_every_current_migration_output(self):
+    def test_published_inputs_reproduce_every_retained_migration_output(self):
         source = os.environ.get("HF_SOURCE_ROOT")
         self.assertTrue(source, "Set HF_SOURCE_ROOT to the Git checkout with the pinned HF commits")
-        outputs, binding = MIGRATION.migrate(Path(source).resolve(), SOURCE_REVISION, ROOT, BROWSER_BASE)
+        outputs, binding = MIGRATION.migrate(Path(source).resolve(), SOURCE_REVISION, ROOT, BROWSER_BASE,
+                                             asset_revision=MIGRATION_BROWSER)
         self.assertEqual(binding["base_revision"], SOURCE_BASE)
         self.assertEqual(binding["renamed_objects"], 557)
         self.assertEqual(set(outputs), EXPECTED_OUTPUTS)
         for path, expected in outputs.items():
             with self.subTest(path=path):
-                self.assertEqual((ROOT / path).read_bytes(), expected, f"Stale pinned migration output: {path}")
+                historical = subprocess.check_output(["git", "show", f"{MIGRATION_BROWSER}:{path}"], cwd=ROOT)
+                self.assertEqual(historical, expected, f"Retained pinned migration differs: {path}")
+
+    def test_current_additive_refresh_is_exactly_reproducible(self):
+        receipt_path = ROOT / "data/source-refresh.json"
+        if not receipt_path.exists():
+            self.skipTest("No accepted additive source pin has been applied")
+        receipt = json.loads(receipt_path.read_bytes())
+        source = os.environ.get("HF_SOURCE_ROOT")
+        self.assertTrue(source, "Set HF_SOURCE_ROOT to the pinned HF Git checkout")
+        spec = importlib.util.spec_from_file_location("additive_refresh", ROOT / "tools/refresh-additive-projection.py")
+        refresh = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(refresh)
+        outputs = refresh.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["browserBase"],
+                                  receipt["generatedAt"], receipt["addedCount"])
+        for path, expected in outputs.items():
+            with self.subTest(path=path):
+                self.assertEqual((ROOT / path).read_bytes(), expected, "Stale current source projection: " + path)
 
     def test_retained_selections_displays_and_correction_evidence_are_unchanged(self):
         selected = json.loads((ROOT / "data/selected-fronts.json").read_bytes())

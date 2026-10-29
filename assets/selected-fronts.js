@@ -1,7 +1,8 @@
-import { loadPhotographDownloads } from "./photograph-downloads.js?v=media-names-12d5713326886bc18669f2a5c571c4fe7ac1fb73";
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
 // Derived access projection: retained candidate plus the separately bound HF master supplement.
-export const SELECTED_FRONTS_SHA256 = "97ee76ddba4b43685db0fd37373cfcec1eb9d403aef9f5b018a372f43825cc1a";
-export const LEGACY_REFERENCE_SHA256 = "dc0d131c3cdb7056e9f7cdfc84a69d1d572646920ca33bbeb47035cc216c878d";
+export const SELECTED_FRONTS_SHA256 = "c5ca400f7bec862c63d5cbde66b5800586684c3dbf120f8d814af23701bd246d";
+export const LEGACY_REFERENCE_SHA256 = "a93a5d9a0905cf8f7410fad2f8bdb367018b86336c61f4ed658b6653f9f799e4";
 const HASH = /^[a-f0-9]{64}$/;
 const WORK = /^tlaw-[a-f0-9]{16}$/;
 const LINK_PATH = "Work_Identity/work_record_links.csv";
@@ -17,9 +18,13 @@ export function buildSelectedFrontIndex(projection, recordData, references) {
   const activeWorks = new Set();
   const recordIds = new Set();
   for (const record of recordData.records) {
-    const workId = references.records?.[record.recordId]?.workId;
-    if (!WORK.test(workId ?? "") || recordIds.has(record.recordId)) throw new Error("Invalid recording-to-work link");
-    activeWorks.add(workId); recordIds.add(record.recordId);
+    const entry = references.records?.[record.recordId];
+    const workId = entry?.workId;
+    if (recordIds.has(record.recordId)) throw new Error("Invalid recording-to-work link");
+    recordIds.add(record.recordId);
+    if (isUnlinkedRecording(entry)) continue;
+    if (!WORK.test(workId ?? "")) throw new Error("Invalid recording-to-work link");
+    activeWorks.add(workId);
   }
   const unselected = projection.unselected_work_ids ?? [];
   if (!Array.isArray(unselected) || new Set(unselected).size !== unselected.length ||

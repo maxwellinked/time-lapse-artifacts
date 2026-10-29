@@ -80,7 +80,7 @@ test("search and reason selection compose to locate a drawing or show an honest 
   const context = { document: { querySelectorAll: () => rows, getElementById: (id) => ({ search, reason, "result-count": count }[id]) } };
   const filter = runInNewContext(CLARIFICATION_FILTER_SCRIPT + "\nfilterRows", context);
   search.value = "tla-f0885e72d6cf24d8"; reason.value = "source_variant"; filter();
-  assert.equal(rows[0].hidden, false); assert.equal(rows[1].hidden, true); assert.equal(count.textContent, "1 drawing");
-  reason.value = "proposed_match"; filter(); assert.equal(count.textContent, "0 drawings");
+  assert.equal(rows[0].hidden, false); assert.equal(rows[1].hidden, true); assert.equal(count.textContent, "1 entry");
+  reason.value = "proposed_match"; filter(); assert.equal(count.textContent, "0 entries");
   search.value = ""; reason.value = ""; filter(); assert.ok(rows.every((row) => !row.hidden));
 });

@@ -14,6 +14,15 @@ links. This asserts drawing identity and the selected photographed view, not a
 recording endpoint, timing calibration, complete process, or original-file quality.
 Pre-Standard records receive no invented work or photograph joins.
 
+The current Standard index has 1,303 recording rows. Its 47 new rows have blank
+work IDs and explicit `missing_work_link`, zero-reference, null-image lookup
+entries. They remain visible in recording browsing, return no selected front and
+are omitted from the registered-drawing gallery. Shared finish labels or file
+order do not assign these recordings a registered work or photograph. The 435
+selected fronts described here retain the browser's earlier 430 displays plus
+five-master supplement; this access layer is distinct from the source paired
+Viewer projection's 430 selected works and 1,205 illustrated Standard rows.
+
 The 430 surviving earlier selected fronts retain their exact candidate and display bytes.
 Five further fronts (51 recordings) are derived from the directly owner-confirmed
 master release at the exact Hugging Face revision in `master_front_supplement`.
