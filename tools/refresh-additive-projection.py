@@ -7,6 +7,7 @@ have blank work IDs. Generate their previews/anchors separately, then run the
 full site validator. --check compares deterministic projection bytes only.
 """
 import argparse
+import base64
 from collections import Counter
 import copy
 import csv
@@ -178,7 +179,70 @@ def project_sequence_insertions(source, revision, records):
         return output_path.read_bytes()
 
 
-def refresh(source, revision, browser, baseline, generated_at, expected_additions):
+def prepare_real_time_refresh(previous, source_bytes, records, expected_additions):
+    """Validate an explicit append scope and render it with the existing JS consumer."""
+    M.require(type(expected_additions) is int and expected_additions >= 0,
+              "Invalid real-time addition count")
+    previous_manifest = json.loads(previous["manifest.json"])
+    for name in ("metadata.csv", "SHA256SUMS"):
+        binding = previous_manifest["inputs"]["Real_Time_Recordings/" + name]
+        M.require(M.digest(previous[name]) == binding["sha256"] and len(previous[name]) == binding["sizeBytes"],
+                  "Real-time baseline source binding differs: " + name)
+    paths = ["Real_Time_Recordings/" + name for name in
+             ("metadata.csv", "SHA256SUMS", "README.md", "SCHEMA.md")]
+    inputs = {path: source_bytes(path) for path in paths}
+    csv_bytes, sums_bytes = inputs[paths[0]], inputs[paths[1]]
+    M.require(previous["metadata.csv"].endswith(b"\n") and csv_bytes.startswith(previous["metadata.csv"]),
+              "Retained real-time CSV bytes changed; only appended rows are permitted")
+    current_lines = sums_bytes.splitlines(keepends=True)
+    M.require(all(line in current_lines for line in previous["SHA256SUMS"].splitlines(keepends=True)),
+              "Retained real-time checksum entry changed")
+    before = list(csv.DictReader(io.StringIO(previous["metadata.csv"].decode("utf-8-sig"))))
+    after = list(csv.DictReader(io.StringIO(csv_bytes.decode("utf-8-sig"))))
+    M.require(len(after) == len(before) + expected_additions,
+              "Real-time recording population is not the approved addition scope")
+    manifest = dict(sourceRepository=M.REPOSITORY, sourceRevision=records["sourceRevision"],
+                    inputs={path: dict(sha256=M.digest(value), sizeBytes=len(value))
+                            for path, value in inputs.items()})
+    node = os.environ.get("NODE_EXECUTABLE") or shutil.which("node")
+    M.require(node, "Node is required to validate the real-time projection")
+    # Reuse the public validator and renderer; no second numeric/path contract.
+    bridge = """
+import {readFileSync} from 'node:fs';
+const {buildRealTimeProjection,buildRealTimePage}=await import(process.argv[2]);
+const input=JSON.parse(readFileSync(process.argv[1],'utf8'));
+const payload=buildRealTimeProjection(input.records,{manifest:input.manifest,
+ csv:Buffer.from(input.csv,'base64'),sums:Buffer.from(input.sums,'base64')});
+const encoded=s=>Buffer.from(s).toString('base64');
+console.log(JSON.stringify({files:{'data/real-time-recordings.json':encoded(JSON.stringify(payload,null,2)+'\\n'),
+ 'real-time-recordings.html':encoded(buildRealTimePage(payload,input.records))}}));
+"""
+    with tempfile.TemporaryDirectory(prefix="tla-realtime-projection-") as directory:
+        input_path = Path(directory) / "input.json"
+        input_path.write_bytes(M.json_bytes(dict(records=records, manifest=manifest,
+            csv=base64.b64encode(csv_bytes).decode(), sums=base64.b64encode(sums_bytes).decode())))
+        result = subprocess.run([node, "--input-type=module", "--eval", bridge, str(input_path),
+                                 (ROOT / "tools/build-real-time-recordings.mjs").as_uri()],
+                                capture_output=True, check=False)
+        M.require(result.returncode == 0,
+                  "Real-time projection validation failed: " + result.stderr.decode("utf-8", errors="replace"))
+        outputs = {path: base64.b64decode(value) for path, value in json.loads(result.stdout)["files"].items()}
+    added = after[len(before):]
+    for row in added:
+        M.require(M.object_identity(source_bytes(row["file_name"])) == (row["sha256"], int(row["size_bytes"])),
+                  "Added real-time source payload identity differs: " + row["record_id"])
+    outputs.update({"data/real-time-source/metadata.csv": csv_bytes,
+                    "data/real-time-source/SHA256SUMS": sums_bytes,
+                    "data/real-time-source/manifest.json": M.json_bytes(manifest)})
+    receipt = dict(previousRecords=len(before), records=len(after), addedCount=len(added),
+                   addedRecords=[row["record_id"] for row in added],
+                   existingRows="byte_identical_prefix", existingChecksums="unchanged_lines",
+                   previousSourceInputs=previous_manifest["inputs"], sourceInputs=manifest["inputs"])
+    return outputs, receipt
+
+
+def refresh(source, revision, browser, baseline, generated_at, expected_additions,
+            expected_real_time_additions=None):
     M.require(M.HEX40.fullmatch(revision) and M.HEX40.fullmatch(baseline), "Exact immutable revisions required")
     M.require(re.fullmatch(r"\d{4}-\d{2}-\d{2}", generated_at), "Explicit generation date required")
     M.require(expected_additions > 0, "Explicit positive addition count required")
@@ -253,15 +317,24 @@ def refresh(source, revision, browser, baseline, generated_at, expected_addition
                 if image.get(field, "").startswith(M.BASE_URL + "/resolve/"):
                     image[field] = M.media_url(image[field], {}, revision)
         outputs[path] = M.json_bytes(manifest)
-    realtime = dict(sourceRepository=M.REPOSITORY, sourceRevision=revision, inputs={})
-    for path in ("Real_Time_Recordings/metadata.csv", "Real_Time_Recordings/SHA256SUMS",
-                 "Real_Time_Recordings/README.md", "Real_Time_Recordings/SCHEMA.md"):
-        value = source_bytes(path)
-        realtime["inputs"][path] = dict(sha256=M.digest(value), sizeBytes=len(value))
-        if path.endswith(".csv") or path.endswith("SHA256SUMS"):
-            M.require(value == raw("data/real-time-source/" + path.rsplit("/", 1)[-1]), "Real-time source values changed")
-            outputs["data/real-time-source/" + path.rsplit("/", 1)[-1]] = value
-    outputs["data/real-time-source/manifest.json"] = M.json_bytes(realtime)
+    real_time_receipt = None
+    if expected_real_time_additions is not None:
+        previous_rt = {name: raw("data/real-time-source/" + name)
+                       for name in ("metadata.csv", "SHA256SUMS", "manifest.json")}
+        rt_outputs, real_time_receipt = prepare_real_time_refresh(
+            previous_rt, source_bytes, records, expected_real_time_additions)
+        outputs.update(rt_outputs)
+    else:
+        # Preserve the exact historical reproduction contract of earlier receipts.
+        realtime = dict(sourceRepository=M.REPOSITORY, sourceRevision=revision, inputs={})
+        for path in ("Real_Time_Recordings/metadata.csv", "Real_Time_Recordings/SHA256SUMS",
+                     "Real_Time_Recordings/README.md", "Real_Time_Recordings/SCHEMA.md"):
+            value = source_bytes(path)
+            realtime["inputs"][path] = dict(sha256=M.digest(value), sizeBytes=len(value))
+            if path.endswith(".csv") or path.endswith("SHA256SUMS"):
+                M.require(value == raw("data/real-time-source/" + path.rsplit("/", 1)[-1]), "Real-time source values changed")
+                outputs["data/real-time-source/" + path.rsplit("/", 1)[-1]] = value
+        outputs["data/real-time-source/manifest.json"] = M.json_bytes(realtime)
     # Use the reviewed working-code changes; the historical snapshot is data authority.
     for path in ("assets/selected-fronts.js", "assets/app.js", "assets/drawing-archive.js", "index.html", "drawings.html"):
         text = (browser / path).read_text(encoding="utf-8")
@@ -278,6 +351,10 @@ def refresh(source, revision, browser, baseline, generated_at, expected_addition
         generatedAt=generated_at, previousRecords=len(old), records=len(current), addedRecords=added,
         addedCount=len(added), unlinkedAddedCount=len(added), existingRelationships="unchanged",
         historicalMigration="retained", metadata=bind("metadata.csv")))
+    if real_time_receipt is not None:
+        receipt = json.loads(outputs["data/source-refresh.json"])
+        receipt["realTime"] = real_time_receipt
+        outputs["data/source-refresh.json"] = M.json_bytes(receipt)
     return outputs
 
 
@@ -289,11 +366,13 @@ def main():
     parser.add_argument("--browser-base", required=True)
     parser.add_argument("--generated-at", required=True)
     parser.add_argument("--expected-additions", type=int, required=True)
+    parser.add_argument("--expected-real-time-additions", type=int,
+                        help="Explicit append-only MOV count; omission retains the legacy no-change guard")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--check", action="store_true")
     args = parser.parse_args()
     outputs = refresh(args.source_root, args.source_revision, args.browser_root, args.browser_base,
-                      args.generated_at, args.expected_additions)
+                      args.generated_at, args.expected_additions, args.expected_real_time_additions)
     for path, value in outputs.items():
         target = args.output / path
         if args.check:

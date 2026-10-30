@@ -178,7 +178,7 @@ if (/CC BY 4\.0/i.test(html)) {
 }
 if (
   !app.includes('from "./data-loader.js?v=20261025-canonical-metadata"') ||
-  !app.includes('from "./record-sequences.js?v=20261029-sequence-insertions"') ||
+  !app.includes('from "./record-sequences.js?v=20261030-sequence-insertions"') ||
   !app.includes("loadRecords(DATA_URL)") ||
   !html.includes('id="retry-data"') ||
   !dataLoader.includes("AbortController") ||

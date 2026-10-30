@@ -27,6 +27,37 @@ test("explicit insertion order survives both sort directions, filtering, paginat
   assert.match(details.get(ids[5]).label, /6 of 11/);
   assert.match(details.get(ids[5]).label, /inferred.*completeness unknown/);
 });
+test("one registered Rec03a keeps forward playback, filtered neighbors and page boundaries", () => {
+  const singleRecords = records.filter(record => record.recordId !== ids[4]);
+  const singleProjection = structuredClone(projection());
+  const expectedIds = [ids[0],ids[1],ids[2],ids[3],ids[5],ids[6],ids[7],ids[8],ids[9],ids[10]];
+  singleProjection.sequences[0].recordIds = expectedIds;
+  const details = deriveRecordingSequences(singleRecords,singleProjection,revision);
+  for (const direction of ["asc","desc"]) {
+    const sorted = sortRecordsForDisplay(singleRecords.slice().reverse(),direction,details);
+    assert.deepEqual(sorted.map(record => record.recordId),expectedIds);
+    assert.equal(extendVisibleCount(sorted,4,details),10);
+    const filtered = sortRecordsForDisplay(singleRecords.filter(record =>
+      [ids[2],ids[3],ids[5]].includes(record.recordId)).reverse(),direction,details);
+    assert.deepEqual(filtered.map(record => record.recordId),[ids[2],ids[3],ids[5]]);
+  }
+  assert.equal(details.get(ids[3]).sequencePosition,4);
+  assert.equal(details.get(ids[5]).sequencePosition,5);
+  assert.match(details.get(ids[3]).label,/4 of 10.*inferred.*unknown/);
+});
+test("single insertion does not widen registered suffix, anchor or required-insertion guards", () => {
+  for (const suffix of ["03c","04a"]) {
+    const changedRecords = records.filter(record => record.recordId !== ids[4])
+      .map(record => record.recordId === ids[3] ? {...record,filename:`${label}.Rec${suffix}.mp4`} : record);
+    const changedProjection = structuredClone(projection());
+    changedProjection.sequences[0].recordIds = changedRecords.map(record => record.recordId);
+    assert.throws(() => deriveRecordingSequences(changedRecords,changedProjection,revision), /suffix|anchor/);
+  }
+  const noInsertions = records.filter(record => !/[ab]\.mp4$/.test(record.filename));
+  const noInsertionProjection = structuredClone(projection());
+  noInsertionProjection.sequences[0].recordIds = noInsertions.map(record => record.recordId);
+  assert.throws(() => deriveRecordingSequences(noInsertions,noInsertionProjection,revision), /insertion/);
+});
 test("insertion suffixes cannot silently fall back to filename ordering", () => {
   assert.throws(() => deriveRecordingSequences(records), /projection|insertion/i);
   assert.throws(() => deriveRecordingSequences(records, { ...projection(), sourceHubRevision: "d".repeat(40) }, revision), /revision/i);

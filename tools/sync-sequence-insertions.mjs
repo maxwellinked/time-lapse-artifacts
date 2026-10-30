@@ -56,7 +56,7 @@ export async function buildSequenceInsertions(payload, { readSource = fetchSourc
     require(oldBytes && currentOldBytes && digest(oldBytes)===predecessor.sha256 && digest(currentOldBytes)===predecessor.sha256,"predecessor hash differs or historical receipt changed");
     const oldRows=[...uniqueRows(oldBytes,"predecessor").values()].filter(r=>r.fragment_set_label===manifest.fragment_set_label && r.object_role==="canonical_fragment").sort((a,b)=>Number(a.sequence_position)-Number(b.sequence_position));
     require(oldRows.length>0,"missing predecessor group");
-    require(Array.isArray(manifest.members) && Array.isArray(manifest.additions) && manifest.additions.length===2 && new Set(manifest.additions).size===2,"invalid declared additions");
+    require(Array.isArray(manifest.members) && Array.isArray(manifest.additions) && manifest.additions.length>0 && new Set(manifest.additions).size===manifest.additions.length,"invalid declared additions");
     const oldIds = new Set(oldRows.map(r=>r.record_id)), memberIds=new Set();
     require(manifest.members.length===oldRows.length+manifest.additions.length,"member count differs");
     const sourceMetadata=uniqueRows(await readSource("metadata.csv",manifest.source_hub_revision),"manifest input metadata.csv");

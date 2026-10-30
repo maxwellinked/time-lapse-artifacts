@@ -1,14 +1,14 @@
 {
   "sourceRepository": "maxwellinked/time-lapse-artifacts",
-  "sourceRevision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78",
+  "sourceRevision": "08cff299256b152828b69e261ad9d791dbc2376d",
   "inputs": {
     "Real_Time_Recordings/metadata.csv": {
-      "sha256": "dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b",
-      "sizeBytes": 3732
+      "sha256": "75798e54b0ccb9918173dd5b61322c43d0536f70cf3f446df025a7dd60a7e9f3",
+      "sizeBytes": 19323
     },
     "Real_Time_Recordings/SHA256SUMS": {
-      "sha256": "e7373c5c2e903d65da23038b7acc0d8856b941fab8eb99177144db5a7cef873b",
-      "sizeBytes": 910
+      "sha256": "e7c87afc282956bfdb98e43d346992653f88cb1b8ce900efcc92eeb61a7f4cd0",
+      "sizeBytes": 3277
     },
     "Real_Time_Recordings/README.md": {
       "sha256": "9fe17e56564cf1a231aa6d6beec9755e781e52902a00085950854d6b41a28262",

@@ -3,7 +3,9 @@ import copy
 import csv
 import importlib.util
 import io
+import json
 from pathlib import Path
+import subprocess
 import unittest
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -12,6 +14,7 @@ R=importlib.util.module_from_spec(SPEC);SPEC.loader.exec_module(R)
 SURVIVOR='tlaw-858a03eb138fbf47'; RETIRED='tlaw-b03bbfba8babbf3d'
 DONOR='tla-109ffe803a4ae0b0'; AFFECTED='tla-933e757350798d34'; ADDED='tla-0000000000000001'
 OLD='c'*40; NEW='d'*40; SHA='a'*64
+REAL_TIME_BROWSER_BASE='088d42c6293b056c5bd11941a5eae915bdd11ddf'
 
 def table(fields,rows):
     stream=io.StringIO(newline='');writer=csv.DictWriter(stream,fields,lineterminator='\n')
@@ -138,5 +141,104 @@ class AcceptedUnlinkedPopulationTests(unittest.TestCase):
         for rid,entry in unlinked.items():
             self.assertEqual(retained[rid],entry)
         self.assertEqual(counts['selectionStatuses']['missing_work_link'],len(unlinked)+1)
+
+class RealTimeAppendTests(unittest.TestCase):
+    def setUp(self):
+        # Keep the original five-row append contract independent of later refreshes.
+        self.previous = {
+            name: subprocess.check_output(['git', 'show',
+                REAL_TIME_BROWSER_BASE + ':data/real-time-source/' + name], cwd=ROOT)
+            for name in ('metadata.csv', 'SHA256SUMS', 'manifest.json')
+        }
+        self.records = json.loads((ROOT / 'data/records.json').read_bytes())
+        self.records['sourceRevision'] = NEW
+        rows = list(csv.DictReader(io.StringIO(self.previous['metadata.csv'].decode())))
+        self.row = {**rows[0], 'record_id': ADDED,
+                    'file_name': 'Real_Time_Recordings/2026-10/Synthetic.New.MOV',
+                    'original_filename': 'Synthetic.New.MOV', 'sha256': '1' * 64,
+                    'hub_xet_hash': '2' * 64, 'size_bytes': '123', 'work_id': ''}
+        appended = table(list(self.row), [self.row]).split(b'\n', 1)[1]
+        self.source = {
+            'Real_Time_Recordings/metadata.csv': self.previous['metadata.csv'] + appended,
+            'Real_Time_Recordings/SHA256SUMS': self.previous['SHA256SUMS'] +
+                (self.row['sha256'] + '  ' + self.row['file_name'] + '\n').encode(),
+            'Real_Time_Recordings/README.md': b'Published source documentation.\n',
+            'Real_Time_Recordings/SCHEMA.md': b'Published source schema.\n',
+            self.row['file_name']: ('version https://git-lfs.github.com/spec/v1\n'
+                'oid sha256:' + self.row['sha256'] + '\nsize 123\n').encode(),
+        }
+
+    def prepare(self, expected=1):
+        self.assertTrue(callable(getattr(R, 'prepare_real_time_refresh', None)),
+                        'Coordinated append-only RT refresh is missing')
+        return R.prepare_real_time_refresh(self.previous, self.source.__getitem__,
+                                           self.records, expected)
+
+    def test_append_preserves_every_old_value_and_pins_page_without_reading_old_media(self):
+        outputs, receipt = self.prepare()
+        projection = json.loads(outputs['data/real-time-recordings.json'])
+        baseline = list(csv.DictReader(io.StringIO(self.previous['metadata.csv'].decode())))
+        self.assertEqual(projection['records'], baseline + [self.row])
+        self.assertEqual(projection['sourceRevision'], NEW)
+        self.assertEqual(receipt['previousRecords'], 5)
+        self.assertEqual(receipt['records'], 6)
+        self.assertEqual(receipt['addedRecords'], [ADDED])
+        self.assertEqual(receipt['addedCount'], 1)
+        self.assertIn(('/resolve/' + NEW + '/' + self.row['file_name']).encode(),
+                      outputs['real-time-recordings.html'])
+        self.assertEqual(outputs['data/real-time-source/metadata.csv'],
+                         self.source['Real_Time_Recordings/metadata.csv'])
+
+    def test_historical_bytes_rows_order_schema_and_checksum_entries_are_frozen(self):
+        original = copy.deepcopy(self.source)
+        changes = [
+            ('Real_Time_Recordings/metadata.csv', lambda b: b.replace(b'candidate_not_calibrated', b'changed', 1)),
+            ('Real_Time_Recordings/metadata.csv', lambda b: b.replace(b'\n', b'\r\n')),
+            ('Real_Time_Recordings/metadata.csv', lambda b: b.split(b'\n', 1)[0] + b',extra\n' + b.split(b'\n', 1)[1]),
+            ('Real_Time_Recordings/SHA256SUMS', lambda b: b.split(b'\n', 1)[1]),
+        ]
+        for path, mutate in changes:
+            with self.subTest(path=path):
+                self.source = copy.deepcopy(original)
+                self.source[path] = mutate(self.source[path])
+                with self.assertRaisesRegex(ValueError, 'Retained real-time'):
+                    self.prepare()
+
+    def test_expected_scope_duplicates_and_new_checksum_or_lfs_identity_fail_closed(self):
+        for count in (-1, 0, 2):
+            with self.subTest(count=count), self.assertRaisesRegex(ValueError, 'real-time.*(count|scope)|addition'):
+                self.prepare(count)
+        self.source[self.row['file_name']] = self.source[self.row['file_name']].replace(b'size 123', b'size 124')
+        with self.assertRaisesRegex(ValueError, 'real-time.*identity'):
+            self.prepare()
+        self.setUp()
+        self.source['Real_Time_Recordings/SHA256SUMS'] = self.source['Real_Time_Recordings/SHA256SUMS'].replace(
+            ('1' * 64).encode(), ('3' * 64).encode())
+        with self.assertRaisesRegex(ValueError, '(?i)real-time.*(validation|projection)'):
+            self.prepare()
+
+    def test_duplicate_retained_id_content_hash_or_standard_id_cannot_be_appended(self):
+        first = next(csv.DictReader(io.StringIO(self.previous['metadata.csv'].decode())))
+        variants = [('record_id', first['record_id']), ('sha256', first['sha256']),
+                    ('record_id', self.records['records'][0]['recordId'])]
+        for field, value in variants:
+            with self.subTest(field=field, value=value):
+                row = {**self.row, field: value}
+                self.source['Real_Time_Recordings/metadata.csv'] = self.previous['metadata.csv'] + table(
+                    list(row), [row]).split(b'\n', 1)[1]
+                self.source['Real_Time_Recordings/SHA256SUMS'] = self.previous['SHA256SUMS'] + (
+                    row['sha256'] + '  ' + row['file_name'] + '\n').encode()
+                with self.assertRaisesRegex(ValueError, 'Real-time projection validation failed'):
+                    self.prepare()
+
+    def test_explicit_zero_repin_is_deterministic_and_baseline_hashes_are_checked(self):
+        for name in ('metadata.csv', 'SHA256SUMS'):
+            self.source['Real_Time_Recordings/' + name] = self.previous[name]
+        first = self.prepare(0)
+        self.assertEqual(first, self.prepare(0))
+        self.assertEqual(first[1]['addedCount'], 0)
+        self.previous['metadata.csv'] += b'\n'
+        with self.assertRaisesRegex(ValueError, 'baseline.*binding'):
+            self.prepare(0)
 
 if __name__=='__main__':unittest.main()

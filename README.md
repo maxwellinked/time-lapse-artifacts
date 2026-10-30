@@ -72,8 +72,8 @@ Hugging Face; this access projection does not change them.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter use one selected-front map: 435 active registered drawings and 1,256 Standard
-recording joins. The current Standard index contains 1,305 recordings at Hugging Face
-revision `3a9c13f603f7255a86ddf2e47d403934dbe09f78`. Its 49 unlinked recordings have no assigned
+recording joins. The current Standard index contains 1,311 recordings at Hugging Face
+revision `08cff299256b152828b69e261ad9d791dbc2376d`. Its 55 unlinked recordings have no assigned
 work IDs or photograph links; they remain available in the recording browser and
 are omitted from registered-drawing grouping. File counts do not establish the
 number of drawings or complete sessions. The 430 surviving earlier displays retain their exact candidate bytes.
@@ -100,15 +100,18 @@ committed line endings and skip LFS media downloads:
 
 ```console
 GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
-GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
-python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision 3a9c13f603f7255a86ddf2e47d403934dbe09f78 --browser-root . --browser-base e3d3bf690d83b65a9c7202d7fd2ad0410d9c5f6a --generated-at 2026-10-30 --expected-additions 2 --output . --check
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 08cff299256b152828b69e261ad9d791dbc2376d 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
+python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision 08cff299256b152828b69e261ad9d791dbc2376d --browser-root . --browser-base 088d42c6293b056c5bd11941a5eae915bdd11ddf --generated-at 2026-10-30 --expected-additions 6 --expected-real-time-additions 13 --output . --check
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
 
 The current additive check starts from browser baseline
-`e3d3bf690d83b65a9c7202d7fd2ad0410d9c5f6a`. It preserves all 1,303 earlier recordings,
-the corrected lookup and all 47 existing unlinked entries, then adds only the two
-restored recordings and their empty reference entries. The earlier 47-file release
+`088d42c6293b056c5bd11941a5eae915bdd11ddf`. It preserves all 1,305 earlier Standard
+recordings, the corrected lookup and all 49 existing unlinked entries, then adds
+six Standard recordings with empty reference entries. The separate real-time
+index preserves its five earlier rows as exact bytes and adds thirteen MOV rows.
+The earlier two-file restoration at `3a9c13f603f7255a86ddf2e47d403934dbe09f78`
+remains separately pinned. The earlier 47-file release
 at `4f563085afacfc454496ac2d61606614268b2cb8` retains its original publication scope.
 `data/source-refresh.json` records the exact source pin, generation date, prior
 population and byte bindings; its browser baseline is not a commit containing the
@@ -236,7 +239,42 @@ The legacy `tools/extract-records.mjs` helper has been removed; retrieve it from
 Git history only to reproduce historical rendered index snapshots. Use
 `tools/sync-records.mjs` for all current index refreshes.
 
-## Refreshing previews
+## Refreshing source projections and previews
+
+### Coordinated Standard and real-time additions
+
+Use an isolated browser checkout and the reviewed, immutable Hugging Face commit.
+The additive tool can include a separately approved MOV append scope:
+
+```console
+python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --browser-base <current-40-character-browser-commit> --generated-at YYYY-MM-DD --expected-additions <new-Standard-count> --expected-real-time-additions <new-MOV-count> --output .
+node tools/build-real-time-recordings.mjs --check
+node tools/build-photograph-clarifications.mjs
+```
+
+The explicit MOV count must match the source exactly, including zero when only
+repinning an unchanged collection. Omitting it retains the historical strict
+no-change contract for earlier receipts. The coordinated path keeps the prior
+real-time CSV bytes as an exact prefix, with identical columns, field values,
+quoting and line endings. Every historical checksum line must remain unchanged.
+It validates the complete appended index using the normal browser contract and
+checks each new MOV's SHA-256 and byte length against its Git/LFS object.
+
+This generates `data/real-time-source/{metadata.csv,SHA256SUMS,manifest.json}`,
+`data/real-time-recordings.json` and `real-time-recordings.html` together with the
+Standard projection and its existing evidence bindings. `data/source-refresh.json`
+records the separate `realTime` population, addition IDs and input hashes so the
+pinned reproduction check can repeat the same operation. No MOV is downloaded
+or decoded by this metadata step. Real-time records remain outside the Standard
+gallery and do not inherit work or photograph associations from candidate links.
+
+Retained works, selected displays and photograph download representations stay
+unchanged. The two unchanged [DNG source masters](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/08cff299256b152828b69e261ad9d791dbc2376d/Image_Source_Masters/v1)
+are preserved in a separate archival source collection. They retain their embedded
+metadata and do not assign work identities or change selected-front JPEGs or
+default gallery images. The linked source contract records their qualifications.
+The movement investigation remains open and paused until the creator resumes it;
+this source publication adds no motor-control or paper-size-effect conclusion.
 
 Run `node tools/generate-previews.mjs --concurrency 6` on a machine with FFmpeg
 and network access, then `node tools/generate-record-anchors.mjs` before running

@@ -43,7 +43,7 @@ export function validateSequenceInsertions(projection, records, sourceRevision) 
       if (suffix[2]) { require(number === 3, "unregistered insertion anchor"); insertions += 1; }
       lastKey = key;
     }
-    require(insertions === 2, "sequence must bind both registered insertion members");
+    require(insertions >= 1, "sequence must bind at least one registered insertion member");
   }
   require(insertionRecords.every(r => usedIds.has(r.recordId)), "insertion member missing from projection");
   return projection;
