@@ -12,7 +12,7 @@ function navigation(url) {
   const location = new URL(url);
   const events = new Map();
   const records = [{ recordId: "tla-abcd" }, { recordId: "tla-cdef" }];
-  const state = { records, activeRecord: records[0] };
+  const state = { records, activeRecord: records[0], ready: true };
   const calls = { referenceClears: 0, videoResets: 0, opened: [] };
   let onClose;
   const dialog = {

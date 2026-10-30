@@ -48,6 +48,7 @@ function fixture(t, rows = [row], { explicitMode = true, existingOutput } = {}) 
     import { readFileSync } from "node:fs";
     const [input, output] = process.argv.slice(1);
     globalThis.fetch = async (url) => {
+      if (String(url).endsWith("/Standard_Time_Lapses/Provenance/Sequence_Insertions/registry.json")) return new Response("", {status: 404});
       if (url !== ${JSON.stringify(metadataUrl)}) throw new Error("Unexpected request: " + url);
       return new Response(readFileSync(input, "utf8"), { headers: { "Content-Type": "text/csv" } });
     };
@@ -130,4 +131,14 @@ test("Standard sync preserves an existing output when a later canonical row has 
   assert.notEqual(result.status, 0, "An invalid later row must fail the entire import");
   assert.match(result.stderr, /Canonical row 3.*recording_mode/);
   assert.equal(readFileSync(f.output, "utf8"), existingOutput);
+});
+
+
+test("Standard sync rejects insertion filenames without an authoritative registry before replacing output", (t) => {
+  const existingOutput = '{"previous":"reviewed snapshot"}\n';
+  const f = fixture(t, [{...row, file_name:"Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec03a.mp4"}], {existingOutput});
+  const result = f.run();
+  assert.notEqual(result.status,0);
+  assert.match(result.stderr,/insertion|projection/);
+  assert.equal(readFileSync(f.output,"utf8"),existingOutput);
 });

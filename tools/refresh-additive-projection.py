@@ -16,6 +16,9 @@ import json
 from pathlib import Path
 import re
 import subprocess
+import os
+import shutil
+import tempfile
 from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,6 +74,15 @@ def retain_corrected_lookup(refs, inputs, metadata_by_id, old_ids, added_ids, re
     retained = copy.deepcopy(refs["records"])
     verified = set()
     for rid, entry in retained.items():
+        if entry["workId"] == "":
+            M.require(metadata_by_id[rid].get("work_id") == "" and rid not in positive
+                      and entry.get("selectionStatus") == "missing_work_link"
+                      and entry.get("referenceRole") == "missing"
+                      and entry.get("clarification") == ""
+                      and entry.get("referenceCount") == 0 and entry.get("primaryReferenceCount") == 0
+                      and entry.get("mainImage") is None and entry.get("additionalReferences") == [],
+                      "Retained unlinked recording-to-work authority differs: " + rid)
+            continue
         M.require(entry["workId"] in active and entry["workId"] == metadata_by_id[rid]["work_id"] == positive.get(rid),
                   "Retained recording-to-work authority differs: " + rid)
         for image in [entry.get("mainImage"), *entry["additionalReferences"]]:
@@ -143,6 +155,29 @@ def project_records(raw, revision, generated_at):
                 collection="Standard_Time_Lapses", records=records)
 
 
+def project_sequence_insertions(source, revision, records):
+    """Use the shared JS source consumer against exact Git objects, without media IO."""
+    registry = "Standard_Time_Lapses/Provenance/Sequence_Insertions/registry.json"
+    exists = subprocess.check_output(["git", "ls-tree", revision, "--", registry], cwd=source).strip()
+    if not exists:
+        M.require(not any(re.search(r"\.Rec\d{2,}[a-z]+\.mp4$", r["filename"], re.I)
+                          for r in records["records"]), "Insertion records require an authoritative projection registry")
+        return None
+    node = os.environ.get("NODE_EXECUTABLE") or shutil.which("node")
+    M.require(node, "Node is required to validate the authoritative insertion registry")
+    with tempfile.TemporaryDirectory(prefix="tla-sequence-projection-") as directory:
+        records_path = Path(directory) / "records.json"
+        output_path = Path(directory) / "sequence-insertions.json"
+        records_path.write_bytes(M.json_bytes(records))
+        try:
+            subprocess.run([node, str(ROOT / "tools/sync-sequence-insertions.mjs"),
+                            "--records", str(records_path), "--source-root", str(source),
+                            "--output", str(output_path)], check=True, capture_output=True)
+        except subprocess.CalledProcessError as error:
+            raise ValueError("Sequence insertion projection failed: " + error.stderr.decode("utf-8", errors="replace")) from error
+        return output_path.read_bytes()
+
+
 def refresh(source, revision, browser, baseline, generated_at, expected_additions):
     M.require(M.HEX40.fullmatch(revision) and M.HEX40.fullmatch(baseline), "Exact immutable revisions required")
     M.require(re.fullmatch(r"\d{4}-\d{2}-\d{2}", generated_at), "Explicit generation date required")
@@ -177,6 +212,9 @@ def refresh(source, revision, browser, baseline, generated_at, expected_addition
         identity = M.object_identity(source_bytes(row["file_name"]))
         M.require(identity == (sums.get(row["file_name"]), int(row["size_bytes"])), "Added source payload identity differs: " + rid)
     outputs["data/records.json"] = M.json_bytes(records)
+    sequence_projection = project_sequence_insertions(source, revision, records)
+    if sequence_projection is not None:
+        outputs["data/sequence-insertions.json"] = sequence_projection
 
     inputs = {p: source_bytes(p) for p in LOOKUP.SOURCES}
     refs = read("data/physical-references.json")

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import test from "node:test";
 import { runInNewContext } from "node:vm";
 
@@ -15,13 +15,17 @@ const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
 const filterSource = app.slice(app.indexOf("function recordMatches("), app.indexOf("function renderRecords("));
 assert.ok(filterSource.includes("async function applyFilters()"));
 const payload = JSON.parse(readFileSync(new URL("../data/records.json", import.meta.url), "utf8"));
+const insertionPath = new URL("../data/sequence-insertions.json", import.meta.url);
+const insertions = existsSync(insertionPath) ? JSON.parse(readFileSync(insertionPath, "utf8")) : null;
+const fullSequenceDetails = deriveRecordingSequences(payload.records, insertions, payload.sourceRevision);
 const published = JSON.parse(readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8"));
 
 async function filter(records, lookup, values = { photograph: "with" }) {
   const state = {
     records,
     sourceRevision: payload.sourceRevision,
-    sequenceDetails: deriveRecordingSequences(records),
+    ready: true,
+    sequenceDetails: fullSequenceDetails,
   };
   const elements = {
     filters: { elements: { photograph: { value: values.photograph ?? "" } } },

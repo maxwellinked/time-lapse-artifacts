@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "sourceHubRevision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78",
+  "sourceRegistry": {
+    "path": "Standard_Time_Lapses/Provenance/Sequence_Insertions/registry.json",
+    "sha256": "d0993dee17ed444502202e5ed23bfacfa7ac4c01d13c799ec56bae5ff08b3031"
+  },
+  "sequences": [
+    {
+      "fragmentSetLabel": "2026-10-25.0938.BallpointPen.Ink.Paper.9x12",
+      "sourceManifest": {
+        "path": "Standard_Time_Lapses/Provenance/Sequence_Insertions/2026-10-29-F/sequence.json",
+        "sha256": "39f1c57641646450f83161a3a738f4f36ff69d9f2c322beec93285b9d70ec888"
+      },
+      "recordIds": [
+        "tla-3629fd6f65c8e3fd",
+        "tla-f4860d81610d06e2",
+        "tla-ab38992860ebf086",
+        "tla-f5575d594e459bfc",
+        "tla-66500ae259f48f35",
+        "tla-ee5ef18a738d9716",
+        "tla-bc90bb2c30a23b73",
+        "tla-4441345c1d3d1392",
+        "tla-268196248f820e42",
+        "tla-0a7b1ed861f10d7d",
+        "tla-f3f1ebaf9ef0a80c"
+      ],
+      "evidence": {
+        "membership": "owner-confirmed",
+        "order": "visual-inference-with-device-metadata-corroboration",
+        "gapless_capture": "not-established"
+      },
+      "sequenceCompleteness": "unknown"
+    }
+  ]
+}

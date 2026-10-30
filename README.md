@@ -12,8 +12,9 @@ not archive records or replacements for the source recordings.
 The archive documents recorded drawing processes and photographed drawing states. Their documented relationships support comparison while leaving intention, perceptual experience and unrecorded activity open to investigation.
 
 The gallery keeps strict, consecutive `Rec01` through `RecNN` filename runs in
-numbered order for viewing continuity. This presentation rule does not assert a
-shared work, session, or completion state.
+numbered order for viewing continuity. Registered insertion supplements provide
+explicit viewing positions for their members. These presentation rules do not
+assert a shared work, session, or completion state.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
@@ -71,8 +72,8 @@ Hugging Face; this access projection does not change them.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter use one selected-front map: 435 active registered drawings and 1,256 Standard
-recording joins. The current Standard index contains 1,303 recordings at Hugging Face
-revision `4f563085afacfc454496ac2d61606614268b2cb8`. Its 47 additions have no assigned
+recording joins. The current Standard index contains 1,305 recordings at Hugging Face
+revision `3a9c13f603f7255a86ddf2e47d403934dbe09f78`. Its 49 unlinked recordings have no assigned
 work IDs or photograph links; they remain available in the recording browser and
 are omitted from registered-drawing grouping. File counts do not establish the
 number of drawings or complete sessions. The 430 surviving earlier displays retain their exact candidate bytes.
@@ -99,14 +100,16 @@ committed line endings and skip LFS media downloads:
 
 ```console
 GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
-GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
-python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision 4f563085afacfc454496ac2d61606614268b2cb8 --browser-root . --browser-base 19ac65ee020f8b40c332fb5e1bb022b1610f99b1 --generated-at 2026-10-29 --expected-additions 47 --output . --check
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
+python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision 3a9c13f603f7255a86ddf2e47d403934dbe09f78 --browser-root . --browser-base e3d3bf690d83b65a9c7202d7fd2ad0410d9c5f6a --generated-at 2026-10-30 --expected-additions 2 --output . --check
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
 
 The current additive check starts from browser baseline
-`19ac65ee020f8b40c332fb5e1bb022b1610f99b1`. It preserves the corrected lookup and
-all existing relationship inputs and adds only the 47 explicitly unlinked rows.
+`e3d3bf690d83b65a9c7202d7fd2ad0410d9c5f6a`. It preserves all 1,303 earlier recordings,
+the corrected lookup and all 47 existing unlinked entries, then adds only the two
+restored recordings and their empty reference entries. The earlier 47-file release
+at `4f563085afacfc454496ac2d61606614268b2cb8` retains its original publication scope.
 `data/source-refresh.json` records the exact source pin, generation date, prior
 population and byte bindings; its browser baseline is not a commit containing the
 new records. The separate historical check reproduces the original 18 migration
@@ -358,3 +361,52 @@ records the published manifest's exact revision, path and SHA-256.
 
 Validation checks the download-manifest hash and selected-source joins. If that
 manifest cannot load, the existing photograph display remains available.
+
+
+## Registered sequence insertions
+
+The gallery can consume `data/sequence-insertions.json`, a derived projection of
+Hugging Face's registered insertion supplements. It uses the same exact source
+revision as `data/records.json`; its registry and manifest path/hash bindings
+identify the source bytes. Existing filename-based groups retain their previous
+behavior. Insertion suffixes such as `Rec03a` and `Rec03b` require this validated
+projection; missing, malformed, stale or contradictory supplements stop index
+loading instead of presenting an unsupported order.
+
+`tools/sync-records.mjs` builds and validates both projections before replacing
+outputs. `tools/refresh-additive-projection.py` uses the same source consumer
+against pinned Git objects, retains existing source rows and reference entries,
+and adds empty reference entries for blank-work recordings. It does not assign
+work IDs. To reproduce only the supplement from accepted source bytes:
+
+```console
+node tools/sync-sequence-insertions.mjs --records data/records.json --source-root /path/to/hf-checkout --check
+```
+
+Omit `--source-root` to read small source files from the pinned Hugging Face
+revision. The generator joins all members to metadata and checksums, verifies the
+manifest's metadata input revision, and checks that the pinned historical packet
+and all predecessor member identities remain unchanged. Final source publication
+also requires the authoritative Hugging Face inventory validator; this browser
+projection does not establish remote media identity independently of that source.
+Locally prepared supplements with unbound source revisions or Xet values cannot
+be projected as published data.
+
+Within a registered group, explicit positions control both date sort directions,
+filtered playback, page boundaries and previous/next navigation. The interface
+shows those positions separately from persistent filenames. It preserves
+owner-confirmed membership, visually inferred order corroborated by device
+metadata, unknown sequence completeness and unestablished gapless capture.
+
+
+The F restoration adds the two unchanged, previously deferred recordings so all
+eleven retained F recordings can be inspected together for drawing progression
+and the evidence supporting their order. This restores access to omitted source
+material while keeping capture continuity and sequence completeness explicitly
+unknown. The source supplement preserves all nine earlier paths and record IDs;
+its order is Rec01, Rec02, Rec03, Rec03a, Rec03b, Rec04, Rec05, Rec06, Rec07,
+Rec08, Rec09. Rec03 retains the recorded qualification of 3,343 coded samples
+versus 3,342 presented frames under the recorded default edit-list handling.
+The [pinned authoritative supplement](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/3a9c13f603f7255a86ddf2e47d403934dbe09f78/Standard_Time_Lapses/Provenance/Sequence_Insertions/2026-10-29-F/sequence.json)
+binds the complete retained files and their qualified order; it does not establish
+complete capture of the drawing process or eliminate unobserved intervals.

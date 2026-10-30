@@ -1,8 +1,8 @@
-import { loadPhotographDownloads } from "./photograph-downloads.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78";
 import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
 // Derived access projection: retained candidate plus the separately bound HF master supplement.
-export const SELECTED_FRONTS_SHA256 = "c5ca400f7bec862c63d5cbde66b5800586684c3dbf120f8d814af23701bd246d";
-export const LEGACY_REFERENCE_SHA256 = "a93a5d9a0905cf8f7410fad2f8bdb367018b86336c61f4ed658b6653f9f799e4";
+export const SELECTED_FRONTS_SHA256 = "f9d1a91dc5cb317bc9ad083180aad8c0fa874332fcdbfd600196dd44bd190671";
+export const LEGACY_REFERENCE_SHA256 = "9a4e47b1840081ae8e6d18ebed9318654d896bd84e9d9ec840235b691fc24b2d";
 const HASH = /^[a-f0-9]{64}$/;
 const WORK = /^tlaw-[a-f0-9]{16}$/;
 const LINK_PATH = "Work_Identity/work_record_links.csv";

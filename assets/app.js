@@ -1,7 +1,8 @@
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+import { loadSequenceInsertions } from "./sequence-insertions.js?v=20261029-sequence-insertions";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
-import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
@@ -9,12 +10,12 @@ import {
   extendVisibleCount,
   getRecordingPart,
   sortRecordsForDisplay,
-} from "./record-sequences.js";
+} from "./record-sequences.js?v=20261029-sequence-insertions";
 
-const DATA_URL = "data/records.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+const DATA_URL = "data/records.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
-const REFERENCE_URL = "data/physical-references.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+const REFERENCE_URL = "data/physical-references.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
 let referenceEvidencePromise;
@@ -27,6 +28,8 @@ let dynamicPreview;
 let previewIntegration;
 
 const state = {
+  ready: false,
+  loadGeneration: 0,
   records: [],
   filtered: [],
   sequenceDetails: new Map(),
@@ -389,8 +392,10 @@ function recordMatches(record, field, expected) {
 }
 
 async function applyFilters() {
-  if (!state.sourceRevision) return;
+  if (!state.ready) return;
   const generation = ++filterGeneration;
+  const loadGeneration = state.loadGeneration;
+  const isCurrent = () => state.ready && state.loadGeneration === loadGeneration && generation === filterGeneration;
   const formData = new FormData(elements.filters);
   const query = String(formData.get("search") ?? "").trim().toLowerCase();
   const year = String(formData.get("year") ?? "");
@@ -407,12 +412,12 @@ async function applyFilters() {
     try {
       photoLookup = await loadSelectedFrontLookup();
     } catch {
-      if (generation !== filterGeneration) return;
+      if (!isCurrent()) return;
       // Preserve browsing when the optional lookup is unavailable.
       elements.filters.elements.photograph.value = "";
       photoFilterFailed = true;
     }
-    if (generation !== filterGeneration) return;
+    if (!isCurrent()) return;
   }
   elements.grid.removeAttribute("aria-busy");
   elements.showMore.disabled = false;
@@ -451,6 +456,7 @@ async function applyFilters() {
 }
 
 function renderRecords() {
+  if (!state.ready) return;
   elements.grid.replaceChildren();
   state.visibleCount = extendVisibleCount(
     state.filtered,
@@ -465,11 +471,15 @@ function renderRecords() {
     const card = elements.cardTemplate.content.firstElementChild.cloneNode(true);
     const button = card.querySelector(".record-open");
     const preview = card.querySelector(".record-preview");
-    const recordingPart = getRecordingPart(record.filename);
+    const sequence = state.sequenceDetails.get(record.recordId);
+    const recordingPart = sequence?.explicit ? sequence : getRecordingPart(record.filename);
+    const accessiblePosition = sequence?.explicit
+      ? `, ${sequence.label}, filename ${record.filename}`
+      : recordingPart ? ` part ${recordingPart.number}` : "";
 
     button.setAttribute(
       "aria-label",
-      `Open recording${recordingPart ? ` part ${recordingPart.number}` : ""} from ${formatDate(
+      `Open recording${accessiblePosition} from ${formatDate(
         record.date,
       )} at ${formatTime(record.time)}`,
     );
@@ -502,6 +512,7 @@ function renderRecords() {
 }
 
 function renderFeatured() {
+  if (!state.ready) return;
   const record = state.records[0];
   const shell = elements.featured.querySelector(".preview-shell");
   elements.featuredDate.textContent = formatDate(record.date);
@@ -548,7 +559,7 @@ async function loadReferenceEvidence(lookupSha256) {
   if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78", { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Qualified-link evidence unavailable");
       const evidence = await response.json();
       if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {
@@ -769,6 +780,7 @@ async function renderReference(record) {
 }
 
 function renderDialog(record) {
+  if (!state.ready) return;
   state.activeRecord = record;
   elements.dialogRecordId.textContent = `Standard Time Lapse · ${record.recordId}`;
   elements.dialogAnchor.src = `assets/record-anchors/${record.recordId}.webp`;
@@ -777,7 +789,14 @@ function renderDialog(record) {
   elements.dialogHash.textContent = record.integrityReference;
   elements.dialogSource.href = record.sourceUrl;
   elements.dialogSourceTop.href = record.sourceUrl;
+  const sequence = state.sequenceDetails.get(record.recordId);
   elements.dialogMetadata.replaceChildren(
+    ...(sequence?.explicit ? [
+      metadataRow("Recording sequence", sequence.label),
+      metadataRow("Sequence membership", "Owner-confirmed"),
+      metadataRow("Order evidence", "Visual inference with device metadata corroboration"),
+      metadataRow("Gapless capture", "Not established"),
+    ] : []),
     metadataRow("Recording mode", "Time-lapse"),
     metadataRow("Acquisition protocol", record.captureType),
     metadataRow("Finish date", record.date),
@@ -806,6 +825,7 @@ function renderDialog(record) {
 }
 
 function openRecord(record, updateHash = true) {
+  if (!state.ready || !state.records.includes(record)) return;
   renderDialog(record);
   if (!elements.dialog.open) elements.dialog.showModal();
   if (updateHash) history.replaceState(null, "", `#record=${record.recordId}`);
@@ -822,7 +842,7 @@ function resetDialogVideo() {
 }
 
 elements.loadFullVideo.addEventListener("click", async () => {
-  if (!state.activeRecord) return;
+  if (!state.ready || !state.activeRecord) return;
   pausePreview(elements.dialogPreview);
   elements.dialogPreview.hidden = true;
   elements.loadFullVideo.hidden = true;
@@ -838,6 +858,7 @@ elements.loadFullVideo.addEventListener("click", async () => {
 });
 
 function navigateDialog(button) {
+  if (!state.ready) return;
   const index = Number(button.dataset.index);
   const record = state.filtered[index];
   if (record) openRecord(record);
@@ -858,6 +879,7 @@ elements.dialog.addEventListener("close", () => {
 });
 
 elements.showMore.addEventListener("click", () => {
+  if (!state.ready) return;
   state.visibleCount += PAGE_SIZE;
   renderRecords();
 });
@@ -874,6 +896,7 @@ elements.retryPhotoFilter.addEventListener("click", () => {
 });
 
 function openHashRecord() {
+  if (!state.ready) return;
   const match = location.hash.match(/^#record=(tla-[a-f0-9]+)$/);
   if (!match) {
     if (elements.dialog.open) elements.dialog.close();
@@ -897,6 +920,19 @@ window.addEventListener("beforeunload", () => {
 });
 
 async function initialize() {
+  const generation = (state.loadGeneration ?? 0) + 1;
+  state.loadGeneration = generation;
+  const isCurrent = () => generation === state.loadGeneration;
+  const clearState = () => Object.assign(state, {
+    ready: false, records: [], filtered: [], sourceRevision: null,
+    recordData: null, sequenceDetails: new Map(), activeRecord: null,
+  });
+  // A retry revokes every prior filter callback before starting any request.
+  filterGeneration += 1;
+  clearState();
+  if (elements.dialog?.open) elements.dialog.close();
+  elements.showMore.disabled = true;
+  elements.grid.removeAttribute("aria-busy");
   elements.retryData.disabled = true;
   elements.dataError.hidden = true;
   elements.resultCount.textContent = "Loading records…";
@@ -914,10 +950,17 @@ async function initialize() {
     }
 
     const payload = await loadRecords(DATA_URL);
-    state.records = payload.records;
-    state.recordData = payload;
-    state.sourceRevision = payload.sourceRevision;
-    state.sequenceDetails = deriveRecordingSequences(state.records);
+    if (!isCurrent()) return;
+    const projection = await loadSequenceInsertions(
+      `data/sequence-insertions.json?v=${payload.sourceRevision}`, payload.records, payload.sourceRevision,
+    );
+    if (!isCurrent()) return;
+    const sequenceDetails = deriveRecordingSequences(payload.records, projection, payload.sourceRevision);
+    // Publish one validated snapshot; pending and failed loads expose no records.
+    Object.assign(state, {
+      records: payload.records, recordData: payload,
+      sourceRevision: payload.sourceRevision, sequenceDetails, ready: true,
+    });
 
     elements.recordCount.textContent = state.records.length.toLocaleString();
     const oldest = state.records.at(-1);
@@ -930,8 +973,11 @@ async function initialize() {
     }
     renderFeatured();
     await applyFilters();
+    if (!isCurrent() || !state.ready) return;
     openHashRecord();
   } catch (error) {
+    if (!isCurrent()) return;
+    clearState();
     const code = error instanceof RecordsDataError ? error.code : "unexpected";
     console.error("Recording index initialization failed", {
       code,
@@ -949,7 +995,7 @@ async function initialize() {
             : "The recording index could not be loaded.";
     elements.dataError.hidden = false;
   } finally {
-    elements.retryData.disabled = false;
+    if (isCurrent()) elements.retryData.disabled = false;
   }
 }
 

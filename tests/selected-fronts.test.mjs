@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import {readFileSync} from "node:fs";
+import {existsSync,readFileSync} from "node:fs";
 import {webcrypto} from "node:crypto";
 import {runInNewContext} from "node:vm";
 import test from "node:test";
@@ -10,6 +10,8 @@ import {getPhotographDisplayRotation} from "../assets/photograph-orientation.js"
 import {deriveRecordingSequences,sortRecordsForDisplay} from "../assets/record-sequences.js";
 const read=p=>JSON.parse(readFileSync(new URL(p,import.meta.url)));
 const data=read("../data/records.json"), refs=read("../data/physical-references.json");
+const insertionPath=new URL("../data/sequence-insertions.json",import.meta.url);
+const insertions=existsSync(insertionPath)?JSON.parse(readFileSync(insertionPath)):null;
 const projection=read("../data/selected-fronts.json");
 const index=buildSelectedFrontIndex(projection,data,refs);
 const app=readFileSync(new URL("../assets/app.js",import.meta.url),"utf8");
@@ -97,7 +99,7 @@ test("all four corrected and two replaced fronts render without legacy rotation;
  assert.ok(gallery.includes('!work.selectedFront && getPhotographDisplayRotation(work.photograph) === 90'));
 });
 test("actual photograph filter uses the common map for all 1256 Standard records",async()=>{
- const state={records:data.records,sourceRevision:data.sourceRevision,sequenceDetails:deriveRecordingSequences(data.records)};
+ const state={ready:true,records:data.records,sourceRevision:data.sourceRevision,sequenceDetails:deriveRecordingSequences(data.records,insertions,data.sourceRevision)};
  const elements={filters:{elements:{photograph:{value:"with"}}},grid:{setAttribute(){},removeAttribute(){}},showMore:{},resultCount:{},retryPhotoFilter:{}};
  const source=app.slice(app.indexOf("function recordMatches("),app.indexOf("function renderRecords("));
  await runInNewContext(`${source}\napplyFilters()`,{state,elements,PAGE_SIZE:18,filterGeneration:0,

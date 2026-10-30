@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 
 import {
   deriveRecordingSequences,
@@ -137,10 +137,13 @@ test("extends a page boundary through the end of a recognized sequence", () => {
 });
 
 test("keeps the indexed August 19–20 and August 22–23 recording runs separate and forward", () => {
-  const records = JSON.parse(
+  const payload = JSON.parse(
     readFileSync(new URL("../data/records.json", import.meta.url), "utf8"),
-  ).records;
-  const details = deriveRecordingSequences(records);
+  );
+  const records = payload.records;
+  const path = new URL("../data/sequence-insertions.json", import.meta.url);
+  const insertions = existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : null;
+  const details = deriveRecordingSequences(records, insertions, payload.sourceRevision);
   const orderedIds = sortRecordsForDisplay(records, "desc", details).map(
     ({ recordId }) => recordId,
   );

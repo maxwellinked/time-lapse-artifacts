@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "sourceRepository": "maxwellinked/time-lapse-artifacts",
-  "sourceRevision": "4f563085afacfc454496ac2d61606614268b2cb8",
+  "sourceRevision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78",
   "collection": "Real_Time_Recordings",
   "recordingModeBasis": "source_metadata",
   "sourceInputs": {

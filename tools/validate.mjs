@@ -1,6 +1,7 @@
+import { deriveRecordingSequences } from "../assets/record-sequences.js";
 import {validateSelectedFrontAssets} from "./validate-selected-fronts.mjs";
 import { createHash } from "node:crypto";
-import { readFileSync, readdirSync, statSync } from "node:fs";
+import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -21,6 +22,8 @@ const requiredFiles = [
   "assets/reference-policy.js",
   "assets/reference-preview-paths.js",
   "assets/record-sequences.js",
+  "assets/sequence-insertions.js",
+  "tools/sync-sequence-insertions.mjs",
   "data/records.json",
   "tools/sync-records.mjs",
   "tools/generate-previews.mjs",
@@ -42,6 +45,9 @@ const dataLoader = readFileSync(join(root, "assets/data-loader.js"), "utf8");
 const recordSequences = readFileSync(join(root, "assets/record-sequences.js"), "utf8");
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
 validateRecordsPayload(payload);
+const insertionPath = join(root, "data/sequence-insertions.json");
+const insertions = existsSync(insertionPath) ? JSON.parse(readFileSync(insertionPath, "utf8")) : null;
+deriveRecordingSequences(payload.records, insertions, payload.sourceRevision);
 
 const realTime = buildRealTimeProjection(payload, {
   manifest: JSON.parse(readFileSync(join(root, "data/real-time-source/manifest.json"), "utf8")),
@@ -172,7 +178,7 @@ if (/CC BY 4\.0/i.test(html)) {
 }
 if (
   !app.includes('from "./data-loader.js?v=20261025-canonical-metadata"') ||
-  !app.includes('from "./record-sequences.js"') ||
+  !app.includes('from "./record-sequences.js?v=20261029-sequence-insertions"') ||
   !app.includes("loadRecords(DATA_URL)") ||
   !html.includes('id="retry-data"') ||
   !dataLoader.includes("AbortController") ||
