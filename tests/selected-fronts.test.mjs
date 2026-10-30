@@ -5,6 +5,8 @@ import {runInNewContext} from "node:vm";
 import test from "node:test";
 import {buildSelectedFrontIndex, getSelectedFrontForRecord, getSelectedFrontForWork, loadSelectedFrontIndex} from "../assets/selected-fronts.js";
 import {buildDrawingArchive} from "../assets/drawing-archive-model.js";
+import {attachPhotographDownloads} from "../assets/photograph-downloads.js";
+import {validateRegistrySelections,validateRegistryDownloads} from "../tools/validate-selected-fronts.mjs";
 import {getDisplayReference,referenceExclusion,describeReferenceLink} from "../assets/reference-policy.js";
 import {getPhotographDisplayRotation} from "../assets/photograph-orientation.js";
 import {deriveRecordingSequences,sortRecordsForDisplay} from "../assets/record-sequences.js";
@@ -30,6 +32,27 @@ test("435 selected fronts agree with all gallery identities and 1256 recording j
  }
  assert.equal(getSelectedFrontForRecord(index,"unlinked-pre-standard"),null);
  assert.equal(JSON.stringify(refs),before);
+});
+test("registry projection rejects changed source/display choices and mixed download snapshots",()=>{
+ const registry=read("../data/source-photo-selections.json");
+ assert.doesNotThrow(()=>validateRegistrySelections(projection,registry));
+ for(const mutate of [p=>p.selections[0].source_photograph_sha256="0".repeat(64),p=>p.selections[0].display.output_display_sha256="0".repeat(64)]) {
+  const candidate=clone(projection);mutate(candidate);assert.throws(()=>validateRegistrySelections(candidate,registry));
+ }
+ const goodDownloads=read("../data/photograph-downloads.json");
+ for (const mutate of [d=>d.rows[0].sha256="0".repeat(64),d=>d.rows[0].path+="wrong",d=>d.rows[0].media_revision="0".repeat(40),d=>d.rows[0].width_px=1,d=>d.rows[0].resolution_class="limited_resolution_jpeg"]) {
+  const candidate=clone(goodDownloads);mutate(candidate);
+  if (JSON.stringify(candidate)===JSON.stringify(goodDownloads)) candidate.rows[0].resolution_class="native_resolution_jpeg";
+  assert.throws(()=>validateRegistryDownloads(candidate,registry));
+  assert.throws(()=>attachPhotographDownloads(index,candidate),/registry/);
+ }
+ const downloads=read("../data/photograph-downloads.json");downloads.selection_registry.sha256="0".repeat(64);
+ assert.throws(()=>attachPhotographDownloads(index,downloads),/registry/);
+});
+test("current selections require an exact authoritative source registry binding",()=>{
+ for(const mutate of [p=>delete p.selection_registry,p=>p.selection_registry={repository:"wrong",revision:"a".repeat(40),path:"wrong",sha256:"0".repeat(64)}]) {
+  const p=clone(projection);mutate(p);assert.throws(()=>buildSelectedFrontIndex(p,data,refs),/registry/);
+ }
 });
 test("wrong work-link hash, duplicate selection, missing output hash and wrong work are rejected",()=>{
  for(const mutate of [p=>p.recording_links.sha256="0".repeat(64),p=>p.selections[1]=p.selections[0],

@@ -242,7 +242,7 @@ console.log(JSON.stringify({files:{'data/real-time-recordings.json':encoded(JSON
 
 
 def refresh(source, revision, browser, baseline, generated_at, expected_additions,
-            expected_real_time_additions=None):
+            expected_real_time_additions=None, *, asset_revision=None):
     M.require(M.HEX40.fullmatch(revision) and M.HEX40.fullmatch(baseline), "Exact immutable revisions required")
     M.require(re.fullmatch(r"\d{4}-\d{2}-\d{2}", generated_at), "Explicit generation date required")
     M.require(expected_additions > 0, "Explicit positive addition count required")
@@ -337,7 +337,8 @@ def refresh(source, revision, browser, baseline, generated_at, expected_addition
         outputs["data/real-time-source/manifest.json"] = M.json_bytes(realtime)
     # Use the reviewed working-code changes; the historical snapshot is data authority.
     for path in ("assets/selected-fronts.js", "assets/app.js", "assets/drawing-archive.js", "index.html", "drawings.html"):
-        text = (browser / path).read_text(encoding="utf-8")
+        text = (M.git_bytes(browser, asset_revision, path).decode("utf-8")
+                if asset_revision else (browser / path).read_text(encoding="utf-8"))
         if path == "assets/selected-fronts.js":
             for constant, target in (("SELECTED_FRONTS_SHA256", "data/selected-fronts.json"),
                                      ("LEGACY_REFERENCE_SHA256", "data/physical-references.json")):

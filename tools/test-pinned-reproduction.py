@@ -34,6 +34,9 @@ EXPECTED_OUTPUTS = {
 SPEC = importlib.util.spec_from_file_location("pinned_migration", ROOT / "tools/migrate-media-names.py")
 MIGRATION = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MIGRATION)
+PHOTO_SPEC = importlib.util.spec_from_file_location('photo_projection', ROOT / 'tools/export-photo-selections.py')
+PHOTO = importlib.util.module_from_spec(PHOTO_SPEC)
+PHOTO_SPEC.loader.exec_module(PHOTO)
 
 
 def baseline_json(path):
@@ -54,7 +57,7 @@ class PinnedReproductionTests(unittest.TestCase):
                 historical = subprocess.check_output(["git", "show", f"{MIGRATION_BROWSER}:{path}"], cwd=ROOT)
                 self.assertEqual(historical, expected, f"Retained pinned migration differs: {path}")
 
-    def test_current_additive_refresh_is_exactly_reproducible(self):
+    def test_current_additive_recording_and_reference_outputs_are_exact(self):
         receipt_path = ROOT / "data/source-refresh.json"
         if not receipt_path.exists():
             self.skipTest("No accepted additive source pin has been applied")
@@ -67,14 +70,20 @@ class PinnedReproductionTests(unittest.TestCase):
         outputs = refresh.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["browserBase"],
                                   receipt["generatedAt"], receipt["addedCount"],
                                   receipt.get("realTime", {}).get("addedCount"))
+        # Photo outputs have their own pinned source-registry replay. The fixed
+        # reviewed allowlist cannot be enlarged by editing a manifest.
         for path, expected in outputs.items():
+            if (ROOT / PHOTO.MANIFEST).exists() and path in PHOTO.PHOTO_OUTPUTS:
+                continue
             with self.subTest(path=path):
                 self.assertEqual((ROOT / path).read_bytes(), expected, "Stale current source projection: " + path)
 
     def test_retained_selections_displays_and_correction_evidence_are_unchanged(self):
         selected = json.loads((ROOT / "data/selected-fronts.json").read_bytes())
         previous = baseline_json("data/selected-fronts.json")
-        self.assertEqual(selected["selections"], previous["selections"])
+        self.assertEqual(len({s["work_id"] for s in selected["selections"]}), len(selected["selections"]))
+        self.assertEqual([PHOTO.selection_identity(s) for s in selected["selections"]],
+                         [PHOTO.selection_identity(s) for s in previous["selections"]])
         self.assertEqual(len(selected["selections"]), 435)
         for selection in previous["selections"]:
             work = selection["work_id"]
