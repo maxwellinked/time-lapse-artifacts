@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261029-unlinked-recordings";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -110,11 +110,11 @@ function render(works) {
 
 try {
   const [recordData, referenceBytes, previews, evidence] = await Promise.all([
-    loadRecords("data/records.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8"),
-    fetch("data/physical-references.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
-    fetch("reference-previews/manifest.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
+    loadRecords("data/records.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78"),
+    fetch("data/physical-references.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
+    fetch("reference-previews/manifest.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
     (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-4f563085afacfc454496ac2d61606614268b2cb8", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-3a9c13f603f7255a86ddf2e47d403934dbe09f78", { signal: AbortSignal.timeout(5000) });
       return response.ok ? response.json() : null;
     })().catch(() => null),
   ]);

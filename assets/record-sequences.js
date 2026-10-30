@@ -1,3 +1,5 @@
+import { validateSequenceInsertions } from "./sequence-insertions.js";
+
 const RECORDING_PART_PATTERN = /\.Rec(\d{2,})\.mp4$/i;
 const RECORDING_DESCRIPTOR_PATTERN =
   /^\d{4}-\d{2}-\d{2}\.(?:\d{4}|UnknownTime)\.(.+)\.Rec\d{2,}\.mp4$/i;
@@ -23,7 +25,8 @@ export function getRecordingPart(filename) {
   };
 }
 
-export function deriveRecordingSequences(records) {
+export function deriveRecordingSequences(records, projection = null, sourceRevision) {
+  validateSequenceInsertions(projection, records, sourceRevision);
   // Presentation heuristic only: filename continuity does not establish work identity,
   // session identity, or completeness.
   const details = new Map();
@@ -80,6 +83,19 @@ export function deriveRecordingSequences(records) {
     index = cursor - 1;
   }
 
+  for (const sequence of projection?.sequences ?? []) {
+    sequence.recordIds.forEach((id, index) => {
+      details.set(id, {
+        ...getRecordingPart(records.find(record => record.recordId === id).filename),
+        groupId: `explicit-sequence:${sequence.fragmentSetLabel}`,
+        sequencePosition: index + 1,
+        sequenceSize: sequence.recordIds.length,
+        explicit: true,
+        label: `Position ${index + 1} of ${sequence.recordIds.length}; inferred order; completeness unknown`,
+        evidence: sequence.evidence,
+      });
+    });
+  }
   return details;
 }
 
@@ -95,9 +111,10 @@ export function sortRecordsForDisplay(records, order, sequenceDetails) {
 
   const orderedUnits = [...units.values()].map((unit) => {
     unit.records.sort((a, b) => {
-      const aPart = sequenceDetails.get(a.recordId)?.number ?? 0;
-      const bPart = sequenceDetails.get(b.recordId)?.number ?? 0;
-      return aPart - bPart;
+      const aPart = sequenceDetails.get(a.recordId);
+      const bPart = sequenceDetails.get(b.recordId);
+      return (aPart?.sequencePosition ?? aPart?.number ?? 0) -
+        (bPart?.sequencePosition ?? bPart?.number ?? 0);
     });
 
     const timestamps = unit.records.map(timestamp);

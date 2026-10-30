@@ -105,4 +105,38 @@ class Tests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'no longer binds'):
             R.retain_qualified_evidence(evidence,old_bytes,broken,evidence_inputs)
 
+
+
+class RetainedUnlinkedTests(unittest.TestCase):
+    def test_retains_existing_blank_work_rows_without_inventing_relationships(self):
+        refs,inputs,metadata,source=fixture()
+        entry=dict(workId='',selectionStatus='missing_work_link',referenceRole='missing',clarification='',referenceCount=0,primaryReferenceCount=0,mainImage=None,additionalReferences=[])
+        metadata[ADDED]['work_id']=''
+        refs['records'][ADDED]=entry
+        retained,counts=R.retain_corrected_lookup(refs,inputs,metadata,set(refs['records']),set(),NEW,source.__getitem__)
+        self.assertEqual(retained[ADDED],entry)
+        self.assertEqual(counts['selectionStatuses']['missing_work_link'],1)
+    def test_rejects_blank_work_entries_that_claim_photographs_or_positive_links(self):
+        for field,value in [('mainImage',dict(work_id=SURVIVOR)),('referenceCount',1),('selectionStatus','primary_inspection'),('referenceRole','native full drawing')]:
+            refs,inputs,metadata,source=fixture()
+            entry=dict(workId='',selectionStatus='missing_work_link',referenceRole='missing',clarification='',referenceCount=0,primaryReferenceCount=0,mainImage=None,additionalReferences=[])
+            entry[field]=value; refs['records'][ADDED]=entry
+            with self.assertRaisesRegex(ValueError,'unlinked|work authority'):
+                R.retain_corrected_lookup(refs,inputs,metadata,set(refs['records']),set(),NEW,source.__getitem__)
+
+class AcceptedUnlinkedPopulationTests(unittest.TestCase):
+    def test_all_retained_unlinked_entries_survive_an_additive_refresh(self):
+        import json
+        actual=json.loads((ROOT / 'data/physical-references.json').read_bytes())['records']
+        unlinked={rid:entry for rid,entry in actual.items() if entry['selectionStatus']=='missing_work_link'}
+        self.assertGreaterEqual(len(unlinked),47)
+        refs,inputs,metadata,source=fixture()
+        refs['records'].update(copy.deepcopy(unlinked))
+        for rid in unlinked:
+            metadata[rid]=dict(record_id=rid,work_id='')
+        retained,counts=R.retain_corrected_lookup(refs,inputs,metadata,set(refs['records']),{ADDED},NEW,source.__getitem__)
+        for rid,entry in unlinked.items():
+            self.assertEqual(retained[rid],entry)
+        self.assertEqual(counts['selectionStatuses']['missing_work_link'],len(unlinked)+1)
+
 if __name__=='__main__':unittest.main()

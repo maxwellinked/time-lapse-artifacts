@@ -1,6 +1,7 @@
+import { buildSequenceInsertions } from "./sync-sequence-insertions.mjs";
 import { parseCsv } from "./parse-csv.mjs";
 import { writeFileSync } from "node:fs";
-import { basename, join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const REPOSITORY = "maxwellinked/time-lapse-artifacts";
@@ -135,6 +136,12 @@ const payload = {
   records,
 };
 
+// Validate every authoritative order binding before replacing either output.
+const sequenceProjection = await buildSequenceInsertions(payload);
+if (sequenceProjection) {
+  writeFileSync(option("--sequence-output") ?? join(dirname(outputPath), "sequence-insertions.json"),
+    `${JSON.stringify(sequenceProjection, null, 2)}\n`);
+}
 writeFileSync(outputPath, `${JSON.stringify(payload, null, 2)}\n`);
 console.log(
   JSON.stringify({
