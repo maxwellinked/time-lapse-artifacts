@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "sourceHubRevision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78",
+  "sourceHubRevision": "08cff299256b152828b69e261ad9d791dbc2376d",
   "sourceRegistry": {
     "path": "Standard_Time_Lapses/Provenance/Sequence_Insertions/registry.json",
-    "sha256": "d0993dee17ed444502202e5ed23bfacfa7ac4c01d13c799ec56bae5ff08b3031"
+    "sha256": "b0d9c18fbaabe01726ed2db3d1a6a11159ec85fd87a94421006eccc2da73d7c3"
   },
   "sequences": [
     {
@@ -24,6 +24,29 @@
         "tla-268196248f820e42",
         "tla-0a7b1ed861f10d7d",
         "tla-f3f1ebaf9ef0a80c"
+      ],
+      "evidence": {
+        "membership": "owner-confirmed",
+        "order": "visual-inference-with-device-metadata-corroboration",
+        "gapless_capture": "not-established"
+      },
+      "sequenceCompleteness": "unknown"
+    },
+    {
+      "fragmentSetLabel": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12",
+      "sourceManifest": {
+        "path": "Standard_Time_Lapses/Provenance/Sequence_Insertions/2026-10-30-9x12/sequence.json",
+        "sha256": "f9627ba2fc3508a22b2a022a973e76a395a217fc96102dd7bbe38e1182a79b20"
+      },
+      "recordIds": [
+        "tla-e331a337491dcda6",
+        "tla-e646380c8407b8f4",
+        "tla-2c306a52343fe829",
+        "tla-b95b28799a6bedce",
+        "tla-a3c2dfe3e7b14b01",
+        "tla-2ebf06934b96e8dd",
+        "tla-afcfcaf9ab1b6c16",
+        "tla-d9c74b9d57e1c3a7"
       ],
       "evidence": {
         "membership": "owner-confirmed",

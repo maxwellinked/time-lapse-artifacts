@@ -1,25 +1,87 @@
 {
   "schemaVersion": 1,
   "sourceRepository": "maxwellinked/time-lapse-artifacts",
-  "sourceRevision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78",
-  "previousSourceRevision": "4f563085afacfc454496ac2d61606614268b2cb8",
-  "browserBase": "e3d3bf690d83b65a9c7202d7fd2ad0410d9c5f6a",
+  "sourceRevision": "08cff299256b152828b69e261ad9d791dbc2376d",
+  "previousSourceRevision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78",
+  "browserBase": "088d42c6293b056c5bd11941a5eae915bdd11ddf",
   "generatedAt": "2026-10-30",
-  "previousRecords": 1303,
-  "records": 1305,
+  "previousRecords": 1305,
+  "records": 1311,
   "addedRecords": [
-    "tla-66500ae259f48f35",
-    "tla-f5575d594e459bfc"
+    "tla-33e35be7b71f596d",
+    "tla-683d766e65b70e83",
+    "tla-7adb8c892c296dc1",
+    "tla-8cd5eb5c7bacdaa9",
+    "tla-b0f113c9af61478f",
+    "tla-b95b28799a6bedce"
   ],
-  "addedCount": 2,
-  "unlinkedAddedCount": 2,
+  "addedCount": 6,
+  "unlinkedAddedCount": 6,
   "existingRelationships": "unchanged",
   "historicalMigration": "retained",
   "metadata": {
     "path": "metadata.csv",
-    "bytes": 1175775,
-    "sha256": "c6bd97f8ad985f1bfa43433e6a71b7849ddbfc09bb16a445800cc90eb2cefdf9",
-    "gitBlobOid": "2d710ee47fc5921f4a23766a48f703370d206cb3",
-    "revision": "3a9c13f603f7255a86ddf2e47d403934dbe09f78"
+    "bytes": 1181713,
+    "sha256": "3fb322d8a0002cbe1b2ccfafa5db5dd949ea3f3d5d2c697c17396ab2efe55c49",
+    "gitBlobOid": "f093c2f1dfdc303d9af9defcea871dd23cb2b10f",
+    "revision": "08cff299256b152828b69e261ad9d791dbc2376d"
+  },
+  "realTime": {
+    "previousRecords": 5,
+    "records": 18,
+    "addedCount": 13,
+    "addedRecords": [
+      "tla-a15f3eb2feafaedb",
+      "tla-592b70857158240f",
+      "tla-23419acfc6441599",
+      "tla-32721000b10f1f4e",
+      "tla-8d0863e0dae8a213",
+      "tla-f9094b489a3f41fa",
+      "tla-c24efe35f7cb640d",
+      "tla-2746846646d6d8ab",
+      "tla-566b8e93ec78679b",
+      "tla-3c6ecc1d47c4a7a7",
+      "tla-0e577b313aed0860",
+      "tla-c36e2e20b1a3570e",
+      "tla-7ad7844d9549a026"
+    ],
+    "existingRows": "byte_identical_prefix",
+    "existingChecksums": "unchanged_lines",
+    "previousSourceInputs": {
+      "Real_Time_Recordings/metadata.csv": {
+        "sha256": "dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b",
+        "sizeBytes": 3732
+      },
+      "Real_Time_Recordings/SHA256SUMS": {
+        "sha256": "e7373c5c2e903d65da23038b7acc0d8856b941fab8eb99177144db5a7cef873b",
+        "sizeBytes": 910
+      },
+      "Real_Time_Recordings/README.md": {
+        "sha256": "9fe17e56564cf1a231aa6d6beec9755e781e52902a00085950854d6b41a28262",
+        "sizeBytes": 6010
+      },
+      "Real_Time_Recordings/SCHEMA.md": {
+        "sha256": "dd9bdaf13e69e024bc79c6194a168dcaa999185a821d5ad245e5df870fc98ac4",
+        "sizeBytes": 2131
+      }
+    },
+    "sourceInputs": {
+      "Real_Time_Recordings/metadata.csv": {
+        "sha256": "75798e54b0ccb9918173dd5b61322c43d0536f70cf3f446df025a7dd60a7e9f3",
+        "sizeBytes": 19323
+      },
+      "Real_Time_Recordings/SHA256SUMS": {
+        "sha256": "e7c87afc282956bfdb98e43d346992653f88cb1b8ce900efcc92eeb61a7f4cd0",
+        "sizeBytes": 3277
+      },
+      "Real_Time_Recordings/README.md": {
+        "sha256": "9fe17e56564cf1a231aa6d6beec9755e781e52902a00085950854d6b41a28262",
+        "sizeBytes": 6010
+      },
+      "Real_Time_Recordings/SCHEMA.md": {
+        "sha256": "dd9bdaf13e69e024bc79c6194a168dcaa999185a821d5ad245e5df870fc98ac4",
+        "sizeBytes": 2131
+      }
+    }
   }
 }

@@ -31,6 +31,88 @@ test("builds exact same-revision order projection bound to source registry and p
   assert.equal(p.sequences[0].sourceManifest.sha256,digest(f.sourceFiles[manifestPath]));
   assert.deepEqual(p.sequences[0].recordIds,f.state.members.map(m=>m.record_id));
 });
+function singleInsertionFixture() {
+  return fixture(s => {
+    s.members.splice(4, 1);
+    s.members.forEach((member, index) => { member.sequence_position = index + 1; });
+    s.manifest.additions = [s.members[3].record_id];
+  });
+}
+test("projects one declared Rec03a addition while retaining all predecessor identities and order", async () => {
+  const build = await builder(), f = singleInsertionFixture();
+  const projection = await build(f.payload, {readSource: f.readSource});
+  assert.deepEqual(projection.sequences[0].recordIds, [
+    "tla-0000000000000001", "tla-0000000000000002", "tla-0000000000000003",
+    "tla-0000000000000004", "tla-0000000000000006", "tla-0000000000000007",
+    "tla-0000000000000008", "tla-0000000000000009", "tla-000000000000000a",
+    "tla-000000000000000b",
+  ]);
+});
+test("each registered group verifies its own independent manifest input revision", async () => {
+  const build = await builder(), f = fixture(), g = singleInsertionFixture();
+  const secondSource = "d".repeat(40), secondPredecessor = "e".repeat(40);
+  const secondLabel = "2026-10-24.1017.BallpointPen.Ink.Paper.9x12";
+  const secondManifestPath = manifestPath.replace("2026-10-29-F", "2026-10-30-G");
+  const secondPredecessorPath = predecessorPath.replace("2026-10-29", "2026-10-30");
+  const translate = value => value.replaceAll(label, secondLabel).replaceAll(
+    /tla-([a-f0-9]{16})/g, (_, id) => `tla-${(parseInt(id,16)+256).toString(16).padStart(16,"0")}`)
+    // The second group has independent content identities as well as record IDs.
+    .replaceAll(/\b0{40}[a-f0-9]{24}\b/g, hash =>
+      (BigInt("0x" + hash) + 256n).toString(16).padStart(64,"0"));
+  const secondManifest = JSON.parse(translate(JSON.stringify(g.state.manifest)));
+  secondManifest.source_hub_revision = secondSource;
+  secondManifest.predecessor.path = secondPredecessorPath;
+  secondManifest.predecessor.source_hub_revision = secondPredecessor;
+  const secondPacket = translate(g.sourceFiles[predecessorPath]);
+  secondManifest.predecessor.sha256 = digest(secondPacket);
+  const secondMetadata = translate(g.sourceFiles["metadata.csv"]);
+  const combinedMetadata = f.sourceFiles["metadata.csv"] + secondMetadata.split("\n").slice(1).join("\n");
+  const files = {
+    ...f.sourceFiles,
+    [secondManifestPath]: JSON.stringify(secondManifest),
+    [secondPredecessorPath]: secondPacket,
+    "metadata.csv": combinedMetadata,
+    "SHA256SUMS": f.sourceFiles.SHA256SUMS + translate(g.sourceFiles.SHA256SUMS),
+  };
+  files[registryPath] = JSON.stringify({schema_version:1,sequences:[
+    {manifest_path:manifestPath,sha256:digest(files[manifestPath])},
+    {manifest_path:secondManifestPath,sha256:digest(files[secondManifestPath])},
+  ]});
+  const payload = {sourceRevision:current,records:[...f.payload.records,
+    ...g.payload.records.map(record => JSON.parse(translate(JSON.stringify(record))))]};
+  const readSource = async(path, pin) => {
+    if (path === "metadata.csv" && pin === source) return Buffer.from(f.sourceFiles[path]);
+    if (path === "metadata.csv" && pin === secondSource) return Buffer.from(combinedMetadata);
+    if (pin === current || (pin === predecessorRevision && path === predecessorPath) ||
+        (pin === secondPredecessor && path === secondPredecessorPath)) {
+      return path in files ? Buffer.from(files[path]) : null;
+    }
+    throw new Error(`Unexpected independently pinned input ${pin}:${path}`);
+  };
+  const projection = await build(payload, {readSource});
+  assert.equal(projection.sequences.length, 2);
+  assert.equal(projection.sequences[0].recordIds.length, 11);
+  assert.equal(projection.sequences[1].recordIds.length, 10);
+  assert.equal(projection.sequences[1].recordIds[3], "tla-0000000000000104");
+  for (const changedPin of [source, secondSource]) {
+    await assert.rejects(build(payload, {readSource: async(path, pin) => {
+      const bytes = await readSource(path, pin);
+      const targetId = changedPin === source ? "tla-0000000000000001" : "tla-0000000000000101";
+      return path === "metadata.csv" && pin === changedPin
+        ? Buffer.from(bytes.toString().split("\n").map(line => line.startsWith(targetId + ",")
+          ? line.replace(/,100$/, ",999") : line).join("\n")) : bytes;
+    }}), /input source revision/);
+  }
+});
+test("declared additions must remain positive, unique, and absent from predecessor", async () => {
+  const build = await builder();
+  for (const change of [s => {s.manifest.additions=[];},
+    s => {s.manifest.additions=[s.members[3].record_id,s.members[3].record_id];},
+    s => {s.manifest.additions=[s.members[0].record_id,s.members[4].record_id];}]) {
+    const f = fixture(change);
+    await assert.rejects(build(f.payload, {readSource:f.readSource}), /addition|member count/);
+  }
+});
 test("refuses stale or missing source bindings, malformed order, changed predecessor and remote identity",async()=>{
   const build=await builder();
   for(const change of [s=>s.manifest.source_hub_revision=null,s=>s.manifest.predecessor.sha256="f".repeat(64),s=>s.manifest.members[5].sequence_position=5,s=>s.manifest.members.reverse(),s=>s.manifest.additions.pop(),s=>s.manifest.evidence.order="owner-confirmed",s=>s.manifest.members[0].record_id="tla-ffffffffffffffff",s=>s.manifest.members[0].hub_xet_hash=null]) {

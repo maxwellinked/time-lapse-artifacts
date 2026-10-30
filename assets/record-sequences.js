@@ -1,4 +1,4 @@
-import { validateSequenceInsertions } from "./sequence-insertions.js";
+import { validateSequenceInsertions } from "./sequence-insertions.js?v=20261030-sequence-insertions";
 
 const RECORDING_PART_PATTERN = /\.Rec(\d{2,})\.mp4$/i;
 const RECORDING_DESCRIPTOR_PATTERN =

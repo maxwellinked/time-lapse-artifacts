@@ -2,10 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { existsSync, readFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { parseCsv } from "../tools/parse-csv.mjs";
 
 const root = new URL("../", import.meta.url);
 const read = (p) => readFileSync(new URL(p, root));
+const historicalBrowser = "088d42c6293b056c5bd11941a5eae915bdd11ddf";
+const readHistorical = p => execFileSync("git", ["show", `${historicalBrowser}:${p}`], {cwd: root,maxBuffer:8*1024*1024});
 const recordData = JSON.parse(read("data/records.json"));
 const hash = (b) => createHash("sha256").update(b).digest("hex");
 const revision = recordData.sourceRevision;
@@ -123,16 +126,32 @@ test("renamed MOVs use the published filename as their label and retain the orig
   assert.equal(p.records[0].work_id,"");
 });
 test("published real-time projection retains all five original records and remains reproducible offline",async()=>{
-  const m=await modules();const csv=read("data/real-time-source/metadata.csv"),sums=read("data/real-time-source/SHA256SUMS"),manifest=JSON.parse(read("data/real-time-source/manifest.json"));
-  assert.equal(hash(csv),"dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b");
+  const m=await modules();
+  const historicalCsv=readHistorical("data/real-time-source/metadata.csv"),historicalSums=readHistorical("data/real-time-source/SHA256SUMS");
+  const historicalManifest=JSON.parse(readHistorical("data/real-time-source/manifest.json"));
+  const historicalRecords=JSON.parse(readHistorical("data/records.json"));
+  assert.equal(hash(historicalCsv),"dc5bfd67db3463f1cdd4908c3eba8447cc142830e0d99e97e4a34f7eae18946b");
+  const historical=m.buildRealTimeProjection(historicalRecords,{manifest:historicalManifest,csv:historicalCsv,sums:historicalSums});
+  assert.equal(historical.records.length,5);
+  assert.equal(historical.records.filter(r=>r.demux_status==="completed_with_timestamp_errors").length,2);
+  const csv=read("data/real-time-source/metadata.csv"),sums=read("data/real-time-source/SHA256SUMS"),manifest=JSON.parse(read("data/real-time-source/manifest.json"));
+  assert.deepEqual(csv.subarray(0,historicalCsv.length),historicalCsv);
+  const checksumLines=new Set(sums.toString("utf8").match(/[^\n]*\n|[^\n]+$/g));
+  for(const line of historicalSums.toString("utf8").match(/[^\n]*\n|[^\n]+$/g))assert.ok(checksumLines.has(line),"Historical checksum line changed");
+  const refresh=JSON.parse(read("data/source-refresh.json"));
+  const expectedCount=refresh.realTime?.records ?? historical.records.length;
+  if(refresh.realTime){
+    assert.equal(refresh.realTime.previousRecords,historical.records.length);
+    assert.equal(refresh.realTime.records,refresh.realTime.previousRecords+refresh.realTime.addedCount);
+  }
   assert.equal(hash(csv),manifest.inputs["Real_Time_Recordings/metadata.csv"].sha256);
-  const p=m.buildRealTimeProjection(recordData,{manifest,csv,sums});assert.equal(p.records.length,5);
+  const p=m.buildRealTimeProjection(recordData,{manifest,csv,sums});assert.equal(p.records.length,expectedCount);
+  assert.deepEqual(p.records.slice(0,historical.records.length),historical.records);
   assert.equal(p.recordingModeBasis,"source_metadata");
   assert.equal(p.sourceFields.length,24);assert.ok(p.sourceFields.includes("recording_mode"));
   assert.deepEqual(p.records,parseCsv(csv.toString("utf8")).map(({values})=>values));
   assert.deepEqual(JSON.parse(read("data/real-time-recordings.json")),p);
   assert.equal(read("real-time-recordings.html").toString(),m.buildRealTimePage(p,recordData));
-  assert.equal(p.records.filter(r=>r.demux_status==="completed_with_timestamp_errors").length,2);
 });
 test("related-record controller ignores delayed old results and cancellation",async()=>{
   const {m,p}=await projection();const pending=[],states=[];

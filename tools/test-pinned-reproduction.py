@@ -65,7 +65,8 @@ class PinnedReproductionTests(unittest.TestCase):
         refresh = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(refresh)
         outputs = refresh.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["browserBase"],
-                                  receipt["generatedAt"], receipt["addedCount"])
+                                  receipt["generatedAt"], receipt["addedCount"],
+                                  receipt.get("realTime", {}).get("addedCount"))
         for path, expected in outputs.items():
             with self.subTest(path=path):
                 self.assertEqual((ROOT / path).read_bytes(), expected, "Stale current source projection: " + path)
