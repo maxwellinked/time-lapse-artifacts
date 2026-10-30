@@ -9,7 +9,7 @@ function fixture() {
     records:[{recordId:"one"},{recordId:"two"}]};
   const references = {sourceRevision:records.sourceRevision,sourceInputs:{[links.path]:links},
     records:{one:{workId:selected},two:{workId:unselected}}};
-  const projection = {recording_links:links,selection_map_sha256:"c".repeat(64),candidate_table_sha256:"d".repeat(64),
+  const projection = {selection_registry:{repository:"maxwellinked/time-lapse-artifacts",path:"Physical_References/Selected_Front_Downloads/selections.json",sha256:fronts.PHOTO_SELECTION_REGISTRY_SHA256,revision:fronts.PHOTO_SELECTION_SOURCE_REVISION},recording_links:links,selection_map_sha256:"c".repeat(64),candidate_table_sha256:"d".repeat(64),
     unselected_work_ids:[unselected],selections:[{work_id:selected,photo_role:"front",
       source_photograph_sha256:"e".repeat(64),display:{output_display_sha256:"f".repeat(64)}}]};
   return {selected,unselected,records,references,projection};

@@ -57,6 +57,14 @@ jobs:
             case "$revision" in *[!a-f0-9]*) exit 1 ;; esac
             git -C "$HF_SOURCE_ROOT" fetch --filter=blob:none --no-tags origin "$revision"
           fi
+      - name: Fetch accepted photograph selection source
+        run: |
+          revision="$(node -p 'JSON.parse(require("fs").readFileSync("data/selected-fronts.json", "utf8")).selection_registry.revision')"
+          test "${#revision}" -eq 40
+          case "$revision" in *[!a-f0-9]*) exit 1 ;; esac
+          git -c protocol.version=0 -C "$HF_SOURCE_ROOT" fetch --filter=blob:none --no-tags origin "$revision"
+      - name: Check photograph projection and exact retained image identities
+        run: python3 -B tools/test-photo-selection-reproduction.py -v
       - name: Check pinned migration, retained displays and historical evidence
         run: python3 -B tools/test-pinned-reproduction.py -v
       - name: Check accepted source ledger path and symlink guards on Linux

@@ -1,0 +1,68 @@
+{
+  "contract": "browser_photo_selection_projection_v1",
+  "selection_registry": {
+    "repository": "maxwellinked/time-lapse-artifacts",
+    "revision": "2890eef05c0ce32b731fb0cf45952dff6141273b",
+    "path": "Physical_References/Selected_Front_Downloads/selections.json",
+    "sha256": "1c1c5a299eac0990fac974caf41bd46d0f759e53cd2a48b5a62b587dfe6d8958"
+  },
+  "preserved_browser_revision": "290880f54e13b1b418321dfea3c9aaaf9f85d6df",
+  "preserved_prior_sha256": "e26dc29b4762a8562c47b7aa2cba0ce11ce6c7972b8f2d55d312c77b17397fc8",
+  "source_inputs": {
+    "Physical_References/Selected_Front_Downloads/selections.json": {
+      "sha256": "1c1c5a299eac0990fac974caf41bd46d0f759e53cd2a48b5a62b587dfe6d8958",
+      "size_bytes": 1335801
+    },
+    "drawing_photographs.parquet": {
+      "sha256": "6802978c6a447ab8f3ea2369bae9aa18ce9efb2477eaf181050b2c508e3838f7",
+      "size_bytes": 113424046
+    },
+    "drawing_photographs.manifest.json": {
+      "sha256": "666b654171e3fa58320f6a843e4f11431510307dc2f52905d76dba4ad91b3b11",
+      "size_bytes": 974
+    },
+    "Physical_References/Selected_Front_Downloads/downloads.json": {
+      "sha256": "b71104679d73ac3a2dd99797bad44bc0928c9fa75606e65b25a7094814a1b180",
+      "size_bytes": 337408
+    }
+  },
+  "outputs": {
+    "assets/app.js": {
+      "sha256": "8476f8a52de1cf870c337d531d8585f57e9c2c5b91e6ccc3b75eb04cd789a640",
+      "size_bytes": 44224
+    },
+    "assets/drawing-archive.js": {
+      "sha256": "ce0eca65540d9b18fe84b260646255f46c2c70654ab4bc66cc1acddb6aa1baac",
+      "size_bytes": 8097
+    },
+    "assets/photograph-downloads.js": {
+      "sha256": "90f9efda2e1ec5d6b291eb0e21399dba3877fd099c2267968fd3876ddd506d72",
+      "size_bytes": 3992
+    },
+    "assets/selected-fronts.js": {
+      "sha256": "54952d85e7ba516c870e139050cbe9ff7fc9309b1ae09c161a6741968eed1015",
+      "size_bytes": 5643
+    },
+    "data/photograph-downloads.json": {
+      "sha256": "3a51a0224b95adaca976782ee1dd82a36ae662a3f02b7e7a43a4fb0cb6b079ee",
+      "size_bytes": 337468
+    },
+    "data/selected-fronts.json": {
+      "sha256": "a752d9228944667f733c3c501aa67f1b2cf6d2d7e0b51c8c790c492ae91e6684",
+      "size_bytes": 643560
+    },
+    "data/source-photo-selections.json": {
+      "sha256": "1c1c5a299eac0990fac974caf41bd46d0f759e53cd2a48b5a62b587dfe6d8958",
+      "size_bytes": 1335801
+    },
+    "drawings.html": {
+      "sha256": "637aff404d032fa3b698a02507070f1b051258d01955f144015f28a287e0485a",
+      "size_bytes": 2531
+    },
+    "index.html": {
+      "sha256": "5f614c00db6b9a7292684380d85591bb7c4bee99e62bb5659d437812a976202c",
+      "size_bytes": 16963
+    }
+  },
+  "proof_scope": "JSON regenerated from pinned source and immutable prior metadata; generated constants/cache tags checked using current implementation templates. Source table identity is verified by hash/OID and size; its contents are not decoded by this exporter."
+}

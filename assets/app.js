@@ -1,5 +1,5 @@
 import { loadSequenceInsertions } from "./sequence-insertions.js?v=20261030-sequence-insertions";
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-2890eef05c0c-1c1c5a299eac";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
 import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";

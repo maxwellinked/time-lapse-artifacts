@@ -1,51 +1,27 @@
 # Drawing-reference policy
 
-The current gallery, recording dialog and photograph filter share the selected-front
-map projected into `data/selected-fronts.json`. It contains one owner-confirmed
-front per existing work ID. Its exact bytes are checked before use, and its work-link
-input hash must match the retained recording lookup. The image assets are verified
-against the selected output hashes; all are limited display JPEGs with normalized
-orientation. Four previously approved source rotations are baked into these pixels
-and are not applied again by the UI. Two corrected assignments replace the selected
-fronts only; historical evidence remains versioned.
+Current gallery, recording dialog and photo filters consume the selected-front
+registry published in the authoritative HF archive. The generated map binds its
+exact source repository, immutable revision, path and SHA-256. Retained source
+registry bytes permit an independent comparison of every source, display and
+download representation.
 
-The 435 active selected fronts join to 1,256 Standard recordings through the existing work
-links. This asserts drawing identity and the selected photographed view, not a
-recording endpoint, timing calibration, complete process, or original-file quality.
-Pre-Standard records receive no invented work or photograph joins.
+Current selected fronts and confirmed recording links are checked against
+the source work table. The source paired Viewer includes the five previously
+missing fronts. The superseded July 25 identity remains historical; both videos
+use the surviving work ID.
 
-The current Standard index has 1,303 recording rows. Its 47 new rows have blank
-work IDs and explicit `missing_work_link`, zero-reference, null-image lookup
-entries. They remain visible in recording browsing, return no selected front and
-are omitted from the registered-drawing gallery. Shared finish labels or file
-order do not assign these recordings a registered work or photograph. The 435
-selected fronts described here retain the browser's earlier 430 displays plus
-five-master supplement; this access layer is distinct from the source paired
-Viewer projection's 430 selected works and 1,205 illustrated Standard rows.
+Consolidation preserves all 435 display JPEGs and existing photograph choices.
+Four approved rotations remain baked into the normalized pixels. Downloads keep
+their resolution classes, exact hashes and per-row media pins. A selected drawing
+photograph does not establish a recording endpoint, timing, complete process or
+original-file quality.
 
-The 430 surviving earlier selected fronts retain their exact candidate and display bytes.
-Five further fronts (51 recordings) are derived from the directly owner-confirmed
-master release at the exact Hugging Face revision in `master_front_supplement`.
-The projection's separate `master_front_supplement` binds that source index and
-owner receipt; the old candidate hashes retain their original 431-work scope.
-No photograph is inherited from another work. The native master downloads and
-bounded display JPEGs have distinct hashes and representation roles.
-
-The separate `work_identity_correction` binds the creator's July 25 two-stage
-confirmation, correction ledger and current registry. Both recordings use active
-ID `tlaw-858a03eb138fbf47` and its existing selected display. Superseded ID
-`tlaw-b03bbfba8babbf3d` and its former selected display remain historical evidence;
-the current map counts the physical drawing once. Historical photograph fields,
-evidence classes and media pins are not relabeled or promoted by this overlay.
-
-Thirty-eight historical preview entries reuse byte-identical selected-front files
-through a validated local `assetPath`. Output hashes, source bindings and image
-bounds remain unchanged; reuse adds no photograph association or quality claim.
-
-The source-lookup policy below remains the contract for retained historical
-reference records and their qualified links. Its old display counts do not count
-the new selected-front population; existing relationship classifications are not
-silently promoted or rewritten by the display adapter.
+Retained candidate, supplement, correction and lookup fields describe their
+original evidence scopes and inputs. Current choice comes from the source
+registry; Work_Images roles retain their separate grants and lineage. Regenerate
+photo selections and downloads together using tools/export-photo-selections.py,
+then run the existing validator and tests. Do not edit choices independently.
 
 ## Historical source-lookup acceptance
 

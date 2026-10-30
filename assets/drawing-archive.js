@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-2890eef05c0c-1c1c5a299eac";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261029-unlinked-recordings";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";

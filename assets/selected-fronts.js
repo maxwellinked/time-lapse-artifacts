@@ -1,13 +1,21 @@
-import { loadPhotographDownloads } from "./photograph-downloads.js?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=photo-selections-2890eef05c0c-1c1c5a299eac";
 import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
-// Derived access projection: retained candidate plus the separately bound HF master supplement.
-export const SELECTED_FRONTS_SHA256 = "e26dc29b4762a8562c47b7aa2cba0ce11ce6c7972b8f2d55d312c77b17397fc8";
+// Current source-registry projection; historical candidate evidence retains its original pins.
+export const SELECTED_FRONTS_SHA256 = "a752d9228944667f733c3c501aa67f1b2cf6d2d7e0b51c8c790c492ae91e6684";
 export const LEGACY_REFERENCE_SHA256 = "7424b2de2612b02301b822657ce68a3e3afa314849bbbedc4d44ecd943f83808";
+export const PHOTO_SELECTION_REGISTRY_SHA256 = "1c1c5a299eac0990fac974caf41bd46d0f759e53cd2a48b5a62b587dfe6d8958";
+export const PHOTO_SELECTION_SOURCE_REVISION = "2890eef05c0ce32b731fb0cf45952dff6141273b";
 const HASH = /^[a-f0-9]{64}$/;
 const WORK = /^tlaw-[a-f0-9]{16}$/;
 const LINK_PATH = "Work_Identity/work_record_links.csv";
 
 export function buildSelectedFrontIndex(projection, recordData, references) {
+  const source = projection.selection_registry;
+  if (source?.repository !== "maxwellinked/time-lapse-artifacts" ||
+      source.path !== "Physical_References/Selected_Front_Downloads/selections.json" ||
+      source.sha256 !== PHOTO_SELECTION_REGISTRY_SHA256 || source.revision !== PHOTO_SELECTION_SOURCE_REVISION) {
+    throw new Error("Selected fronts differ from the authoritative photo registry");
+  }
   if (recordData.sourceRepository !== "maxwellinked/time-lapse-artifacts" ||
       references.sourceRevision !== recordData.sourceRevision ||
       projection.recording_links?.path !== LINK_PATH ||
@@ -44,7 +52,7 @@ export function buildSelectedFrontIndex(projection, recordData, references) {
     byWork[workId] = Object.freeze({workId, displayUrl: `selected-fronts/${workId}.jpg`,
       displaySha256: selection.display.output_display_sha256,
       sourcePhotographSha256: selection.source_photograph_sha256,
-      orientationNormalized: true});
+      downloadRepresentation: Object.freeze({...selection.download}), orientationNormalized: true});
   }
   const byRecord = Object.create(null);
   for (const recordId of recordIds) {
@@ -52,7 +60,7 @@ export function buildSelectedFrontIndex(projection, recordData, references) {
     if (selected) byRecord[recordId] = selected;
   }
   return Object.freeze({byWork: Object.freeze(byWork), byRecord: Object.freeze(byRecord),
-    unselectedWorkIds: Object.freeze([...unselected])});
+    selectionRegistry: Object.freeze({...source}), unselectedWorkIds: Object.freeze([...unselected])});
 }
 
 export function getSelectedFrontForRecord(index, recordId) { return index?.byRecord?.[recordId] ?? null; }

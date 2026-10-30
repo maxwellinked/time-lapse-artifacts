@@ -1,5 +1,5 @@
 // Independent download projection; selected display images remain unchanged.
-export const PHOTOGRAPH_DOWNLOADS_SHA256 = "b685888eed60d29b72585d9fd241f4cbe52157f2734fba1a9ea454ca3d276f14";
+export const PHOTOGRAPH_DOWNLOADS_SHA256 = "3a51a0224b95adaca976782ee1dd82a36ae662a3f02b7e7a43a4fb0cb6b079ee";
 const HASH = /^[a-f0-9]{64}$/;
 const REVISION = /^[a-f0-9]{40}$/;
 const PREFIXES = ['Physical_References/Photographs/', 'Physical_References/Selected_Front_Downloads/'];
@@ -10,6 +10,10 @@ const LABELS = Object.freeze({
 });
 
 export function attachPhotographDownloads(index, manifest) {
+  if (index.selectionRegistry && ['repository','revision','path','sha256'].some(key =>
+      manifest.selection_registry?.[key] !== index.selectionRegistry[key])) {
+    throw new Error('Photograph downloads differ from selected photo registry');
+  }
   if (!REVISION.test(manifest.media_revision ?? '') || !Array.isArray(manifest.rows) ||
       manifest.rows.length !== Object.keys(index.byWork).length) throw new Error('Invalid photograph download manifest');
   const byWork = Object.create(null);
@@ -19,6 +23,10 @@ export function attachPhotographDownloads(index, manifest) {
     const front = index.byWork[row.work_id];
     if (!front || byWork[row.work_id] || row.source_sha256 !== front.sourcePhotographSha256) {
       throw new Error('Photograph download differs from selected source');
+    }
+    if (front.downloadRepresentation && (row.display_sha256 !== front.displaySha256 ||
+        ['path','sha256','width_px','height_px','size_bytes','resolution_class','media_revision','representation','source_filename'].some(key => row[key] !== (front.downloadRepresentation[key] ?? null)))) {
+      throw new Error('Photograph download representation differs from source registry');
     }
     if (row.path === null && row.resolution_class === 'source_not_located') {
       byWork[row.work_id] = front;

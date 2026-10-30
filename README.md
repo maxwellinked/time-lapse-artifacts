@@ -448,3 +448,11 @@ versus 3,342 presented frames under the recorded default edit-list handling.
 The [pinned authoritative supplement](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/3a9c13f603f7255a86ddf2e47d403934dbe09f78/Standard_Time_Lapses/Provenance/Sequence_Insertions/2026-10-29-F/sequence.json)
 binds the complete retained files and their qualified order; it does not establish
 complete capture of the drawing process or eliminate unobserved intervals.
+
+## Current photo selection source
+
+Current photos and downloads are projected from the authoritative HF registry.
+Use tools/export-photo-selections.py with --source-root, --source-revision and
+--destination, then run the existing site validator and tests. The retained
+source registry and exact binding reject mixed work/source/display/download
+choices. Historical recording and reference pins keep their own scope.
