@@ -5,13 +5,13 @@
     "photo": "0aa420fb5e3e2690165b783793fb3cfd1a5f55ed",
     "github": "fcfb2d5d28f40400e6d5f34faff8f641925be64b"
   },
-  "selection_map_sha256": "1c1c5a299eac0990fac974caf41bd46d0f759e53cd2a48b5a62b587dfe6d8958",
-  "candidate_table_sha256": "6802978c6a447ab8f3ea2369bae9aa18ce9efb2477eaf181050b2c508e3838f7",
+  "selection_map_sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba",
+  "candidate_table_sha256": "efbd6612f0d1242a13b01290806067c5981a156525037bbadb886a34db34da91",
   "recording_links": {
     "path": "Work_Identity/work_record_links.csv",
-    "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b",
+    "sha256": "b27eca36130c98a5264deb81cbb69b040275ef33d1467d461fdb13312c02c452",
     "repository": "main",
-    "revision": "2890eef05c0ce32b731fb0cf45952dff6141273b"
+    "revision": "44ac0117e9240f2c3f2877d8739abdc159b8370f"
   },
   "selections": [
     {
@@ -9150,7 +9150,9 @@
       }
     }
   ],
-  "unselected_work_ids": [],
+  "unselected_work_ids": [
+    "tlaw-d5e993f2657744f6"
+  ],
   "work_identity_correction": {
     "repository": "maxwellinked/time-lapse-artifacts",
     "revision": "253e2ad859ea93b183110f19b5bbd78fc0bd6289",
@@ -9243,9 +9245,9 @@
   },
   "selection_registry": {
     "repository": "maxwellinked/time-lapse-artifacts",
-    "revision": "2890eef05c0ce32b731fb0cf45952dff6141273b",
+    "revision": "44ac0117e9240f2c3f2877d8739abdc159b8370f",
     "path": "Physical_References/Selected_Front_Downloads/selections.json",
-    "sha256": "1c1c5a299eac0990fac974caf41bd46d0f759e53cd2a48b5a62b587dfe6d8958"
+    "sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba"
   },
   "historical_import": {
     "status": "derived_display_projection",

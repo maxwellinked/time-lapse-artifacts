@@ -20,18 +20,35 @@ const app=readFileSync(new URL("../assets/app.js",import.meta.url),"utf8");
 const gallery=readFileSync(new URL("../assets/drawing-archive.js",import.meta.url),"utf8");
 const clone=structuredClone;
 
-test("435 selected fronts agree with all gallery identities and 1256 recording joins",()=>{
+test("435 retained fronts and one explicitly unselected work agree with 436 gallery identities",()=>{
  const before=JSON.stringify(refs);
  const works=buildDrawingArchive(data,refs,read("../reference-previews/manifest.json"));
- assert.equal(works.length,435); assert.equal(Object.keys(index.byRecord).length,1256);
- assert.equal(index.unselectedWorkIds.length,0);
+ assert.equal(works.length,436); assert.equal(Object.keys(index.byRecord).length,1256);
+ assert.equal(Object.keys(index.byWork).length,435);
+ assert.deepEqual(index.unselectedWorkIds,['tlaw-d5e993f2657744f6']);
  assert.deepEqual(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).map(r=>r.recordId).sort(),
-   data.records.filter(r=>refs.records[r.recordId].selectionStatus==="missing_work_link").map(r=>r.recordId).sort());
+   data.records.filter(r=>refs.records[r.recordId].selectionStatus==="missing_work_link" ||
+     refs.records[r.recordId].workId==='tlaw-d5e993f2657744f6').map(r=>r.recordId).sort());
  for(const work of works) for(const record of work.records) {
    assert.equal(getSelectedFrontForRecord(index,record.recordId),getSelectedFrontForWork(index,work.workId));
  }
  assert.equal(getSelectedFrontForRecord(index,"unlinked-pre-standard"),null);
  assert.equal(JSON.stringify(refs),before);
+});
+
+test("the confirmed 38-record addition retains one complete browser run without promoting a photograph",()=>{
+ const members=read('./fixtures/2026-10-31-one-drawing-38-recordings.json').members;
+ const records=data.records.filter(r=>refs.records[r.recordId].workId==='tlaw-d5e993f2657744f6')
+   .sort((a,b)=>a.rowIndex-b.rowIndex);
+ assert.deepEqual(records.map(r=>r.recordId),members.map(r=>r.record_id));
+ const sequences=deriveRecordingSequences(data.records,insertions,data.sourceRevision);
+ const groupIds=new Set(records.map(r=>sequences.get(r.recordId).groupId));
+ assert.equal(groupIds.size,1);assert.notEqual([...groupIds][0],null);
+ records.forEach((record,position)=>{
+   assert.equal(sequences.get(record.recordId).sequenceSize,38);
+   assert.equal(sequences.get(record.recordId).sequencePosition,position+1);
+   assert.equal(getSelectedFrontForRecord(index,record.recordId),null);
+ });
 });
 test("registry projection rejects changed source/display choices and mixed download snapshots",()=>{
  const registry=read("../data/source-photo-selections.json");

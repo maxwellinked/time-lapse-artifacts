@@ -12,11 +12,11 @@ const previews = read("../reference-previews/manifest.json");
 test("groups the committed snapshot once per work without changing source evidence", () => {
   const before = JSON.stringify([data, references, previews]);
   const works = buildDrawingArchive(data, references, previews);
-  assert.equal(works.length, 435);
-  assert.equal(new Set(works.map((work) => work.workId)).size, 435);
+  assert.equal(works.length, 436);
+  assert.equal(new Set(works.map((work) => work.workId)).size, 436);
   assert.equal(works.filter((work) => work.photograph).length, 80);
   assert.equal(works.filter((work) => work.status === "reference_review").length, 289);
-  assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 66);
+  assert.equal(works.filter((work) => work.status === "no_published_photograph").length, 67);
   assert.deepEqual(works.flatMap((work) => work.records.map((record) => record.recordId)).sort(),
     data.records.filter((record) => references.records[record.recordId].workId).map((record) => record.recordId).sort());
   assert.equal(JSON.stringify([data, references, previews]), before);

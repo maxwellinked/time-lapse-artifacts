@@ -23,7 +23,7 @@ test("unlinked recordings stay in the recording index without manufacturing draw
   const {data,refs,id}=fixture();
   const before=JSON.stringify([data,refs,selected]);
   const works=buildDrawingArchive(data,refs,previews);
-  assert.equal(works.length,435);
+  assert.equal(works.length,436);
   assert.ok(!works.some(w=>w.records.some(r=>r.recordId===id)));
   const index=buildSelectedFrontIndex(selected,data,refs);
   assert.equal(Object.keys(index.byWork).length,435);

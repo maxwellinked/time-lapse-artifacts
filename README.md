@@ -71,11 +71,15 @@ fabricated gallery link. Source metadata and relationship authority remain on
 Hugging Face; this access projection does not change them.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
-filter use one selected-front map: 435 active registered drawings and 1,256 Standard
-recording joins. The current Standard index contains 1,311 recordings at Hugging Face
-revision `08cff299256b152828b69e261ad9d791dbc2376d`. Its 55 unlinked recordings have no assigned
+filter retain the same 435 selected fronts. The current registry has 436 active
+registered drawings and 1,294 Standard recording joins. The Standard index contains
+1,349 recordings at Hugging Face revision
+`44ac0117e9240f2c3f2877d8739abdc159b8370f`. Its 55 unlinked recordings have no assigned
 work IDs or photograph links; they remain available in the recording browser and
-are omitted from registered-drawing grouping. File counts do not establish the
+are omitted from registered-drawing grouping. The 38 newly added original MP4s
+belong to the creator-confirmed work `tlaw-d5e993f2657744f6`, which is explicitly
+unselected in the photograph map. Their confirmed order leaves sequence
+completeness and capture continuity unknown. File counts do not establish the
 number of drawings or complete sessions. The 430 surviving earlier displays retain their exact candidate bytes.
 Five additional displays (51 recording joins) are bounded derivatives of the
 owner-confirmed fronts in the separate Hugging Face master release, at the exact
@@ -85,6 +89,11 @@ embedded image table still covers 431 works. Each selected display is a bounded,
 normalized JPEG. Source photographs, display bytes and work identities remain
 distinct. Historical references retain their own evidence and qualifications
 under Reference details.
+
+Additional reviewed photographs are available in the
+[native Hugging Face folder](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/44ac0117e9240f2c3f2877d8739abdc159b8370f/Physical_References/Reviewed_Photographs/2026-10-31).
+Its independent associations do not replace selected fronts or establish recording
+endpoints. Use a file's download control when it exceeds the Hub preview limit.
 
 The creator confirmed that the July 25 recordings at 10:17 and 19:16 show two
 stages of one physical drawing. Both now join `tlaw-858a03eb138fbf47` and share its
@@ -100,12 +109,12 @@ committed line endings and skip LFS media downloads:
 
 ```console
 GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
-GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 08cff299256b152828b69e261ad9d791dbc2376d 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
-python3 -B tools/refresh-additive-projection.py --source-root /path/to/hf-git --source-revision 08cff299256b152828b69e261ad9d791dbc2376d --browser-root . --browser-base 088d42c6293b056c5bd11941a5eae915bdd11ddf --generated-at 2026-10-30 --expected-additions 6 --expected-real-time-additions 13 --output . --check
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 44ac0117e9240f2c3f2877d8739abdc159b8370f 08cff299256b152828b69e261ad9d791dbc2376d 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
+python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision 44ac0117e9240f2c3f2877d8739abdc159b8370f --browser-root . --generated-at 2026-11-01 --output . --check
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
 
-The current additive check starts from browser baseline
+The retained historical v1 additive check starts from browser baseline
 `088d42c6293b056c5bd11941a5eae915bdd11ddf`. It preserves all 1,305 earlier Standard
 recordings, the corrected lookup and all 49 existing unlinked entries, then adds
 six Standard recordings with empty reference entries. The separate real-time
@@ -113,7 +122,7 @@ index preserves its five earlier rows as exact bytes and adds thirteen MOV rows.
 The earlier two-file restoration at `3a9c13f603f7255a86ddf2e47d403934dbe09f78`
 remains separately pinned. The earlier 47-file release
 at `4f563085afacfc454496ac2d61606614268b2cb8` retains its original publication scope.
-`data/source-refresh.json` records the exact source pin, generation date, prior
+`data/source-refresh.json` records that historical source pin, generation date, prior
 population and byte bindings; its browser baseline is not a commit containing the
 new records. The separate historical check reproduces the original 18 migration
 outputs against the retained browser snapshot, starting from creator-corrected
@@ -125,8 +134,8 @@ local browser files and use only Python's standard library and Git. Partial Git
 clones may fetch missing pinned metadata and LFS pointer objects during a check;
 no media payloads are downloaded. The pinned-input CI job runs the same
 integration checks, plus two unchanged source-ledger path/symlink guard tests on
-Linux. These verify the current additive projection, exact historical migration
-and retained display bytes; they do not reconstruct the original candidate selection or encode JPEGs.
+Linux. These verify the current confirmed-work projection, retained historical
+additive projection, exact migration and retained display bytes; they do not reconstruct the original candidate selection or encode JPEGs.
 Future source or selection publications require explicit review and updates to
 the reproduction pins, preserving the exact comparisons.
 
