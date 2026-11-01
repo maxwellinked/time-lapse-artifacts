@@ -1,15 +1,18 @@
-# Proposed Hugging Face metadata enrichment
+# Published Hugging Face source-filename enrichment
 
-Publication is blocked by Hugging Face HTTP 403 for both direct commit and PR creation. This draft holds review materials; authoritative source publication is still pending. The live dataset, browser data and website remain unchanged.
+Exactly **168 blank original_filename cells** are now filled on the authoritative Hugging Face source. [Source publication](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/commit/b93f2c7b0bc9e7959db0856474e6090cd50661d8) and [native-table publication](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/commit/9bc8132b66e39d74a562eae12a00df98c7a8edfd) are verified.
 
-Exactly **168 blank original_filename cells** can be filled from literal source_filename values in the [frozen public Timing v2 observations](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/fcbe6277ca34c6a5dd4a15d82e4f0654b46ffbee/Standard_Time_Lapses/Provenance/Recording_Timing_v2/observations.json). These are retained local-ingest basenames. They establish no camera-original status or recording clock.
+- [Exact 168 fills](metadata-fills.csv).
+- [Publication receipt and artifact hashes](publication.json).
+- [Published correction and evidence](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/9bc8132b66e39d74a562eae12a00df98c7a8edfd/Standard_Time_Lapses/Provenance/Corrections/2026-11-01-source-filenames).
+- [Archived prepublication review bundle](metadata-enrichment-patch.zip?raw=true), SHA-256 `932b752b96cbae92bf18552afa33601ac0e0de2e07dad1284659811950271543`. It retains its historical preparation status and local native-preview pin; current publication status is recorded above.
 
-- [Review the 168 exact fills](metadata-fills.csv).
-- [Download the complete patch bundle](metadata-enrichment-patch.zip?raw=true): source patch, eight source files, exact correction receipt, validator tests, generated native previews, publication helper and validation logs.
-- Bundle SHA-256: `932b752b96cbae92bf18552afa33601ac0e0de2e07dad1284659811950271543`.
+The names are literal local-ingest basenames from frozen Timing v2 observations. They establish no camera-original status or recording clock. Every other canonical cell, row position, media identity and frozen historical receipt is preserved. Forty-five original filenames and all 37 unknown Standard finish times remain unknown.
 
-The immutable source baseline is `fcbe6277ca34c6a5dd4a15d82e4f0654b46ffbee`. Only the 168 formerly blank filename cells change. Every other canonical cell, row order, media identity and historical receipt is preserved. Forty-five earlier filenames and all 37 unknown Standard finish times remain unknown.
+The native outputs were rebuilt independently on two machines; all five hashes matched. Published downloads matched those hashes. Every cell of the 1,349-row, 36-column canonical table matches the published source under its declared types and null rules.
 
-Validation passed for canonical metadata, timing v1/v2/current, 60 timing tests, native table cells/schema/nulls/order and decode-disabled loading. The browser's 211 tests and site validator passed; all 1,349 exposed records match candidate source values. The full source suite has seven failures and one error from an existing README assertion and unmaterialized Work_Images LFS files; exact names and logs are bundled.
+Canonical metadata and timing v1/v2/current checks, 60 timing tests, native decode-disabled loading, 211 browser tests and site validation passed. The broader source suite retains seven failures and one error from an existing README assertion and unmaterialized Work_Images LFS inputs; exact cases and logs are in the archived bundle.
 
-Native previews use unpublished local candidate revision `d0510b7df4afee331d0b34ff5377d470e7b9cd1a`. The publication helper regenerates them at the actual published source commit and verifies uploaded hashes. It requires repository write access and stops if the authoritative source has advanced.
+All 1,349 exposed browser records still match the source. The browser's current schema omits original_filename, so its index and application are unchanged. The hosted Hugging Face Viewer currently returns HTTP 500, response not ready; direct source and native Parquet files are published and verified.
+
+This review-only GitHub draft is closed because authoritative publication is complete. No browser-main merge is required for these source-only fields.
