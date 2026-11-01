@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-2890eef05c0c-1c1c5a299eac";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-44ac0117e924-d1e044a6d685";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261029-unlinked-recordings";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -110,11 +110,11 @@ function render(works) {
 
 try {
   const [recordData, referenceBytes, previews, evidence] = await Promise.all([
-    loadRecords("data/records.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d"),
-    fetch("data/physical-references.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
-    fetch("reference-previews/manifest.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
+    loadRecords("data/records.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f"),
+    fetch("data/physical-references.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
+    fetch("reference-previews/manifest.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
     (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f", { signal: AbortSignal.timeout(5000) });
       return response.ok ? response.json() : null;
     })().catch(() => null),
   ]);

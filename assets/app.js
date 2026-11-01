@@ -1,8 +1,8 @@
 import { loadSequenceInsertions } from "./sequence-insertions.js?v=20261030-sequence-insertions";
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-2890eef05c0c-1c1c5a299eac";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-44ac0117e924-d1e044a6d685";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
-import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";
+import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261020-public-display-derivatives";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import {
@@ -12,10 +12,10 @@ import {
   sortRecordsForDisplay,
 } from "./record-sequences.js?v=20261030-sequence-insertions";
 
-const DATA_URL = "data/records.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";
+const DATA_URL = "data/records.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
-const REFERENCE_URL = "data/physical-references.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d";
+const REFERENCE_URL = "data/physical-references.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
 let referenceEvidencePromise;
@@ -559,7 +559,7 @@ async function loadReferenceEvidence(lookupSha256) {
   if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=source-refresh-08cff299256b152828b69e261ad9d791dbc2376d", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f", { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Qualified-link evidence unavailable");
       const evidence = await response.json();
       if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {

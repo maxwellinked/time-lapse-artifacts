@@ -24,6 +24,7 @@ jobs:
       - run: python3 -B tools/test-reference-lookup.py
       - run: python3 -B tools/test-media-name-migration.py
       - run: python3 -B tools/test-additive-projection.py
+      - run: python3 -B tools/test-confirmed-work-projection.py
       - run: node tools/validate-image-dedup.mjs
       - run: node tools/validate.mjs
       - name: Validate committed preview pack
@@ -70,7 +71,11 @@ jobs:
       - name: Check accepted source ledger path and symlink guards on Linux
         run: |
           if test -f data/source-refresh.json; then
-            revision="$(node -p 'JSON.parse(require("fs").readFileSync("data/source-refresh.json", "utf8")).sourceRevision')"
+            receipt=data/source-refresh.json
+            if test -f data/confirmed-work-refresh.json; then
+              receipt=data/confirmed-work-refresh.json
+            fi
+            revision="$(node -p 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8")).sourceRevision' "$receipt")"
             test "${#revision}" -eq 40
             case "$revision" in *[!a-f0-9]*) exit 1 ;; esac
             checkdir="$RUNNER_TEMP/accepted-source-wall-clock-tests"

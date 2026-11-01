@@ -62,6 +62,19 @@ class PinnedReproductionTests(unittest.TestCase):
         if not receipt_path.exists():
             self.skipTest("No accepted additive source pin has been applied")
         receipt = json.loads(receipt_path.read_bytes())
+        # A later confirmed-work release has its own bounded source contract.
+        # V1 is still replayed byte-for-byte against its immutable retained
+        # browser state; its historical blank-work guard is never relaxed.
+        confirmed_path = ROOT / "data/confirmed-work-refresh.json"
+        retained_browser = None
+        if confirmed_path.exists():
+            module_spec = importlib.util.spec_from_file_location("confirmed_refresh", ROOT / "tools/refresh-confirmed-work-projection.py")
+            confirmed = importlib.util.module_from_spec(module_spec)
+            module_spec.loader.exec_module(confirmed)
+            confirmed.validate_current_receipt(json.loads(confirmed_path.read_bytes()), ROOT)
+            retained_browser = confirmed.BROWSER_BASE
+            original = subprocess.check_output(["git", "show", retained_browser + ":data/source-refresh.json"], cwd=ROOT)
+            self.assertEqual(receipt_path.read_bytes(), original, "Historical v1 receipt was rewritten")
         source = os.environ.get("HF_SOURCE_ROOT")
         self.assertTrue(source, "Set HF_SOURCE_ROOT to the pinned HF Git checkout")
         spec = importlib.util.spec_from_file_location("additive_refresh", ROOT / "tools/refresh-additive-projection.py")
@@ -69,14 +82,33 @@ class PinnedReproductionTests(unittest.TestCase):
         spec.loader.exec_module(refresh)
         outputs = refresh.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["browserBase"],
                                   receipt["generatedAt"], receipt["addedCount"],
-                                  receipt.get("realTime", {}).get("addedCount"))
+                                  receipt.get("realTime", {}).get("addedCount"), asset_revision=retained_browser)
         # Photo outputs have their own pinned source-registry replay. The fixed
         # reviewed allowlist cannot be enlarged by editing a manifest.
         for path, expected in outputs.items():
             if (ROOT / PHOTO.MANIFEST).exists() and path in PHOTO.PHOTO_OUTPUTS:
                 continue
             with self.subTest(path=path):
-                self.assertEqual((ROOT / path).read_bytes(), expected, "Stale current source projection: " + path)
+                actual = (subprocess.check_output(["git", "show", retained_browser + ":" + path], cwd=ROOT)
+                          if retained_browser else (ROOT / path).read_bytes())
+                self.assertEqual(actual, expected, "Stale retained v1 source projection: " + path)
+
+    def test_current_confirmed_work_outputs_are_exact(self):
+        receipt_path = ROOT / "data/confirmed-work-refresh.json"
+        if not receipt_path.exists():
+            self.skipTest("No confirmed-work source publication has been applied")
+        source = os.environ.get("HF_SOURCE_ROOT")
+        self.assertTrue(source, "Set HF_SOURCE_ROOT to the accepted HF Git object store")
+        spec = importlib.util.spec_from_file_location("confirmed_refresh", ROOT / "tools/refresh-confirmed-work-projection.py")
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        receipt = json.loads(receipt_path.read_bytes())
+        module.validate_current_receipt(receipt, ROOT)
+        outputs = module.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["generatedAt"])
+        self.assertEqual(set(outputs), module.OUTPUTS | {module.CURRENT_RECEIPT})
+        for path, expected in outputs.items():
+            with self.subTest(path=path):
+                self.assertEqual((ROOT / path).read_bytes(), expected, "Stale current confirmed-work projection: " + path)
 
     def test_retained_selections_displays_and_correction_evidence_are_unchanged(self):
         selected = json.loads((ROOT / "data/selected-fronts.json").read_bytes())

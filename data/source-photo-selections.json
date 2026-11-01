@@ -4,11 +4,11 @@
   "selection_role": "selected_front",
   "work_registry": {
     "path": "Work_Identity/works.csv",
-    "sha256": "1e7d157ea2fe219af13e078da0185dedd93c89396304e035b721f6cdee8c87bb"
+    "sha256": "390df7973e2d34149bad831685bba147acfa74dc1e6417837ac0deed1fa25ad0"
   },
   "recording_links": {
     "path": "Work_Identity/work_record_links.csv",
-    "sha256": "2da2626fc573fff46f35b0b04dacb1b7f6f74771af3e38c243caf710a5a1da0b"
+    "sha256": "b27eca36130c98a5264deb81cbb69b040275ef33d1467d461fdb13312c02c452"
   },
   "migration": {
     "path": "Physical_References/Selected_Front_Downloads/selection-migration.json",
@@ -19200,7 +19200,9 @@
       }
     }
   ],
-  "unselected_work_ids": [],
+  "unselected_work_ids": [
+    "tlaw-d5e993f2657744f6"
+  ],
   "work_image_authority": {
     "manifest": {
       "path": "Work_Images/manifest.csv",
