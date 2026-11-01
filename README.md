@@ -192,6 +192,9 @@ views follow the pinned overlay and migration stages above. No export tool uploa
 
 ## Validation
 
+See the [November 1 audit follow-up](AUDIT_FOLLOWUP_2026-11-01.md) for the
+scoped reconciliation of the October 27 photograph-lookup finding.
+
 Run the dependency-free checks before publishing:
 
 ```console
