@@ -93,6 +93,25 @@ class ConfirmedWorkProjectionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'member.*path'):
             self.check()
 
+    def test_appended_metadata_and_links_cannot_reorder_confirmed_capture_sequence(self):
+        for name in ['metadata', 'links']:
+            after = copy.deepcopy(self.after)
+            after[name][-2:] = reversed(after[name][-2:])
+            with self.subTest(registry=name):
+                with self.assertRaisesRegex(ValueError, 'order'):
+                    self.module.validate_release(self.before, after, self.raw, self.identities)
+
+    def test_generated_browser_fetch_urls_use_the_new_source_cache_pin(self):
+        revision = '9' * 40
+        for path in ['assets/app.js', 'assets/drawing-archive.js']:
+            text = (ROOT / path).read_text(encoding='utf-8')
+            generated = self.module.prepare_template(path, text, revision, 'a' * 64)
+            with self.subTest(template=path):
+                for resource in ['data/records.json', 'data/physical-references.json',
+                                 'data/reference-link-evidence.json']:
+                    self.assertIn(resource + '?v=confirmed-work-' + revision, generated)
+                self.assertNotIn('source-refresh-08cff299256b152828b69e261ad9d791dbc2376d', generated)
+
     def test_changed_source_media_hash_or_length_is_rejected(self):
         path = self.after['metadata'][-1]['file_name']
         original = self.identities[path]

@@ -86,6 +86,9 @@ def validate_release(before, after, confirmation_bytes, media_identities):
             'New work creation evidence does not bind the approved confirmation')
     require(set(maps['metadata']) == set(maps['links']) == set(expected),
             'New recording/link membership differs from the exact 38 originals')
+    for name in ['metadata', 'links']:
+        require([r['record_id'] for r in after[name][len(before[name]):]] == list(expected),
+                'Appended ' + name + ' order differs from confirmed capture order')
     for rid, member in expected.items():
         row, link = maps['metadata'][rid], maps['links'][rid]
         require(row['file_name'] == member['file_path'], 'Confirmed member path differs: ' + rid)
@@ -118,6 +121,14 @@ def retain_evidence(evidence, old_lookup, entries, prior_inputs, inputs, lookup,
         sourceInputs={path: dict(**LOOKUP.text_binding(path, inputs[path]), revision=revision)
                       for path in EVIDENCE.SOURCES})
     return result
+
+
+def prepare_template(path, text, revision, lookup_sha256):
+    if path == 'assets/selected-fronts.js':
+        text, count = re.subn(r'(LEGACY_REFERENCE_SHA256 = ")[a-f0-9]{64}(";)',
+            lambda m: m[1] + lookup_sha256 + m[2], text)
+        require(count == 1, 'Historical-reference hash gate missing')
+    return M.migrate_cache_tokens(text, revision).replace('media-names-' + revision, 'confirmed-work-' + revision)
 
 
 def validate_current_receipt(receipt, browser):
@@ -246,11 +257,8 @@ process.stdout.write(buildClarificationPage(x.records,x.refs,x.evidence));"""
         for path in PHOTO.SOURCE_PATHS:
             file = source_files / path; file.parent.mkdir(parents=True, exist_ok=True); file.write_bytes(inputs[path])
         for path in PHOTO.TEMPLATES:
-            text = (browser / path).read_text(encoding='utf-8')
-            if path == 'assets/selected-fronts.js':
-                text, count = re.subn(r'(LEGACY_REFERENCE_SHA256 = ")[a-f0-9]{64}(";)',
-                    lambda m: m[1] + M.digest(outputs['data/physical-references.json']) + m[2], text)
-                require(count == 1, 'Historical-reference hash gate missing')
+            text = prepare_template(path, (browser / path).read_text(encoding='utf-8'), revision,
+                                    M.digest(outputs['data/physical-references.json']))
             file = target / path; file.parent.mkdir(parents=True, exist_ok=True)
             file.write_text(text, encoding='utf-8', newline='\n')
         for selection in old_registry['selections']:
