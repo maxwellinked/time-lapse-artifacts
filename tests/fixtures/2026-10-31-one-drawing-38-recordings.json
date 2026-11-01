@@ -1,0 +1,344 @@
+{
+  "schema_version": "creator_recording_membership_confirmation_v1",
+  "confirmation_recorded_utc": null,
+  "confirmation_recorded_date": "2026-10-31",
+  "confirmation_time_qualification": "Conversation date only; exact owner reply timestamp not established.",
+  "authority": "Tim Maxwell (maxwellinked), creator/owner, in this conversation",
+  "work_id": "tlaw-d5e993f2657744f6",
+  "owner_described_work_count": 1,
+  "creator_statements": [
+    {
+      "subject": "finish",
+      "reply_verbatim": "Confirmed drawing finish: October 31, 2026 at 10:40"
+    },
+    {
+      "subject": "listed filename capture order",
+      "reply_verbatim": "Yes, that is the capture order"
+    },
+    {
+      "subject": "separate descriptively named MP4",
+      "reply_verbatim": "Edited or combined export; keep separate from the 38 originals"
+    },
+    {
+      "subject": "earlier duplication concern",
+      "reply_verbatim": "i see no duplicate video, only possible metadata, which doesnt provide evidence over video"
+    }
+  ],
+  "membership_basis": "Owner described one drawing with 38 recordings and one photograph; all 38 listed original VID files are retained. The two final VID files were specifically confirmed as same drawing with unique video content for each.",
+  "scope": "Positive work membership and listed file order only. No complete-session, gapless-capture, per-file endpoint, filename-timezone or calibrated timing claim.",
+  "finish_date": "2026-10-31",
+  "finish_time": "10:40",
+  "finish_timezone": null,
+  "sequence_completeness": "unknown",
+  "capture_continuity": "unknown",
+  "members": [
+    {
+      "record_id": "tla-795f9203a7081259",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec01.mp4",
+      "source_original_filename": "VID_20261030_033742.mp4",
+      "sha256": "cf9da4490d84f204bf57cb4e892e85715293e7da574f987ff88c0e8ebd59da79",
+      "size_bytes": 484644030,
+      "sequence_position": 1
+    },
+    {
+      "record_id": "tla-eac3d49e60c6dbe9",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec02.mp4",
+      "source_original_filename": "VID_20261030_035405.mp4",
+      "sha256": "b2f3d637093f3902b46710fcefec48008cd766111505d1942c5532681bcec028",
+      "size_bytes": 761825975,
+      "sequence_position": 2
+    },
+    {
+      "record_id": "tla-740dd7c948d9b1ef",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec03.mp4",
+      "source_original_filename": "VID_20261030_051224.mp4",
+      "sha256": "52638b98ac7a2f2733cd89e3c76a54a9ddd1a747518f728d407a04a908c1675d",
+      "size_bytes": 429052734,
+      "sequence_position": 3
+    },
+    {
+      "record_id": "tla-37bc7c4ed1ec87ea",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec04.mp4",
+      "source_original_filename": "VID_20261030_063510.mp4",
+      "sha256": "f19bf3410e01b9b0339dbc21710810c75c849b9e5f58f55dbd5326e06651d717",
+      "size_bytes": 370681683,
+      "sequence_position": 4
+    },
+    {
+      "record_id": "tla-2984be965b28cbda",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec05.mp4",
+      "source_original_filename": "VID_20261030_064932.mp4",
+      "sha256": "f9a87b0c861a6d458c29a0064cb5e13f476e995ba3b7cb4e822615256da65e11",
+      "size_bytes": 368158763,
+      "sequence_position": 5
+    },
+    {
+      "record_id": "tla-f43f562de8d027ed",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec06.mp4",
+      "source_original_filename": "VID_20261030_070231.mp4",
+      "sha256": "d3b709aacd96a4fec13508830cdcd1e5e0a11266148f4207bc6b8e4fb9ada0e8",
+      "size_bytes": 342773869,
+      "sequence_position": 6
+    },
+    {
+      "record_id": "tla-edd1626af894b182",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec07.mp4",
+      "source_original_filename": "VID_20261030_071142.mp4",
+      "sha256": "93c8fb9c56a99f5a657a19607901289bcdd095ae604aef546400653f00e76e3f",
+      "size_bytes": 313341461,
+      "sequence_position": 7
+    },
+    {
+      "record_id": "tla-a4e02d70b52ad726",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec08.mp4",
+      "source_original_filename": "VID_20261030_072145.mp4",
+      "sha256": "45b3ab1f35f05a4dc6de0f70d759d68d719ebeaf39d05241f3883980cebcdb17",
+      "size_bytes": 905685854,
+      "sequence_position": 8
+    },
+    {
+      "record_id": "tla-640e0580b0112de3",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec09.mp4",
+      "source_original_filename": "VID_20261030_082446.mp4",
+      "sha256": "16337930a12849ee7f237a4f321dbd296a3897a8444fa78dced7bcc4385839c1",
+      "size_bytes": 480267621,
+      "sequence_position": 9
+    },
+    {
+      "record_id": "tla-6a3102bc60245d50",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec10.mp4",
+      "source_original_filename": "VID_20261030_083710.mp4",
+      "sha256": "a60455338d618bac386e1eee59545c49888f78014fa56c9c0c8d2e3a2b5b3233",
+      "size_bytes": 242977392,
+      "sequence_position": 10
+    },
+    {
+      "record_id": "tla-98a0865acc4666a3",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec11.mp4",
+      "source_original_filename": "VID_20261030_084940.mp4",
+      "sha256": "3c64d4c0e741a5d32c713ab46275ff0630ed661c638d91fd44de7a68a6d6f511",
+      "size_bytes": 538681219,
+      "sequence_position": 11
+    },
+    {
+      "record_id": "tla-7519977d0db6c308",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec12.mp4",
+      "source_original_filename": "VID_20261030_090600.mp4",
+      "sha256": "87f8c05d787d4676a023e2403898b0ea01c8260fdb65e8f92db5be150db11a7f",
+      "size_bytes": 165940605,
+      "sequence_position": 12
+    },
+    {
+      "record_id": "tla-a36304c7a6001eda",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec13.mp4",
+      "source_original_filename": "VID_20261030_112740.mp4",
+      "sha256": "11e2163da1243495e6e262c284304ca5035e10d912cec66324ef8e78a4ebae1d",
+      "size_bytes": 543954559,
+      "sequence_position": 13
+    },
+    {
+      "record_id": "tla-747a528383b1724a",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec14.mp4",
+      "source_original_filename": "VID_20261030_125115.mp4",
+      "sha256": "add923b827fc4f599b849a579f2f477af30530ac73326b453a715144bf87f488",
+      "size_bytes": 188995969,
+      "sequence_position": 14
+    },
+    {
+      "record_id": "tla-dd447e244e5aa5a4",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec15.mp4",
+      "source_original_filename": "VID_20261030_145713.mp4",
+      "sha256": "88664d656a0d708d295b4cefad32122c6620135cb560e4700c6418f65b91693c",
+      "size_bytes": 244779511,
+      "sequence_position": 15
+    },
+    {
+      "record_id": "tla-f38f86b027363807",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec16.mp4",
+      "source_original_filename": "VID_20261030_150525.mp4",
+      "sha256": "a003e40c1eb08d2964088ff13eb45c82be781e12a365505c25b85e5ae4d02283",
+      "size_bytes": 239379803,
+      "sequence_position": 16
+    },
+    {
+      "record_id": "tla-b521674b626db9b0",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec17.mp4",
+      "source_original_filename": "VID_20261030_151522.mp4",
+      "sha256": "dbdb5d18cd9ea13a3041fa7159b475e2fc57409da1a66ef2442daba912535320",
+      "size_bytes": 725198237,
+      "sequence_position": 17
+    },
+    {
+      "record_id": "tla-3c32c0caf4a7c777",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec18.mp4",
+      "source_original_filename": "VID_20261030_190630.mp4",
+      "sha256": "d6012ffb23ac6c049d2ddeb71473f1825d80973fbda7bce23231edbc71461213",
+      "size_bytes": 265938900,
+      "sequence_position": 18
+    },
+    {
+      "record_id": "tla-e523c92ad4ee332f",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec19.mp4",
+      "source_original_filename": "VID_20261030_191506.mp4",
+      "sha256": "2f4048383b0e7a3d98e8c69060125771b20a4824979ba6d0f22ac14029428417",
+      "size_bytes": 149948272,
+      "sequence_position": 19
+    },
+    {
+      "record_id": "tla-83d4d7908a2d8e80",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec20.mp4",
+      "source_original_filename": "VID_20261030_202850.mp4",
+      "sha256": "c9657de43f9064153694e8b1411e1f22a02bc2a6f3dddb2ff63485e4c2f05a3f",
+      "size_bytes": 224080881,
+      "sequence_position": 20
+    },
+    {
+      "record_id": "tla-e5c3c298c352f296",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec21.mp4",
+      "source_original_filename": "VID_20261030_235025.mp4",
+      "sha256": "2575a891913a5b09815bc85c068243c91ca0ccf31725d0c63256e6fad5215dec",
+      "size_bytes": 196019709,
+      "sequence_position": 21
+    },
+    {
+      "record_id": "tla-e8fa3a3888616943",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec22.mp4",
+      "source_original_filename": "VID_20261030_235602.mp4",
+      "sha256": "84b3b0b86ce76402a2ed42fcb7429c56a0e7655f5333c28527ea5964e3605bc6",
+      "size_bytes": 166829070,
+      "sequence_position": 22
+    },
+    {
+      "record_id": "tla-334d52d4b73b5151",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec23.mp4",
+      "source_original_filename": "VID_20261031_000123.mp4",
+      "sha256": "b8995820ac9979ce2960a6cc3cbc0d6d5f75acae8788ab08158aef4a7fe3785b",
+      "size_bytes": 249405602,
+      "sequence_position": 23
+    },
+    {
+      "record_id": "tla-34e568c0b4443a73",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec24.mp4",
+      "source_original_filename": "VID_20261031_001049.mp4",
+      "sha256": "f784b4ff145123c7627f773ddbe0921670a794865592ec14e0f973b63c036aed",
+      "size_bytes": 216449505,
+      "sequence_position": 24
+    },
+    {
+      "record_id": "tla-e60cb377358cb8d5",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec25.mp4",
+      "source_original_filename": "VID_20261031_001942.mp4",
+      "sha256": "8ff3b88da5e2bf5807dfbfa835b293ed1a79d9c0f9e6b9c5b070f635b0909b3d",
+      "size_bytes": 410099109,
+      "sequence_position": 25
+    },
+    {
+      "record_id": "tla-253cff3e92135599",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec26.mp4",
+      "source_original_filename": "VID_20261031_003302.mp4",
+      "sha256": "312f5f3752025874356f6355df4ce9470628c90475ad62c1cf9963c433c62d21",
+      "size_bytes": 236534338,
+      "sequence_position": 26
+    },
+    {
+      "record_id": "tla-c9e3575e1657f9fe",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec27.mp4",
+      "source_original_filename": "VID_20261031_004352.mp4",
+      "sha256": "f91873ce6f9f7c444932e4a2e825914d884d4bc3a940be60bea9b4ee4e90aa54",
+      "size_bytes": 246168061,
+      "sequence_position": 27
+    },
+    {
+      "record_id": "tla-1ca2b83d9b54d55a",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec28.mp4",
+      "source_original_filename": "VID_20261031_024007.mp4",
+      "sha256": "50d109d4214e6736f6b38afc07a2d565e07f95978ebe79596cfd4d42f984a754",
+      "size_bytes": 191184213,
+      "sequence_position": 28
+    },
+    {
+      "record_id": "tla-181739297f23e9df",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec29.mp4",
+      "source_original_filename": "VID_20261031_081542.mp4",
+      "sha256": "6eba5bc9b872f1242573fdd4c44cbad98097fdfb91f1ed7aa2b3ddb2d81a2aac",
+      "size_bytes": 186451336,
+      "sequence_position": 29
+    },
+    {
+      "record_id": "tla-19e9fadad38a0b5a",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec30.mp4",
+      "source_original_filename": "VID_20261031_082048.mp4",
+      "sha256": "cf3bc1d88d301a3897aa52301a9d406a1357cbba61610c7629348bd48e59e5fb",
+      "size_bytes": 112211216,
+      "sequence_position": 30
+    },
+    {
+      "record_id": "tla-d838fc7198034e51",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec31.mp4",
+      "source_original_filename": "VID_20261031_082902.mp4",
+      "sha256": "31a193bc907120274efa2cecdb517d0474d640b87cf3260cbd6823af4e765da0",
+      "size_bytes": 340469778,
+      "sequence_position": 31
+    },
+    {
+      "record_id": "tla-aaa4c20e5c6d9c23",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec32.mp4",
+      "source_original_filename": "VID_20261031_085901.mp4",
+      "sha256": "8557c87c9ac557afec8ea8c7ae3841d290fa0b6c624b79be8226ed65f2131477",
+      "size_bytes": 191095828,
+      "sequence_position": 32
+    },
+    {
+      "record_id": "tla-75b33f1aa082de29",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec33.mp4",
+      "source_original_filename": "VID_20261031_090810.mp4",
+      "sha256": "df5338ed45d2b400deaef07df2c940c24d728608b43b09436737b8e1aace430e",
+      "size_bytes": 515349658,
+      "sequence_position": 33
+    },
+    {
+      "record_id": "tla-7a0a33accd726e7c",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec34.mp4",
+      "source_original_filename": "VID_20261031_092827.mp4",
+      "sha256": "34c87a741f4662dbc018f5fc5feb02a8b19f0fb6269a9f3760bc0fa759b92ad2",
+      "size_bytes": 214247544,
+      "sequence_position": 34
+    },
+    {
+      "record_id": "tla-0b233acf16436cc4",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec35.mp4",
+      "source_original_filename": "VID_20261031_093813.mp4",
+      "sha256": "f6252c3f0ed7e096664d75b39a20471d6b5ae38bfd9363bc0a5792d18d24961d",
+      "size_bytes": 588441016,
+      "sequence_position": 35
+    },
+    {
+      "record_id": "tla-bdb85295f6d50723",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec36.mp4",
+      "source_original_filename": "VID_20261031_095709.mp4",
+      "sha256": "d0b384e0afe2a135ebd0996decf9d5956d089e4f883fecc6a53c110f1e4f2baf",
+      "size_bytes": 138351826,
+      "sequence_position": 36
+    },
+    {
+      "record_id": "tla-28494b3b4805006f",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec37.mp4",
+      "source_original_filename": "VID_20261031_100459.mp4",
+      "sha256": "5a17b8d68e4ce7aecac4c863ee091b2e3cf978fea0a2c974b6d9246e5bb155a6",
+      "size_bytes": 250829014,
+      "sequence_position": 37
+    },
+    {
+      "record_id": "tla-2fa54dbab1a3a47e",
+      "file_path": "Standard_Time_Lapses/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec38.mp4",
+      "source_original_filename": "VID_20261031_101458.mp4",
+      "sha256": "ab17da4d61674e69883fe1eb24df041bd323c6b3124a7f494992ced94489b48a",
+      "size_bytes": 238157403,
+      "sequence_position": 38
+    }
+  ],
+  "excluded_edited_export_sha256": "0ba3f2ec1be3157f2463442290fbe039d99d4018edddcb9bf236df7d92fac1f4",
+  "photograph_source_sha256": "f719b1ecad6907c3bd9779e7ccb2be79a19d5654a650e3f125e93e42c2631238",
+  "photograph_limit": "Separate physical-state evidence; no recording-endpoint or identical-state claim. Photograph publication handled separately.",
+  "base_hf_revision": "6d5b7b405e488f3b232246057b9529d4b7410f0f"
+}

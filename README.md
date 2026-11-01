@@ -241,6 +241,36 @@ Git history only to reproduce historical rendered index snapshots. Use
 
 ## Refreshing source projections and previews
 
+### Confirmed October 31 work append
+
+The October 31 release uses a separate bounded projection contract for exactly
+38 original recordings and the creator-confirmed work `tlaw-d5e993f2657744f6`.
+Its current accepted source pin is recorded in `data/confirmed-work-refresh.json`
+when applied. `data/records.json` remains the playback source pin, and the
+photograph registry keeps its own explicit source binding.
+
+`data/source-refresh.json` continues to describe the retained historical v1
+release of six unlinked Standard files and thirteen MOV files. It is not the
+current source pin after the confirmed-work release. V1's blank-work restriction
+and exact historical replay remain unchanged. The new check preserves every
+older metadata/work/link row, all 435 photograph selections and display bytes,
+and historical correction evidence. It binds the published creator confirmation,
+all 38 original path/hash/size identities and their positive links, and keeps the
+new work explicitly unselected. It does not inherit a photo or recording endpoint.
+
+After the exact Hugging Face main revision is published and independently checked:
+
+```console
+python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --generated-at YYYY-MM-DD --output .
+python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --generated-at YYYY-MM-DD --output . --check
+python3 -B tools/test-confirmed-work-projection.py
+HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
+```
+
+Generate the ordinary motion previews and recording images before strict site
+validation. This source projection changes no gallery layout or navigation and
+uploads no original MP4, DNG or full-size photograph to GitHub.
+
 ### Coordinated Standard and real-time additions
 
 Use an isolated browser checkout and the reviewed, immutable Hugging Face commit.
