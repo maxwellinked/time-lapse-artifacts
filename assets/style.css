@@ -223,6 +223,10 @@ button {
   object-fit: contain;
 }
 
+.visual-anchors img[src$="/383812a0374f75bfb4c8285b90c64e3cc836a3dbbf47003b14903fa9b34c92be.webp"] {
+  transform: rotate(180deg);
+}
+
 .eyebrow {
   color: var(--accent);
   font-size: 9px;
