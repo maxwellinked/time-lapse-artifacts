@@ -62,9 +62,12 @@ export function buildRealTimePage(payload, recordData, presentation=null) {
     const target = byId.get(r.paired_record_id);
     const related = target ? `<a href="./#record=${escape(target.recordId)}">${escape(target.filename)}</a> <code>${escape(target.recordId)}</code>`
       : r.paired_record_id ? `<code>${escape(r.paired_record_id)}</code> — not included in this Standard browser snapshot` : "No related recording listed in the source index";
+    const player = !presentation ? "" : rotations.has(r.record_id)
+      ? `\n<div class="rt-player" data-source-url="${source(r.file_name,"resolve")}" data-rotation="${rotations.get(r.record_id)}"><button type="button" class="rt-player__activate">Play oriented view</button><a class="rt-player__source" href="${source(r.file_name,"resolve")}">Open original source</a></div>`
+      : '\n<p class="rt-orientation-unreviewed">Viewing orientation has not been reviewed; use the source MOV above.</p>';
     return `<article id="${escape(r.record_id)}">
 <h2>${escape(realTimeDisplayFilename(r))}</h2><p class="record-id"><strong>Real-time</strong> · <code>${escape(r.record_id)}</code></p>
-<p><a href="${source(r.file_name,"resolve")}">Open source MOV (${(Number(r.size_bytes)/1e9).toFixed(2)} GB)</a></p>${presentation?`\n<div class="rt-player" data-source-url="${source(r.file_name,"resolve")}" data-rotation="${rotations.get(r.record_id)}"><button type="button" class="rt-player__activate">Play oriented view</button><a class="rt-player__source" href="${source(r.file_name,"resolve")}">Open original source</a></div>`:""}
+<p><a href="${source(r.file_name,"resolve")}">Open source MOV (${(Number(r.size_bytes)/1e9).toFixed(2)} GB)</a></p>${player}
 <div class="relationship"><h3>Related time-lapse recording</h3><p>${related}</p><p><strong>${escape(realTimeStatusLabel(r.pairing_status))}</strong></p></div>
 <dl class="metadata">
 ${entry("Recording mode","Real-time")}${entry("Encoded video duration",r.duration_seconds+" seconds")}
