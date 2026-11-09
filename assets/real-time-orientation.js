@@ -10,7 +10,9 @@ export function validateRealTimeOrientation(manifest,realTime,recordData){
     REVISION.test(manifest.sourceRevision??"") && manifest.scope==="viewing_only" &&
     manifest.rotationBasis==="clockwise_after_source_display_rotation","manifest scope or source");
   requireOrientation(/^\d{4}-\d{2}-\d{2}$/.test(manifest.reviewedAt??""),"review date");
-  requireOrientation(Array.isArray(manifest.records) && manifest.records.length===realTime.records.length,"complete collection coverage");
+  // Reviewed settings may cover a subset. New sources must remain accessible
+  // without acquiring a guessed rotation or waiting for a visual review.
+  requireOrientation(Array.isArray(manifest.records),"reviewed recording list");
   const rt=new Map(realTime.records.map(r=>[r.record_id,r]));
   const tl=new Map(recordData.records.map(r=>[r.recordId,r]));
   const seen=new Set();

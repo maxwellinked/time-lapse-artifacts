@@ -23,16 +23,32 @@ test("viewing orientation covers all source identities without changing source m
   assert.equal(m.records.filter(r=>r.rotationClockwiseDegrees===90).length,16);
 });
 
-test("viewing orientation rejects incomplete, duplicate, stale or mismatched source bindings",async()=>{
+test("viewing orientation rejects malformed, duplicate, stale or mismatched source bindings",async()=>{
   const {validateRealTimeOrientation}=await import("../assets/real-time-orientation.js");
   for(const change of [
-    m=>m.records.pop(),m=>m.records[1]=structuredClone(m.records[0]),
+    m=>m.records=null,m=>m.records[1]=structuredClone(m.records[0]),m=>m.records[0].recordId="tla-ffffffffffffffff",
     m=>m.records[0].sourceSha256="b".repeat(64),m=>m.records[0].sourcePath=m.records[1].sourcePath,
     m=>m.records[0].pairedRecordId=m.records[2].pairedRecordId,
     m=>m.records[0].pairedSourceXetHash="b".repeat(64),m=>m.records[0].pairedSourcePath="Standard_Time_Lapses/other.mp4",
     m=>m.records[0].rotationClockwiseDegrees=45,m=>m.rotationBasis="raw_encoded_pixels",
     m=>m.scope="source_orientation",m=>m.records[0].samples=[],m=>m.records[0].samples[0].realTimeSeekSeconds=-1,
   ]){const m=fixture();change(m);assert.throws(()=>validateRealTimeOrientation(m,rt,tl),/orientation/i);}
+});
+
+test("a missing orientation review retains source access without guessing a rotation",async()=>{
+  const {buildRealTimePage}=await import("../tools/build-real-time-recordings.mjs");
+  const manifest=fixture(),removed=manifest.records.pop();
+  const html=buildRealTimePage(rt,tl,{manifest,source:{sourceRevision:manifest.sourceRevision}});
+  const article=html.split(`<article id="${removed.recordId}">`)[1].split("</article>")[0];
+  assert.match(article,/Viewing orientation has not been reviewed/);
+  assert.ok(article.includes(`/resolve/${rt.sourceRevision}/${removed.sourcePath}`));
+  assert.doesNotMatch(article,/rt-player|data-rotation/);
+  assert.equal((html.match(/data-rotation="0"/g)||[]).length,2);
+  assert.equal((html.match(/class="rt-player"/g)||[]).length,17);
+  manifest.records=[];
+  const unreviewed=buildRealTimePage(rt,tl,{manifest,source:{sourceRevision:manifest.sourceRevision}});
+  assert.equal((unreviewed.match(/class="rt-orientation-unreviewed"/g)||[]).length,18);
+  assert.doesNotMatch(unreviewed,/class="rt-player"|data-rotation=/);
 });
 
 test("sample PTS stays explicitly unknown when only requested seek positions were retained",async()=>{
@@ -66,4 +82,21 @@ test("oriented viewing is an additive page and preserves the historical metadata
   const {buildRealTimePage}=await import("../tools/build-real-time-recordings.mjs");
   const receipt=JSON.parse(readFileSync(new URL("../data/confirmed-work-refresh.json",import.meta.url)));
   assert.equal(createHash("sha256").update(buildRealTimePage(rt,tl)).digest("hex"),receipt.outputs["real-time-recordings.html"].sha256);
+});
+
+test("new RT recordings remain accessible without waiting for an orientation review",async()=>{
+  const {loadRealTimePresentation,buildRealTimePage}=await import("../tools/build-real-time-recordings.mjs");
+  const next=structuredClone(rt);
+  const added={...next.records[0],record_id:"tla-0000000000000001",
+    file_name:"Real_Time_Recordings/2026-10/test-unreviewed.MOV",original_filename:"test-unreviewed.MOV",
+    sha256:"1".repeat(64),hub_xet_hash:"2".repeat(64)};
+  next.records.push(added);
+  const settings=loadRealTimePresentation(next,tl),html=buildRealTimePage(next,tl,settings);
+  assert.equal((html.match(/<article id=/g)||[]).length,19);
+  assert.equal((html.match(/class="rt-player"/g)||[]).length,18);
+  const addedArticle=html.split(`<article id="${added.record_id}">`)[1].split("</article>")[0];
+  assert.ok(addedArticle.includes(`/resolve/${next.sourceRevision}/${added.file_name}`));
+  assert.match(addedArticle,/Viewing orientation has not been reviewed/);
+  assert.doesNotMatch(addedArticle,/rt-player|data-rotation/);
+  assert.equal(buildRealTimePage(rt,tl,loadRealTimePresentation(rt,tl)),readFileSync(new URL("../real-time-viewing.html",import.meta.url),"utf8"));
 });
