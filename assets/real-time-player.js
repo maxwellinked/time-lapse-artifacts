@@ -88,6 +88,7 @@ function initializePlayer(wrapper) {
     controls.append(play, seekLabel, time, mute, fullscreen);
     wrapper.append(viewport, controls);
     status.textContent = "Loading original source…";
+    const bufferingMessage = "Buffering original source…";
 
     const fit = () => {
       if (!video.videoWidth || !video.videoHeight || !wrapper.clientWidth) return;
@@ -157,7 +158,11 @@ function initializePlayer(wrapper) {
       playingVideo = video;
       update();
     });
-    video.addEventListener("waiting", () => { status.textContent = "Buffering original source…"; });
+    const clearPausedBuffering = () => {
+      if (video.paused && video.readyState >= 2 && !video.error && status.textContent === bufferingMessage) status.textContent = "";
+    };
+    for (const event of ["pause", "seeked", "loadeddata", "canplay"]) video.addEventListener(event, clearPausedBuffering);
+    video.addEventListener("waiting", () => { status.textContent = bufferingMessage; });
     video.addEventListener("playing", () => { status.textContent = ""; });
     video.addEventListener("error", () => fail(video.error?.code === 2 ? "The original source could not be loaded over the network." : "This browser could not play the source format or codec."));
     if (window.ResizeObserver) new window.ResizeObserver(fit).observe(wrapper);

@@ -10,7 +10,7 @@ class Element extends EventTarget {
     Object.assign(this, { tagName, ownerDocument, children: [], dataset: {}, style: {}, attributes: {},
       className: "", textContent: "", hidden: false, disabled: false, clientWidth: 960 });
     if (tagName === "video") Object.assign(this, { paused: true, currentTime: 0, duration: NaN,
-      videoWidth: 0, videoHeight: 0, muted: false, error: null });
+      videoWidth: 0, videoHeight: 0, muted: false, error: null, readyState: 0 });
   }
   append(...children) { this.children.push(...children); }
   setAttribute(name, value) { this.attributes[name] = String(value); }
@@ -179,3 +179,48 @@ test("browser playback denial leaves an explicit retry control available", async
   assert.equal(wrapper.querySelector(".rt-player__play").disabled, false);
   assert.equal(wrapper.querySelector(".rt-player__play").textContent, "Play");
 });
+
+for (const availableEvent of ["pause", "seeked", "loadeddata", "canplay"]) {
+  test(`${availableEvent} clears buffering only after a paused source has a current frame`, () => {
+    const ui = page();
+    initRealTimePlayers(ui.document);
+    const wrapper = ui.wrappers[0];
+    wrapper.querySelector(".rt-player__activate").click();
+    const video = wrapper.querySelector("video");
+    const status = wrapper.querySelector(".rt-player__status");
+    video.readyState = 2;
+    video.dispatchEvent(new Event("waiting"));
+    video.dispatchEvent(new Event(availableEvent));
+    assert.match(status.textContent, /buffering/i);
+    video.readyState = 1;
+    video.pause();
+    video.dispatchEvent(new Event(availableEvent));
+    assert.match(status.textContent, /buffering/i);
+    video.readyState = 2;
+    video.currentTime = 445.9;
+    video.dispatchEvent(new Event(availableEvent));
+    assert.equal(status.textContent, "");
+    assert.equal(video.currentTime, 445.9);
+  });
+}
+
+for (const errorCode of [2, 4]) {
+  test(`frame availability while paused preserves source error ${errorCode}`, () => {
+    const ui = page();
+    initRealTimePlayers(ui.document);
+    const wrapper = ui.wrappers[0];
+    wrapper.querySelector(".rt-player__activate").click();
+    const video = wrapper.querySelector("video");
+    const status = wrapper.querySelector(".rt-player__status");
+    video.dispatchEvent(new Event("waiting"));
+    video.error = { code: errorCode };
+    video.dispatchEvent(new Event("error"));
+    const errorMessage = status.textContent;
+    assert.match(errorMessage, errorCode === 2 ? /network/i : /codec/i);
+    video.readyState = 2;
+    for (const event of ["pause", "seeked", "loadeddata", "canplay"]) {
+      video.dispatchEvent(new Event(event));
+      assert.equal(status.textContent, errorMessage);
+    }
+  });
+}
