@@ -70,6 +70,25 @@ download MOVs. IDs outside the Standard gallery remain visible without a
 fabricated gallery link. Source metadata and relationship authority remain on
 Hugging Face; this access projection does not change them.
 
+The [oriented real-time viewing page](real-time-viewing.html) offers **Play
+oriented view** for all 18 recordings. The metadata-only list and its historical
+reproduction receipts retain their exact original bytes.
+It streams the pinned original only after activation and applies an additional
+viewing rotation after the browser's source-display orientation. The player fits
+the complete frame, retains the different camera angle, and keeps playback
+controls upright. The original-source links remain available for compatible
+players when a browser cannot decode a MOV.
+
+The viewing settings are published on Hugging Face in
+[`Presentation/real-time-orientation.json`](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/ebbcc105735d2f820cfdfa874610f60ecaf80aa6/Presentation/real-time-orientation.json).
+The exact retained copy in `data/real-time-orientation.json` is bound by
+`data/real-time-orientation-source.json` to that independent presentation revision.
+Generation validates full record coverage, source SHA-256, candidate ID, path and
+Xet identity before applying a rotation. New or changed recordings require a
+reviewed source presentation entry; a blanket rotation is not inferred. This
+does not change the Standard browser's source pin, any original metadata value,
+the MOV bytes, or native Hugging Face file-player behavior.
+
 The [drawing photograph view](drawings.html), recording dialog and photograph
 filter retain the same 435 selected fronts. The current registry has 436 active
 registered drawings and 1,294 Standard recording joins. The Standard index contains

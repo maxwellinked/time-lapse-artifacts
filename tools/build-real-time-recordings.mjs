@@ -3,6 +3,7 @@ import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { parseCsv } from "./parse-csv.mjs";
 import { REAL_TIME_REPOSITORY, REAL_TIME_FIELDS, validateRealTimePayload, realTimeSourceUrl, realTimeStatusLabel, realTimeDisplayFilename } from "../assets/real-time-recordings.js";
+import {validateRealTimeOrientation} from "../assets/real-time-orientation.js";
 
 const ROOT = new URL("../", import.meta.url);
 const INPUT_PATHS = ["Real_Time_Recordings/metadata.csv","Real_Time_Recordings/SHA256SUMS","Real_Time_Recordings/README.md","Real_Time_Recordings/SCHEMA.md"];
@@ -37,8 +38,23 @@ export function buildRealTimeProjection(recordData, {manifest, csv, sums}) {
     sourceInputs:manifest.inputs, sourceFields, records}, recordData);
 }
 
-export function buildRealTimePage(payload, recordData) {
+export function validateRealTimePresentation(bytes,source,payload,recordData) {
+  if(source?.sourceRepository!==REAL_TIME_REPOSITORY || !/^[a-f0-9]{40}$/.test(source.sourceRevision??"") ||
+    source.sourcePath!=="Presentation/real-time-orientation.json" || source.sha256!==sha256(bytes) || source.sizeBytes!==bytes.length) {
+    throw new Error("Real-time orientation publication binding mismatch");
+  }
+  return {manifest:validateRealTimeOrientation(JSON.parse(bytes),payload,recordData),source};
+}
+
+export function loadRealTimePresentation(payload,recordData) {
+  return validateRealTimePresentation(readFileSync(new URL("data/real-time-orientation.json",ROOT)),
+    JSON.parse(readFileSync(new URL("data/real-time-orientation-source.json",ROOT))),payload,recordData);
+}
+
+export function buildRealTimePage(payload, recordData, presentation=null) {
   validateRealTimePayload(payload, recordData);
+  if(presentation)validateRealTimeOrientation(presentation.manifest,payload,recordData);
+  const rotations=new Map((presentation?.manifest.records??[]).map(r=>[r.recordId,r.rotationClockwiseDegrees]));
   const revision = payload.sourceRevision, byId = new Map(recordData.records.map(r => [r.recordId,r]));
   const source = (path, view="blob") => escape(realTimeSourceUrl(revision,path,view));
   const entry = (label,value) => `<div><dt>${escape(label)}</dt><dd>${escape(value)}</dd></div>`;
@@ -48,7 +64,7 @@ export function buildRealTimePage(payload, recordData) {
       : r.paired_record_id ? `<code>${escape(r.paired_record_id)}</code> — not included in this Standard browser snapshot` : "No related recording listed in the source index";
     return `<article id="${escape(r.record_id)}">
 <h2>${escape(realTimeDisplayFilename(r))}</h2><p class="record-id"><strong>Real-time</strong> · <code>${escape(r.record_id)}</code></p>
-<p><a href="${source(r.file_name,"resolve")}">Open source MOV (${(Number(r.size_bytes)/1e9).toFixed(2)} GB)</a></p>
+<p><a href="${source(r.file_name,"resolve")}">Open source MOV (${(Number(r.size_bytes)/1e9).toFixed(2)} GB)</a></p>${presentation?`\n<div class="rt-player" data-source-url="${source(r.file_name,"resolve")}" data-rotation="${rotations.get(r.record_id)}"><button type="button" class="rt-player__activate">Play oriented view</button><a class="rt-player__source" href="${source(r.file_name,"resolve")}">Open original source</a></div>`:""}
 <div class="relationship"><h3>Related time-lapse recording</h3><p>${related}</p><p><strong>${escape(realTimeStatusLabel(r.pairing_status))}</strong></p></div>
 <dl class="metadata">
 ${entry("Recording mode","Real-time")}${entry("Encoded video duration",r.duration_seconds+" seconds")}
@@ -66,20 +82,20 @@ ${entry("Video codec",r.video_codec)}${entry("Pixel format",r.pixel_format)}${en
   }).join("\n");
   return `<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Real-time recordings · Time-Lapse Artifacts</title>
+<title>Real-time recordings · Time-Lapse Artifacts</title>${presentation?'\n<link rel="stylesheet" href="assets/real-time-player.css">':""}
 <style>
 :root{color-scheme:light dark;--page:light-dark(#e8e9e7,#111315);--ink:light-dark(#202326,#f0f1ef);--rule:light-dark(#bfc3c6,#363a3e)}
 *{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 system-ui,sans-serif}main{max-width:1000px;margin:auto;padding:28px 20px 70px}h1{font:400 34px/1.2 Georgia,serif}h2{font-size:23px}h3{font-size:16px;margin-bottom:4px}a{color:inherit;text-decoration:underline;text-underline-offset:3px}p,dd,code,a{overflow-wrap:anywhere}code{font-size:13px}.metadata{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px}.metadata div{min-width:0}dt{font-size:13px;opacity:.75}dd{margin:2px 0 0}.notes{white-space:pre-wrap}.relationship{border-left:3px solid var(--rule);padding-left:16px}article{border-top:1px solid var(--rule);padding:20px 0;scroll-margin-top:16px}summary{cursor:pointer;padding:10px 0}:focus-visible{outline:2px solid currentColor;outline-offset:4px}nav ul{padding-left:22px}@media(max-width:600px){.metadata{grid-template-columns:1fr}h1{font-size:29px}}
 </style></head><body><main>
 <a href="./">← Browse time-lapse recordings</a><h1>Real-time recordings</h1>
 <p>${payload.records.length} separately indexed MOV recordings, with their published metadata and candidate time-lapse relationships. Recording mode ${payload.recordingModeBasis === "source_metadata" ? "is read from the pinned source metadata" : "follows the documented collection"}.</p>
-<p>Encoded durations describe the media timeline. Candidate links retain their published status; they do not assign a work identity or a calibrated temporal alignment.</p>
+<p>Encoded durations describe the media timeline. Candidate links retain their published status; they do not assign a work identity or a calibrated temporal alignment.</p>${presentation?`\n<p><strong>Play oriented view</strong> aligns the paper with the listed time-lapse while preserving the different camera angle. Playback streams the original only when you choose Play. Direct source links retain the source presentation. <a href="real-time-recordings.html">Metadata-only recording list</a> · <a href="https://huggingface.co/datasets/${REAL_TIME_REPOSITORY}/blob/${escape(presentation.source.sourceRevision)}/Presentation/real-time-orientation.json">Viewing orientation evidence</a>.</p>`:""}
 <p><a href="data/real-time-recordings.json">Download browser metadata (JSON)</a> · <a href="${source(INPUT_PATHS[0],"resolve")}">Source metadata (CSV)</a> · <a href="${source(INPUT_PATHS[3])}">Field definitions</a></p>
 <nav aria-label="Real-time records"><ul>${payload.records.map(r=>`<li><a href="#${escape(r.record_id)}">${escape(realTimeDisplayFilename(r))}</a></li>`).join("")}</ul></nav>
 ${articles}
 <footer><p>Source snapshot: <a href="https://huggingface.co/datasets/${REAL_TIME_REPOSITORY}/tree/${revision}"><code>${revision}</code></a>. Full source values and the metadata/checksum bindings are retained in the JSON download.</p>
 <p><a href="https://huggingface.co/datasets/${REAL_TIME_REPOSITORY}">Source dataset</a> · <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a> · <a href="./">Recording browser</a></p></footer>
-</main></body></html>\n`;
+</main>${presentation?'<script type="module" src="assets/real-time-player.js"></script>':""}</body></html>\n`;
 }
 
 async function main() {
@@ -101,7 +117,10 @@ async function main() {
   }
   const inputs={manifest:JSON.parse(read("data/real-time-source/manifest.json")),csv:read("data/real-time-source/metadata.csv"),sums:read("data/real-time-source/SHA256SUMS")};
   const projection=buildRealTimeProjection(recordData,inputs);
-  const outputs={"data/real-time-recordings.json":JSON.stringify(projection,null,2)+"\n","real-time-recordings.html":buildRealTimePage(projection,recordData)};
+  const presentation=loadRealTimePresentation(projection,recordData);
+  const outputs={"data/real-time-recordings.json":JSON.stringify(projection,null,2)+"\n",
+    "real-time-recordings.html":buildRealTimePage(projection,recordData),
+    "real-time-viewing.html":buildRealTimePage(projection,recordData,presentation)};
   for(const [path,content] of Object.entries(outputs)) {
     if(process.argv.includes("--check")) {if(read(path).toString("utf8")!==content)throw new Error(`Stale real-time projection: ${path}`);}
     else writeFileSync(new URL(path,ROOT),content);

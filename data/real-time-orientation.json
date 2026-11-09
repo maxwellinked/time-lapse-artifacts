@@ -1,0 +1,417 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "maxwellinked/time-lapse-artifacts",
+  "sourceRevision": "1232661117dd1720b4ead54f41ec9e5d4a5c5e0b",
+  "scope": "viewing_only",
+  "rotationBasis": "clockwise_after_source_display_rotation",
+  "reviewedAt": "2026-11-09",
+  "method": "Bounded decoded-frame comparisons of asymmetric marks and sheet edges. Source display matrices were honored once before choosing the additional display rotation. Sample positions are separate encoded-media locations, not synchronized instants.",
+  "sourceInputs": {
+    "Real_Time_Recordings/metadata.csv": {
+      "sha256": "75798e54b0ccb9918173dd5b61322c43d0536f70cf3f446df025a7dd60a7e9f3",
+      "sizeBytes": 19323
+    },
+    "metadata.csv": {
+      "sha256": "3cbe9190b60cb15ced35ca5f1ffa123a3f4560d8f0b96dc4881b55ead33bce07",
+      "sizeBytes": 1227994
+    }
+  },
+  "records": [
+    {
+      "recordId": "tla-086bbc187b9b862f",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-20.1057.RealTime.Candidate.Rec01.tla-086bbc187b9b862f.Seq0548.c695fe3fc778.MOV",
+      "sourceSha256": "c695fe3fc778f94f52e1d59939d4c870ad0f17989b1deeba280067f08dd07322",
+      "pairedRecordId": "tla-e7dd855a7896d0c9",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-20.1057.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+      "pairedSourceSha256": "f22390a48a95beabd2c7922b313c74ee50fc3d3e62d229ac89aeadcd57ebf514",
+      "pairedSourceXetHash": "974e19c3fa71312569087417b263733b4f6b855cb3c458aa563443879bf9de7d",
+      "rotationClockwiseDegrees": 0,
+      "sourceDisplayRotationDegrees": -90,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 1601.487,
+          "realTimePtsSeconds": 1601.488333,
+          "timeLapseSeekSeconds": 228.778,
+          "timeLapsePtsSeconds": 228.797711
+        }
+      ],
+      "reviewBasis": "The RT and TL already show the large ink fan on the left, small ink panel on the right, blank upper cap, and pencil framework extending downward. Both source display matrices already produce matching portrait presentation."
+    },
+    {
+      "recordId": "tla-5cc8bff9d170577f",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec01.tla-5cc8bff9d170577f.Seq0549.281ac10e7815.MOV",
+      "sourceSha256": "281ac10e7815dae62e1f57a7b34b42fede760f849111ad1e48ebcd29fdb45427",
+      "pairedRecordId": "tla-9d0913586a134a39",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-22.0430.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+      "pairedSourceSha256": "b6ecfbebee9d84a27c8be426533cdb1427041167967a11a6e43032ed96f2a92d",
+      "pairedSourceXetHash": "2aa71ded7229fbde809c60556a3861c36670146b051ace3987101d406997864b",
+      "rotationClockwiseDegrees": 0,
+      "sourceDisplayRotationDegrees": -90,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 2094.434,
+          "realTimePtsSeconds": 2094.448333,
+          "timeLapseSeekSeconds": 299.237,
+          "timeLapsePtsSeconds": 299.263678
+        }
+      ],
+      "reviewBasis": "The RT and TL already show the broad dark left wedge, narrow curved right wedge, blank upper cap, and long pencil framework below the central convergence. Both source display matrices already produce matching portrait presentation."
+    },
+    {
+      "recordId": "tla-910c68c14d743e13",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec02.tla-910c68c14d743e13.Seq0545.d6e7a551d54d.MOV",
+      "sourceSha256": "d6e7a551d54d203fce283d1c0e4e08a08fbc2023cc4098de1b41b714e30423c5",
+      "pairedRecordId": "tla-9b648b2c608eb523",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-22.0430.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec02.mp4",
+      "pairedSourceSha256": "e1685fd1b6af3c7e5993e758a91114f6cbb282451dfb1fc69dc2cfd74294014a",
+      "pairedSourceXetHash": "11095065bfe5411e976d82a82bf4831fc94916af7ac39350e1d64aa0272c0344",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 933.0,
+          "realTimePtsSeconds": 933.013333,
+          "timeLapseSeekSeconds": 133.279,
+          "timeLapsePtsSeconds": 133.298667
+        }
+      ],
+      "reviewBasis": "The RT left blank cap becomes the TL top cap; the broad RT lower ink chamber becomes the TL left chamber and its narrow inner ridge remains on the same side. The RT upper hand position becomes the TL right edge."
+    },
+    {
+      "recordId": "tla-1173f78b2c88e6ca",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec03.tla-1173f78b2c88e6ca.Seq0546.2973d1ab13cf.MOV",
+      "sourceSha256": "2973d1ab13cf114d738e2f1bd918717dbba049f7c326db30527c83196ef8d1a4",
+      "pairedRecordId": "tla-6e997c9a39698d6b",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-22.0430.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03.mp4",
+      "pairedSourceSha256": "c72792e90bdee34ea648a1770cd05e2d3f2cd6d6ae99b3da08ffe68ee62082ee",
+      "pairedSourceXetHash": "3fddf91bfc80dafb2de3bca794285dc56342fa211eb4edc7f6555c63e4d2c89e",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 692.418,
+          "realTimePtsSeconds": 692.418333,
+          "timeLapseSeekSeconds": 98.879,
+          "timeLapsePtsSeconds": 98.899011
+        }
+      ],
+      "reviewBasis": "The RT left blank cap becomes the TL top cap; the two narrow inner ink ridges extending toward RT right become the two downward TL ridges, with the larger dark outer chamber remaining on the TL left."
+    },
+    {
+      "recordId": "tla-32e62eed05b62568",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-22.0430.RealTime.Candidate.Rec05.tla-32e62eed05b62568.Seq0547.7d4cd6668ab3.MOV",
+      "sourceSha256": "7d4cd6668ab3b5d0fa0b8e91bca9b45c73a6cf3a92ae7e27095419c8df577739",
+      "pairedRecordId": "tla-12fb3f2c65d95902",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-22.0430.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec05.mp4",
+      "pairedSourceSha256": "05ffd1baa92d4bd56be6c9830e00d6cbdd38242ad1da2ff82b069c7d0f41c475",
+      "pairedSourceXetHash": "8cc0f895c064dacc36fb91cc1553f1ba1eed084e91c297dba4be3e1f9dc25504",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 780.611,
+          "realTimePtsSeconds": 780.621667,
+          "timeLapseSeekSeconds": 105.839,
+          "timeLapsePtsSeconds": 105.865611
+        }
+      ],
+      "reviewBasis": "The RT left lined cap becomes the TL top lined cap, the asymmetric dark outer chambers become the TL left and right chambers, and the central narrow rays extending right become the downward TL rays."
+    },
+    {
+      "recordId": "tla-a15f3eb2feafaedb",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-29.2234.RealTime.Candidate.Rec05.tla-a15f3eb2feafaedb.Seq0558.a0afb3bc8e6f.MOV",
+      "sourceSha256": "a0afb3bc8e6ff9a63072ead38476b7da03a0fc24cb2f41f00d9945a990e928d1",
+      "pairedRecordId": "tla-8cd5eb5c7bacdaa9",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec05.mp4",
+      "pairedSourceSha256": "2ad3e70b0db7051b7c1079b4d15343c501fe9f000aefb5e8db558c0919ab7f67",
+      "pairedSourceXetHash": "5f18dcb8edb12834ee1e21411ebaa3b4ef9ee3e63c02701fb67265902803665c",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 531.884,
+          "realTimePtsSeconds": 531.895,
+          "timeLapseSeekSeconds": 75.939,
+          "timeLapsePtsSeconds": 75.965911
+        }
+      ],
+      "reviewBasis": "The broad wavy RT left chamber becomes the TL top chamber, the RT lower fan becomes the TL left fan, and the narrow central pencil-only chamber extending RT right becomes the TL bottom chamber."
+    },
+    {
+      "recordId": "tla-592b70857158240f",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-29.2234.RealTime.Candidate.Rec03.tla-592b70857158240f.Seq0559.023b2fded2b8.MOV",
+      "sourceSha256": "023b2fded2b87fe0e701adfb3075130f6363fc8d4d29cd234ffe1a45a4da2212",
+      "pairedRecordId": "tla-b0f113c9af61478f",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec03.mp4",
+      "pairedSourceSha256": "a955bd7afed65176dc790022634473a32a1a72576158e3d6b2401ee72dc6ac02",
+      "pairedSourceXetHash": "81693e143d04b2aaaf62add8958a32ba238d00e5aa02266b3ddbeb4c726c30c5",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 466.814,
+          "realTimePtsSeconds": 466.815,
+          "timeLapseSeekSeconds": 66.639,
+          "timeLapsePtsSeconds": 66.666
+        }
+      ],
+      "reviewBasis": "The broad wavy RT left chamber becomes the TL top chamber, the RT lower fan becomes the TL left fan, and the pencil-only RT right chamber becomes the TL bottom chamber."
+    },
+    {
+      "recordId": "tla-23419acfc6441599",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-29.2234.RealTime.Candidate.Rec01.tla-23419acfc6441599.Seq0568.622abda2034c.MOV",
+      "sourceSha256": "622abda2034ce94566b7da51f1a4ecfbcfacc8339c4b8ef6c8b2fcbe9dc3cefe",
+      "pairedRecordId": "tla-683d766e65b70e83",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec01.mp4",
+      "pairedSourceSha256": "b15ff1b7ec701244eb42992b55063dde07e58cec34a90ab9e561c5ff7ea42894",
+      "pairedSourceXetHash": "315355e7d95e209f17315ad04c3b5f85bd3e32480f32c8f45f3b1fcd756650eb",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 1208.846,
+          "realTimePtsSeconds": 1208.856667,
+          "timeLapseSeekSeconds": 172.618,
+          "timeLapsePtsSeconds": 172.631611
+        }
+      ],
+      "reviewBasis": "The sole broad lined RT lower fan becomes the TL left fan; the rest of the pencil-only framework rotates into the same top/right/bottom locations and the RT upper hand position becomes TL right."
+    },
+    {
+      "recordId": "tla-32721000b10f1f4e",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-29.2234.RealTime.Candidate.Rec02.tla-32721000b10f1f4e.Seq0569.c5ddf2909c18.MOV",
+      "sourceSha256": "c5ddf2909c18868ba667e032e55b53e461f87d82c87e1408d697dac8b903371b",
+      "pairedRecordId": "tla-33e35be7b71f596d",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec02.mp4",
+      "pairedSourceSha256": "60cfa3db2bfd2e837ddee0dbc052b014e18cac3f8e1b4e733ab346a22244b153",
+      "pairedSourceXetHash": "2fdef54589e1b80e1831cc7ed39523d20463222f0c3c729204ba453dce7f70e6",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 501.14,
+          "realTimePtsSeconds": 501.148333,
+          "timeLapseSeekSeconds": 71.539,
+          "timeLapsePtsSeconds": 71.565956
+        }
+      ],
+      "reviewBasis": "The wavy RT left chamber becomes the TL top chamber, the broad RT lower fan becomes the TL left fan, and the blank RT right chamber becomes the TL bottom chamber."
+    },
+    {
+      "recordId": "tla-8d0863e0dae8a213",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-29.2234.RealTime.Candidate.Rec04.tla-8d0863e0dae8a213.Seq0570.2c253e54bec7.MOV",
+      "sourceSha256": "2c253e54bec788a274a15020ed867e29a9d44a692d36227fd90041664f476840",
+      "pairedRecordId": "tla-7adb8c892c296dc1",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec04.mp4",
+      "pairedSourceSha256": "80cac9fe56dcc97abd142e34bffea3597a943c08742db31ac12ee9a1a231283f",
+      "pairedSourceXetHash": "7e280d503a57b78fede88784ac588bc7d444ae11d7b7e5ee47c899a9fe248eb6",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 446.465,
+          "realTimePtsSeconds": 446.471667,
+          "timeLapseSeekSeconds": 63.739,
+          "timeLapsePtsSeconds": 63.766033
+        }
+      ],
+      "reviewBasis": "The RT left wavy chamber becomes the TL top chamber, the broad lower fan becomes TL left, and the pair of inner angled ridges extending RT right become the downward TL ridges beside the blank chamber."
+    },
+    {
+      "recordId": "tla-f9094b489a3f41fa",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec01.tla-f9094b489a3f41fa.Seq0560.af5014057477.MOV",
+      "sourceSha256": "af5014057477b9983be1b61d785fc7db7fb2358c004fb7b839ec68ce2873220a",
+      "pairedRecordId": "tla-e331a337491dcda6",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+      "pairedSourceSha256": "e502028995a3a2aafcbbd938b52071f25ffbe09b2b1e2f93dcfb19c4097dcf3e",
+      "pairedSourceXetHash": "616a1d0a7c6f035641fb6bc35985d3ec5e5d670cf9ba534a514976de0ab5d346",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 538.888,
+          "realTimePtsSeconds": 538.898333,
+          "timeLapseSeekSeconds": 76.959,
+          "timeLapsePtsSeconds": 76.9659
+        }
+      ],
+      "reviewBasis": "The only inked RT lower wedge becomes the TL left wedge, including its dark inner boundary, while the pencil-only RT upper framework becomes the TL right framework and the RT upper hand becomes TL right."
+    },
+    {
+      "recordId": "tla-c24efe35f7cb640d",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec02.tla-c24efe35f7cb640d.Seq0561.3eacd1d49e5a.MOV",
+      "sourceSha256": "3eacd1d49e5a0633e23f1ced482731ca7adc718e407aa7a1304120bbee5e15b4",
+      "pairedRecordId": "tla-e646380c8407b8f4",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec02.mp4",
+      "pairedSourceSha256": "264dfcbfcfd74ad352ccb5d7ef1d3d899a1d0f6b57a1e57f92dad4cc74ea26e7",
+      "pairedSourceXetHash": "65604828e23da5fe239fc522fbba204927b4bec210d6cd9c956b3ec8d58d1fd2",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 376.233,
+          "realTimePtsSeconds": 376.24,
+          "timeLapseSeekSeconds": 53.759,
+          "timeLapsePtsSeconds": 53.766133
+        }
+      ],
+      "reviewBasis": "The broad RT lower fan becomes the TL left fan, the smaller RT upper curved fan becomes the TL right fan, and the pencil-only RT right chamber becomes the TL bottom chamber."
+    },
+    {
+      "recordId": "tla-2746846646d6d8ab",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec03.tla-2746846646d6d8ab.Seq0562.5337013f3d34.MOV",
+      "sourceSha256": "5337013f3d3431734f5229b319b108397c4bcae02afd4211308a2ea1e208829a",
+      "pairedRecordId": "tla-2c306a52343fe829",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03.mp4",
+      "pairedSourceSha256": "ed56f18b607061126d2bf7a3a7211762b8807884e464c6a2c496244220e802e9",
+      "pairedSourceXetHash": "0568b05192568ab9a3345923e2c717504d31314cc12fa2a2416758a8645de6ec",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 63.4875,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 9.07324,
+          "timeLapsePtsSeconds": null
+        },
+        {
+          "realTimeSeekSeconds": 317.4375,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 45.3662,
+          "timeLapsePtsSeconds": null
+        }
+      ],
+      "reviewBasis": "The broad lined wedge at the RT bottom becomes the TL left wedge, the curved upper RT wedge becomes the TL right wedge, and the pencil-only RT right chamber becomes the TL bottom chamber."
+    },
+    {
+      "recordId": "tla-566b8e93ec78679b",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec03a.tla-566b8e93ec78679b.Seq0563.b97a6d3ad544.MOV",
+      "sourceSha256": "b97a6d3ad54489d0bba899c0f4a3898a1faddceca6b59e3cc4f488f93461b24e",
+      "pairedRecordId": "tla-b95b28799a6bedce",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03a.mp4",
+      "pairedSourceSha256": "3f18f8268fd0bb5992f4e314bf5295764caba5365a768d960c23bf471b335b3b",
+      "pairedSourceXetHash": "47cdb1a09220510a74700aec439c1a33dbef93a872bc580939996790ffcf9a67",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 0.191667,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 0.08333,
+          "timeLapsePtsSeconds": null
+        },
+        {
+          "realTimeSeekSeconds": 0.958333,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 0.41665,
+          "timeLapsePtsSeconds": null
+        }
+      ],
+      "reviewBasis": "Both unobstructed samples show the same crossed fan geometry: broad RT bottom fan maps to TL left fan, RT upper fan maps to TL right fan, and RT right pencil-only chamber maps to TL bottom."
+    },
+    {
+      "recordId": "tla-3c6ecc1d47c4a7a7",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec04.tla-3c6ecc1d47c4a7a7.Seq0564.b2aeef418b30.MOV",
+      "sourceSha256": "b2aeef418b3070e3bbb25f6fd291336d9d8a3f3cf768b77a82bd31abd0cc4488",
+      "pairedRecordId": "tla-a3c2dfe3e7b14b01",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec04.mp4",
+      "pairedSourceSha256": "32fe233a445f93fb7359e34bf0cced15be3272b66d8d58978c38466097eb3eb8",
+      "pairedSourceXetHash": "c5a6ff42f34a0517ceb162fea05f5dcc1fa8acb3d7d88899646bf6cf497f46be",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 51.9355,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 7.39659,
+          "timeLapsePtsSeconds": null
+        },
+        {
+          "realTimeSeekSeconds": 259.6775,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 36.98295,
+          "timeLapsePtsSeconds": null
+        }
+      ],
+      "reviewBasis": "The broad RT lower fan and its dark diagonal ridge map to the TL left fan and ridge; RT upper curved fan maps to TL right, with the pencil-only RT right chamber mapping to TL bottom."
+    },
+    {
+      "recordId": "tla-0e577b313aed0860",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec05.tla-0e577b313aed0860.Seq0565.90a5f0e7b6ea.MOV",
+      "sourceSha256": "90a5f0e7b6ea8afbb1338a5f749be6709a9b8c483d685bad75647b04abdab49d",
+      "pairedRecordId": "tla-2ebf06934b96e8dd",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec05.mp4",
+      "pairedSourceSha256": "09236338ba90bac2bf84f5bf69bb1b1c8776a7fc062e4fd0fb99c901c52509da",
+      "pairedSourceXetHash": "b151492916b6d4e66142531f2c9e607b2f629f0f11444f71cbe2a83514034808",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 28.984833,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 4.14329,
+          "timeLapsePtsSeconds": null
+        },
+        {
+          "realTimeSeekSeconds": 144.924167,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 20.71645,
+          "timeLapsePtsSeconds": null
+        }
+      ],
+      "reviewBasis": "The newly lined narrow facet at RT lower-left maps to TL upper-left; the broad RT lower fan maps to TL left, and the unfilled RT right chamber maps to TL bottom."
+    },
+    {
+      "recordId": "tla-c36e2e20b1a3570e",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec06.tla-c36e2e20b1a3570e.Seq0566.1cfd0625c1be.MOV",
+      "sourceSha256": "1cfd0625c1be0cb8bc6991cbdf6aeefd9bc1135378bcc3c72c4375751eb432af",
+      "pairedRecordId": "tla-afcfcaf9ab1b6c16",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec06.mp4",
+      "pairedSourceSha256": "d46cdf94723ffd40758361b4a6a5280a5301ba5412ad546204a2bc13349c2218",
+      "pairedSourceXetHash": "00d4fc1e48cd699495ce5bbd87d101aac653b352eccff9bee0bc065ddf73841a",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 61.014667,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 8.71658,
+          "timeLapsePtsSeconds": null
+        },
+        {
+          "realTimeSeekSeconds": 305.073333,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 43.5829,
+          "timeLapsePtsSeconds": null
+        }
+      ],
+      "reviewBasis": "The feather-like RT left and lower fans map to TL upper and left fans; the emerging inked RT right chamber maps to the TL bottom chamber, matching central junction and line-border directions."
+    },
+    {
+      "recordId": "tla-7ad7844d9549a026",
+      "sourcePath": "Real_Time_Recordings/2026-10/2026-10-27.0100.RealTime.Candidate.Rec07.tla-7ad7844d9549a026.Seq0567.cb43741fad2e.MOV",
+      "sourceSha256": "cb43741fad2e250c4288aef3f637d17ac6514857a2e9abca111f25df6650d2bc",
+      "pairedRecordId": "tla-d9c74b9d57e1c3a7",
+      "pairedSourcePath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec07.mp4",
+      "pairedSourceSha256": "405eb40add982845994b097f6c22a3e784a102201658a2ae2c1a62f2b1332396",
+      "pairedSourceXetHash": "d86f41ad72928db8ee3bb0dbb7a30574c8308ffc5e7e265eb9fff3b9475453e7",
+      "rotationClockwiseDegrees": 90,
+      "sourceDisplayRotationDegrees": 0,
+      "samples": [
+        {
+          "realTimeSeekSeconds": 78.964667,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 11.283219,
+          "timeLapsePtsSeconds": null
+        },
+        {
+          "realTimeSeekSeconds": 394.823333,
+          "realTimePtsSeconds": null,
+          "timeLapseSeekSeconds": 56.416094,
+          "timeLapsePtsSeconds": null
+        }
+      ],
+      "reviewBasis": "The increasingly filled RT right chamber maps to the TL bottom chamber; the broad RT lower fan maps to TL left and upper RT fan maps to TL right, preserving the central four-way junction."
+    }
+  ]
+}
