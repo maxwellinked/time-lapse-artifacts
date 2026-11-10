@@ -25,6 +25,7 @@ jobs:
       - run: python3 -B tools/test-media-name-migration.py
       - run: python3 -B tools/test-additive-projection.py
       - run: python3 -B tools/test-confirmed-work-projection.py
+      - run: python3 -B tools/test-multiple-work-projection.py
       - run: node tools/validate-image-dedup.mjs
       - run: node tools/validate.mjs
       - name: Validate committed preview pack

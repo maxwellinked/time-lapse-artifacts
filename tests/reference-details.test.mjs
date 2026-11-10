@@ -124,8 +124,9 @@ test("unresolved candidates get equal qualified links without a chosen primary",
 
 test("missing photographs are distinguished from an unresolved work identity", async () => {
   const ui = renderer(); await ui.show("tla-7500b249133719dc");
-  assert.equal(ui.elements.referenceRole.textContent, "No published photograph");
+  assert.equal(ui.elements.referenceRole.textContent, "No photograph in this browser view");
   assert.match(ui.elements.referenceStatus.textContent, /established work link/);
+  assert.match(ui.elements.referenceStatus.textContent, /included in this browser view/);
   assert.equal(ui.elements.referenceStage.hidden, true);
   assert.equal(links(ui).length, 0);
   assert.match(referenceExclusion({ workId: null })[0], /Work link unresolved/);
@@ -168,6 +169,6 @@ test("a delayed lookup from a previous record cannot overwrite the current dialo
   const first = ui.show("tla-d9c55c2215a49da7");
   await ui.show("tla-7500b249133719dc");
   finishFirst(lookup); await first;
-  assert.equal(ui.elements.referenceRole.textContent, "No published photograph");
+  assert.equal(ui.elements.referenceRole.textContent, "No photograph in this browser view");
   assert.equal(links(ui).length, 0);
 });

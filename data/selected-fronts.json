@@ -5,13 +5,13 @@
     "photo": "0aa420fb5e3e2690165b783793fb3cfd1a5f55ed",
     "github": "fcfb2d5d28f40400e6d5f34faff8f641925be64b"
   },
-  "selection_map_sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba",
-  "candidate_table_sha256": "efbd6612f0d1242a13b01290806067c5981a156525037bbadb886a34db34da91",
+  "selection_map_sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b",
+  "candidate_table_sha256": "68988203054d824d6a55f6de1de2db50aba910aebb7af8ea8503c3422c9b840d",
   "recording_links": {
     "path": "Work_Identity/work_record_links.csv",
-    "sha256": "b27eca36130c98a5264deb81cbb69b040275ef33d1467d461fdb13312c02c452",
+    "sha256": "89e7c62713fb4f260551bf165047074f7437892db25c03f7b3b274f6394c2d3c",
     "repository": "main",
-    "revision": "44ac0117e9240f2c3f2877d8739abdc159b8370f"
+    "revision": "202226b18431f67f879629d8f49d72883643f810"
   },
   "selections": [
     {
@@ -9151,7 +9151,9 @@
     }
   ],
   "unselected_work_ids": [
-    "tlaw-d5e993f2657744f6"
+    "tlaw-6a4a3ee3fdd84066",
+    "tlaw-d5e993f2657744f6",
+    "tlaw-e5c89a91491998a7"
   ],
   "work_identity_correction": {
     "repository": "maxwellinked/time-lapse-artifacts",
@@ -9245,9 +9247,9 @@
   },
   "selection_registry": {
     "repository": "maxwellinked/time-lapse-artifacts",
-    "revision": "44ac0117e9240f2c3f2877d8739abdc159b8370f",
+    "revision": "202226b18431f67f879629d8f49d72883643f810",
     "path": "Physical_References/Selected_Front_Downloads/selections.json",
-    "sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba"
+    "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b"
   },
   "historical_import": {
     "status": "derived_display_projection",

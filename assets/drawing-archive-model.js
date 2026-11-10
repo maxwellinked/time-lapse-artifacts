@@ -1,4 +1,4 @@
-import { getDisplayReference, describeReferenceLink } from "./reference-policy.js?v=20261020-public-display-derivatives";
+import { getDisplayReference, describeReferenceLink } from "./reference-policy.js?v=20261110-browser-photo-scope";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
 

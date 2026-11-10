@@ -2,65 +2,65 @@
   "contract": "browser_photo_selection_projection_v1",
   "selection_registry": {
     "repository": "maxwellinked/time-lapse-artifacts",
-    "revision": "44ac0117e9240f2c3f2877d8739abdc159b8370f",
+    "revision": "202226b18431f67f879629d8f49d72883643f810",
     "path": "Physical_References/Selected_Front_Downloads/selections.json",
-    "sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba"
+    "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b"
   },
   "preserved_browser_revision": "290880f54e13b1b418321dfea3c9aaaf9f85d6df",
   "preserved_prior_sha256": "e26dc29b4762a8562c47b7aa2cba0ce11ce6c7972b8f2d55d312c77b17397fc8",
   "source_inputs": {
     "Physical_References/Selected_Front_Downloads/selections.json": {
-      "sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba",
-      "size_bytes": 1335832
+      "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b",
+      "size_bytes": 1335890
     },
     "drawing_photographs.parquet": {
-      "sha256": "efbd6612f0d1242a13b01290806067c5981a156525037bbadb886a34db34da91",
-      "size_bytes": 113424544
+      "sha256": "68988203054d824d6a55f6de1de2db50aba910aebb7af8ea8503c3422c9b840d",
+      "size_bytes": 113424945
     },
     "drawing_photographs.manifest.json": {
-      "sha256": "ffdb59d6e5de0a64b0263cee0815a728f7a2c5e825b3f93ecd3788713d86bf8c",
+      "sha256": "9fbacd0de37b3ccee1fcbef13624f483e97affc65b83671a6e53d1e46763b9f5",
       "size_bytes": 974
     },
     "Physical_References/Selected_Front_Downloads/downloads.json": {
-      "sha256": "4a8a8bb56b06cfd99350af836b84f2338f969c87e21fec93d7b3bdafb3d13990",
+      "sha256": "330e9e430b13a879a2677077c50b540886f7733430a0d3aa8a7927dea3776c41",
       "size_bytes": 337408
     }
   },
   "outputs": {
     "assets/app.js": {
-      "sha256": "256040b4c2e4ca9eb709b341f761f9e0268c63a46378fea22a1b47aa2e54ceae",
-      "size_bytes": 44224
+      "sha256": "2c6f8df0ac6a70323db326ad6400c5475057af806923e78acbd58be387872b41",
+      "size_bytes": 44217
     },
     "assets/drawing-archive.js": {
-      "sha256": "7d6a0e887e63159ecc95e4719092e7fc60b7af798422ad406000a2e38627323d",
-      "size_bytes": 8097
+      "sha256": "90fb0090f22711d55a149e5fdac2c96d14eb2d5913e5501796e96aab03aede7f",
+      "size_bytes": 8104
     },
     "assets/photograph-downloads.js": {
-      "sha256": "fccf9a947decf969f2e7afb261a4735c61a8e6f07adeb5c2a97cee22ef211836",
+      "sha256": "b0bb37ea9abe9d121cdf36ddd7c052981505f9c5518236bf2637f95932a210d1",
       "size_bytes": 3992
     },
     "assets/selected-fronts.js": {
-      "sha256": "93911fc3c814a25d0320c8c0ff4f7a02fbbddc22286b31c60220749590968223",
+      "sha256": "b2393d7b0712e961c4fcf6a0d3263035980a932de761b20ad16315159df9dcd1",
       "size_bytes": 5643
     },
     "data/photograph-downloads.json": {
-      "sha256": "2898204036dc5eef3738d2ee3d0d04f56660e60eb18c311d49d6f8b4bcf70cd1",
+      "sha256": "074640cdb11a32e1a0cf735f3329856764bc6fa8851c1a8342275be8c5afb08b",
       "size_bytes": 337468
     },
     "data/selected-fronts.json": {
-      "sha256": "ab5db30b7c0b7061c486d19c736fc007c5d5c51c6b11110a12a7ca6157a1530c",
-      "size_bytes": 643591
+      "sha256": "d44a660e2f671d3f591a2832cf7c19acddc1b5a2ef172aac941645d4c4e2d581",
+      "size_bytes": 643649
     },
     "data/source-photo-selections.json": {
-      "sha256": "d1e044a6d685d10c6a7ccaf9ff68d3a56b518095a56175f104bec6bc2496f7ba",
-      "size_bytes": 1335832
+      "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b",
+      "size_bytes": 1335890
     },
     "drawings.html": {
-      "sha256": "7a8f1966a5efc22ab7939b3ca1771bc241bc5ee8c02a7d0297481e395f6bbbf6",
+      "sha256": "3860d857c62d70e1632c4f8eaa0082b9b3c107c553998beeb008d5e14e831245",
       "size_bytes": 2531
     },
     "index.html": {
-      "sha256": "c20665c314f6a7cbced3312b2971b9647843213808fd353564d3ad0c06bb2b8a",
+      "sha256": "2c2b3cf99e1610359ada3e9b7946b754a9da570a08a713ea198645780e93fe8c",
       "size_bytes": 16963
     }
   },

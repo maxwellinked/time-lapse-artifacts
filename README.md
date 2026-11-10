@@ -71,8 +71,8 @@ fabricated gallery link. Source metadata and relationship authority remain on
 Hugging Face; this access projection does not change them.
 
 The [oriented real-time viewing page](real-time-viewing.html) offers **Play
-oriented view** for all 18 recordings. The metadata-only list and its historical
-reproduction receipts retain their exact original bytes.
+oriented view** for all 18 recordings. Historical reproduction receipts retain
+their original byte bindings; both current pages use the accepted source pin.
 It streams the pinned original only after activation and applies an additional
 viewing rotation after the browser's source-display orientation. The player fits
 the complete frame, retains the different camera angle, and keeps playback
@@ -92,16 +92,19 @@ does not change the Standard browser's source pin, any original metadata value,
 the MOV bytes, or native Hugging Face file-player behavior.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
-filter retain the same 435 selected fronts. The current registry has 436 active
-registered drawings and 1,294 Standard recording joins. The Standard index contains
-1,349 recordings at Hugging Face revision
-`44ac0117e9240f2c3f2877d8739abdc159b8370f`. Its 55 unlinked recordings have no assigned
+filter retain the same 435 selected fronts. The current registry has 438 active
+registered drawings and 1,326 Standard recording joins. The Standard index contains
+1,381 recordings at Hugging Face revision
+`202226b18431f67f879629d8f49d72883643f810`. Its 55 unlinked recordings have no assigned
 work IDs or photograph links; they remain available in the recording browser and
-are omitted from registered-drawing grouping. The 38 newly added original MP4s
-belong to the creator-confirmed work `tlaw-d5e993f2657744f6`, which is explicitly
-unselected in the photograph map. Their confirmed order leaves sequence
-completeness and capture continuity unknown. File counts do not establish the
-number of drawings or complete sessions. The 430 surviving earlier displays retain their exact candidate bytes.
+are omitted from registered-drawing grouping. The November 10 append adds 32
+original MP4s in creator-confirmed groups of 3 and 29, for works
+`tlaw-e5c89a91491998a7` and `tlaw-6a4a3ee3fdd84066`. These two works and the
+October 31 work `tlaw-d5e993f2657744f6` remain explicitly unselected in the
+photograph map. The creator described both new drawings as complete; recording
+coverage and capture continuity remain unknown. Intermediate viewing order
+follows source basenames and does not establish every capture position.
+The 430 surviving earlier displays retain their exact candidate bytes.
 Five additional displays (51 recording joins) are bounded derivatives of the
 owner-confirmed fronts in the separate Hugging Face master release, at the exact
 revision recorded in `data/selected-fronts.json`. The projection records the original
@@ -113,7 +116,9 @@ under Reference details.
 
 Additional reviewed photographs are available in the
 [native Hugging Face folder](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/44ac0117e9240f2c3f2877d8739abdc159b8370f/Physical_References/Reviewed_Photographs/2026-10-31).
-Its independent associations do not replace selected fronts or establish recording
+The [November 10 photograph folder](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/202226b18431f67f879629d8f49d72883643f810/Physical_References/Reviewed_Photographs/2026-11-10/images)
+adds two full-size JPEG access derivatives. These editions' qualified
+associations do not replace selected fronts or establish recording
 endpoints. Use a file's download control when it exceeds the Hub preview limit.
 
 The creator confirmed that the July 25 recordings at 10:17 and 19:16 show two
@@ -130,8 +135,7 @@ committed line endings and skip LFS media downloads:
 
 ```console
 GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
-GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 44ac0117e9240f2c3f2877d8739abdc159b8370f 08cff299256b152828b69e261ad9d791dbc2376d 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
-python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision 44ac0117e9240f2c3f2877d8739abdc159b8370f --browser-root . --generated-at 2026-11-01 --output . --check
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 202226b18431f67f879629d8f49d72883643f810 44ac0117e9240f2c3f2877d8739abdc159b8370f 08cff299256b152828b69e261ad9d791dbc2376d 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
 
@@ -274,29 +278,35 @@ Git history only to reproduce historical rendered index snapshots. Use
 
 ## Refreshing source projections and previews
 
-### Confirmed October 31 work append
+### Confirmed work appends
 
-The October 31 release uses a separate bounded projection contract for exactly
-38 original recordings and the creator-confirmed work `tlaw-d5e993f2657744f6`.
-Its current accepted source pin is recorded in `data/confirmed-work-refresh.json`
-when applied. `data/records.json` remains the playback source pin, and the
+The current bounded projection adds the November 10 release's 32 original
+recordings and two creator-confirmed works. Its exact source confirmation,
+per-work counts, and prior browser commit are recorded in the `appendDefinition`
+of `data/confirmed-work-refresh.json`. The October 31 one-work/38-record contract
+remains independently reproducible from its immutable browser snapshot.
+`data/records.json` remains the playback source pin, and the
 photograph registry keeps its own explicit source binding.
 
 `data/source-refresh.json` continues to describe the retained historical v1
 release of six unlinked Standard files and thirteen MOV files. It is not the
-current source pin after the confirmed-work release. V1's blank-work restriction
-and exact historical replay remain unchanged. The new check preserves every
-older metadata/work/link row, all 435 photograph selections and display bytes,
-and historical correction evidence. It binds the published creator confirmation,
-all 38 original path/hash/size identities and their positive links, and keeps the
-new work explicitly unselected. It does not inherit a photo or recording endpoint.
+current source pin after a confirmed-work release. V1's blank-work restriction
+and exact historical replay remain unchanged. The current check preserves every
+older metadata row against the accepted pre-ingest source baseline, every prior
+work/link row, all 435 photograph selections and display bytes, and historical
+correction evidence. The source baseline separately binds 168 earlier
+`original_filename` enrichments that do not change browser record values.
+Published confirmation bytes bind each new work's exact original path/hash/size
+membership. The three unselected work IDs follow the source's sorted order.
+No photograph is promoted into the selected-front map by this append.
 
 After the exact Hugging Face main revision is published and independently checked:
 
 ```console
-python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --generated-at YYYY-MM-DD --output .
-python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --generated-at YYYY-MM-DD --output . --check
+python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --generated-at YYYY-MM-DD --output . --append-definition /path/to/reviewed-append-definition.json
+python3 -B tools/refresh-confirmed-work-projection.py --source-root /path/to/hf-git --source-revision <accepted-40-character-HF-commit> --browser-root . --generated-at YYYY-MM-DD --output . --append-definition /path/to/reviewed-append-definition.json --check
 python3 -B tools/test-confirmed-work-projection.py
+python3 -B tools/test-multiple-work-projection.py
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
 

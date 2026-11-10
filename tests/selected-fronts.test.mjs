@@ -20,20 +20,41 @@ const app=readFileSync(new URL("../assets/app.js",import.meta.url),"utf8");
 const gallery=readFileSync(new URL("../assets/drawing-archive.js",import.meta.url),"utf8");
 const clone=structuredClone;
 
-test("435 retained fronts and one explicitly unselected work agree with 436 gallery identities",()=>{
+test("435 retained fronts and three explicitly unselected works agree with 438 gallery identities",()=>{
  const before=JSON.stringify(refs);
  const works=buildDrawingArchive(data,refs,read("../reference-previews/manifest.json"));
- assert.equal(works.length,436); assert.equal(Object.keys(index.byRecord).length,1256);
+ assert.equal(works.length,438); assert.equal(Object.keys(index.byRecord).length,1256);
  assert.equal(Object.keys(index.byWork).length,435);
- assert.deepEqual(index.unselectedWorkIds,['tlaw-d5e993f2657744f6']);
+ assert.deepEqual(index.unselectedWorkIds,['tlaw-6a4a3ee3fdd84066','tlaw-d5e993f2657744f6','tlaw-e5c89a91491998a7']);
  assert.deepEqual(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).map(r=>r.recordId).sort(),
    data.records.filter(r=>refs.records[r.recordId].selectionStatus==="missing_work_link" ||
-     refs.records[r.recordId].workId==='tlaw-d5e993f2657744f6').map(r=>r.recordId).sort());
+     index.unselectedWorkIds.includes(refs.records[r.recordId].workId)).map(r=>r.recordId).sort());
  for(const work of works) for(const record of work.records) {
    assert.equal(getSelectedFrontForRecord(index,record.recordId),getSelectedFrontForWork(index,work.workId));
  }
  assert.equal(getSelectedFrontForRecord(index,"unlinked-pre-standard"),null);
  assert.equal(JSON.stringify(refs),before);
+});
+test("the November append preserves separate 3-part and 29-part viewing runs without selecting photographs",()=>{
+ const confirmation=read('./fixtures/2026-11-10-two-drawings-32-recordings.json');
+ const sequences=deriveRecordingSequences(data.records,insertions,data.sourceRevision);
+ const distinctGroups=new Set();
+ for(const group of confirmation.groups) {
+   const members=confirmation.members.filter(r=>r.work_id===group.work_id);
+   const records=data.records.filter(r=>refs.records[r.recordId].workId===group.work_id)
+     .sort((a,b)=>a.rowIndex-b.rowIndex);
+   assert.equal(records.length,group.recording_count);
+   assert.deepEqual(records.map(r=>r.recordId),members.map(r=>r.record_id));
+   const groupIds=new Set(records.map(r=>sequences.get(r.recordId).groupId));
+   assert.equal(groupIds.size,1);assert.notEqual([...groupIds][0],null);
+   distinctGroups.add([...groupIds][0]);
+   records.forEach((record,position)=>{
+     assert.equal(sequences.get(record.recordId).sequenceSize,group.recording_count);
+     assert.equal(sequences.get(record.recordId).sequencePosition,position+1);
+     assert.equal(getSelectedFrontForRecord(index,record.recordId),null);
+   });
+ }
+ assert.equal(distinctGroups.size,2);
 });
 
 test("the confirmed 38-record addition retains one complete browser run without promoting a photograph",()=>{
