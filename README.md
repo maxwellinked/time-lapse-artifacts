@@ -83,9 +83,11 @@ The viewing settings are published on Hugging Face in
 [`Presentation/real-time-orientation.json`](https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/ebbcc105735d2f820cfdfa874610f60ecaf80aa6/Presentation/real-time-orientation.json).
 The exact retained copy in `data/real-time-orientation.json` is bound by
 `data/real-time-orientation-source.json` to that independent presentation revision.
-Generation validates full record coverage, source SHA-256, candidate ID, path and
-Xet identity before applying a rotation. New or changed recordings require a
-reviewed source presentation entry; a blanket rotation is not inferred. This
+Generation validates each reviewed entry's source path and SHA-256, candidate
+ID, path and Xet identity, and review evidence before applying a rotation. New
+recordings can appear without a reviewed entry. Unreviewed MOVs retain their
+original source link and display an unreviewed notice, with no inferred
+rotation or oriented player. This
 does not change the Standard browser's source pin, any original metadata value,
 the MOV bytes, or native Hugging Face file-player behavior.
 
