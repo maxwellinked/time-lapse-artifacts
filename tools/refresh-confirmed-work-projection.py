@@ -1,4 +1,4 @@
-"""Bounded browser verification for the October 31 one-work/38-record release.
+"""Bounded browser verification for explicitly defined confirmed-work appends.
 
 Historical blank-work additive refresh v1 remains a separate unchanged contract.
 This module neither authors source metadata nor assigns work or photo identity.
@@ -56,19 +56,66 @@ def unique(rows, key, label):
     return result
 
 
-def validate_release(before, after, confirmation_bytes, media_identities):
+def validate_definition(value):
+    require(set(value) in ({'schemaVersion', 'browserBase', 'confirmation', 'workCounts'},
+                          {'schemaVersion', 'browserBase', 'confirmation', 'workCounts', 'sourceBaseRevision'})
+            and value['schemaVersion'] == 1
+            and re.fullmatch('[a-f0-9]{40}', value['browserBase']) is not None,
+            'Invalid explicit append definition')
+    if 'sourceBaseRevision' in value:
+        require(re.fullmatch('[a-f0-9]{40}', value['sourceBaseRevision']) is not None,
+                'Invalid explicit source baseline')
+    binding = value['confirmation']
+    require(set(binding) == {'path', 'sha256'}
+            and re.fullmatch(r'Work_Identity/Confirmations/[A-Za-z0-9_.-]+\.json', binding['path']) is not None
+            and re.fullmatch('[a-f0-9]{64}', binding['sha256']) is not None,
+            'Invalid explicit confirmation binding')
+    entries = value['workCounts']
+    require(isinstance(entries, list) and len(entries) > 0
+            and all(set(e) == {'workId', 'count'}
+                    and re.fullmatch('tlaw-[a-f0-9]{16}', e['workId']) is not None
+                    and type(e['count']) is int and e['count'] > 0 for e in entries)
+            and len({e['workId'] for e in entries}) == len(entries),
+            'Invalid explicit work counts')
+    return value
+
+
+def validate_release(before, after, confirmation_bytes, media_identities, *, append_definition=None):
     """Verify published membership without reinterpreting older relationships."""
-    require(hashlib.sha256(confirmation_bytes).hexdigest() == CONFIRMATION_SHA256,
+    definition = validate_definition(append_definition) if append_definition is not None else {
+        'confirmation': {'path': CONFIRMATION_PATH, 'sha256': CONFIRMATION_SHA256},
+        'workCounts': [{'workId': WORK, 'count': 38}]}
+    binding = definition['confirmation']
+    work_ids = [e['workId'] for e in definition['workCounts']]
+    counts = {e['workId']: e['count'] for e in definition['workCounts']}
+    require(hashlib.sha256(confirmation_bytes).hexdigest() == binding['sha256'],
             'Published confirmation hash differs from the approved release')
     confirmation = json.loads(confirmation_bytes)
-    require(confirmation['work_id'] == WORK and confirmation['owner_described_work_count'] == 1,
+    require(confirmation['owner_described_work_count'] == len(work_ids),
             'Published confirmation describes another work')
-    members = confirmation['members']
-    require(len(members) == 38 and [r['sequence_position'] for r in members] == list(range(1, 39)),
-            'Approved membership/order differs')
+    members = copy.deepcopy(confirmation['members'])
+    if append_definition is None:
+        require(confirmation['work_id'] == WORK, 'Published confirmation describes another work')
+        for member in members:
+            member['work_id'] = WORK
+        require(all(re.fullmatch(r'VID_\d{8}_\d{6}\.mp4', r['source_original_filename']) for r in members),
+                'Approved original membership differs')
+    else:
+        groups = confirmation['groups']
+        require([(g['work_id'], g['recording_count']) for g in groups] == list(counts.items()),
+                'Published group membership/count differs')
+    require(len(members) == sum(counts.values())
+            and set(m['work_id'] for m in members) == set(work_ids),
+            'Approved membership count differs')
+    for work in work_ids:
+        group = [m for m in members if m['work_id'] == work]
+        require([m['sequence_position'] for m in group] == list(range(1, counts[work] + 1)),
+                'Approved membership/order differs')
+    require([m['work_id'] for m in members] == [w for w in work_ids for _ in range(counts[w])],
+            'Published work group order differs')
     expected = unique(members, 'record_id', 'confirmed member')
-    require(len({r['file_path'] for r in members}) == 38 and
-            all(re.fullmatch(r'VID_\d{8}_\d{6}\.mp4', r['source_original_filename']) for r in members),
+    require(len({r['file_path'] for r in members}) == len(members) and
+            all(re.fullmatch(r'[^/\\]+\.mp4', r['source_original_filename']) for r in members),
             'Approved original membership differs')
     maps = {}
     for name, key in [('metadata', 'record_id'), ('works', 'work_id'), ('links', 'record_id')]:
@@ -78,21 +125,23 @@ def validate_release(before, after, confirmation_bytes, media_identities):
                 after[name][:len(before[name])] == before[name],
                 'Retained ' + name + ' rows/relationships changed')
         maps[name] = {k: row for k, row in current.items() if k not in old}
-    require(set(maps['works']) == {WORK} and maps['works'][WORK]['status'] == 'active',
-            'Release must add exactly one active confirmed work')
-    evidence = maps['works'][WORK]['creation_evidence']
-    require('confirmation_path=' + CONFIRMATION_PATH in evidence and
-            'confirmation_sha256=' + CONFIRMATION_SHA256 in evidence,
-            'New work creation evidence does not bind the approved confirmation')
+    require(set(maps['works']) == set(work_ids) and
+            all(maps['works'][work]['status'] == 'active' for work in work_ids),
+            'Release must add exactly the defined active confirmed works')
+    for work in work_ids:
+        evidence = maps['works'][work]['creation_evidence']
+        require('confirmation_path=' + binding['path'] in evidence and
+                'confirmation_sha256=' + binding['sha256'] in evidence,
+                'New work creation evidence does not bind the approved confirmation')
     require(set(maps['metadata']) == set(maps['links']) == set(expected),
-            'New recording/link membership differs from the exact 38 originals')
+            'New recording/link membership differs from the exact approved originals')
     for name in ['metadata', 'links']:
         require([r['record_id'] for r in after[name][len(before[name]):]] == list(expected),
-                'Appended ' + name + ' order differs from confirmed capture order')
+                'Appended ' + name + ' order differs from published member order')
     for rid, member in expected.items():
         row, link = maps['metadata'][rid], maps['links'][rid]
         require(row['file_name'] == member['file_path'], 'Confirmed member path differs: ' + rid)
-        require(row['work_id'] == link['work_id'] == WORK and
+        require(row['work_id'] == link['work_id'] == member['work_id'] and
                 link['owner_confirmation_state'] == 'owner_confirmed' and
                 re.fullmatch('[a-f0-9]{40}', link.get('source_hub_revision', '')) is not None,
                 'Invalid positive new link: ' + rid)
@@ -102,11 +151,20 @@ def validate_release(before, after, confirmation_bytes, media_identities):
                 media_identities.get(member['file_path']) == (member['sha256'], member['size_bytes']),
                 'Confirmed media identity differs: ' + rid)
     require(after['selections'] == before['selections'], 'Retained photograph selection changed')
-    require(after['unselected_work_ids'] == before['unselected_work_ids'] + [WORK],
-            'New work must remain explicitly unselected')
+    expected_unselected = before['unselected_work_ids'] + work_ids
+    if append_definition is not None:
+        # The authoritative source's sync_work_population sorts the exact
+        # unselected population; recording/work append order is separate.
+        require(len(set(expected_unselected)) == len(expected_unselected),
+                'Duplicate unselected work identity in append population')
+        expected_unselected = sorted(expected_unselected)
+    require(after['unselected_work_ids'] == expected_unselected,
+            'New works must remain explicitly unselected')
     require(after['photo_manifest_sha256'] == before['photo_manifest_sha256'],
             'Historical photograph manifest changed')
-    return {'work_id': WORK, 'added_count': 38, 'added_records': [r['record_id'] for r in members]}
+    return {'work_id': work_ids[0] if len(work_ids) == 1 else None, 'work_ids': work_ids,
+            'added_count': len(members), 'added_records': [r['record_id'] for r in members],
+            'record_work_ids': {r['record_id']: r['work_id'] for r in members}}
 
 
 def rows(raw):
@@ -131,33 +189,55 @@ def prepare_template(path, text, revision, lookup_sha256):
     return M.migrate_cache_tokens(text, revision).replace('media-names-' + revision, 'confirmed-work-' + revision)
 
 
-def validate_current_receipt(receipt, browser):
-    require(receipt.get('schemaVersion') == 2 and receipt.get('contract') == 'confirmed_work_append_v1'
-            and receipt.get('browserBase') == BROWSER_BASE and receipt.get('workId') == WORK
-            and receipt.get('addedCount') == 38
-            and re.fullmatch('[a-f0-9]{40}', receipt.get('sourceRevision', '')) is not None,
-            'Invalid bounded current source receipt')
-    require(set(receipt['outputs']) == OUTPUTS, 'Current projection output allowlist differs')
-    require(receipt['confirmation']['path'] == CONFIRMATION_PATH
-            and receipt['confirmation']['sha256'] == CONFIRMATION_SHA256,
-            'Current receipt confirmation binding differs')
-    historical = M.git_bytes(browser, BROWSER_BASE, 'data/source-refresh.json')
-    require((browser / 'data/source-refresh.json').read_bytes() == historical
+def validate_current_receipt(receipt, browser, *, asset_revision=None):
+    read = lambda path: (M.git_bytes(browser, asset_revision, path) if asset_revision
+                         else (browser / path).read_bytes())
+    definition = receipt.get('appendDefinition')
+    if definition is None:
+        require(receipt.get('schemaVersion') == 2 and receipt.get('contract') == 'confirmed_work_append_v1'
+                and receipt.get('browserBase') == BROWSER_BASE and receipt.get('workId') == WORK
+                and receipt.get('addedCount') == 38, 'Invalid bounded current source receipt')
+        binding = {'path': CONFIRMATION_PATH, 'sha256': CONFIRMATION_SHA256}
+        base = BROWSER_BASE
+        expected_outputs = OUTPUTS
+    else:
+        validate_definition(definition)
+        base = definition['browserBase']
+        binding = definition['confirmation']
+        require(receipt.get('schemaVersion') == 3 and receipt.get('contract') == 'confirmed_work_append_v2'
+                and receipt.get('browserBase') == base
+                and receipt.get('workIds') == [e['workId'] for e in definition['workCounts']]
+                and receipt.get('addedCount') == sum(e['count'] for e in definition['workCounts']),
+                'Invalid explicit append receipt')
+        historical_confirmed = M.git_bytes(browser, base, CURRENT_RECEIPT)
+        require(receipt.get('priorConfirmedWorkReceiptSha256') == M.digest(historical_confirmed),
+                'Prior confirmed-work receipt binding differs')
+        expected_outputs = OUTPUTS | {'real-time-viewing.html'}
+    require(re.fullmatch('[a-f0-9]{40}', receipt.get('sourceRevision', '')) is not None,
+            'Invalid bounded current source revision')
+    require(set(receipt['outputs']) == expected_outputs, 'Current projection output allowlist differs')
+    require(receipt['confirmation'] == binding, 'Current receipt confirmation binding differs')
+    historical = M.git_bytes(browser, base, 'data/source-refresh.json')
+    require(read('data/source-refresh.json') == historical
             and receipt['historicalAdditiveReceiptSha256'] == M.digest(historical),
             'Historical additive receipt changed')
     for relative, binding in receipt['outputs'].items():
-        raw = (browser / relative).read_bytes()
+        raw = read(relative)
         require(M.digest(raw) == binding['sha256'] and len(raw) == binding['sizeBytes'],
                 'Current projection output identity differs: ' + relative)
     return True
 
 
-def refresh(source, revision, browser, generated_at):
+def refresh(source, revision, browser, generated_at, *, append_definition=None, asset_revision=None):
     """Return exact derived bytes; read only pinned Git objects and prior displays."""
     require(re.fullmatch('[a-f0-9]{40}', revision) is not None
             and re.fullmatch(r'\d{4}-\d{2}-\d{2}', generated_at) is not None,
             'Exact accepted source revision and explicit generation date required')
-    old_bytes = lambda path: M.git_bytes(browser, BROWSER_BASE, path)
+    definition = validate_definition(append_definition) if append_definition is not None else None
+    base = definition['browserBase'] if definition else BROWSER_BASE
+    confirmation_binding = definition['confirmation'] if definition else {
+        'path': CONFIRMATION_PATH, 'sha256': CONFIRMATION_SHA256}
+    old_bytes = lambda path: M.git_bytes(browser, base, path)
     source_bytes = lambda path: M.git_bytes(source, revision, path)
     old_refs = json.loads(old_bytes('data/physical-references.json'))
     old_records = json.loads(old_bytes('data/records.json'))
@@ -173,7 +253,7 @@ def refresh(source, revision, browser, generated_at):
         prior[path] = raw
         if path not in {'metadata.csv', 'Work_Identity/works.csv', 'Work_Identity/work_record_links.csv'}:
             require(raw == inputs[path], 'Historical reference input changed: ' + path)
-    confirmation = source_bytes(CONFIRMATION_PATH)
+    confirmation = source_bytes(confirmation_binding['path'])
     member_list = json.loads(confirmation)['members']
     identities = {m['file_path']: M.object_identity(source_bytes(m['file_path'])) for m in member_list}
     sums = {}
@@ -188,7 +268,29 @@ def refresh(source, revision, browser, generated_at):
             links=rows(values['Work_Identity/work_record_links.csv']), selections=selection['selections'],
             unselected_work_ids=selection.get('unselected_work_ids', []),
             photo_manifest_sha256=M.digest(values[LOOKUP.PHOTO_MANIFEST]))
-    membership = validate_release(authority(prior, old_registry), authority(inputs, registry), confirmation, identities)
+    comparison_prior = dict(prior)
+    metadata_baseline = None
+    if definition and definition.get('sourceBaseRevision'):
+        # A source-only enrichment can precede the browser append. Bind its
+        # exact published baseline; existing projected records must still match
+        # the browser snapshot below, and work/photo premises stay unchanged.
+        baseline_metadata = M.git_bytes(source, definition['sourceBaseRevision'], 'metadata.csv')
+        baseline_rows, browser_rows = rows(baseline_metadata), rows(prior['metadata.csv'])
+        require([r['record_id'] for r in baseline_rows] == [r['record_id'] for r in browser_rows],
+                'Source baseline changes the existing recording population/order')
+        require(subprocess.run(['git', 'merge-base', '--is-ancestor', definition['sourceBaseRevision'], revision],
+                               cwd=source, capture_output=True).returncode == 0,
+                'Source baseline is not an ancestor of the accepted publication')
+        comparison_prior['metadata.csv'] = baseline_metadata
+        changes = [[key for key in old.keys() | new.keys() if old.get(key) != new.get(key)]
+                   for old, new in zip(browser_rows, baseline_rows)]
+        metadata_baseline = dict(revision=definition['sourceBaseRevision'], path='metadata.csv',
+            sha256=M.digest(baseline_metadata), bytes=len(baseline_metadata),
+            previousBrowserInputSha256=M.digest(prior['metadata.csv']),
+            preexistingChangedRows=sum(bool(fields) for fields in changes),
+            preexistingChangedFields=dict(sorted(Counter(key for fields in changes for key in fields).items())))
+    membership = validate_release(authority(comparison_prior, old_registry), authority(inputs, registry), confirmation, identities,
+                                  append_definition=definition)
     records = R.project_records(inputs['metadata.csv'], revision, generated_at)
     old_by_id = {r['recordId']: r for r in old_records['records']}
     current = {r['recordId']: r for r in records['records']}
@@ -205,14 +307,14 @@ def refresh(source, revision, browser, generated_at):
     refs = copy.deepcopy(old_refs)
     # The original verifier checks retained correction receipts, actual photo
     # identities and old positive links. Its blank-new-work guard stays intact:
-    # no additions are passed to it; the separately verified 38 are added below.
+    # no additions are passed to it; separately verified members are added below.
     retained_inputs = dict(inputs)
     for path in ['Work_Identity/works.csv', 'Work_Identity/work_record_links.csv']:
         retained_inputs[path] = prior[path]
     refs['records'], _ = R.retain_corrected_lookup(old_refs, retained_inputs,
         {r['record_id']: r for r in rows(inputs['metadata.csv'])}, set(old_by_id), [], revision, source_bytes)
     for rid in membership['added_records']:
-        refs['records'][rid] = dict(workId=WORK, selectionStatus='missing_public_photo', referenceRole='missing',
+        refs['records'][rid] = dict(workId=membership['record_work_ids'][rid], selectionStatus='missing_public_photo', referenceRole='missing',
             clarification='', referenceCount=0, primaryReferenceCount=0, mainImage=None, additionalReferences=[])
     refs.update(sourceRevision=revision,
         sourceInputs={p: dict(**LOOKUP.text_binding(p, inputs[p]), revision=revision) for p in LOOKUP.SOURCES},
@@ -248,6 +350,19 @@ def refresh(source, revision, browser, generated_at):
                    for name in ['metadata.csv', 'SHA256SUMS', 'manifest.json']}
     rt_outputs, rt_receipt = R.prepare_real_time_refresh(previous_rt, source_bytes, records, 0)
     outputs.update(rt_outputs)
+    if definition:
+        # Existing oriented viewing remains an access derivative, with exactly
+        # the retained orientation evidence and the new source URL pin.
+        rt_bridge = """import {readFileSync} from 'node:fs';
+const {buildRealTimePage,loadRealTimePresentation}=await import(process.argv[2]);
+const x=JSON.parse(readFileSync(process.argv[1],'utf8'));
+process.stdout.write(buildRealTimePage(x.rt,x.records,loadRealTimePresentation(x.rt,x.records)));"""
+        with tempfile.TemporaryDirectory(prefix='confirmed-work-viewing-') as folder:
+            payload = Path(folder) / 'input.json'
+            payload.write_bytes(M.json_bytes(dict(records=records, rt=json.loads(rt_outputs['data/real-time-recordings.json']))))
+            result = subprocess.run([shutil.which('node'), '--input-type=module', '--eval', rt_bridge,
+                str(payload), (ROOT / 'tools/build-real-time-recordings.mjs').as_uri()], capture_output=True, check=True)
+            outputs['real-time-viewing.html'] = result.stdout
     bridge = """import {readFileSync} from 'node:fs';
 const {buildClarificationPage}=await import(process.argv[2]);
 const x=JSON.parse(readFileSync(process.argv[1],'utf8'));
@@ -257,7 +372,9 @@ process.stdout.write(buildClarificationPage(x.records,x.refs,x.evidence));"""
         for path in PHOTO.SOURCE_PATHS:
             file = source_files / path; file.parent.mkdir(parents=True, exist_ok=True); file.write_bytes(inputs[path])
         for path in PHOTO.TEMPLATES:
-            text = prepare_template(path, (browser / path).read_text(encoding='utf-8'), revision,
+            template = (M.git_bytes(browser, asset_revision, path).decode('utf-8') if asset_revision
+                        else (browser / path).read_text(encoding='utf-8'))
+            text = prepare_template(path, template, revision,
                                     M.digest(outputs['data/physical-references.json']))
             file = target / path; file.parent.mkdir(parents=True, exist_ok=True)
             file.write_text(text, encoding='utf-8', newline='\n')
@@ -271,10 +388,21 @@ process.stdout.write(buildClarificationPage(x.records,x.refs,x.evidence));"""
             outputs[path] = (target / path).read_bytes()
         payload = temp / 'clarifications.json'
         payload.write_bytes(M.json_bytes(dict(records=records, refs=refs, evidence=evidence)))
+        generator = ROOT / 'tools/build-photograph-clarifications.mjs'
+        if asset_revision:
+            # Replay historical wording with its exact historical generator and
+            # policy, rather than applying today's display labels retroactively.
+            code = temp / 'historical-code'
+            for path in ('tools/build-photograph-clarifications.mjs', 'assets/reference-policy.js'):
+                file = code / path; file.parent.mkdir(parents=True, exist_ok=True)
+                file.write_bytes(M.git_bytes(browser, asset_revision, path))
+            (code / 'package.json').write_text('{"type":"module"}', encoding='utf-8')
+            generator = code / 'tools/build-photograph-clarifications.mjs'
         result = subprocess.run([shutil.which('node'), '--input-type=module', '--eval', bridge,
-            str(payload), (ROOT / 'tools/build-photograph-clarifications.mjs').as_uri()], capture_output=True, check=True)
+            str(payload), generator.as_uri()], capture_output=True, check=True)
         outputs['photograph-clarifications.html'] = result.stdout
-    require(set(outputs) == OUTPUTS, 'Current projection output allowlist differs')
+    expected_outputs = OUTPUTS | ({'real-time-viewing.html'} if definition else set())
+    require(set(outputs) == expected_outputs, 'Current projection output allowlist differs')
     receipt = dict(schemaVersion=2, contract='confirmed_work_append_v1', sourceRepository=M.REPOSITORY,
         sourceRevision=revision, browserBase=BROWSER_BASE, generatedAt=generated_at, workId=WORK, addedCount=38,
         previousRecords=len(old_by_id), records=len(current), addedRecords=membership['added_records'],
@@ -285,6 +413,14 @@ process.stdout.write(buildClarificationPage(x.records,x.refs,x.evidence));"""
         realTime=rt_receipt,
         sourceInputs={path: dict(sha256=M.digest(raw), bytes=len(raw)) for path, raw in sorted(inputs.items())},
         outputs={path: dict(sha256=M.digest(raw), sizeBytes=len(raw)) for path, raw in sorted(outputs.items())})
+    if definition:
+        receipt.update(schemaVersion=3, contract='confirmed_work_append_v2', browserBase=base,
+            workIds=membership['work_ids'], addedCount=membership['added_count'],
+            confirmation=confirmation_binding, appendDefinition=definition,
+            priorConfirmedWorkReceiptSha256=M.digest(old_bytes(CURRENT_RECEIPT)))
+        if metadata_baseline:
+            receipt['retainedMetadataBaseline'] = metadata_baseline
+        del receipt['workId']
     outputs[CURRENT_RECEIPT] = M.json_bytes(receipt)
     return outputs
 
@@ -297,8 +433,12 @@ if __name__ == '__main__':
     parser.add_argument('--generated-at', required=True)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--check', action='store_true')
+    parser.add_argument('--append-definition', type=Path,
+                        help='Explicit browser baseline, confirmation binding and per-work counts')
     args = parser.parse_args()
-    outputs = refresh(args.source_root, args.source_revision, args.browser_root, args.generated_at)
+    definition = json.loads(args.append_definition.read_bytes()) if args.append_definition else None
+    outputs = refresh(args.source_root, args.source_revision, args.browser_root, args.generated_at,
+                      append_definition=definition)
     for path, raw in outputs.items():
         target = args.output / path
         if args.check:

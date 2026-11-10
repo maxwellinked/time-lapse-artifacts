@@ -23,7 +23,7 @@ test("unlinked recordings stay in the recording index without manufacturing draw
   const {data,refs,id}=fixture();
   const before=JSON.stringify([data,refs,selected]);
   const works=buildDrawingArchive(data,refs,previews);
-  assert.equal(works.length,436);
+  assert.equal(works.length,438);
   assert.ok(!works.some(w=>w.records.some(r=>r.recordId===id)));
   const index=buildSelectedFrontIndex(selected,data,refs);
   assert.equal(Object.keys(index.byWork).length,435);
@@ -52,6 +52,6 @@ test("clarification entries never combine blank work IDs into an asserted drawin
 });
 test("the changed drawing model receives a fresh browser import URL",()=>{
   const gallery=readFileSync(new URL("../assets/drawing-archive.js",import.meta.url),"utf8");
-  assert.ok(gallery.includes('"./drawing-archive-model.js?v=20261029-unlinked-recordings"'));
+  assert.ok(gallery.includes('"./drawing-archive-model.js?v=20261110-browser-photo-scope"'));
   assert.ok(!gallery.includes('"./drawing-archive-model.js?v=20261025-master-fronts"'));
 });

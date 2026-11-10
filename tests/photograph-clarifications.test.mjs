@@ -68,6 +68,20 @@ test("the list rejects mixed snapshots and escapes archive text in recording lin
   assert.ok(html.includes("&lt;img src=x onerror=&quot;alert(1)&quot;&gt;"));
 });
 
+test("missing photographs describe browser coverage without claiming absence from the archive", () => {
+  const before = JSON.stringify(lookup);
+  const html = buildClarificationPage(payload, lookup, evidence);
+  assert.ok(html.includes("No photograph in this browser view"));
+  assert.ok(html.includes("No photograph is included for this work in this browser view."));
+  assert.ok(!html.includes("No photograph is published in this snapshot"));
+  for (const workId of ["tlaw-e5c89a91491998a7", "tlaw-6a4a3ee3fdd84066"]) {
+    const entries = Object.values(lookup.records).filter((entry) => entry.workId === workId);
+    assert.ok(entries.length);
+    assert.ok(entries.every((entry) => entry.mainImage === null && getDisplayReference(entry) === null));
+  }
+  assert.equal(JSON.stringify(lookup), before);
+});
+
 test("search and reason selection compose to locate a drawing or show an honest empty result", () => {
   const html = buildClarificationPage(payload, lookup, evidence);
   assert.ok(html.includes(`<script>${CLARIFICATION_FILTER_SCRIPT}</script>`));

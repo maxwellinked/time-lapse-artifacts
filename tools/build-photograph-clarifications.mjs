@@ -23,7 +23,7 @@ export const QUESTIONS = {
   proposed_match: ["Photograph match needs evidence", "A complete supporting chain for this photograph has not been verified here. Check the existing evidence or identify the exact photograph. Private evidence may exist; this listing does not declare the match false."],
   primary_selection: ["Primary photograph not selected", "Review the published candidates before choosing a primary. No candidate is selected here."],
   missing_work: ["Recording-to-work link unresolved", "Establish which physical drawing this recording belongs to before assigning a photograph."],
-  missing_photo: ["No published photograph", "The work link is established. No photograph is published in this snapshot. A new photograph is optional."],
+  missing_photo: ["No photograph in this browser view", "The work link is established. No photograph is included for this work in this browser view."],
   supplemental_only: ["Supplemental photograph only", "The existing photograph retains its supplemental role. A full-sheet photograph is an optional coverage improvement, not an unresolved work identity."],
 };
 
@@ -111,7 +111,7 @@ article { border-top:1px solid var(--rule); padding:16px 0; scroll-margin-top:16
 <label>Reason<select id="reason"><option value="">All listed entries (${works.length})</option>${Object.entries(QUESTIONS).filter(([key]) => counts[key]).map(([key, [label]]) => `<option value="${key}">${escape(label)} (${counts[key]})</option>`).join("")}</select></label></div>
 <p id="result-count" aria-live="polite">${works.length} entries</p>
 <section aria-label="Drawing and recording reference questions or gaps">${rows}</section>
-<p>Source snapshot: <a href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/${escape(payload.sourceRevision)}"><code>${escape(payload.sourceRevision)}</code></a>. This list describes that snapshot; archive evidence and primary-image rules are unchanged.</p>
+<p>Source snapshot: <a href="https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/tree/${escape(payload.sourceRevision)}"><code>${escape(payload.sourceRevision)}</code></a>. This list describes this browser view of that snapshot; archive evidence and primary-image rules are unchanged.</p>
 </main><script>${CLARIFICATION_FILTER_SCRIPT}</script></body></html>
 `.replace(/[ \t]+$/gm, "");
 }

@@ -1,6 +1,6 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-44ac0117e924-d1e044a6d685";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
-import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261029-unlinked-recordings";
+import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261110-browser-photo-scope";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 
 const summary = document.querySelector("#archive-summary");
@@ -8,7 +8,7 @@ const gallery = document.querySelector("#drawing-grid");
 const pending = document.querySelector("#pending-drawings");
 const search = document.querySelector("#drawing-search");
 const labels = {
-  no_published_photograph: "No linked public photograph",
+  no_published_photograph: "No photograph in this browser view",
   reference_review: "No confirmed primary photograph",
   display_unavailable: "Small photograph preview unavailable",
 };
@@ -110,11 +110,11 @@ function render(works) {
 
 try {
   const [recordData, referenceBytes, previews, evidence] = await Promise.all([
-    loadRecords("data/records.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f"),
-    fetch("data/physical-references.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
-    fetch("reference-previews/manifest.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
+    loadRecords("data/records.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810"),
+    fetch("data/physical-references.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
+    fetch("reference-previews/manifest.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
     (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-44ac0117e9240f2c3f2877d8739abdc159b8370f", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810", { signal: AbortSignal.timeout(5000) });
       return response.ok ? response.json() : null;
     })().catch(() => null),
   ]);

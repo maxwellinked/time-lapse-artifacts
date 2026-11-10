@@ -103,12 +103,26 @@ class PinnedReproductionTests(unittest.TestCase):
         module = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(module)
         receipt = json.loads(receipt_path.read_bytes())
-        module.validate_current_receipt(receipt, ROOT)
-        outputs = module.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["generatedAt"])
-        self.assertEqual(set(outputs), module.OUTPUTS | {module.CURRENT_RECEIPT})
-        for path, expected in outputs.items():
-            with self.subTest(path=path):
-                self.assertEqual((ROOT / path).read_bytes(), expected, "Stale current confirmed-work projection: " + path)
+        asset_revision = None
+        visited = set()
+        while True:
+            module.validate_current_receipt(receipt, ROOT, asset_revision=asset_revision)
+            definition = receipt.get('appendDefinition')
+            outputs = module.refresh(Path(source), receipt["sourceRevision"], ROOT, receipt["generatedAt"],
+                                     append_definition=definition, asset_revision=asset_revision)
+            self.assertEqual(set(outputs), set(receipt['outputs']) | {module.CURRENT_RECEIPT})
+            for path, expected in outputs.items():
+                actual = (subprocess.check_output(['git', 'show', asset_revision + ':' + path], cwd=ROOT)
+                          if asset_revision else (ROOT / path).read_bytes())
+                with self.subTest(path=path, browser_revision=asset_revision):
+                    self.assertEqual(actual, expected, "Stale confirmed-work projection: " + path)
+            if definition is None:
+                break
+            asset_revision = definition['browserBase']
+            self.assertNotIn(asset_revision, visited, 'Cyclic confirmed-work append history')
+            visited.add(asset_revision)
+            receipt = json.loads(subprocess.check_output(
+                ['git', 'show', asset_revision + ':' + module.CURRENT_RECEIPT], cwd=ROOT))
 
     def test_retained_selections_displays_and_correction_evidence_are_unchanged(self):
         selected = json.loads((ROOT / "data/selected-fronts.json").read_bytes())

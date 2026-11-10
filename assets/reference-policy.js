@@ -75,7 +75,7 @@ export function getDisplayReference(entry) {
 // Access to documentation never grants primary-image or filter eligibility.
 export function referenceExclusion(entry) {
   if (!entry?.workId) return ["Work link unresolved", "No established recording-to-work link is available."];
-  if (!entry.referenceCount) return ["No published photograph", "This recording has an established work link, but no photograph is published in this snapshot."];
+  if (!entry.referenceCount) return ["No photograph in this browser view", "This recording has an established work link, but no photograph is included in this browser view."];
   if (entry.selectionStatus === "selection_unresolved") return ["Primary selection unresolved", "Published candidates are available in Reference details. No candidate has been selected as primary."];
   if (entry.mainImage?.view_purpose === "supplemental_documentation") return ["Supplemental documentation only", "The published photograph is designated supplemental documentation, not a primary drawing reference. Its qualified link is in Reference details."];
   if (entry.mainImage?.relationship_status === "proposed") return ["Proposed reference only", "A proposed photograph-to-work link is recorded. It does not qualify as a directly owner-confirmed primary reference. See Reference details for its evidence and source limits."];
