@@ -7,6 +7,7 @@ import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canon
 import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261110-browser-photo-scope";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
+import { nativeInspectionUrl } from "./native-inspection-links.js?v=20261110-native-companions";
 import {
   deriveRecordingSequences,
   extendVisibleCount,
@@ -69,6 +70,7 @@ const elements = {
   dialogHash: document.querySelector("#dialog-hash"),
   dialogSource: document.querySelector("#dialog-source"),
   dialogSourceTop: document.querySelector("#dialog-source-top"),
+  dialogNativeInspection: document.querySelector("#dialog-native-inspection"),
   dialogPreview: document.querySelector(".dialog-preview"),
   loadFullVideo: document.querySelector("#load-full-video"),
   fullVideo: document.querySelector("#full-video"),
@@ -856,6 +858,10 @@ function renderDialog(record) {
   elements.dialogHash.textContent = record.integrityReference;
   elements.dialogSource.href = record.sourceUrl;
   elements.dialogSourceTop.href = record.sourceUrl;
+  const nativeUrl = nativeInspectionUrl(record);
+  elements.dialogNativeInspection.hidden = !nativeUrl;
+  if (nativeUrl) elements.dialogNativeInspection.href = nativeUrl;
+  else elements.dialogNativeInspection.removeAttribute("href");
   const sequence = state.sequenceDetails.get(record.recordId);
   elements.dialogMetadata.replaceChildren(
     ...(sequence?.explicit ? [

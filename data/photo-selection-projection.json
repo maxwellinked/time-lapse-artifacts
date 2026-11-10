@@ -28,8 +28,8 @@
   },
   "outputs": {
     "assets/app.js": {
-      "sha256": "f771245e9afe54924dbc3dfc3ba0485506b863be7a1d1881bcb29c47500cedb5",
-      "size_bytes": 48381
+      "sha256": "edec79fb7fb62d2635f89a6f271ebc643c3f3e17aa82abf35f3e590d7b66746d",
+      "size_bytes": 48792
     },
     "assets/drawing-archive.js": {
       "sha256": "57e733cbbaab3b5b7184b7dd4e5492a2bca116c06aeee71c1b1be79d489b8e75",
@@ -60,8 +60,8 @@
       "size_bytes": 2612
     },
     "index.html": {
-      "sha256": "29ec6cdefb957d9c02dd95c01393ce6d802d518b5afe54977c27859d4912523c",
-      "size_bytes": 16982
+      "sha256": "342a0cd03e06ef4c6441bef046076a44a398b75d14cd0b1793c18b6b528ad0f0",
+      "size_bytes": 17135
     }
   },
   "proof_scope": "JSON regenerated from pinned source and immutable prior metadata; generated constants/cache tags checked using current implementation templates. Source table identity is verified by hash/OID and size; its contents are not decoded by this exporter."

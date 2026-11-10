@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { deriveRecordingSequences, sortRecordsForDisplay, extendVisibleCount } from "../assets/record-sequences.js";
+import { nativeInspectionUrl } from "../assets/native-inspection-links.js";
 const revision = "a".repeat(40);
 const label = "2026-10-25.0938.BallpointPen.Ink.Paper.9x12";
 const suffixes = ["01", "02", "03", "03a", "03b", "04", "05", "06", "07", "08", "09"];
@@ -80,15 +81,17 @@ test("dialog keeps literal filename separate from qualified position and uses th
   const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");
   const source = app.slice(app.indexOf("function renderDialog(record)"), app.indexOf("function openRecord(record"));
   const details = deriveRecordingSequences(records, projection(), revision);
-  const nodes = ["dialogRecordId","dialogAnchor","dialogTitle","dialogFilename","dialogHash","dialogSource","dialogSourceTop","dialogMetadata","previousRecord","nextRecord"];
-  const elements = Object.fromEntries(nodes.map(n=>[n,{dataset:{}, replaceChildren(...rows) {this.rows=rows;}}]));
+  const nodes = ["dialogRecordId","dialogAnchor","dialogTitle","dialogFilename","dialogHash","dialogSource","dialogSourceTop","dialogNativeInspection","dialogMetadata","previousRecord","nextRecord"];
+  const elements = Object.fromEntries(nodes.map(n=>[n,{dataset:{}, removeAttribute(name) {delete this[name];}, replaceChildren(...rows) {this.rows=rows;}}]));
   const state = {filtered: records.slice(2,6), sequenceDetails: details, ready: true};
-  const api = runInNewContext(source + "\n({renderDialog})", {state,elements,metadataRow:(name,value)=>({name,value}),formatDate:String,formatTime:String,humanizeToken:String,formatDimensions:String,formatDuration:String,relatedRecordings:{open(){}},resetDialogVideo(){},preparePreview(){},renderReference(){}});
+  const api = runInNewContext(source + "\n({renderDialog})", {state,elements,nativeInspectionUrl,metadataRow:(name,value)=>({name,value}),formatDate:String,formatTime:String,humanizeToken:String,formatDimensions:String,formatDuration:String,relatedRecordings:{open(){}},resetDialogVideo(){},preparePreview(){},renderReference(){}});
   api.renderDialog(records[3]);
   assert.equal(elements.dialogFilename.textContent, `${label}.Rec03a.mp4`);
   assert.ok(elements.dialogMetadata.rows.some(r=>r.name === "Recording sequence" && /Position 4 of 11.*inferred.*unknown/.test(r.value)));
   assert.ok(elements.dialogMetadata.rows.some(r=>/Gapless capture/.test(r.name) && /not established/i.test(r.value)));
   assert.equal(elements.previousRecord.dataset.index,"0"); assert.equal(elements.nextRecord.dataset.index,"2");
+  assert.equal(elements.dialogNativeInspection.hidden,true);
+  assert.equal(elements.dialogNativeInspection.href,undefined);
 });
 test("gallery cards expose the explicit position in visible and accessible labels without rewriting filenames", () => {
   const app = readFileSync(new URL("../assets/app.js", import.meta.url), "utf8");

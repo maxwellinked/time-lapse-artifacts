@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Time-Lapse Artifacts · Native frame companions</title>
+  <link rel="stylesheet" href="native.css">
+  <script type="module" src="native-app.js?v=20261110-native-companions"></script>
+</head>
+<body>
+  <header class="page-header">
+    <p class="eyebrow">TIME-LAPSE ARTIFACTS / NATIVE FRAME COMPANIONS</p>
+    <h1>Follow the recording. Inspect the detail.</h1>
+    <p class="intro">Two recordings, 21 uniform positions each. Full uncropped native frames with their source and provenance.</p>
+    <nav aria-label="Archive views"><a href="../">Recording browser</a><a href="./">Nine-record inspection pilot</a></nav>
+  </header>
+  <main>
+    <aside aria-label="Companion recordings">
+      <h2>Choose a recording</h2>
+      <p class="muted">This is a bounded access pack, not a representative sample.</p>
+      <div id="native-records"></div>
+      <p class="boundary">Positions describe encoded video. They do not measure drawing time or establish complete capture.</p>
+      <p class="muted">These native targets span the first to last packet timestamp. The earlier JPEG profile uses duration targets; equal position labels may select different frames.</p>
+      <p><a id="native-pack-link" target="_blank" rel="noopener" hidden>Published pack and reproduction</a></p>
+    </aside>
+    <section class="workspace" aria-label="Native frame inspection">
+      <p id="native-status" role="status" aria-live="polite">Loading the published companion index…</p>
+      <div id="native-workspace" hidden>
+        <div class="record-heading"><p id="native-tier" class="eyebrow"></p><h2 id="native-record-id"></h2><p id="native-filename" class="filename"></p><p id="native-work-state" class="muted"></p><a id="native-overview-link" hidden>Back to this recording’s overview</a></div>
+        <div id="native-strip" aria-label="21 uniform native frame positions"></div>
+        <div class="toolbar"><button id="native-previous" type="button">← Previous</button><button id="native-next" type="button">Next →</button><span class="spacer"></span><button id="native-fit" type="button" aria-pressed="true">Fit frame</button><button id="native-pixels" type="button" aria-pressed="false">Native pixels</button><button id="native-retry" type="button" hidden>Retry selected frame</button></div>
+        <div class="caption"><strong id="native-sample-title"></strong><span id="native-sample-time"></span></div>
+        <div id="native-viewport" aria-busy="false"><img id="native-image" alt="Selected full uncropped native frame" hidden></div>
+        <p id="native-resolution" class="muted"></p>
+        <nav class="actions" aria-label="Selected frame and recording links"><a id="native-png" target="_blank" rel="noopener">Open full-resolution PNG</a><a id="native-proxy" target="_blank" rel="noopener">Open silent access proxy</a><a id="native-source" target="_blank" rel="noopener">Pinned source file</a></nav>
+        <section class="provenance" aria-labelledby="native-provenance-title"><h3 id="native-provenance-title">Provenance for this frame</h3><nav class="actions"><a id="native-manifest" target="_blank" rel="noopener">Native pack manifest</a><a id="native-access-manifest" target="_blank" rel="noopener">Recording access manifest</a></nav><dl id="native-evidence"></dl></section>
+      </div>
+    </section>
+  </main>
+  <footer>Media: Tim Maxwell / maxwellinked · <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0 within the source rights scope</a><br>Source media and published manifests remain authoritative. Viewing size does not change the PNG pixels.</footer>
+</body>
+</html>
