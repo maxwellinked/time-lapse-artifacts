@@ -1,0 +1,42 @@
+{
+  "sourceRepository": "maxwellinked/time-lapse-artifacts",
+  "sourceRevision": "202226b18431f67f879629d8f49d72883643f810",
+  "inputs": [
+    {
+      "path": "Image_Source_Masters/v1/Receipts/relationships.json",
+      "retainedPath": "data/candidate-photo-source/relationships.json",
+      "sizeBytes": 1004,
+      "sha256": "04014df5ee47c075fd67605dd8c08f64813cab1ed66e0aa0a2728a8fe2fb3630"
+    },
+    {
+      "path": "Image_Source_Masters/v1/Receipts/ingest-authority.json",
+      "retainedPath": "data/candidate-photo-source/ingest-authority.json",
+      "sizeBytes": 1958,
+      "sha256": "dce9a4098ec9c2f088e52be5f2a026580574e5b1c109a4e4ec84244bc47cf69b"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-30/cohort.json",
+      "retainedPath": "data/candidate-photo-source/cohort.json",
+      "sizeBytes": 22602,
+      "sha256": "664f18bfe19929da41e65422f650b3d6939174456555ca19d801a6090d24a39c"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-29/owner_confirmation.json",
+      "retainedPath": "data/candidate-photo-source/owner-confirmation.json",
+      "sizeBytes": 7398,
+      "sha256": "48de5ea28c8b3a6b03944b157f47c97f244105fcc7be42784067db86cf892514"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-29/ingest_mapping.json",
+      "retainedPath": "data/candidate-photo-source/ingest-mapping.json",
+      "sizeBytes": 27884,
+      "sha256": "60386bb4082df47edd3448b5604399a8e6bb8b1320df753ab62af4c40263e6bb"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-29/source_dispositions.json",
+      "retainedPath": "data/candidate-photo-source/source-dispositions.json",
+      "sizeBytes": 87241,
+      "sha256": "411041c46e3eac0fd52f29c026f6d7230b3069a9b61659703be04f7d352b8700"
+    }
+  ]
+}

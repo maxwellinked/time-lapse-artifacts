@@ -1,0 +1,24 @@
+{
+  "schema_version": "image-source-master-relationships/v1",
+  "scope": "study_set_static_reference_candidate_only",
+  "objects": [
+    {
+      "asset_id": "imsrc:sha256:664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9",
+      "sha256": "664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9",
+      "study_set_id": "reference_9x12",
+      "relationship_status": "candidate_same_drawing"
+    },
+    {
+      "asset_id": "imsrc:sha256:7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612",
+      "sha256": "7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612",
+      "study_set_id": "comparison_11x14",
+      "relationship_status": "candidate_same_drawing"
+    }
+  ],
+  "work_identity_established": false,
+  "endpoint_established": false,
+  "final_state_established": false,
+  "calibrated_registration_established": false,
+  "basis": "prepared scoped static-image candidate review with owner-confirmed group context",
+  "investigation_status": "open"
+}

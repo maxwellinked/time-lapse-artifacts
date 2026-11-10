@@ -18,6 +18,15 @@ assert a shared work, session, or completion state.
 
 Public URL: <https://maxwellinked.github.io/time-lapse-artifacts/>
 
+The recording dialog and drawing gallery also expose the published October 31,
+November 1 and November 10 work-reference photographs beside their 70 recordings.
+They retain their source association details and full-size JPEG links without
+changing the 435 selected fronts. Reproduce this access map with
+`python tools/build-reviewed-photographs.py --check`; see
+[the photograph policy](REFERENCE_POLICY.md#published-work-references).
+Thirteen further recordings expose existing candidate DNG downloads with their
+provisional associations; they remain outside the displayed-photograph filter.
+
 ## Source authority
 
 **Hugging Face owns the data and metadata. GitHub consumes and presents them.**

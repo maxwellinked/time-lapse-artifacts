@@ -1,4 +1,4 @@
-import { loadPhotographDownloads } from "./photograph-downloads.js?v=photo-selections-202226b18431-90bded9bcd98";
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access";
 import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
 // Current source-registry projection; historical candidate evidence retains its original pins.
 export const SELECTED_FRONTS_SHA256 = "d44a660e2f671d3f591a2832cf7c19acddc1b5a2ef172aac941645d4c4e2d581";

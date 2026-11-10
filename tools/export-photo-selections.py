@@ -99,7 +99,7 @@ def export(source,destination,revision,prior_bytes):
  code,count=re.subn(r'(export const PHOTOGRAPH_DOWNLOADS_SHA256 = ")[a-f0-9]+(";)',lambda m:m[1]+digest(destination/'data/photograph-downloads.json')+m[2],code)
  require(count==1,'Missing download constant')
  path.write_text(code,encoding='utf-8',newline='\n')
- tag='photo-selections-'+revision[:12]+'-'+registry_sha[:12]
+ tag='photo-selections-'+revision[:12]+'-'+registry_sha[:12]+'-reviewed-access'
  for relative in TEMPLATES:
   path=destination/relative;original=path.read_text(encoding='utf-8')
   changed=re.sub(r'((?:selected-fronts|photograph-downloads|app|drawing-archive)\.js)\?v=[A-Za-z0-9_-]+',lambda m:m[1]+'?v='+tag,original)

@@ -28,20 +28,20 @@
   },
   "outputs": {
     "assets/app.js": {
-      "sha256": "2c6f8df0ac6a70323db326ad6400c5475057af806923e78acbd58be387872b41",
-      "size_bytes": 44217
+      "sha256": "f771245e9afe54924dbc3dfc3ba0485506b863be7a1d1881bcb29c47500cedb5",
+      "size_bytes": 48381
     },
     "assets/drawing-archive.js": {
-      "sha256": "90fb0090f22711d55a149e5fdac2c96d14eb2d5913e5501796e96aab03aede7f",
-      "size_bytes": 8104
+      "sha256": "57e733cbbaab3b5b7184b7dd4e5492a2bca116c06aeee71c1b1be79d489b8e75",
+      "size_bytes": 9364
     },
     "assets/photograph-downloads.js": {
       "sha256": "b0bb37ea9abe9d121cdf36ddd7c052981505f9c5518236bf2637f95932a210d1",
       "size_bytes": 3992
     },
     "assets/selected-fronts.js": {
-      "sha256": "b2393d7b0712e961c4fcf6a0d3263035980a932de761b20ad16315159df9dcd1",
-      "size_bytes": 5643
+      "sha256": "95cf7209dfd7d7f611a85a0246f21113d3f8eb850bcc8a7de85d9fcc73cba261",
+      "size_bytes": 5659
     },
     "data/photograph-downloads.json": {
       "sha256": "074640cdb11a32e1a0cf735f3329856764bc6fa8851c1a8342275be8c5afb08b",
@@ -56,12 +56,12 @@
       "size_bytes": 1335890
     },
     "drawings.html": {
-      "sha256": "3860d857c62d70e1632c4f8eaa0082b9b3c107c553998beeb008d5e14e831245",
-      "size_bytes": 2531
+      "sha256": "70c72ecb330866fb9a658fd7504d701ce11f4e8cabd39f725591fa16bc650fe9",
+      "size_bytes": 2612
     },
     "index.html": {
-      "sha256": "2c2b3cf99e1610359ada3e9b7946b754a9da570a08a713ea198645780e93fe8c",
-      "size_bytes": 16963
+      "sha256": "29ec6cdefb957d9c02dd95c01393ce6d802d518b5afe54977c27859d4912523c",
+      "size_bytes": 16982
     }
   },
   "proof_scope": "JSON regenerated from pinned source and immutable prior metadata; generated constants/cache tags checked using current implementation templates. Source table identity is verified by hash/OID and size; its contents are not decoded by this exporter."

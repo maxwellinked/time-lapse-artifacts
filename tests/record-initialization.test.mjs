@@ -30,6 +30,7 @@ function harness({loadRecords=async()=>({records,sourceRevision:revision}),fetch
     loadSequenceInsertions:(url,rows,pin)=>loadSequenceInsertions(url,rows,pin,{fetchImpl:fetchProjection}),deriveRecordingSequences,sortRecordsForDisplay,
     RecordsDataError:class extends Error{},console:{error(){}},navigator:{onLine:true},URLSearchParams,
     FormData:class{get(name){return name==="photograph"?elements.filters.elements.photograph.value:form[name];}},loadSelectedFrontLookup:loadPhotos,getSelectedFrontForRecord:()=>true,
+    loadReviewedPhotographLookup:async()=>null,getReviewedPhotographForRecord:()=>null,
     renderRecords(){calls.rendered.push(state.filtered.map(r=>r.recordId));},renderDialog(record){state.activeRecord=record;calls.opened.push(record.recordId);},populateFilters(){},renderFeatured(){},clearReference(){},resetDialogVideo(){},relatedRecordings:{clear(){}},
     window:{addEventListener:(name,fn)=>events.set(name,fn),setTimeout:fn=>fn()},history:{replaceState(_s,_t,url){location.href=new URL(url,location).href;}}};
   const api=runInNewContext(source+"\n({initialize,applyFilters,openHashRecord,openRecord,navigateDialog})",context);

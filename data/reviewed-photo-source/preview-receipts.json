@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "202226b18431f67f879629d8f49d72883643f810",
+  "method": "EXIF transpose; fit within 1024 pixels; JPEG quality 84, subsampling 2, optimized; retain ICC",
+  "pillowVersion": "12.2.0",
+  "previews": [
+    {
+      "workId": "tlaw-6a4a3ee3fdd84066",
+      "sourcePath": "Physical_References/Reviewed_Photographs/2026-11-10/images/2026-11-10.0155.Pencil.Graphite.FountainPen.Ink.Paper.11x14--dd946b648445ee69.jpg",
+      "sourceSha256": "b2dc6d1197ba584dbc87ec5bd66ae77a445790ffcf85ad3b721d0205dba90056",
+      "sourceSizeBytes": 14411695,
+      "displayPath": "reviewed-photographs/tlaw-6a4a3ee3fdd84066.jpg",
+      "displaySha256": "80e9acd3591afe650d020d47307bdd42edbe8aaa3ac9a3631d14500de2aab3af",
+      "displaySizeBytes": 239350,
+      "width": 768,
+      "height": 1024,
+      "orientationNormalized": true
+    },
+    {
+      "workId": "tlaw-d5e993f2657744f6",
+      "sourcePath": "Physical_References/Reviewed_Photographs/2026-10-31/images/2026-10-31.1040.Pencil.Graphite.FountainPen.Ink.Paper.11x14--f719b1ecad6907c3.jpg",
+      "sourceSha256": "92c6c1dbffda7621ae756f52ddde00a28bfb58bd32b3739519fac24fff4277b8",
+      "sourceSizeBytes": 12789529,
+      "displayPath": "reviewed-photographs/tlaw-d5e993f2657744f6.jpg",
+      "displaySha256": "3582f1c5254b64c77c1346a6a873c6636f2a90130af53d00611c91e01b9c6a4f",
+      "displaySizeBytes": 235111,
+      "width": 768,
+      "height": 1024,
+      "orientationNormalized": true
+    },
+    {
+      "workId": "tlaw-e5c89a91491998a7",
+      "sourcePath": "Physical_References/Reviewed_Photographs/2026-11-10/images/2026-11-01.0353.BallpointPen.Ink.Paper.11x14--379dc4ed7c4344af.jpg",
+      "sourceSha256": "14c44a725e0021ae980aa58450b87f2aacc39e2737f26493c0756f65700894c0",
+      "sourceSizeBytes": 8646247,
+      "displayPath": "reviewed-photographs/tlaw-e5c89a91491998a7.jpg",
+      "displaySha256": "b878d2a2ea8e948d74a56a8d2e39dd76e2167074654c90e0297d71299d802f0c",
+      "displaySizeBytes": 99154,
+      "width": 768,
+      "height": 1024,
+      "orientationNormalized": true
+    }
+  ]
+}

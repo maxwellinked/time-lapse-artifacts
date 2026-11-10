@@ -1,4 +1,5 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access";
+import { loadReviewedPhotographIndex, getReviewedPhotographForWork } from "./reviewed-photographs.js?v=20261110-reviewed-access";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261110-browser-photo-scope";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
@@ -65,12 +66,12 @@ function dates(work) {
 function render(works) {
   const query = search.value.trim().toLowerCase();
   const visible = works.filter((work) => `${work.workId} ${work.records.map((r) => `${r.recordId} ${r.filename}`).join(" ")}`.toLowerCase().includes(query));
-  const ready = visible.filter((work) => work.selectedFront || work.photograph);
-  const awaiting = visible.filter((work) => !work.selectedFront && !work.photograph);
+  const ready = visible.filter((work) => work.selectedFront || work.reviewedPhotograph || work.photograph);
+  const awaiting = visible.filter((work) => !work.selectedFront && !work.reviewedPhotograph && !work.photograph);
   gallery.replaceChildren();
   pending.replaceChildren();
-  document.querySelector("#visible-summary").textContent = `${visible.length} drawing${visible.length === 1 ? "" : "s"} · ${ready.length} with confirmed photographs`;
-  document.querySelector("#pending-summary").textContent = `${awaiting.length} drawing${awaiting.length === 1 ? "" : "s"} without a confirmed display photograph`;
+  document.querySelector("#visible-summary").textContent = `${visible.length} drawing${visible.length === 1 ? "" : "s"} · ${ready.length} with photographs`;
+  document.querySelector("#pending-summary").textContent = `${awaiting.length} drawing${awaiting.length === 1 ? "" : "s"} without a display photograph`;
   document.querySelector("#empty-gallery").hidden = ready.length > 0;
   for (const work of ready) {
     const card = node("article", undefined, "drawing-card");
@@ -80,16 +81,27 @@ function render(works) {
     link.rel = "noreferrer";
     link.setAttribute("aria-label", `Open small photograph for ${work.workId}`);
     const image = node("img");
-    image.alt = `Confirmed reference photograph for drawing ${work.workId}`;
+    image.alt = `Reference photograph for drawing ${work.workId}`;
     image.loading = "lazy";
     image.decoding = "async";
-    if (!work.selectedFront && getPhotographDisplayRotation(work.photograph) === 90) image.classList.add("owner-rotation-clockwise");
+    if (!work.reviewedPhotograph && !work.selectedFront && getPhotographDisplayRotation(work.photograph) === 90) image.classList.add("owner-rotation-clockwise");
     image.addEventListener("error", () => {
       link.replaceWith(node("p", "Photograph could not load. The recording and reference details remain available.", "image-error"));
     }, { once: true });
     image.src = work.displayUrl;
     link.append(image);
     const caption = node("div", undefined, "drawing-caption");
+    if (!work.selectedFront && work.reviewedPhotograph) {
+      const photo = work.reviewedPhotograph;
+      caption.append(node("p", `${photo.evidenceBasis} ${photo.qualification}`, "drawing-reference-note"));
+      const download = node("a", `Open full-resolution photograph (${photo.displayDimensions}) ↗`, "photograph-download");
+      download.href = photo.fullResolutionUrl;
+      download.target = "_blank"; download.rel = "noreferrer";
+      const metadata = node("a", "Photograph association details ↗");
+      metadata.href = photo.sourceMetadataUrl;
+      metadata.target = "_blank"; metadata.rel = "noreferrer";
+      caption.append(download, metadata);
+    }
     if (work.selectedFront) caption.append(node("p", "Owner-confirmed selected front · limited display JPEG. This photograph does not establish a recording endpoint.", "drawing-reference-note"));
     if (work.selectedFront?.downloadUrl) {
       const download = node("a", `${work.selectedFront.downloadLabel} (${work.selectedFront.downloadDimensions}) ↗`, "photograph-download");
@@ -121,9 +133,13 @@ try {
   const references = JSON.parse(new TextDecoder().decode(referenceBytes));
   const proof = await verifiedDrawingEvidence(referenceBytes, evidence);
   const selectedFronts = await loadSelectedFrontIndex(recordData, references);
-  const works = applySelectedFronts(buildDrawingArchive(recordData, references, previews, proof), selectedFronts);
+  const reviewed = await loadReviewedPhotographIndex(recordData, references).catch(() => null);
+  const works = applySelectedFronts(buildDrawingArchive(recordData, references, previews, proof), selectedFronts).map((work) => {
+    const reviewedPhotograph = !work.selectedFront && !work.photograph ? getReviewedPhotographForWork(reviewed, work.workId) : null;
+    return reviewedPhotograph ? {...work, reviewedPhotograph, displayUrl: reviewedPhotograph.displayUrl} : work;
+  });
   const unlinkedCount = recordData.records.length - works.reduce((total, work) => total + work.records.length, 0);
-  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.selectedFront || work.photograph).length} confirmed photographs` +
+  summary.textContent = `${works.length} registered drawings · ${works.filter((work) => work.selectedFront || work.reviewedPhotograph || work.photograph).length} with photographs` +
     (unlinkedCount ? `. ${unlinkedCount} recordings have no assigned work ID and remain available in the recording browser.` : "");
   const source = document.querySelector("#drawing-source");
   source.href = `https://huggingface.co/datasets/${recordData.sourceRepository}/tree/${recordData.sourceRevision}/Work_Identity`;

@@ -1,5 +1,7 @@
 import { loadSequenceInsertions } from "./sequence-insertions.js?v=20261030-sequence-insertions";
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access";
+import { loadReviewedPhotographIndex, getReviewedPhotographForRecord } from "./reviewed-photographs.js?v=20261110-reviewed-access";
+import { loadCandidatePhotographIndex, getCandidatePhotographForRecord } from "./candidate-photographs.js?v=20261110-candidate-access";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
 import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810";
@@ -18,6 +20,8 @@ const PREVIEW_DIRECTORY = "previews";
 const REFERENCE_URL = "data/physical-references.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
+let reviewedPhotographLookupPromise;
+let candidatePhotographLookupPromise;
 let referenceEvidencePromise;
 let referenceGeneration = 0;
 let filterGeneration = 0;
@@ -402,6 +406,7 @@ async function applyFilters() {
   const order = String(formData.get("order") ?? "desc");
   const withPhotograph = formData.get("photograph") === "with";
   let photoLookup = null;
+  let reviewedLookup = null;
   let photoFilterFailed = false;
   elements.retryPhotoFilter.hidden = true;
 
@@ -410,7 +415,7 @@ async function applyFilters() {
     elements.showMore.disabled = true;
     elements.resultCount.textContent = "Loading photograph availability… Previous results remain below.";
     try {
-      photoLookup = await loadSelectedFrontLookup();
+      [photoLookup, reviewedLookup] = await Promise.all([loadSelectedFrontLookup(), loadReviewedPhotographLookup()]);
     } catch {
       if (!isCurrent()) return;
       // Preserve browsing when the optional lookup is unavailable.
@@ -439,7 +444,8 @@ async function applyFilters() {
     return (
       (!query || searchable.includes(query)) &&
       (!year || record.date.startsWith(year)) &&
-      (!photoLookup || Boolean(getSelectedFrontForRecord(photoLookup, record.recordId))) &&
+      (!photoLookup || Boolean(getSelectedFrontForRecord(photoLookup, record.recordId) ||
+        getReviewedPhotographForRecord(reviewedLookup, record.recordId))) &&
       recordMatches(record, "tool", String(formData.get("tool") ?? "")) &&
       recordMatches(record, "dimensions", String(formData.get("dimensions") ?? ""))
     );
@@ -659,6 +665,24 @@ async function loadSelectedFrontLookup() {
   return selectedFrontLookupPromise;
 }
 
+async function loadReviewedPhotographLookup() {
+  if (!reviewedPhotographLookupPromise) {
+    reviewedPhotographLookupPromise = loadReferenceLookup()
+      .then((references) => loadReviewedPhotographIndex(state.recordData, references))
+      .catch((error) => { reviewedPhotographLookupPromise = null; throw error; });
+  }
+  return reviewedPhotographLookupPromise;
+}
+
+async function loadCandidatePhotographLookup() {
+  if (!candidatePhotographLookupPromise) {
+    candidatePhotographLookupPromise = loadReferenceLookup()
+      .then((references) => loadCandidatePhotographIndex(state.recordData, references))
+      .catch((error) => { candidatePhotographLookupPromise = null; throw error; });
+  }
+  return candidatePhotographLookupPromise;
+}
+
 function clearReference() {
   referenceGeneration += 1;
   elements.referenceStage.querySelector("img")?.remove();
@@ -686,6 +710,11 @@ async function renderReference(record) {
     const selectedFront = getSelectedFrontForRecord(await loadSelectedFrontLookup(), record.recordId);
     if (!isCurrent()) return;
     const image = getDisplayReference(entry);
+    const reviewed = entry.workId && !selectedFront && !image
+      ? getReviewedPhotographForRecord(await loadReviewedPhotographLookup(), record.recordId) : null;
+    const candidate = !entry.workId
+      ? getCandidatePhotographForRecord(await loadCandidatePhotographLookup().catch(() => null), record.recordId) : null;
+    if (!isCurrent()) return;
     if (selectedFront) {
       elements.referenceRole.textContent = "Owner-confirmed selected front";
       elements.referenceFull.href = selectedFront.downloadUrl ?? selectedFront.displayUrl;
@@ -709,8 +738,46 @@ async function renderReference(record) {
       elements.referenceStage.append(photograph);
       elements.referenceStage.hidden = false;
       photograph.src = selectedFront.displayUrl;
+    } else if (reviewed) {
+      elements.referenceRole.textContent = reviewed.evidenceClass === "owner_confirmed_work_photo_association"
+        ? "Owner-associated drawing photograph" : "Creator-supplied drawing photograph";
+      elements.referenceFull.href = reviewed.fullResolutionUrl;
+      elements.referenceFull.textContent = "Open full-resolution photograph ↗";
+      elements.referenceFull.hidden = false;
+      elements.referenceRepresentation.textContent = `Small display preview. Published photograph: ${reviewed.displayDimensions} JPEG.`;
+      elements.referenceRepresentation.hidden = false;
+      elements.pairingClarification.textContent = reviewed.qualification;
+      elements.pairingClarification.hidden = false;
+      const photograph = document.createElement("img");
+      photograph.alt = "Published reference photograph of the associated drawing";
+      photograph.decoding = "async";
+      photograph.addEventListener("load", () => { if (isCurrent()) elements.referenceStatus.hidden = true; }, {once:true});
+      photograph.addEventListener("error", () => {
+        if (!isCurrent()) return;
+        photograph.remove(); elements.referenceStage.hidden = true; elements.referenceStatus.hidden = false;
+        elements.referenceStatus.textContent = "The preview could not load. Open the full-resolution photograph using the link below.";
+      }, {once:true});
+      elements.referenceStatus.textContent = "Loading photograph…";
+      elements.referenceStage.append(photograph);
+      elements.referenceStage.hidden = false;
+      photograph.src = reviewed.displayUrl;
+      elements.referenceWork.textContent = reviewed.workId;
+      elements.referenceEvidence.textContent = reviewed.evidenceBasis;
+      elements.referenceManifest.href = reviewed.sourceMetadataUrl;
+      elements.referenceDetails.hidden = false;
     } else if (!image) {
       [elements.referenceRole.textContent, elements.referenceStatus.textContent] = referenceExclusion(entry);
+      if (candidate) {
+        elements.referenceRole.textContent = "Candidate photograph available";
+        elements.referenceStatus.textContent = candidate.qualification;
+        elements.referenceFull.textContent = `Download candidate photograph (DNG, ${(candidate.sizeBytes / 1000000).toFixed(1)} MB) ↗`;
+        elements.referenceFull.href = candidate.downloadUrl;
+        elements.referenceFull.hidden = false;
+        elements.referenceWork.textContent = "No assigned work ID";
+        elements.referenceEvidence.textContent = candidate.associationBasis;
+        elements.referenceManifest.href = candidate.sourceMetadataUrl;
+        elements.referenceDetails.hidden = false;
+      }
     } else {
       const useSource = Math.max(Number(image.width_px), Number(image.height_px)) <= 1024 &&
         Number(image.size_bytes) <= 512 * 1024;
