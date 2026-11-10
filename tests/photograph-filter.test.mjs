@@ -20,7 +20,7 @@ const insertions = existsSync(insertionPath) ? JSON.parse(readFileSync(insertion
 const fullSequenceDetails = deriveRecordingSequences(payload.records, insertions, payload.sourceRevision);
 const published = JSON.parse(readFileSync(new URL("../data/physical-references.json", import.meta.url), "utf8"));
 
-async function filter(records, lookup, values = { photograph: "with" }) {
+async function filter(records, lookup, values = { photograph: "with" }, reviewed = null) {
   const state = {
     records,
     sourceRevision: payload.sourceRevision,
@@ -41,12 +41,22 @@ async function filter(records, lookup, values = { photograph: "with" }) {
     loadSelectedFrontLookup: async () => { lookupLoads += 1; return {byRecord: Object.fromEntries(
       Object.entries(lookup.records).filter(([,entry]) => getDisplayReference(entry)).map(([id,entry]) => [id,entry.mainImage]))}; },
     getSelectedFrontForRecord,
+    loadReviewedPhotographLookup: async () => reviewed,
+    getReviewedPhotographForRecord: (index, id) => index?.byRecord?.[id] ?? null,
     getDisplayReference,
     sortRecordsForDisplay,
     renderRecords() {},
   });
   return { records: state.filtered, lookupLoads };
 }
+
+test("photograph filter includes a published work reference while leaving unlinked recordings out", async () => {
+  const ids = ["tla-41667b16a88d464a", "tla-f43f562de8d027ed"];
+  const records = payload.records.filter((record) => ids.includes(record.recordId) || !published.records[record.recordId].workId);
+  const reviewed = {byRecord: Object.fromEntries(ids.map((id) => [id, {workId: published.records[id].workId}]))};
+  const result = await filter(records, published, {photograph: "with"}, reviewed);
+  assert.deepEqual(new Set(result.records.map((r) => r.recordId)), new Set(ids));
+});
 
 test("the filter respects the corrected 633-entry resolver without modifying its source evidence", async () => {
   const before = JSON.stringify(published);

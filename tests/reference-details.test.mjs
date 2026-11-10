@@ -23,7 +23,7 @@ class Element {
   addEventListener() {}
 }
 
-function renderer(proof = evidence, loader = async () => lookup) {
+function renderer(proof = evidence, loader = async () => lookup, reviewed = null, candidates = null) {
   const elements = Object.fromEntries(["referenceStage", "referenceStatus", "referenceRole", "referenceFull",
     "referenceRepresentation", "referenceDetails", "referenceWork", "referenceEvidence", "additionalReferences",
     "referenceManifest", "pairingClarification"].map((name) => [name, new Element()]));
@@ -33,6 +33,10 @@ function renderer(proof = evidence, loader = async () => lookup) {
     getPhotographDisplayRotation, referencePreviewPath,
     // Exercise retained historical source rendering; selected-front rendering has its own integration test.
     loadSelectedFrontLookup: async () => null, getSelectedFrontForRecord: () => null,
+    loadReviewedPhotographLookup: typeof reviewed === "function" ? reviewed : async () => reviewed,
+    getReviewedPhotographForRecord: (index, id) => index?.byRecord?.[id] ?? null,
+    loadCandidatePhotographLookup: async () => candidates,
+    getCandidatePhotographForRecord: (index, id) => index?.[id] ?? null,
     document: { createElement: (tag) => new Element(tag) }, loadReferenceLookup: loader,
     loadReferenceEvidence: async () => proof,
   });
@@ -40,6 +44,53 @@ function renderer(proof = evidence, loader = async () => lookup) {
 }
 
 function links(ui) { return ui.elements.additionalReferences.children.map((p) => p.children[0]); }
+
+test("published work reference renders without being promoted to a selected front or endpoint", async () => {
+  const id = "tla-41667b16a88d464a";
+  const photo = {workId: "tlaw-6a4a3ee3fdd84066", displayUrl: "reviewed-photographs/example.jpg",
+    fullResolutionUrl: "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/pinned/photo.jpg",
+    displayDimensions: "6048 × 8064", evidenceClass: "creator_supplied_matching_finish_label_and_visual_corroboration",
+    evidenceBasis: "Supplied with the creator-confirmed drawing group; visually corroborated.",
+    qualification: "Work reference; exact recording endpoint equality is not established.",
+    sourceMetadataUrl: "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/pinned/photos.json"};
+  const before = JSON.stringify(lookup);
+  const ui = renderer(evidence, async () => lookup, {byRecord: {[id]: photo}});
+  await ui.show(id);
+  assert.equal(ui.elements.referenceStage.querySelector("img")?.src, photo.displayUrl);
+  assert.equal(ui.elements.referenceFull.href, photo.fullResolutionUrl);
+  assert.equal(ui.elements.referenceFull.hidden, false);
+  assert.match(ui.elements.referenceRole.textContent, /supplied/i);
+  assert.doesNotMatch(ui.elements.referenceRole.textContent, /selected front/i);
+  assert.equal(ui.elements.pairingClarification.textContent, photo.qualification);
+  assert.equal(ui.elements.referenceManifest.href, photo.sourceMetadataUrl);
+  assert.equal(ui.elements.referenceDetails.hidden, false);
+  await ui.show("tla-7500b249133719dc");
+  assert.equal(ui.elements.referenceStage.hidden, true);
+  assert.equal(ui.elements.referenceFull.hidden, true);
+  assert.equal(JSON.stringify(lookup), before);
+});
+
+test("unlinked candidate source offers a qualified DNG download without displaying a confirmed photograph", async () => {
+  const id="tla-2c306a52343fe829", candidate={downloadUrl:"https://example.org/candidate.DNG",filename:"IMG_3326.DNG",
+    sizeBytes:93431484,qualification:"Candidate same drawing; work identity and endpoint are not established.",
+    associationBasis:"Explicit published study-set candidate relationship.",sourceMetadataUrl:"https://example.org/relationships.json"};
+  const ui=renderer(evidence,async()=>lookup,null,{[id]:candidate});
+  await ui.show(id);
+  assert.equal(ui.elements.referenceStage.hidden,true);
+  assert.equal(ui.elements.referenceStage.children.length,0);
+  assert.match(ui.elements.referenceRole.textContent,/candidate/i);
+  assert.match(ui.elements.referenceFull.textContent,/DNG/);
+  assert.equal(ui.elements.referenceFull.href,candidate.downloadUrl);
+  assert.equal(ui.elements.referenceFull.hidden,false);
+  assert.equal(ui.elements.referenceStatus.textContent,candidate.qualification);
+  assert.equal(ui.elements.referenceEvidence.textContent,candidate.associationBasis);
+  assert.equal(ui.elements.referenceManifest.href,candidate.sourceMetadataUrl);
+  assert.equal(lookup.records[id].workId,"");
+  const independent=renderer(evidence,async()=>lookup,async()=>{throw new Error("Unrelated reviewed-photo service unavailable");},{[id]:candidate});
+  await independent.show(id);
+  assert.equal(independent.elements.referenceFull.href,candidate.downloadUrl);
+  assert.equal(independent.elements.referenceFull.hidden,false);
+});
 
 test("owner-approved rotation follows the selected photograph without leaking to the next recording", async () => {
   const ui = renderer();

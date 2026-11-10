@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Drawing photographs · Time-Lapse Artifacts</title>
-    <meta name="description" content="Browse one entry per registered Standard drawing, with small confirmed photographs and explicit coverage gaps." />
+    <meta name="description" content="Browse one entry per registered Standard drawing, with reference photographs, documented associations and explicit coverage gaps." />
     <link rel="stylesheet" href="assets/style.css?v=20261020-owner-rotation" />
     <link rel="stylesheet" href="assets/drawing-archive.css" />
-    <script type="module" src="assets/drawing-archive.js?v=photo-selections-202226b18431-90bded9bcd98"></script>
+    <script type="module" src="assets/drawing-archive.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access"></script>
   </head>
   <body>
     <header class="site-header shell">
@@ -20,19 +20,19 @@
       <p id="archive-summary" role="status">Loading the drawing index…</p>
       <p class="archive-note">Browse one entry per registered Standard drawing. Public photograph links appear with their evidence and source limits. They do not establish a recording’s endpoint or photograph-to-video alignment.</p>
       <details class="archive-about"><summary>About these photographs</summary>
-        <p>Small photographs show directly confirmed drawing references. Photographs do not establish a recording’s endpoint.</p>
+        <p>Small photographs show selected fronts and published work references, with their documented association details. Photographs do not establish a recording’s endpoint.</p>
         <p><a id="drawing-source">Source snapshot</a> · <a href="REFERENCE_POLICY.md">Photograph policy</a></p>
       </details>
       <label class="archive-search" for="drawing-search">Find a drawing, recording or date
         <input id="drawing-search" type="search" placeholder="Work ID, recording ID, date or filename" disabled />
       </label>
-      <h2>Confirmed photographs</h2>
+      <h2>Available photographs</h2>
       <p id="visible-summary" role="status"></p>
-      <p id="empty-gallery" hidden>No confirmed photographs match this search.</p>
+      <p id="empty-gallery" hidden>No photographs match this search.</p>
       <div id="drawing-grid" class="drawing-grid"></div>
       <section class="awaiting-photographs" aria-labelledby="pending-summary">
-        <h2 id="pending-summary">Drawings without a confirmed display photograph</h2>
-        <p>These entries have no eligible confirmed primary display photograph. Any available public references are linked below with their existing evidence status.</p>
+        <h2 id="pending-summary">Drawings without a display photograph</h2>
+        <p>These entries have no selected front or eligible published work reference in this view. Any other public references are linked below with their existing evidence status.</p>
         <div id="pending-drawings"></div>
       </section>
     </main>

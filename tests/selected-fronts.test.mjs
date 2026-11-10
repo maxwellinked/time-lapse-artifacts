@@ -164,6 +164,7 @@ test("actual photograph filter uses the common map for all 1256 Standard records
  const elements={filters:{elements:{photograph:{value:"with"}}},grid:{setAttribute(){},removeAttribute(){}},showMore:{},resultCount:{},retryPhotoFilter:{}};
  const source=app.slice(app.indexOf("function recordMatches("),app.indexOf("function renderRecords("));
  await runInNewContext(`${source}\napplyFilters()`,{state,elements,PAGE_SIZE:18,filterGeneration:0,
-  FormData:class{get(k){return k==="photograph"?"with":"";}},loadSelectedFrontLookup:async()=>index,getSelectedFrontForRecord,sortRecordsForDisplay,renderRecords(){}});
+  FormData:class{get(k){return k==="photograph"?"with":"";}},loadSelectedFrontLookup:async()=>index,getSelectedFrontForRecord,
+  loadReviewedPhotographLookup:async()=>null,getReviewedPhotographForRecord:()=>null,sortRecordsForDisplay,renderRecords(){}});
  assert.equal(state.filtered.length,1256);
 });

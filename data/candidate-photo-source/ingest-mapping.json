@@ -1,0 +1,680 @@
+{
+  "schema": "approved-ordinary-ingest-mapping/v1",
+  "created_utc": "2026-10-29T22:10:27.926294+00:00",
+  "base_hf_revision": "c75826cbc1e1366d05b0deb0746c880c34f3d750",
+  "media_revision": "aa4d6cec95c27f956221ae5dc72a95d98af4e2f0",
+  "source_index_revision": "03b010253b62b4453779e6fa98fd4c630f3bb0f8",
+  "selected_files": 47,
+  "selected_bytes": 29532133448,
+  "payload_transformations": "None; canonical destination naming only. All MP4 bytes unchanged.",
+  "groups": [
+    {
+      "group_key": "A",
+      "group_label": "A: Curving dark ribbon with top circles",
+      "owner_label": "2026-10-23.1234.BallpointPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-23",
+      "documented_finish_time": "12:34",
+      "tool": "BallpointPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 2,
+      "accepted_source_count": 2,
+      "deferred_source_count": 0,
+      "accepted_bytes": 4053218656,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261023_093959 (1).mp4",
+        "VID_20261023_120225.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "B",
+      "group_label": "B: Angular dark profile with eye-like circle",
+      "owner_label": "2026-10-23.1523.FountainPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-23",
+      "documented_finish_time": "15:23",
+      "tool": "FountainPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 1,
+      "accepted_source_count": 1,
+      "deferred_source_count": 0,
+      "accepted_bytes": 2386451510,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261023_142846.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "C",
+      "group_label": "C: Blue profile figure",
+      "owner_label": "2026-10-23.1824.BallpointPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-23",
+      "documented_finish_time": "18:24",
+      "tool": "BallpointPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 1,
+      "accepted_source_count": 1,
+      "deferred_source_count": 0,
+      "accepted_bytes": 1328587930,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261023_175418.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "D",
+      "group_label": "D: Architectural passage with figures and steps",
+      "owner_label": "2026-10-24.1028.BallpointPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-24",
+      "documented_finish_time": "10:28",
+      "tool": "BallpointPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 4,
+      "accepted_source_count": 4,
+      "deferred_source_count": 0,
+      "accepted_bytes": 5984850438,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261024_062659.mp4",
+        "VID_20261024_075706.mp4",
+        "VID_20261024_091348.mp4",
+        "2026-10-24.1028.BallpointPen.Ink.Paper.9x12.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "E",
+      "group_label": "E: Curved diagonal dark abstract with white lower opening",
+      "owner_label": "2026-10-24.2238.BallpointPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-24",
+      "documented_finish_time": "22:38",
+      "tool": "BallpointPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 6,
+      "accepted_source_count": 6,
+      "deferred_source_count": 0,
+      "accepted_bytes": 2126511587,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261024_152959.mp4",
+        "VID_20261024_163428.mp4",
+        "VID_20261024_170302.mp4",
+        "VID_20261024_173102.mp4",
+        "VID_20261024_223118.mp4",
+        "2026-10-24.2238.BallpontPen.Ink.Paper.9x12.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "F",
+      "group_label": "F: Dark rising face/ribbon with top-left rectangular field",
+      "owner_label": "2026-10-25.0938.BallpointPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-25",
+      "documented_finish_time": "09:38",
+      "tool": "BallpointPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 11,
+      "accepted_source_count": 9,
+      "deferred_source_count": 2,
+      "accepted_bytes": 3929837813,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261025_005135.mp4",
+        "VID_20261025_014406.mp4",
+        "VID_20261025_030436.mp4",
+        "VID_20261025_053749.mp4",
+        "VID_20261025_062640.mp4",
+        "VID_20261025_071511.mp4",
+        "VID_20261025_074857.mp4",
+        "VID_20261025_082106.mp4",
+        "2026-10-25.0938.BallpontPen.Ink.Paper.9x12.mp4"
+      ],
+      "deferred_sources": [
+        "VID_20261025_033718.mp4",
+        "VID_20261025_044208.mp4"
+      ],
+      "scope_note": "F is explicitly a selected 9-of-11 subset; no completeness assertion."
+    },
+    {
+      "group_key": "G",
+      "group_label": "G: Blue frontal hooded portrait",
+      "owner_label": "2026-10-25.1453.BallpointPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-25",
+      "documented_finish_time": "14:53",
+      "tool": "BallpointPen",
+      "medium": "Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 4,
+      "accepted_source_count": 4,
+      "deferred_source_count": 0,
+      "accepted_bytes": 1791377562,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261025_124658.mp4",
+        "VID_20261025_132007.mp4",
+        "VID_20261025_135349.mp4",
+        "VID_20261025_145027.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "H",
+      "group_label": "H: Stepped geometric corridor",
+      "owner_label": "2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-26",
+      "documented_finish_time": "17:49",
+      "tool": "Pencil;FountainPen",
+      "medium": "Graphite;Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 13,
+      "accepted_source_count": 13,
+      "deferred_source_count": 0,
+      "accepted_bytes": 4748653138,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261026_123920.mp4",
+        "VID_20261026_130758.mp4",
+        "VID_20261026_132839 (1).mp4",
+        "VID_20261026_133956.mp4",
+        "VID_20261026_142856.mp4",
+        "VID_20261026_144224.mp4",
+        "VID_20261026_150208.mp4",
+        "VID_20261026_161153.mp4",
+        "VID_20261026_164459.mp4",
+        "VID_20261026_170933.mp4",
+        "VID_20261026_171928.mp4",
+        "VID_20261026_173629.mp4",
+        "2026-10-26.1749.BallpointPen.Ink.Paper.9x12.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    },
+    {
+      "group_key": "I",
+      "group_label": "I: Unstepped converging linear corridor",
+      "owner_label": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12",
+      "documented_finish_date": "2026-10-27",
+      "documented_finish_time": "01:00",
+      "tool": "Pencil;FountainPen",
+      "medium": "Graphite;Ink",
+      "support": "Paper",
+      "dimensions": "9x12",
+      "supplied_source_count": 7,
+      "accepted_source_count": 7,
+      "deferred_source_count": 0,
+      "accepted_bytes": 3182644814,
+      "sequence_completeness": "unknown",
+      "work_id": "",
+      "accepted_sources_in_order": [
+        "VID_20261026_232048.mp4",
+        "VID_20261026_233622.mp4",
+        "VID_20261026_235105.mp4",
+        "VID_20261027_001400.mp4",
+        "VID_20261027_002514.mp4",
+        "VID_20261027_003035.mp4",
+        "2026-10-27.0001.Pencil.Graphite.FountainPen.Ink.Paper.9x12.mp4"
+      ],
+      "deferred_sources": [],
+      "scope_note": "Accepted supplied members only; no completeness assertion."
+    }
+  ],
+  "source_dispositions": "source_dispositions.json",
+  "selected_mappings": [
+    {
+      "original_filename": "VID_20261023_093959 (1).mp4",
+      "sha256": "754f429746ff29bd791753112755790680a0cf0c897abb2d7587640bebdc9eec",
+      "size_bytes": 2675530184,
+      "canonical_path": "Standard_Time_Lapses/2026-10-23.1234.BallpointPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-64444ec386495f1b",
+      "group_key": "A",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261023_120225.mp4",
+      "sha256": "6dad7e9e79e3f30e3d760e7329b7ef84f0b6aea427bc6ffc823e9ba496931784",
+      "size_bytes": 1377688472,
+      "canonical_path": "Standard_Time_Lapses/2026-10-23.1234.BallpointPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-a40e173b15a4333c",
+      "group_key": "A",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261023_142846.mp4",
+      "sha256": "dcaeb1db135e05735496494d6714b87a9d78f293569543b627bb92f8319690f4",
+      "size_bytes": 2386451510,
+      "canonical_path": "Standard_Time_Lapses/2026-10-23.1523.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-ba141a670db2f6e9",
+      "group_key": "B",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261023_175418.mp4",
+      "sha256": "55033980262be9696804bbcd713cd1e822cc96d9994cc31a977ff142c532331a",
+      "size_bytes": 1328587930,
+      "canonical_path": "Standard_Time_Lapses/2026-10-23.1824.BallpointPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-194dd205397da3b1",
+      "group_key": "C",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261024_062659.mp4",
+      "sha256": "3c9000b692b031bad2613f82838b6f6403b7ba8173a8acc756a85134bf10519d",
+      "size_bytes": 1897087272,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.1028.BallpointPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-2a10dc3196eddcf3",
+      "group_key": "D",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261024_075706.mp4",
+      "sha256": "5b20836d4f5a76f99d1c4156f23c01b6c5ab2cee9e5a5d231963d0b856534206",
+      "size_bytes": 1852649078,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.1028.BallpointPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-6f932f6051656baf",
+      "group_key": "D",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261024_091348.mp4",
+      "sha256": "5c2f6d59e87ca8a0d4f8633d03d5eb3f1de66178c6a77707680f2391337b9567",
+      "size_bytes": 1455732264,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.1028.BallpointPen.Ink.Paper.9x12.Rec03.mp4",
+      "record_id": "tla-3dfb85c76f5d63ed",
+      "group_key": "D",
+      "accepted_recording_position": 3
+    },
+    {
+      "original_filename": "2026-10-24.1028.BallpointPen.Ink.Paper.9x12.mp4",
+      "sha256": "fc618917b8ee7a2337da0148abad222595d5f20f927ba51e131bb6c23186903f",
+      "size_bytes": 779381824,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.1028.BallpointPen.Ink.Paper.9x12.Rec04.mp4",
+      "record_id": "tla-14ea1e421b4f5557",
+      "group_key": "D",
+      "accepted_recording_position": 4
+    },
+    {
+      "original_filename": "VID_20261024_152959.mp4",
+      "sha256": "ff27c44e6a99cef1666796dbd25e29f1fd9c5bae61d453961c7a02c70a651622",
+      "size_bytes": 396356398,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.2238.BallpointPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-d16fdbdd06c9b582",
+      "group_key": "E",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261024_163428.mp4",
+      "sha256": "8f21cb7892b7e27d48f0af12733628e718d27485dd46857ba9303d5070558fde",
+      "size_bytes": 349198061,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.2238.BallpointPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-3a9c9eecbc8f3a41",
+      "group_key": "E",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261024_170302.mp4",
+      "sha256": "5685ed038b5dca3964fca167b8f3834d33a1f89a0f6c1996161783cb2a229020",
+      "size_bytes": 560928930,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.2238.BallpointPen.Ink.Paper.9x12.Rec03.mp4",
+      "record_id": "tla-ad411a82eb8c46ab",
+      "group_key": "E",
+      "accepted_recording_position": 3
+    },
+    {
+      "original_filename": "VID_20261024_173102.mp4",
+      "sha256": "cb405fb6fa8bd76740cfcf10e335b897525e2cf0cac8a54d3e345b1ea107596c",
+      "size_bytes": 356603141,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.2238.BallpointPen.Ink.Paper.9x12.Rec04.mp4",
+      "record_id": "tla-79db1cb0bb9dea84",
+      "group_key": "E",
+      "accepted_recording_position": 4
+    },
+    {
+      "original_filename": "VID_20261024_223118.mp4",
+      "sha256": "cd0b1f2a2d437ddfba33253b43567f5def53485ee99f67b5e1f912531035af5c",
+      "size_bytes": 324667052,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.2238.BallpointPen.Ink.Paper.9x12.Rec05.mp4",
+      "record_id": "tla-b44978d38c0b0759",
+      "group_key": "E",
+      "accepted_recording_position": 5
+    },
+    {
+      "original_filename": "2026-10-24.2238.BallpontPen.Ink.Paper.9x12.mp4",
+      "sha256": "5f1dc5a2332141edb44d8ceb3d908affb54781c59eb29085b6757866f5b5cbd0",
+      "size_bytes": 138758005,
+      "canonical_path": "Standard_Time_Lapses/2026-10-24.2238.BallpointPen.Ink.Paper.9x12.Rec06.mp4",
+      "record_id": "tla-05ae735765e35f48",
+      "group_key": "E",
+      "accepted_recording_position": 6
+    },
+    {
+      "original_filename": "VID_20261025_005135.mp4",
+      "sha256": "84d457a7e6aaca5d4371789d3e2e39fc3b5b52af26d5b05ca059780480a5dfb6",
+      "size_bytes": 635615442,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-3629fd6f65c8e3fd",
+      "group_key": "F",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261025_014406.mp4",
+      "sha256": "45d1182ab7a4c5d1b4932a9b6db7d5435c7113b67800ec09d3ad085025117036",
+      "size_bytes": 397603600,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-f4860d81610d06e2",
+      "group_key": "F",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261025_030436.mp4",
+      "sha256": "df42be1475d8dc0b10d7a13cf62a008163603d5c8f95d481be46e8f904ebc5c5",
+      "size_bytes": 568504461,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec03.mp4",
+      "record_id": "tla-ab38992860ebf086",
+      "group_key": "F",
+      "accepted_recording_position": 3
+    },
+    {
+      "original_filename": "VID_20261025_053749.mp4",
+      "sha256": "5752612460f0622627356560dea3bb45d675bf58672ef9daeb804ac44c062311",
+      "size_bytes": 557130580,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec04.mp4",
+      "record_id": "tla-ee5ef18a738d9716",
+      "group_key": "F",
+      "accepted_recording_position": 4
+    },
+    {
+      "original_filename": "VID_20261025_062640.mp4",
+      "sha256": "3d568e991ddcd2b3a7c2c27de6af0ea03a234b1673ff89be9bfd9d75575cb333",
+      "size_bytes": 462611183,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec05.mp4",
+      "record_id": "tla-bc90bb2c30a23b73",
+      "group_key": "F",
+      "accepted_recording_position": 5
+    },
+    {
+      "original_filename": "VID_20261025_071511.mp4",
+      "sha256": "fdbc957d116619bfb9882c10d967a4c58d63cccd67269b4f9b543c70a9116ab8",
+      "size_bytes": 389360335,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec06.mp4",
+      "record_id": "tla-4441345c1d3d1392",
+      "group_key": "F",
+      "accepted_recording_position": 6
+    },
+    {
+      "original_filename": "VID_20261025_074857.mp4",
+      "sha256": "149bfbe86be48b962d4ca5173ebeb05e92adbdc1090a0da953d5eabfea071a81",
+      "size_bytes": 409326007,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec07.mp4",
+      "record_id": "tla-268196248f820e42",
+      "group_key": "F",
+      "accepted_recording_position": 7
+    },
+    {
+      "original_filename": "VID_20261025_082106.mp4",
+      "sha256": "e7f0741b5bab6a8a5ac15a298ba459c7d0b0521fdb73486896c9c880072bd801",
+      "size_bytes": 324657877,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec08.mp4",
+      "record_id": "tla-0a7b1ed861f10d7d",
+      "group_key": "F",
+      "accepted_recording_position": 8
+    },
+    {
+      "original_filename": "2026-10-25.0938.BallpontPen.Ink.Paper.9x12.mp4",
+      "sha256": "0c31d2999acc70297648cb0c1ec68a61b3856e6f7f28551585f6e47fc79f8828",
+      "size_bytes": 185028328,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.0938.BallpointPen.Ink.Paper.9x12.Rec09.mp4",
+      "record_id": "tla-f3f1ebaf9ef0a80c",
+      "group_key": "F",
+      "accepted_recording_position": 9
+    },
+    {
+      "original_filename": "VID_20261025_124658.mp4",
+      "sha256": "4c486d2fbe5bc2b0c0fa79c296b457a136e99b0909c5505cbba4bfaa2e9982b2",
+      "size_bytes": 791293020,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.1453.BallpointPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-52a13c7f87b216f0",
+      "group_key": "G",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261025_132007.mp4",
+      "sha256": "79c3028a9e15c86343ae7423599e8900fd0f848dc9c8375be3b29f5a370edbd7",
+      "size_bytes": 386855276,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.1453.BallpointPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-c9a7cc631b8fe253",
+      "group_key": "G",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261025_135349.mp4",
+      "sha256": "2b27852a12ff96b1fca92eb2780d1ca41463c159b72d5268482edf412a343cc2",
+      "size_bytes": 469974261,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.1453.BallpointPen.Ink.Paper.9x12.Rec03.mp4",
+      "record_id": "tla-6a71fa37acb9b07f",
+      "group_key": "G",
+      "accepted_recording_position": 3
+    },
+    {
+      "original_filename": "VID_20261025_145027.mp4",
+      "sha256": "6307ba626a4f1f32a49e2d8c26dccaa4ebed4603b85d7d54c5eca876f5714828",
+      "size_bytes": 143255005,
+      "canonical_path": "Standard_Time_Lapses/2026-10-25.1453.BallpointPen.Ink.Paper.9x12.Rec04.mp4",
+      "record_id": "tla-b0853bd5d3d190cf",
+      "group_key": "G",
+      "accepted_recording_position": 4
+    },
+    {
+      "original_filename": "VID_20261026_123920.mp4",
+      "sha256": "51ad4b41efc6be5785b2c2a01077b0172259c6bf669eea38017d5e603cba7836",
+      "size_bytes": 252373154,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-fafd3e44747d7a66",
+      "group_key": "H",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261026_130758.mp4",
+      "sha256": "0149db16b444bec3339cc7c8b1bd6c74ddd022ad0b3ed1e2f51bc27ce36603f4",
+      "size_bytes": 268188199,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-fc13783749b83ec7",
+      "group_key": "H",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261026_132839 (1).mp4",
+      "sha256": "64044240990962fe4ad6fdd9d6b1f826bdb456f283fc98357764d9c15edc86b0",
+      "size_bytes": 303740057,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03.mp4",
+      "record_id": "tla-0d2583dde3cd6e07",
+      "group_key": "H",
+      "accepted_recording_position": 3
+    },
+    {
+      "original_filename": "VID_20261026_133956.mp4",
+      "sha256": "2ab5044e7c43ef6615ececb719c989c15f030a85ef970242ba899b0973e15188",
+      "size_bytes": 603664457,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec04.mp4",
+      "record_id": "tla-f85a1296bf9c2707",
+      "group_key": "H",
+      "accepted_recording_position": 4
+    },
+    {
+      "original_filename": "VID_20261026_142856.mp4",
+      "sha256": "471ceb45a15ee0e6b1980c40f70a03d1235c11209b82e3b4acb0bb49307d2f92",
+      "size_bytes": 427636873,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec05.mp4",
+      "record_id": "tla-1945b6229c8b7bb6",
+      "group_key": "H",
+      "accepted_recording_position": 5
+    },
+    {
+      "original_filename": "VID_20261026_144224.mp4",
+      "sha256": "bcf828003d75cb378bf51edd09e9ed394689b9b37a7640f3cb0da8fd61f31fdd",
+      "size_bytes": 368918324,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec06.mp4",
+      "record_id": "tla-bf1bba6e50ef8b45",
+      "group_key": "H",
+      "accepted_recording_position": 6
+    },
+    {
+      "original_filename": "VID_20261026_150208.mp4",
+      "sha256": "e287aedcd622339f006e7bc9a0a7e73d73510bfe5817b6a302ea53c5a9b13466",
+      "size_bytes": 567084122,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec07.mp4",
+      "record_id": "tla-2d42c62d72703799",
+      "group_key": "H",
+      "accepted_recording_position": 7
+    },
+    {
+      "original_filename": "VID_20261026_161153.mp4",
+      "sha256": "ad7c6805dfa91fbeccb7dce23de1267331b7a8b4b2af50ab4ce5993d15544a82",
+      "size_bytes": 252252892,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec08.mp4",
+      "record_id": "tla-55a3ea4dbe95205c",
+      "group_key": "H",
+      "accepted_recording_position": 8
+    },
+    {
+      "original_filename": "VID_20261026_164459.mp4",
+      "sha256": "b8a5a4a1134d66f0ecebdbb2280734c7304ce73c85b041d6750fa855d8af7a47",
+      "size_bytes": 617105149,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec09.mp4",
+      "record_id": "tla-56c1dcbc3ec53d63",
+      "group_key": "H",
+      "accepted_recording_position": 9
+    },
+    {
+      "original_filename": "VID_20261026_170933.mp4",
+      "sha256": "ce4847d192f64cfd90b9887acfe7ade320597c9ee251efffd77512bb3303ce77",
+      "size_bytes": 418622038,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec10.mp4",
+      "record_id": "tla-c84c979cf34c4aa0",
+      "group_key": "H",
+      "accepted_recording_position": 10
+    },
+    {
+      "original_filename": "VID_20261026_171928.mp4",
+      "sha256": "1c8df048f608e52a7d513b3dd5292a9108ab9585d23dc239ce2c3045b63451f8",
+      "size_bytes": 132006641,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec11.mp4",
+      "record_id": "tla-206fe52b157531de",
+      "group_key": "H",
+      "accepted_recording_position": 11
+    },
+    {
+      "original_filename": "VID_20261026_173629.mp4",
+      "sha256": "ffe0a2370ef906add99a0e8fb9e112b2032c9f3da472a671c670a793a8451bca",
+      "size_bytes": 206703260,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec12.mp4",
+      "record_id": "tla-89993436e626232a",
+      "group_key": "H",
+      "accepted_recording_position": 12
+    },
+    {
+      "original_filename": "2026-10-26.1749.BallpointPen.Ink.Paper.9x12.mp4",
+      "sha256": "fb5f8513cdbf1adf41821a36a13ee7446189bfc4443d58156a4eb88c2b20bbfa",
+      "size_bytes": 330357972,
+      "canonical_path": "Standard_Time_Lapses/2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec13.mp4",
+      "record_id": "tla-5a50decb35a38efc",
+      "group_key": "H",
+      "accepted_recording_position": 13
+    },
+    {
+      "original_filename": "VID_20261026_232048.mp4",
+      "sha256": "e502028995a3a2aafcbbd938b52071f25ffbe09b2b1e2f93dcfb19c4097dcf3e",
+      "size_bytes": 654099542,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+      "record_id": "tla-e331a337491dcda6",
+      "group_key": "I",
+      "accepted_recording_position": 1
+    },
+    {
+      "original_filename": "VID_20261026_233622.mp4",
+      "sha256": "264dfcbfcfd74ad352ccb5d7ef1d3d899a1d0f6b57a1e57f92dad4cc74ea26e7",
+      "size_bytes": 456590103,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec02.mp4",
+      "record_id": "tla-e646380c8407b8f4",
+      "group_key": "I",
+      "accepted_recording_position": 2
+    },
+    {
+      "original_filename": "VID_20261026_235105.mp4",
+      "sha256": "ed56f18b607061126d2bf7a3a7211762b8807884e464c6a2c496244220e802e9",
+      "size_bytes": 462777456,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03.mp4",
+      "record_id": "tla-2c306a52343fe829",
+      "group_key": "I",
+      "accepted_recording_position": 3
+    },
+    {
+      "original_filename": "VID_20261027_001400.mp4",
+      "sha256": "32fe233a445f93fb7359e34bf0cced15be3272b66d8d58978c38466097eb3eb8",
+      "size_bytes": 377032309,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec04.mp4",
+      "record_id": "tla-a3c2dfe3e7b14b01",
+      "group_key": "I",
+      "accepted_recording_position": 4
+    },
+    {
+      "original_filename": "VID_20261027_002514.mp4",
+      "sha256": "09236338ba90bac2bf84f5bf69bb1b1c8776a7fc062e4fd0fb99c901c52509da",
+      "size_bytes": 211488548,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec05.mp4",
+      "record_id": "tla-2ebf06934b96e8dd",
+      "group_key": "I",
+      "accepted_recording_position": 5
+    },
+    {
+      "original_filename": "VID_20261027_003035.mp4",
+      "sha256": "d46cdf94723ffd40758361b4a6a5280a5301ba5412ad546204a2bc13349c2218",
+      "size_bytes": 444592408,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec06.mp4",
+      "record_id": "tla-afcfcaf9ab1b6c16",
+      "group_key": "I",
+      "accepted_recording_position": 6
+    },
+    {
+      "original_filename": "2026-10-27.0001.Pencil.Graphite.FountainPen.Ink.Paper.9x12.mp4",
+      "sha256": "405eb40add982845994b097f6c22a3e784a102201658a2ae2c1a62f2b1332396",
+      "size_bytes": 576064448,
+      "canonical_path": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec07.mp4",
+      "record_id": "tla-d9c74b9d57e1c3a7",
+      "group_key": "I",
+      "accepted_recording_position": 7
+    }
+  ],
+  "publication_authority": "owner_confirmation.json",
+  "completeness": "unknown",
+  "work_id_assignments": 0
+}

@@ -100,6 +100,12 @@ def export(source,destination,revision,prior_bytes):
  require(count==1,'Missing download constant')
  path.write_text(code,encoding='utf-8',newline='\n')
  tag='photo-selections-'+revision[:12]+'-'+registry_sha[:12]
+ # Historical replays use their retained implementation templates. Keep their
+ # original cache tags; only the new photograph-access implementation needs
+ # this additional cache generation at the otherwise unchanged source pin.
+ if re.search(r'from ["\']\./reviewed-photographs\.js(?:\?[^"\']*)?["\']',
+              (destination/'assets/app.js').read_text(encoding='utf-8')):
+  tag+='-reviewed-access'
  for relative in TEMPLATES:
   path=destination/relative;original=path.read_text(encoding='utf-8')
   changed=re.sub(r'((?:selected-fronts|photograph-downloads|app|drawing-archive)\.js)\?v=[A-Za-z0-9_-]+',lambda m:m[1]+'?v='+tag,original)

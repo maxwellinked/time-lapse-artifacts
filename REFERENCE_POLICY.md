@@ -23,6 +23,36 @@ registry; Work_Images roles retain their separate grants and lineage. Regenerate
 photo selections and downloads together using tools/export-photo-selections.py,
 then run the existing validator and tests. Do not edit choices independently.
 
+## Published work references
+
+When no selected front or eligible historical display is available, the browser
+also presents a uniquely associated photograph from the published
+`Reviewed_Photographs` collections. The source's work association, evidence
+class and explanation remain visible. These additional photographs do not
+change the selected-front registry or establish a recording endpoint.
+
+`data/reviewed-photographs.json` is generated from exact retained, revision-pinned
+Hugging Face photograph manifests and work-record links. It accepts the existing
+owner-confirmed work-photo association and creator-supplied, visually corroborated
+work-reference classes. Three normalized display previews accompany links to the
+unchanged published full-size JPEGs. `tools/build-reviewed-photographs.py --check`
+reproduces the access map and checks retained inputs and preview hashes. With
+`HF_SOURCE_ROOT` set, it also compares those inputs to the authoritative Git tree.
+
+The photograph filter includes selected fronts and these published work
+references. Its wording describes photograph availability; individual association
+qualifications remain in the dialog and drawing gallery.
+
+For thirteen recordings without registered work identity, the dialog also links
+to two already-public candidate DNG source photographs. These remain download
+links, outside the displayed-photograph filter and gallery. The source receipts
+retain `candidate_same_drawing`, unknown endpoint/final state, and no work or
+primary-selection authorization. Twelve recording links are explicit cohort
+members; the remaining October 27 final part is connected through its existing
+owner-confirmed group. The browser labels that group-derived basis separately.
+`tools/build-candidate-photographs.py --check` verifies this qualified access map
+against exact retained source receipts; `HF_SOURCE_ROOT` enables Git-tree checks.
+
 ## Historical source-lookup acceptance
 
 A displayed reference must identify the same drawing and depicted surface as

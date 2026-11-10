@@ -1,0 +1,187 @@
+{
+  "schema": "owner-confirmed-ingest-facts/v1",
+  "status_at_generation": "owner_approved_publication_remote_index_bound",
+  "authority": "Creator statements in the October29 owner review; technical metadata is separately media-probed.",
+  "memberships": "The creator confirmed the nine proposed memberships and definite file orders; the later explicit F exception supersedes the generic confirmation.",
+  "labels": [
+    {
+      "owner_group_letter": "A",
+      "normalized_owner_label": "2026-10-23.1234.BallpointPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-23",
+      "owner_label_time_24h": "12:34",
+      "owner_material_tokens": [
+        "BallpointPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "B",
+      "normalized_owner_label": "2026-10-23.1523.FountainPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-23",
+      "owner_label_time_24h": "15:23",
+      "owner_material_tokens": [
+        "FountainPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "C",
+      "normalized_owner_label": "2026-10-23.1824.BallpointPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-23",
+      "owner_label_time_24h": "18:24",
+      "owner_material_tokens": [
+        "BallpointPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "D",
+      "normalized_owner_label": "2026-10-24.1028.BallpointPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-24",
+      "owner_label_time_24h": "10:28",
+      "owner_material_tokens": [
+        "BallpointPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "E",
+      "normalized_owner_label": "2026-10-24.2238.BallpointPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-24",
+      "owner_label_time_24h": "22:38",
+      "owner_material_tokens": [
+        "BallpointPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "F",
+      "normalized_owner_label": "2026-10-25.0938.BallpointPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-25",
+      "owner_label_time_24h": "09:38",
+      "owner_material_tokens": [
+        "BallpointPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "G",
+      "normalized_owner_label": "2026-10-25.1453.BallpointPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-25",
+      "owner_label_time_24h": "14:53",
+      "owner_material_tokens": [
+        "BallpointPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "H",
+      "normalized_owner_label": "2026-10-26.1749.Pencil.Graphite.FountainPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-26",
+      "owner_label_time_24h": "17:49",
+      "owner_material_tokens": [
+        "Pencil",
+        "Graphite",
+        "FountainPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    },
+    {
+      "owner_group_letter": "I",
+      "normalized_owner_label": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12",
+      "owner_label_date": "2026-10-27",
+      "owner_label_time_24h": "01:00",
+      "owner_material_tokens": [
+        "Pencil",
+        "Graphite",
+        "FountainPen",
+        "Ink",
+        "Paper"
+      ],
+      "owner_dimensions_text": "9x12",
+      "timezone": null,
+      "dimension_unit": null
+    }
+  ],
+  "C_correction": {
+    "question": "For C, the blue profile figure, should I use your latest label, 2026-10-23.1523.FountainPen.Ink.Paper.9x12, exactly as written (the same as B), or the earlier 2026-10-23.1824.BallpointPen.Ink.Paper.9x12? I need the intended value before assigning its canonical path.",
+    "answer": "Earlier: 18:24, BallpointPen"
+  },
+  "F_order": {
+    "question": "Which order should group F use for these two recordings?",
+    "answer": "Leave their relative order unresolved",
+    "sources": [
+      "VID_20261025_033718.mp4",
+      "VID_20261025_044208.mp4"
+    ]
+  },
+  "flagged_recording": {
+    "question": "Should VID_20261025_030436.mp4 be included unchanged if its identity and metadata checks pass, with the FFmpeg edit-list qualification retained? Its inclusion remains undecided in the current proposal.",
+    "answer": "Include unchanged if identity and metadata pass",
+    "source": "VID_20261025_030436.mp4",
+    "disposition": "selected unchanged with retained reader qualification"
+  },
+  "package_scope": {
+    "question": "While group F’s two recordings remain unordered, which package scope should I use? Deferring only VID_20261025_033718.mp4 and VID_20261025_044208.mp4 yields 47 videos / 29,532,133,448 bytes, including the unchanged recording with the edit-list qualification. F would be documented as nine of eleven retained files, with completeness unknown.",
+    "answer": "47 videos: defer only the unordered pair (Recommended)"
+  },
+  "selected_files": 47,
+  "selected_bytes": 29532133448,
+  "retained_files": 49,
+  "retained_bytes": 29700706565,
+  "source_map": {
+    "path": "source_dispositions.json",
+    "sha256": "411041c46e3eac0fd52f29c026f6d7230b3069a9b61659703be04f7d352b8700"
+  },
+  "limitations": [
+    "Work IDs remain blank; group labels are local review references, not a competing identifier registry.",
+    "The supplied 9x12 dimension text has no newly inferred unit.",
+    "No timezone or recording-start declaration is inferred from the finish labels.",
+    "RecNN is reviewed order within the selected file subset. Completeness remains unknown.",
+    "Publication approval does not resolve recording starts, sequence completeness, work IDs, or the deferred pair order."
+  ],
+  "publication_approval": {
+    "observed_utc": "2026-10-29T17:09:36.371446+00:00",
+    "authority": "Explicit human reply in this task",
+    "question": "The 47-video payload is assembled and byte-verified. Do you approve proceeding with its Hugging Face publication workflow, completing the remote identity bindings and strict validation, then refreshing GitHub from the accepted HF revision? This preserves F’s 9-of-11 coverage, the two deferred files, the edit-list qualification and the timing pause result.",
+    "answer": "Approve publication and GitHub refresh",
+    "selected_videos": 47,
+    "selected_bytes": 29532133448,
+    "payload_manifest_sha256": "a263c78202580f27759179231a4d37032e8ce7658911025a6975ccd37ea13cbc",
+    "review_readiness_receipt_sha256": "ff6342ce9d7cea461d58f220b25500137648148aab4bdbb4577fe59331071150",
+    "source_map_sha256": "1c1735cf5ab0c46b6b0b0177e94a1c88c152d77654f6043865023fe4ae03090a",
+    "scope": "Exact reviewed media; remote-bound metadata/ledger/access views and subsequent GitHub refresh. Owner facts/payloads/coverage fixed."
+  }
+}

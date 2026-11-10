@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "maxwellinked/time-lapse-artifacts",
+  "sourceRevision": "202226b18431f67f879629d8f49d72883643f810",
+  "sourceManifestSha256": "8bb79930d2e0280b9d8151977644dbcac1770c79a479e09af9f539a354937865",
+  "sourceInputs": [
+    {
+      "path": "Image_Source_Masters/v1/Receipts/relationships.json",
+      "retainedPath": "data/candidate-photo-source/relationships.json",
+      "sizeBytes": 1004,
+      "sha256": "04014df5ee47c075fd67605dd8c08f64813cab1ed66e0aa0a2728a8fe2fb3630"
+    },
+    {
+      "path": "Image_Source_Masters/v1/Receipts/ingest-authority.json",
+      "retainedPath": "data/candidate-photo-source/ingest-authority.json",
+      "sizeBytes": 1958,
+      "sha256": "dce9a4098ec9c2f088e52be5f2a026580574e5b1c109a4e4ec84244bc47cf69b"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-30/cohort.json",
+      "retainedPath": "data/candidate-photo-source/cohort.json",
+      "sizeBytes": 22602,
+      "sha256": "664f18bfe19929da41e65422f650b3d6939174456555ca19d801a6090d24a39c"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-29/owner_confirmation.json",
+      "retainedPath": "data/candidate-photo-source/owner-confirmation.json",
+      "sizeBytes": 7398,
+      "sha256": "48de5ea28c8b3a6b03944b157f47c97f244105fcc7be42784067db86cf892514"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-29/ingest_mapping.json",
+      "retainedPath": "data/candidate-photo-source/ingest-mapping.json",
+      "sizeBytes": 27884,
+      "sha256": "60386bb4082df47edd3448b5604399a8e6bb8b1320df753ab62af4c40263e6bb"
+    },
+    {
+      "path": "Standard_Time_Lapses/Provenance/2026-10-29/source_dispositions.json",
+      "retainedPath": "data/candidate-photo-source/source-dispositions.json",
+      "sizeBytes": 87241,
+      "sha256": "411041c46e3eac0fd52f29c026f6d7230b3069a9b61659703be04f7d352b8700"
+    }
+  ],
+  "photographs": [
+    {
+      "assetId": "imsrc:sha256:664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9",
+      "sourceSha256": "664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9",
+      "sourcePath": "Image_Source_Masters/v1/objects/664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9.DNG",
+      "filename": "IMG_3326.DNG",
+      "sizeBytes": 93431484,
+      "studySetId": "reference_9x12",
+      "workId": null,
+      "relationshipStatus": "candidate_same_drawing",
+      "endpointEstablished": false,
+      "finalStateEstablished": false,
+      "primarySelection": false,
+      "qualification": "Published candidate reference photograph for this recording group. It does not establish an exact recording endpoint or final state, and is not a selected primary photograph. DNG source download; no browser image is supplied.",
+      "metadataPath": "Image_Source_Masters/v1/Receipts/relationships.json",
+      "records": [
+        {
+          "recordId": "tla-2c306a52343fe829",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03.mp4"
+        },
+        {
+          "recordId": "tla-2ebf06934b96e8dd",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec05.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec05.mp4"
+        },
+        {
+          "recordId": "tla-a3c2dfe3e7b14b01",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec04.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec04.mp4"
+        },
+        {
+          "recordId": "tla-afcfcaf9ab1b6c16",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec06.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec06.mp4"
+        },
+        {
+          "recordId": "tla-b95b28799a6bedce",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03a.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec03a.mp4"
+        },
+        {
+          "recordId": "tla-d9c74b9d57e1c3a7",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec07.mp4",
+          "associationBasis": "Group-derived from prior owner-confirmed recording membership; not individually listed in the later study cohort.",
+          "associationKind": "owner_group_derived",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec07.mp4"
+        },
+        {
+          "recordId": "tla-e331a337491dcda6",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec01.mp4"
+        },
+        {
+          "recordId": "tla-e646380c8407b8f4",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec02.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-27.0100.Pencil.Graphite.FountainPen.Ink.Paper.9x12.Rec02.mp4"
+        }
+      ]
+    },
+    {
+      "assetId": "imsrc:sha256:7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612",
+      "sourceSha256": "7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612",
+      "sourcePath": "Image_Source_Masters/v1/objects/7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612.DNG",
+      "filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Paper.11x14.DNG",
+      "sizeBytes": 105075416,
+      "studySetId": "comparison_11x14",
+      "workId": null,
+      "relationshipStatus": "candidate_same_drawing",
+      "endpointEstablished": false,
+      "finalStateEstablished": false,
+      "primarySelection": false,
+      "qualification": "Published candidate reference photograph for this recording group. It does not establish an exact recording endpoint or final state, and is not a selected primary photograph. DNG source download; no browser image is supplied.",
+      "metadataPath": "Image_Source_Masters/v1/Receipts/relationships.json",
+      "records": [
+        {
+          "recordId": "tla-33e35be7b71f596d",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec02.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec02.mp4"
+        },
+        {
+          "recordId": "tla-683d766e65b70e83",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec01.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec01.mp4"
+        },
+        {
+          "recordId": "tla-7adb8c892c296dc1",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec04.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec04.mp4"
+        },
+        {
+          "recordId": "tla-8cd5eb5c7bacdaa9",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec05.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec05.mp4"
+        },
+        {
+          "recordId": "tla-b0f113c9af61478f",
+          "canonicalPath": "Standard_Time_Lapses/2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec03.mp4",
+          "associationBasis": "Direct cohort membership; candidate photograph relationship retained.",
+          "associationKind": "direct_cohort",
+          "filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Ink.Paper.11x14.Rec03.mp4"
+        }
+      ]
+    }
+  ]
+}

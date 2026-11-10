@@ -1,0 +1,44 @@
+{
+  "schema_version": "image-source-master-ingest-authority/v1",
+  "authorization": "Ingest with the understanding, this investigation remains open to me",
+  "scope": "two_unchanged_supplied_DNG_containers",
+  "objects": [
+    {
+      "asset_id": "imsrc:sha256:664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9",
+      "file_name": "Image_Source_Masters/v1/objects/664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9.DNG",
+      "sha256": "664e8776f87a4d3ca47c1ba7ac298843099070331929f5536b0bdff432e5d4b9",
+      "size_bytes": 93431484,
+      "original_filename": "IMG_3326.DNG",
+      "study_set_id": "reference_9x12",
+      "owner_finish_date": "2026-10-27",
+      "owner_finish_time": "01:00",
+      "dimensions": "9x12",
+      "dimension_unit": "in",
+      "tools": "Pencil;FountainPen",
+      "media": "Graphite;Ink",
+      "support": "Paper"
+    },
+    {
+      "asset_id": "imsrc:sha256:7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612",
+      "file_name": "Image_Source_Masters/v1/objects/7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612.DNG",
+      "sha256": "7625f42a74ecf9c06211828489ba3eaecad00651fb7f7893df59ce41bf94e612",
+      "size_bytes": 105075416,
+      "original_filename": "2026-10-29.2234.Pencil.Graphite.FountainPen.Paper.11x14.DNG",
+      "study_set_id": "comparison_11x14",
+      "owner_finish_date": "2026-10-29",
+      "owner_finish_time": "22:34",
+      "dimensions": "11x14",
+      "dimension_unit": "in",
+      "tools": "Pencil;FountainPen",
+      "media": "Graphite;Ink",
+      "support": "Paper"
+    }
+  ],
+  "work_registration_authorized": false,
+  "primary_selection_authorized": false,
+  "research_conclusions_authorized": false,
+  "recorded_at_utc": "2026-10-30T06:55:39.397452+00:00",
+  "owner_material_confirmation": "Confirm both finish labels and material sets",
+  "finish_labels_are_capture_timestamps": false,
+  "sequence_completeness_established": false
+}

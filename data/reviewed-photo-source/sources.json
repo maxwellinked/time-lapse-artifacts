@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "sourceRepository": "maxwellinked/time-lapse-artifacts",
+  "sourceRevision": "202226b18431f67f879629d8f49d72883643f810",
+  "inputs": [
+    {
+      "path": "Physical_References/Reviewed_Photographs/2026-10-31/metadata/photographs.json",
+      "retainedPath": "data/reviewed-photo-source/2026-10-31-photographs.json",
+      "sha256": "1cd787a40f90515fc5fa9cc17c7f55c159fc014730207c691498cd3519f75f5e",
+      "sizeBytes": 1398747
+    },
+    {
+      "path": "Physical_References/Reviewed_Photographs/2026-11-10/metadata/photographs.json",
+      "retainedPath": "data/reviewed-photo-source/2026-11-10-photographs.json",
+      "sha256": "5a97f01dc2822f27e3b8322a3507d2d3d9c6799af89375e16c9123058b9e5b55",
+      "sizeBytes": 6524
+    },
+    {
+      "path": "Work_Identity/work_record_links.csv",
+      "retainedPath": "data/reviewed-photo-source/work_record_links.csv",
+      "sha256": "89e7c62713fb4f260551bf165047074f7437892db25c03f7b3b274f6394c2d3c",
+      "sizeBytes": 458187
+    }
+  ]
+}

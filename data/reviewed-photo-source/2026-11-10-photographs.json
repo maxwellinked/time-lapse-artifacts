@@ -1,0 +1,130 @@
+{
+  "schema_version": "reviewed_photograph_access_collection_v1",
+  "baseline_revision": "86d35414d4ada7cfc3cc76c2c84ccaaeeac7c477",
+  "collection_date_label": "2026-11-10",
+  "policies": {
+    "identity": "Source SHA-256 identifies the unchanged supplied DNG. Public JPEG SHA-256 identifies the sanitized access image. Hash suffixes are not work identifiers.",
+    "recording_relationships": "Associations retain their evidence class. No exact recording segment or endpoint-state equality is asserted.",
+    "publication_scope": "Two additive photographs accompanying two creator-confirmed drawing groups. The 435 existing selected-front objects remain unchanged.",
+    "quality": "Dimensions do not establish geometric reproducibility, calibrated scale, color fidelity, fine-detail resolution or final-state equality.",
+    "privacy_processing": "Retain primary JPEG coding data, original ICC profile and EXIF Orientation only. Strip location, device and auxiliary metadata. Original DNG masters remain local and unchanged."
+  },
+  "photographs": [
+    {
+      "source": {
+        "sha256": "379dc4ed7c4344af7521c6e74f7c035b562faa6499545e5a1893081001679bd6",
+        "original_filename": "2026-11-01.0353.BallpointPen.Ink.Paper.11x14.DNG",
+        "size_bytes": 50461709,
+        "source_set": "november_2026_capture",
+        "source_container_kind": "dng_tiff"
+      },
+      "image": {
+        "path": "images/2026-11-01.0353.BallpointPen.Ink.Paper.11x14--379dc4ed7c4344af.jpg",
+        "sha256": "14c44a725e0021ae980aa58450b87f2aacc39e2737f26493c0756f65700894c0",
+        "size_bytes": 8646247,
+        "encoded_dimensions_px": [
+          8064,
+          6048
+        ],
+        "display_dimensions_px": [
+          6048,
+          8064
+        ],
+        "orientation": 6,
+        "icc_profile_sha256": "0ff6958f98684c61f6bbdce1368ddeaf3873baf84545baba482e920d92a914c0",
+        "format": "JPEG",
+        "frames": 1
+      },
+      "processing": {
+        "input_representation": "existing_full_size_embedded_jpeg_extraction",
+        "input_representation_sha256": "6941e3feeec69cbc7d99b2611695d8f63e220ca29ce6b3981c17e07ceabe6d79",
+        "public_export": "first_jpeg_image_preserved_with_icc_and_orientation_only_exif",
+        "pixel_recompression": false,
+        "pixel_resampling": false,
+        "raw_development": false,
+        "primary_coding_stream_sha256": "370e0e3c94bda71bc11b068d561df8c7739d4099d7edf647bed0b29e2710e0d5",
+        "decoded_primary_raster_sha256": "b2bafec8082467e7088d10eaf9dc1db117454b5185b730105dc57805f800d760",
+        "decoded_mode": "RGB",
+        "decoded_primary_raster_equality_verified": true
+      },
+      "placement_status": "owner_supplied_work_reference",
+      "current_role": "additive_reference",
+      "selected_front_promoted": false,
+      "candidate_archive_placements": [],
+      "prior_capture_review": null,
+      "prior_source_associations": [],
+      "supplementary_context_references": [],
+      "work_associations": [
+        {
+          "work_id": "tlaw-e5c89a91491998a7",
+          "relationship": "photograph_supplied_with_creator_confirmed_work",
+          "evidence_class": "creator_supplied_matching_finish_label_and_visual_corroboration",
+          "evidence_basis": "Creator supplied two complete drawings with finish labels, their recording groups and two correspondingly named DNGs. Reviewed images are visually consistent with the associated recordings. No separate exact endpoint-state equality confirmation was supplied.",
+          "recording_membership_registry": "Work_Identity/work_record_links.csv",
+          "recording_count": 3,
+          "endpoint_equality": null,
+          "photographed_final_state": null,
+          "selected_front_promoted": false
+        }
+      ]
+    },
+    {
+      "source": {
+        "sha256": "dd946b648445ee697e9ef2a71ba23381781748ddc0f18e6876cf55fb8beb5d0a",
+        "original_filename": "2026-11-10.0155.Pencil.Graphite.FountainPen.Ink.Paper.11x14.DNG",
+        "size_bytes": 63711001,
+        "source_set": "november_2026_capture",
+        "source_container_kind": "dng_tiff"
+      },
+      "image": {
+        "path": "images/2026-11-10.0155.Pencil.Graphite.FountainPen.Ink.Paper.11x14--dd946b648445ee69.jpg",
+        "sha256": "b2dc6d1197ba584dbc87ec5bd66ae77a445790ffcf85ad3b721d0205dba90056",
+        "size_bytes": 14411695,
+        "encoded_dimensions_px": [
+          8064,
+          6048
+        ],
+        "display_dimensions_px": [
+          6048,
+          8064
+        ],
+        "orientation": 6,
+        "icc_profile_sha256": "0ff6958f98684c61f6bbdce1368ddeaf3873baf84545baba482e920d92a914c0",
+        "format": "JPEG",
+        "frames": 1
+      },
+      "processing": {
+        "input_representation": "existing_full_size_embedded_jpeg_extraction",
+        "input_representation_sha256": "884a9da946b1be84bfe7218099a53165e5e9069d886d3bc27e218215c907ccc8",
+        "public_export": "first_jpeg_image_preserved_with_icc_and_orientation_only_exif",
+        "pixel_recompression": false,
+        "pixel_resampling": false,
+        "raw_development": false,
+        "primary_coding_stream_sha256": "a35cdfbdb7269dd3ec37181d047541805ab3babcdc27dda02d6b0af0c8d3b985",
+        "decoded_primary_raster_sha256": "37d633f34c091d31e4e35aa09b17f588b1c3c75ff48ed30e46d1c67c7e69c073",
+        "decoded_mode": "RGB",
+        "decoded_primary_raster_equality_verified": true
+      },
+      "placement_status": "owner_supplied_work_reference",
+      "current_role": "additive_reference",
+      "selected_front_promoted": false,
+      "candidate_archive_placements": [],
+      "prior_capture_review": null,
+      "prior_source_associations": [],
+      "supplementary_context_references": [],
+      "work_associations": [
+        {
+          "work_id": "tlaw-6a4a3ee3fdd84066",
+          "relationship": "photograph_supplied_with_creator_confirmed_work",
+          "evidence_class": "creator_supplied_matching_finish_label_and_visual_corroboration",
+          "evidence_basis": "Creator supplied two complete drawings with finish labels, their recording groups and two correspondingly named DNGs. Reviewed images are visually consistent with the associated recordings. No separate exact endpoint-state equality confirmation was supplied.",
+          "recording_membership_registry": "Work_Identity/work_record_links.csv",
+          "recording_count": 29,
+          "endpoint_equality": null,
+          "photographed_final_state": null,
+          "selected_front_promoted": false
+        }
+      ]
+    }
+  ]
+}
