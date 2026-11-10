@@ -1,0 +1,734 @@
+{
+  "schema": "native-inspection-projection/v1",
+  "derivedRepository": "maxwellinked/time-lapse-artifacts-derived",
+  "derivedRevision": "4b0870f45eac36c53b1084305934471ee8dd273b",
+  "profile": "artifacts/native-access-v1-2026-11-10",
+  "manifestPath": "artifacts/native-access-v1-2026-11-10/manifest.json",
+  "manifestSha256": "32a69b36cff7eb7fe24b92564e22981ef178a3e27b9838560ce6a205aa9a7a77",
+  "sourceRepository": "maxwellinked/time-lapse-artifacts",
+  "sourceRevision": "46e0be60f606635ee2b627be911bc98ab46565d3",
+  "records": [
+    {
+      "recordId": "tla-0897038ffd1f516b",
+      "collectionTier": "standard",
+      "filePath": "Standard_Time_Lapses/2026-07-24.1704.BallpointPen.Ink.Paper.12x9.mp4",
+      "sourceRevision": "46e0be60f606635ee2b627be911bc98ab46565d3",
+      "sourceRepository": "maxwellinked/time-lapse-artifacts",
+      "sourceSha256": "280789c0fc189cdb06c8e53a2f8affb1cf8704eb227d85b8340dd03be0c579e9",
+      "sourceXetHash": "45e0b6f0dd0cbeafff357a8003527614f4d4ff0955c570e99e5e61db5288dcae",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/46e0be60f606635ee2b627be911bc98ab46565d3/Standard_Time_Lapses/2026-07-24.1704.BallpointPen.Ink.Paper.12x9.mp4",
+      "sourcePageUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/46e0be60f606635ee2b627be911bc98ab46565d3/Standard_Time_Lapses/2026-07-24.1704.BallpointPen.Ink.Paper.12x9.mp4",
+      "accessManifestUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/blob/a8de72f00be897f055f9290c5b366238656520f0/artifacts/expansion-v1-2026-11-10/records/tla-0897038ffd1f516b/manifest.json",
+      "accessManifestSha256": "878ed62d866938cb38199be26718b801efb93a0240387802f70031fa9d168c04",
+      "proxyUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/a8de72f00be897f055f9290c5b366238656520f0/artifacts/expansion-v1-2026-11-10/records/tla-0897038ffd1f516b/proxy.mp4",
+      "documentaryState": {
+        "capture_extent": "unknown",
+        "completeness_evidence": null,
+        "source_master_status": "unknown",
+        "visible_end_state": "unknown",
+        "visible_start_state": "unknown",
+        "work_id": null,
+        "work_id_status": "unassigned"
+      },
+      "frames": [
+        {
+          "index": 0,
+          "normalizedEncodedPosition": 0,
+          "pts": 0,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 0,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "e8200be0334ad2139674610a523ed73c9161a74a6149f25faeb7ca286245e586",
+          "sizeBytes": 3697913,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/00.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "index": 1,
+          "normalizedEncodedPosition": 0.05,
+          "pts": 16483662,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 16.483662,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "eebd626485f005f8d95ab0286ad41e3ce611f79dbffa5083939428e51b86d677",
+          "sizeBytes": 4078817,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/01.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 329629999
+          }
+        },
+        {
+          "index": 2,
+          "normalizedEncodedPosition": 0.1,
+          "pts": 32967325,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 32.967325,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "eee85e144bd7617fb6f7c5af3c765ec1952de11573287277d73d27a442aeb844",
+          "sizeBytes": 4272041,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/02.png",
+          "targetPts": {
+            "denominator": 10,
+            "numerator": 329629999
+          }
+        },
+        {
+          "index": 3,
+          "normalizedEncodedPosition": 0.15,
+          "pts": 49450988,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 49.450988,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "c1c15e79233a7d0c0e55a540e953b14701bb54ad7f5b735c281cc56f9869ff29",
+          "sizeBytes": 4956206,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/03.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 988889997
+          }
+        },
+        {
+          "index": 4,
+          "normalizedEncodedPosition": 0.2,
+          "pts": 65934651,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 65.934651,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "62dc891ae772c723378f71b5b8a3af953118b09d464cb9fee624ee23f5708118",
+          "sizeBytes": 5335850,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/04.png",
+          "targetPts": {
+            "denominator": 5,
+            "numerator": 329629999
+          }
+        },
+        {
+          "index": 5,
+          "normalizedEncodedPosition": 0.25,
+          "pts": 82418314,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 82.418314,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "c2bbd299b26e215c345d86718524a64c7225ad5499cbc4809516ce70cac0f4cb",
+          "sizeBytes": 5601521,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/05.png",
+          "targetPts": {
+            "denominator": 4,
+            "numerator": 329629999
+          }
+        },
+        {
+          "index": 6,
+          "normalizedEncodedPosition": 0.3,
+          "pts": 98901977,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 98.901977,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "0b2bc1a2ae5ceb2755bfb135da4e815423f22e53eb8c2c247c7546b450cdf7e2",
+          "sizeBytes": 5290428,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/06.png",
+          "targetPts": {
+            "denominator": 10,
+            "numerator": 988889997
+          }
+        },
+        {
+          "index": 7,
+          "normalizedEncodedPosition": 0.35,
+          "pts": 115385640,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 115.38564,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "1ea8cfd1011c3be086eb28ab456f67972d9d00e21d815c8eaf72604ec9d12544",
+          "sizeBytes": 5460832,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/07.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 2307409993
+          }
+        },
+        {
+          "index": 8,
+          "normalizedEncodedPosition": 0.4,
+          "pts": 131852636,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 131.852636,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "aa07f632c7636dd34bba5aadd03bddbd5596a8b489f339c490050834e316f8c8",
+          "sizeBytes": 5383887,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/08.png",
+          "targetPts": {
+            "denominator": 5,
+            "numerator": 659259998
+          }
+        },
+        {
+          "index": 9,
+          "normalizedEncodedPosition": 0.45,
+          "pts": 148336299,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 148.336299,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "52a5cbde7cb2668fcb22668c81cff0d6cda529e8902523b97b9163b069486224",
+          "sizeBytes": 6038581,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/09.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 2966669991
+          }
+        },
+        {
+          "index": 10,
+          "normalizedEncodedPosition": 0.5,
+          "pts": 164819962,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 164.819962,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "a7f530527cb9282b9bfe7c28bfc72063e516fe4387136311ee855073ae09d841",
+          "sizeBytes": 6547980,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/10.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 329629999
+          }
+        },
+        {
+          "index": 11,
+          "normalizedEncodedPosition": 0.55,
+          "pts": 181303625,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 181.303625,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "d5747caec6f72fa9b4a4cfbc7fc90c0db5f8ead5f264a562f1c290587302cc12",
+          "sizeBytes": 6098071,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/11.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 3625929989
+          }
+        },
+        {
+          "index": 12,
+          "normalizedEncodedPosition": 0.6,
+          "pts": 197787288,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 197.787288,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "a016ce4e7939e4598e6482292ddc6cb43400c19f7acc5bdb2ae742050f46b8dd",
+          "sizeBytes": 6388488,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/12.png",
+          "targetPts": {
+            "denominator": 5,
+            "numerator": 988889997
+          }
+        },
+        {
+          "index": 13,
+          "normalizedEncodedPosition": 0.65,
+          "pts": 214270951,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 214.270951,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "24e97408783fbad915bc74fc6715c8a063bc265cc41da71d804895dfa26792ff",
+          "sizeBytes": 6588393,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/13.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 4285189987
+          }
+        },
+        {
+          "index": 14,
+          "normalizedEncodedPosition": 0.7,
+          "pts": 230754614,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 230.754614,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "8a8891f9b2cca93cf534a1f73f9d6c81a78b189ade42ae93fa55e0ea77843938",
+          "sizeBytes": 6225027,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/14.png",
+          "targetPts": {
+            "denominator": 10,
+            "numerator": 2307409993
+          }
+        },
+        {
+          "index": 15,
+          "normalizedEncodedPosition": 0.75,
+          "pts": 247238277,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 247.238277,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "90f99e717e1735b65e792c7d0d36a5802673f7d1c456841bd70566e7304868d4",
+          "sizeBytes": 6275459,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/15.png",
+          "targetPts": {
+            "denominator": 4,
+            "numerator": 988889997
+          }
+        },
+        {
+          "index": 16,
+          "normalizedEncodedPosition": 0.8,
+          "pts": 263705273,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 263.705273,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "bc68286a4661b2694e581939e5fd4c3959beaf4f3cda23df6ff342b673b73eac",
+          "sizeBytes": 5958500,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/16.png",
+          "targetPts": {
+            "denominator": 5,
+            "numerator": 1318519996
+          }
+        },
+        {
+          "index": 17,
+          "normalizedEncodedPosition": 0.85,
+          "pts": 280188936,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 280.188936,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "eeb054756844d6f9c243a5f4de2f0a739d8467cea89935800b822e5692295e99",
+          "sizeBytes": 6731010,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/17.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 5603709983
+          }
+        },
+        {
+          "index": 18,
+          "normalizedEncodedPosition": 0.9,
+          "pts": 296672599,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 296.672599,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "0aee244b30187cbebe18a9e33d06e1118738e7cb9124868fe0b064e95f481ac1",
+          "sizeBytes": 6474306,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/18.png",
+          "targetPts": {
+            "denominator": 10,
+            "numerator": 2966669991
+          }
+        },
+        {
+          "index": 19,
+          "normalizedEncodedPosition": 0.95,
+          "pts": 313156262,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 313.156262,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "a8e88d8948f9f35876c646347d1ccb6824bb069feb957e85d3df3c6e9c3539d5",
+          "sizeBytes": 6881596,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/19.png",
+          "targetPts": {
+            "denominator": 20,
+            "numerator": 6262969981
+          }
+        },
+        {
+          "index": 20,
+          "normalizedEncodedPosition": 1,
+          "pts": 329629999,
+          "timeBase": "1/1000000",
+          "encodedSeconds": 329.629999,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "02481f3ba64dae61796f922251d7ffd8b4e6509964ff4ce51a9df515330b15c1",
+          "sizeBytes": 7471963,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-0897038ffd1f516b/20.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 329629999
+          }
+        }
+      ]
+    },
+    {
+      "recordId": "tla-5fe34f800eee6bb4",
+      "collectionTier": "pre_standard",
+      "filePath": "Pre_Standard_Time_Lapses/2025-02-03.00.UnknownTime.Pencil.Graphite.FountainPen.Ink.IllustrationBoard.30x40.mp4",
+      "sourceRevision": "46e0be60f606635ee2b627be911bc98ab46565d3",
+      "sourceRepository": "maxwellinked/time-lapse-artifacts",
+      "sourceSha256": "c24c567f18436d1d9e0a3f22779ff028e08d3ea0cb63daf9085b8d6e353b16b1",
+      "sourceXetHash": "f4d47afbe3f2081e0ea09606c0484409cc8909cf4fec8ef3ae12f4b99f610a6e",
+      "sourceUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/46e0be60f606635ee2b627be911bc98ab46565d3/Pre_Standard_Time_Lapses/2025-02-03.00.UnknownTime.Pencil.Graphite.FountainPen.Ink.IllustrationBoard.30x40.mp4",
+      "sourcePageUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/46e0be60f606635ee2b627be911bc98ab46565d3/Pre_Standard_Time_Lapses/2025-02-03.00.UnknownTime.Pencil.Graphite.FountainPen.Ink.IllustrationBoard.30x40.mp4",
+      "accessManifestUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/blob/a8de72f00be897f055f9290c5b366238656520f0/artifacts/expansion-v1-2026-11-10/records/tla-5fe34f800eee6bb4/manifest.json",
+      "accessManifestSha256": "708cfac43a54641dc7978283b8a7f42eb61b879d45f61d7163027dd80d227070",
+      "proxyUrl": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/a8de72f00be897f055f9290c5b366238656520f0/artifacts/expansion-v1-2026-11-10/records/tla-5fe34f800eee6bb4/proxy.mp4",
+      "documentaryState": {
+        "capture_extent": "unknown",
+        "completeness_evidence": null,
+        "source_master_status": "unknown",
+        "visible_end_state": "unknown",
+        "visible_start_state": "unknown",
+        "work_id": null,
+        "work_id_status": "unassigned"
+      },
+      "frames": [
+        {
+          "index": 0,
+          "normalizedEncodedPosition": 0,
+          "pts": 0,
+          "timeBase": "1/600",
+          "encodedSeconds": 0,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "bfb69c38b3c04df8d3bd22ee2d4a8f272e963d921c7c0102bad091513c96dc58",
+          "sizeBytes": 922817,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/00.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 0
+          }
+        },
+        {
+          "index": 1,
+          "normalizedEncodedPosition": 0.05,
+          "pts": 79610,
+          "timeBase": "1/600",
+          "encodedSeconds": 132.68333333333334,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "b3c1280f427a3860bb0afadae51dea315e7cdf609ed9c7bbf71a62083642b979",
+          "sizeBytes": 2661501,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/01.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 159203
+          }
+        },
+        {
+          "index": 2,
+          "normalizedEncodedPosition": 0.1,
+          "pts": 159210,
+          "timeBase": "1/600",
+          "encodedSeconds": 265.35,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "6ef5146c5ad32618acb74e93dadb14fa08599708623954cde6758f9d129822d2",
+          "sizeBytes": 2567564,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/02.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 159203
+          }
+        },
+        {
+          "index": 3,
+          "normalizedEncodedPosition": 0.15,
+          "pts": 238810,
+          "timeBase": "1/600",
+          "encodedSeconds": 398.01666666666665,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "e74525a683cb1988168e0d09049f40999675e1ecea4f13130ab910d646e6ecff",
+          "sizeBytes": 2817757,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/03.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 477609
+          }
+        },
+        {
+          "index": 4,
+          "normalizedEncodedPosition": 0.2,
+          "pts": 318410,
+          "timeBase": "1/600",
+          "encodedSeconds": 530.6833333333333,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "44c6f28425f26430fb34016c29c249a8cf6df2ba31d95309b087e5827f6b4bfe",
+          "sizeBytes": 3565596,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/04.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 318406
+          }
+        },
+        {
+          "index": 5,
+          "normalizedEncodedPosition": 0.25,
+          "pts": 398010,
+          "timeBase": "1/600",
+          "encodedSeconds": 663.35,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "42090113289183f875c061581a05a134e65e98c1150b774ee96e049f9fd5a9df",
+          "sizeBytes": 2671201,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/05.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 796015
+          }
+        },
+        {
+          "index": 6,
+          "normalizedEncodedPosition": 0.3,
+          "pts": 477610,
+          "timeBase": "1/600",
+          "encodedSeconds": 796.0166666666667,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "ab84d55f6a7bebce695e52eef2a3a94050f16ed8948ecdc1481ce9fa73f7fb86",
+          "sizeBytes": 2756185,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/06.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 477609
+          }
+        },
+        {
+          "index": 7,
+          "normalizedEncodedPosition": 0.35,
+          "pts": 557220,
+          "timeBase": "1/600",
+          "encodedSeconds": 928.7,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "441bc3c2ce530915c03019ddfe326ebb4e98c01218169814042108f4a672c7d9",
+          "sizeBytes": 2399241,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/07.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 1114421
+          }
+        },
+        {
+          "index": 8,
+          "normalizedEncodedPosition": 0.4,
+          "pts": 636820,
+          "timeBase": "1/600",
+          "encodedSeconds": 1061.3666666666666,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "2b0f9d1cc31d36adc439dc09cda7d694b3738643180bb415b6cbed9bb7084410",
+          "sizeBytes": 2944839,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/08.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 636812
+          }
+        },
+        {
+          "index": 9,
+          "normalizedEncodedPosition": 0.45,
+          "pts": 716420,
+          "timeBase": "1/600",
+          "encodedSeconds": 1194.0333333333333,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "ae91f16f42db1f2628de503786478bd39cfe206477ff78eab82ab31552a0ba6d",
+          "sizeBytes": 3263874,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/09.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 1432827
+          }
+        },
+        {
+          "index": 10,
+          "normalizedEncodedPosition": 0.5,
+          "pts": 796020,
+          "timeBase": "1/600",
+          "encodedSeconds": 1326.7,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "a60da835b83b28f6c76588d49db4e3439b10714da541bc05f11b70bc0204d220",
+          "sizeBytes": 3185860,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/10.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 796015
+          }
+        },
+        {
+          "index": 11,
+          "normalizedEncodedPosition": 0.55,
+          "pts": 875620,
+          "timeBase": "1/600",
+          "encodedSeconds": 1459.3666666666666,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "3c8f45e60964b3278ee9b5b948477e94c67e341d7fdb7662d32bc6482b230b79",
+          "sizeBytes": 3450326,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/11.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 1751233
+          }
+        },
+        {
+          "index": 12,
+          "normalizedEncodedPosition": 0.6,
+          "pts": 955220,
+          "timeBase": "1/600",
+          "encodedSeconds": 1592.0333333333333,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "f09e63e25eee959286dbc54a3ba469f1bcc3a4eb64f1904e627ae60b385dfbc1",
+          "sizeBytes": 3687747,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/12.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 955218
+          }
+        },
+        {
+          "index": 13,
+          "normalizedEncodedPosition": 0.65,
+          "pts": 1034820,
+          "timeBase": "1/600",
+          "encodedSeconds": 1724.7,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "a281a5bafc8e573c450bf0841ff24ba3a69fd196e72de6cc3597c963c885d53a",
+          "sizeBytes": 3735537,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/13.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 2069639
+          }
+        },
+        {
+          "index": 14,
+          "normalizedEncodedPosition": 0.7,
+          "pts": 1114430,
+          "timeBase": "1/600",
+          "encodedSeconds": 1857.3833333333334,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "6ced001e6ea261c682bf411855f59168c1678166242c5d1fa1c2bc2b0a6c4076",
+          "sizeBytes": 3984776,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/14.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 1114421
+          }
+        },
+        {
+          "index": 15,
+          "normalizedEncodedPosition": 0.75,
+          "pts": 1194030,
+          "timeBase": "1/600",
+          "encodedSeconds": 1990.05,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "61382a136c699f5f7b95529768405a55144898a0e04942e191687a17a915f325",
+          "sizeBytes": 3987358,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/15.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 2388045
+          }
+        },
+        {
+          "index": 16,
+          "normalizedEncodedPosition": 0.8,
+          "pts": 1273630,
+          "timeBase": "1/600",
+          "encodedSeconds": 2122.7166666666667,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "ee2739236b494f2f0f4fd5957fbf9dcf7ea7206bc034338f77b4385d47d12a03",
+          "sizeBytes": 4153971,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/16.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 1273624
+          }
+        },
+        {
+          "index": 17,
+          "normalizedEncodedPosition": 0.85,
+          "pts": 1353230,
+          "timeBase": "1/600",
+          "encodedSeconds": 2255.383333333333,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "d83fee2404f4e0d4b8d5ecc148848f3a802739d79f5859581f4ae8f33726d2bb",
+          "sizeBytes": 4608595,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/17.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 2706451
+          }
+        },
+        {
+          "index": 18,
+          "normalizedEncodedPosition": 0.9,
+          "pts": 1432830,
+          "timeBase": "1/600",
+          "encodedSeconds": 2388.05,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "d0285df6d423aba8837b895f4550d46f6b8e679f31ac46be0710dc115a5ce3c1",
+          "sizeBytes": 5259243,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/18.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 1432827
+          }
+        },
+        {
+          "index": 19,
+          "normalizedEncodedPosition": 0.95,
+          "pts": 1512430,
+          "timeBase": "1/600",
+          "encodedSeconds": 2520.7166666666667,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "158d1f764eb1641686a0bf2027014eef0b7f72c03a2bd5ce1eb211b5fb5b96b1",
+          "sizeBytes": 4785950,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/19.png",
+          "targetPts": {
+            "denominator": 2,
+            "numerator": 3024857
+          }
+        },
+        {
+          "index": 20,
+          "normalizedEncodedPosition": 1,
+          "pts": 1592030,
+          "timeBase": "1/600",
+          "encodedSeconds": 2653.383333333333,
+          "width": 2160,
+          "height": 3840,
+          "sha256": "d6b53d0d6b5e2729cbb18ac098aa62a1c54cceaccb764ebc203b348f4b7d7fc1",
+          "sizeBytes": 4645857,
+          "url": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts-derived/resolve/4b0870f45eac36c53b1084305934471ee8dd273b/artifacts/native-access-v1-2026-11-10/assets/tla-5fe34f800eee6bb4/20.png",
+          "targetPts": {
+            "denominator": 1,
+            "numerator": 1592030
+          }
+        }
+      ]
+    }
+  ]
+}

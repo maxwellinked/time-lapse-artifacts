@@ -1,3 +1,4 @@
 # Retain authoritative source bytes exactly, including any original CRLF.
 data/reviewed-photo-source/* -text whitespace=cr-at-eol
 data/candidate-photo-source/* -text whitespace=cr-at-eol
+inspection/native-source/** -text whitespace=cr-at-eol

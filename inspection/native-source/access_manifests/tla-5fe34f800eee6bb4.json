@@ -1,0 +1,290 @@
+{
+  "derivation_id": "tla-deriv-2417c4d629ec1e317551",
+  "documentary_state": {
+    "capture_extent": "unknown",
+    "completeness_evidence": null,
+    "source_master_status": "unknown",
+    "visible_end_state": "unknown",
+    "visible_start_state": "unknown",
+    "work_id": null,
+    "work_id_status": "unassigned"
+  },
+  "generator": {
+    "ffmpeg_version": "ffmpeg version 9.0-full_build-www.gyan.dev Copyright (c) 2000-2026 the FFmpeg developers\r\nbuilt with gcc 16.1.0 (Rev2, Built by MSYS2 project)\r\nconfiguration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-cairo --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-liboapv --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libsvtjpegxs --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-openal --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint --enable-whisper\r\nlibavutil      61.  1.100 / 61.  1.100\r\nlibavcodec     63.  1.100 / 63.  1.100\r\nlibavformat    63.  1.100 / 63.  1.100\r\nlibavdevice    63.  1.100 / 63.  1.100\r\nlibavfilter    12.  1.100 / 12.  1.100\r\nlibswscale     10.  1.100 / 10.  1.100\r\nlibswresample   7.  1.100 /  7.  1.100\r\n\r\nExiting with exit code 0",
+    "name": "time-lapse-artifacts-derivative-generator",
+    "version": "1.1.0"
+  },
+  "manifest_version": "1.0.0",
+  "progress_frames": {
+    "adjacent_pairs_at_or_below_difference_hash_hamming_2": 0,
+    "exact_adjacent_duplicate_pairs": 0,
+    "frame_count": 21,
+    "frames": [
+      {
+        "difference_hash_64": "917e787879572e2f",
+        "difference_hash_hamming_to_previous": null,
+        "index": 0,
+        "normalized_encoded_position": 0.0,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_00.jpg",
+        "requested_seek_seconds": 0.0,
+        "sha256": "a575a8d17385e50d24a319859edbbe355aedfc29c8dfa5fd7a3a7401c87ca0bb",
+        "size_bytes": 47484
+      },
+      {
+        "difference_hash_64": "817a30304b2955e6",
+        "difference_hash_hamming_to_previous": 25,
+        "index": 1,
+        "normalized_encoded_position": 0.05,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_01.jpg",
+        "requested_seek_seconds": 132.67,
+        "sha256": "d2e63db4a28640ede4a18c35e647a8636af5030270f1f4e7a59d8e636b0fd71e",
+        "size_bytes": 72229
+      },
+      {
+        "difference_hash_64": "817a78302b6e56ef",
+        "difference_hash_hamming_to_previous": 12,
+        "index": 2,
+        "normalized_encoded_position": 0.1,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_02.jpg",
+        "requested_seek_seconds": 265.34,
+        "sha256": "fc5a26dcb64564dda70640aff4a90c179941183f7699195de4adc4fff655e72f",
+        "size_bytes": 75839
+      },
+      {
+        "difference_hash_64": "917a78ec8d7fa7b3",
+        "difference_hash_hamming_to_previous": 21,
+        "index": 3,
+        "normalized_encoded_position": 0.15,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_03.jpg",
+        "requested_seek_seconds": 398.01,
+        "sha256": "fcdf2d42f9f25d4ba98701b9fa90286b6e5df4418a7d985d9cc25986cdc55cf9",
+        "size_bytes": 87272
+      },
+      {
+        "difference_hash_64": "917a797c4f9ea7a1",
+        "difference_hash_hamming_to_previous": 12,
+        "index": 4,
+        "normalized_encoded_position": 0.2,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_04.jpg",
+        "requested_seek_seconds": 530.68,
+        "sha256": "767466a0b0e0f6bee2caabaaaf5ee06c71e93f4098cb39cbc97e7e4df0168bec",
+        "size_bytes": 117634
+      },
+      {
+        "difference_hash_64": "c162406019755beb",
+        "difference_hash_hamming_to_previous": 30,
+        "index": 5,
+        "normalized_encoded_position": 0.25,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_05.jpg",
+        "requested_seek_seconds": 663.35,
+        "sha256": "a174963285c1ab4faed03ea1708c79de547266a476028fa06f5f8df341548593",
+        "size_bytes": 75596
+      },
+      {
+        "difference_hash_64": "c1634041155e53e9",
+        "difference_hash_hamming_to_previous": 11,
+        "index": 6,
+        "normalized_encoded_position": 0.3,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_06.jpg",
+        "requested_seek_seconds": 796.02,
+        "sha256": "7fe64b836b460dd28e2ded70757e2775738eece155c29497f1e667313a6c83d2",
+        "size_bytes": 70044
+      },
+      {
+        "difference_hash_64": "c1626370155d524d",
+        "difference_hash_hamming_to_previous": 13,
+        "index": 7,
+        "normalized_encoded_position": 0.35,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_07.jpg",
+        "requested_seek_seconds": 928.69,
+        "sha256": "46a8580761296142ed6a322fae43d1460627966ba6f14e8bf8ece9b0c3a873f2",
+        "size_bytes": 80360
+      },
+      {
+        "difference_hash_64": "c172404011c1d749",
+        "difference_hash_hamming_to_previous": 15,
+        "index": 8,
+        "normalized_encoded_position": 0.4,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_08.jpg",
+        "requested_seek_seconds": 1061.36,
+        "sha256": "72d262f70e27ee02f42a88c6e1a0cf1e547d3628fbbc071c5618dc52189e21ec",
+        "size_bytes": 85188
+      },
+      {
+        "difference_hash_64": "c172400001cdd556",
+        "difference_hash_hamming_to_previous": 10,
+        "index": 9,
+        "normalized_encoded_position": 0.45,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_09.jpg",
+        "requested_seek_seconds": 1194.03,
+        "sha256": "8d71d58483ff1f61b8d6854f1b70b333ffa0a0e59455eb6f0bf4316ce701925b",
+        "size_bytes": 115398
+      },
+      {
+        "difference_hash_64": "415361406393d44b",
+        "difference_hash_hamming_to_previous": 19,
+        "index": 10,
+        "normalized_encoded_position": 0.5,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_10.jpg",
+        "requested_seek_seconds": 1326.7,
+        "sha256": "128e30c92eab89d657b2b3e47830b1d0f22967b620ca97abf0fb01a8e204f8f5",
+        "size_bytes": 104614
+      },
+      {
+        "difference_hash_64": "41330b62add3d74a",
+        "difference_hash_hamming_to_previous": 17,
+        "index": 11,
+        "normalized_encoded_position": 0.55,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_11.jpg",
+        "requested_seek_seconds": 1459.37,
+        "sha256": "a0c7c3e55adee23ec69902f80145f1d189cb7d0857c3c73f91d69a5e8d10e0dd",
+        "size_bytes": 118145
+      },
+      {
+        "difference_hash_64": "818280c381d3974f",
+        "difference_hash_hamming_to_previous": 19,
+        "index": 12,
+        "normalized_encoded_position": 0.6,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_12.jpg",
+        "requested_seek_seconds": 1592.04,
+        "sha256": "2a108128d941f51068286a1763b626604c23e990a2e9cfb133b4d0852c23c57a",
+        "size_bytes": 136021
+      },
+      {
+        "difference_hash_64": "818280c18957d26d",
+        "difference_hash_hamming_to_previous": 9,
+        "index": 13,
+        "normalized_encoded_position": 0.65,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_13.jpg",
+        "requested_seek_seconds": 1724.71,
+        "sha256": "088ade5d403579ee355b9bd3eebddd5fe157c3dcebb7deac312d728bfaab1133",
+        "size_bytes": 140964
+      },
+      {
+        "difference_hash_64": "819a99dfeb91f749",
+        "difference_hash_hamming_to_previous": 21,
+        "index": 14,
+        "normalized_encoded_position": 0.7,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_14.jpg",
+        "requested_seek_seconds": 1857.38,
+        "sha256": "bb83d9f8c50f6f3af9070d5dd8f1a38e8e83219176850244cbd999f4043a3c20",
+        "size_bytes": 145630
+      },
+      {
+        "difference_hash_64": "d1a2a9728addd7e3",
+        "difference_hash_hamming_to_previous": 23,
+        "index": 15,
+        "normalized_encoded_position": 0.75,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_15.jpg",
+        "requested_seek_seconds": 1990.05,
+        "sha256": "eec0030061373a2d6867a2a9be097ab1f60794ffc614340457b342d7af3fe707",
+        "size_bytes": 135521
+      },
+      {
+        "difference_hash_64": "c1a2a163ab839461",
+        "difference_hash_hamming_to_previous": 16,
+        "index": 16,
+        "normalized_encoded_position": 0.8,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_16.jpg",
+        "requested_seek_seconds": 2122.72,
+        "sha256": "30124040a01802d8fce5ec0b992fc5b9c95458a85b478ba58b33891037bfef66",
+        "size_bytes": 171477
+      },
+      {
+        "difference_hash_64": "81a3aea5a98dd7ce",
+        "difference_hash_hamming_to_previous": 23,
+        "index": 17,
+        "normalized_encoded_position": 0.85,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_17.jpg",
+        "requested_seek_seconds": 2255.39,
+        "sha256": "686fe62c9b4584924bea7665824f526d68a169c558070fabfad630380c8ebf05",
+        "size_bytes": 187783
+      },
+      {
+        "difference_hash_64": "c183b1e9a9af974e",
+        "difference_hash_hamming_to_previous": 14,
+        "index": 18,
+        "normalized_encoded_position": 0.9,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_18.jpg",
+        "requested_seek_seconds": 2388.06,
+        "sha256": "804d72cba7bbd63f9428570ea666f52dd02123ee71c1b6b28a6cc225e8e11e45",
+        "size_bytes": 210401
+      },
+      {
+        "difference_hash_64": "c18bb0acaba5d668",
+        "difference_hash_hamming_to_previous": 13,
+        "index": 19,
+        "normalized_encoded_position": 0.95,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_19.jpg",
+        "requested_seek_seconds": 2520.73,
+        "sha256": "9d8dfeaa4edd91967eb35a65f0b8de52d97d91e876d608e014e9df4d03abb06a",
+        "size_bytes": 201348
+      },
+      {
+        "difference_hash_64": "818bb0a8a9a3d74e",
+        "difference_hash_hamming_to_previous": 9,
+        "index": 20,
+        "normalized_encoded_position": 1.0,
+        "path": "records/tla-5fe34f800eee6bb4/frames/frame_20.jpg",
+        "requested_seek_seconds": 2653.383333333,
+        "sha256": "4bca6e0a7b28640572341db5bea0f0a2cd24974b9b872f97791fdc0fbee86ede",
+        "size_bytes": 213358
+      }
+    ],
+    "interpretation": null,
+    "position_basis": "normalized_encoded_duration",
+    "real_drawing_time_claimed": false
+  },
+  "proxy": {
+    "audio_removed": true,
+    "codec": "h264",
+    "crf": 28,
+    "encoded_frame_rate": 30,
+    "fit_within_pixels": [
+      1280,
+      1280
+    ],
+    "path": "records/tla-5fe34f800eee6bb4/proxy.mp4",
+    "pixel_format": "yuv420p",
+    "preset": "medium",
+    "probed": {
+      "audio_stream_count": 0,
+      "average_frame_rate": 30.0,
+      "codec": "h264",
+      "duration_seconds": 2653.4,
+      "has_audio": false,
+      "height": 1280,
+      "pixel_format": "yuv420p",
+      "reported_frame_rate": "30/1",
+      "video_stream_count": 1,
+      "width": 720
+    },
+    "sha256": "07affe98969722f47e470550cbd81f81d7982140d5b91c1c73e15d8147089069",
+    "size_bytes": 168987327
+  },
+  "source": {
+    "collection_tier": "pre_standard",
+    "downloaded_content_sha256": "c24c567f18436d1d9e0a3f22779ff028e08d3ea0cb63daf9085b8d6e353b16b1",
+    "file_path": "Pre_Standard_Time_Lapses/2025-02-03.00.UnknownTime.Pencil.Graphite.FountainPen.Ink.IllustrationBoard.30x40.mp4",
+    "hub_lfs_sha256": "c24c567f18436d1d9e0a3f22779ff028e08d3ea0cb63daf9085b8d6e353b16b1",
+    "hub_xet_hash": "f4d47afbe3f2081e0ea09606c0484409cc8909cf4fec8ef3ae12f4b99f610a6e",
+    "metadata_duration_seconds": 2653.4,
+    "probed": {
+      "audio_stream_count": 1,
+      "average_frame_rate": 60.0,
+      "codec": "h264",
+      "duration_seconds": 2653.4,
+      "has_audio": true,
+      "height": 3840,
+      "pixel_format": "yuv420p",
+      "reported_frame_rate": "60/1",
+      "video_stream_count": 1,
+      "width": 2160
+    },
+    "record_id": "tla-5fe34f800eee6bb4",
+    "repo_id": "maxwellinked/time-lapse-artifacts",
+    "revision": "46e0be60f606635ee2b627be911bc98ab46565d3",
+    "size_bytes": 18633497650,
+    "source_has_audio": true
+  }
+}
