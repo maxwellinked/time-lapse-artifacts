@@ -27,6 +27,33 @@ changing the 435 selected fronts. Reproduce this access map with
 Thirteen further recordings expose existing candidate DNG downloads with their
 provisional associations; they remain outside the displayed-photograph filter.
 
+## One drawing, plane by plane
+
+The [drawing-process example](drawing-process.html) follows six photographs and
+one locally matched real-time/time-lapse detail, alongside the artist's current
+method account. It publishes reviewed excerpts, previews and source-file
+identities; the full original files remain outside this release. Nominal paper
+dimensions and unmeasured drawing quantities retain their source qualifications.
+
+Hugging Face owns the dated note, structured records and display template under
+`docs/notes/drawing-process-2026-11-13/`. Its derived repository supplies the
+excerpts and previews under `Drawing_Process/2026-11-13/`. The exact retained
+template, derivative declaration and note manifest are bound by
+[`data/drawing-process-source/source.json`](data/drawing-process-source/source.json)
+to independent immutable source and derived revisions. The browser substitutes
+only those two revisions into the authoritative template. This example does not
+change the existing Standard, RT or photograph projection pins.
+
+```console
+node tools/build-drawing-process.mjs --check
+node tools/build-drawing-process.mjs --sync --revision <published-source-commit>
+```
+
+The sync fetches three small source files and verifies their content bindings
+before changing the local projection. It does not download original recordings.
+The normal site validator checks exact regeneration, declared media/source links,
+and the homepage entry link.
+
 ## Source authority
 
 **Hugging Face owns the data and metadata. GitHub consumes and presents them.**

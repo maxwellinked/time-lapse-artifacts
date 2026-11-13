@@ -1,0 +1,23 @@
+{
+  "schema": "drawing-process-browser-source/v1",
+  "sourceRepository": "maxwellinked/time-lapse-artifacts",
+  "sourceRevision": "5d9defcf8bfeb24a60dda29a17b7072c6823ad6b",
+  "notePath": "docs/notes/drawing-process-2026-11-13",
+  "derivedRepository": "maxwellinked/time-lapse-artifacts-derived",
+  "derivedRevision": "63fe923cd4399f1612005c4f68dd2f29822de815",
+  "scope": "Exact retained source display template and derivative declarations; original payload ingest remains separately qualified by the authoritative note.",
+  "inputs": {
+    "presentation.html": {
+      "bytes": 22480,
+      "sha256": "9022f939f6df0e977e77d8ed18a68a9fb3cb9630db222a93840d0540b0017b9d"
+    },
+    "derivatives.json": {
+      "bytes": 12350,
+      "sha256": "c612dceb6c9cdfd95f1a8f8116e1579bbb7a7e0c51819b668f66d589ca49f843"
+    },
+    "manifest.json": {
+      "bytes": 2172,
+      "sha256": "6f48fc4209541d897d2004ebd575fb372cdbcad94a39e3fb8beb037eff2edd1b"
+    }
+  }
+}
