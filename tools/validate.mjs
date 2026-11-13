@@ -11,6 +11,7 @@ import { referencePreviewPath, SHARED_REFERENCE_PREVIEWS } from "../assets/refer
 import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
 import { createValidationServer, hasRequiredSourceLinks } from "./validation-helpers.mjs";
 import { buildRealTimeProjection, buildRealTimePage, loadRealTimePresentation } from "./build-real-time-recordings.mjs";
+import {buildDrawingProcessPage, loadDrawingProcessInputs} from "./build-drawing-process.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 validateSelectedFrontAssets(root);
@@ -39,6 +40,10 @@ const requiredFiles = [
 for (const path of requiredFiles) readFileSync(join(root, path));
 
 const html = readFileSync(join(root, "index.html"), "utf8");
+if (!html.includes('href="drawing-process.html"') ||
+    readFileSync(join(root, "drawing-process.html"), "utf8") !== buildDrawingProcessPage(loadDrawingProcessInputs())) {
+  throw new Error("Drawing-process example is missing, unreachable or differs from its pinned source template");
+}
 const css = readFileSync(join(root, "assets/style.css"), "utf8");
 const app = readFileSync(join(root, "assets/app.js"), "utf8");
 const dataLoader = readFileSync(join(root, "assets/data-loader.js"), "utf8");

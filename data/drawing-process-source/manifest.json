@@ -1,0 +1,71 @@
+{
+  "schema": "drawing-process-note-manifest/v1",
+  "scope": "Public note records, documentation, presentation and validation code; derivative payloads are separately bound in derivatives.json.",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5569,
+      "sha256": "34785d34f446a3110a68924333d917879da6984c5e76ef186463c5291c07f5f5"
+    },
+    {
+      "path": "SCHEMA.md",
+      "bytes": 6348,
+      "sha256": "056faf033fd7ff4a91ae8fb176f66354146719bb8d621e74eb8e46a7d615c4cd"
+    },
+    {
+      "path": "action-F1.json",
+      "bytes": 6490,
+      "sha256": "5fdd39550a6014916fbd9699f5bfe42e529eb0e8689090dd10c065dc3a51a455"
+    },
+    {
+      "path": "checkpoints.json",
+      "bytes": 5631,
+      "sha256": "dfbe4711795082c26d5e9cebbc850f263208d05c274d463715782ffa0681dc67"
+    },
+    {
+      "path": "clarifications.json",
+      "bytes": 2914,
+      "sha256": "b1336c7093619b28539dc106d6cfd9e2563aaf4120625ce5ec8d8dc0b81d0aff"
+    },
+    {
+      "path": "derivatives.json",
+      "bytes": 12350,
+      "sha256": "c612dceb6c9cdfd95f1a8f8116e1579bbb7a7e0c51819b668f66d589ca49f843"
+    },
+    {
+      "path": "method.json",
+      "bytes": 6350,
+      "sha256": "fa3cb3506a1b83dbb2b18a7ea0d43052799f947f73750816a0a2376b6b9ba798"
+    },
+    {
+      "path": "presentation.html",
+      "bytes": 22480,
+      "sha256": "9022f939f6df0e977e77d8ed18a68a9fb3cb9630db222a93840d0540b0017b9d"
+    },
+    {
+      "path": "provenance.json",
+      "bytes": 4278,
+      "sha256": "53dcc1af64c7069d1b792f384e32d4913056dc0ba679294896e513913261abde"
+    },
+    {
+      "path": "source-catalog.json",
+      "bytes": 125465,
+      "sha256": "ea90821ed5d58ba01d264f50dc6d272c799abaa88f4f4aa199564fe9b30b322c"
+    },
+    {
+      "path": "tests/test_validate.py",
+      "bytes": 4747,
+      "sha256": "f30c80fcf23fb808fc971f9174c22ebb996aa52b15c3cca833579742ffc76781"
+    },
+    {
+      "path": "tools/build_note.py",
+      "bytes": 18011,
+      "sha256": "10ac139bed24334c3aaa089bbd16fc81ecd0ea0084fd62265da89bd4e0f53f05"
+    },
+    {
+      "path": "validate.py",
+      "bytes": 19220,
+      "sha256": "39b3204d7882184727c66981696cff5b821096ca32d7d9c42ffcfa7c66bfc99b"
+    }
+  ]
+}

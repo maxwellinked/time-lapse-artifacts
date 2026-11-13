@@ -1,0 +1,314 @@
+{
+  "schema": "drawing-process-derivatives/v1",
+  "repository": "maxwellinked/time-lapse-artifacts-derived",
+  "revision": "63fe923cd4399f1612005c4f68dd2f29822de815",
+  "publication_binding_status": "pinned",
+  "license": "CC-BY-NC-4.0",
+  "attribution": "Tim Maxwell, Time-Lapse Artifacts, 2026",
+  "license_notice": "https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/blob/da60db08fe5978322db92da7e0786bcd0cbe4675/LICENSE",
+  "scope_exception": "These unchanged review derivatives come from new original files whose complete-byte hashes are catalogued in source-catalog.json. The original payloads are not yet uploaded or represented by canonical recording/work IDs. This note does not claim the masters are already available in the source repository.",
+  "files": [
+    {
+      "derivative_id": "photo-01",
+      "path": "Drawing_Process/2026-11-13/evidence/plane-checkpoints/20261112_162319_preview.jpg",
+      "bytes": 291327,
+      "sha256": "7e124f24c391e363c4dff4619c422811964bd0a78f3d809a724956250f4eaa8a",
+      "source_key": "sha256:c90a191f85d7e50f8e860cf53a27a68413139b0cbf8d475420088dfb99ad2221",
+      "kind": "full_frame_photo_preview",
+      "dimensions_px": [
+        1200,
+        1600
+      ],
+      "processing": {
+        "orientation": "90 degrees clockwise; existing preview already applies this.",
+        "resize": "Pillow LANCZOS, aspect ratio preserved",
+        "crop": null,
+        "additional_rotation_degrees": 0,
+        "tonal_or_perspective_adjustments": false
+      }
+    },
+    {
+      "derivative_id": "photo-02",
+      "path": "Drawing_Process/2026-11-13/evidence/plane-checkpoints/20261112_165441_preview.jpg",
+      "bytes": 251597,
+      "sha256": "6d27da8685c00ad7e6d125dead73c69bf55b11b3c66594db88bfd0d771ea4b11",
+      "source_key": "sha256:f4dd2664ff0b42eaf47f4a937866ce529b3ab07e94a1b2c0c5c2fe1d36512b01",
+      "kind": "full_frame_photo_preview",
+      "dimensions_px": [
+        1200,
+        1600
+      ],
+      "processing": {
+        "orientation": "90 degrees clockwise; existing preview already applies this.",
+        "resize": "Pillow LANCZOS, aspect ratio preserved",
+        "crop": null,
+        "additional_rotation_degrees": 0,
+        "tonal_or_perspective_adjustments": false
+      }
+    },
+    {
+      "derivative_id": "photo-03",
+      "path": "Drawing_Process/2026-11-13/evidence/plane-checkpoints/20261112_182002_preview.jpg",
+      "bytes": 276475,
+      "sha256": "54218b9b5353d3b359e097f62499c1013164894b8da9e59606b8cbc0fd07b216",
+      "source_key": "sha256:7b40da53a079c4eccbaf2e505d7bf19945f751370ad9d13721a6d192551b360b",
+      "kind": "full_frame_photo_preview",
+      "dimensions_px": [
+        1200,
+        1600
+      ],
+      "processing": {
+        "orientation": "90 degrees clockwise; existing preview already applies this.",
+        "resize": "Pillow LANCZOS, aspect ratio preserved",
+        "crop": null,
+        "additional_rotation_degrees": 0,
+        "tonal_or_perspective_adjustments": false
+      }
+    },
+    {
+      "derivative_id": "photo-04",
+      "path": "Drawing_Process/2026-11-13/evidence/plane-checkpoints/20261112_191657_preview.jpg",
+      "bytes": 317942,
+      "sha256": "cfbef035473965d3b167352b61cdce0dcd09e98f57d471855b83e200a6d95f76",
+      "source_key": "sha256:800ea7abfb5a319e1b95f0804aa825554548a9ac66c4dbc168d5a823de6909e0",
+      "kind": "full_frame_photo_preview",
+      "dimensions_px": [
+        1200,
+        1600
+      ],
+      "processing": {
+        "orientation": "90 degrees clockwise; existing preview already applies this.",
+        "resize": "Pillow LANCZOS, aspect ratio preserved",
+        "crop": null,
+        "additional_rotation_degrees": 0,
+        "tonal_or_perspective_adjustments": false
+      }
+    },
+    {
+      "derivative_id": "photo-05",
+      "path": "Drawing_Process/2026-11-13/evidence/plane-checkpoints/20261112_201343_preview.jpg",
+      "bytes": 372817,
+      "sha256": "4ae49e8a4cee63ae95eb9a44335ecf4f82676deb03592a79da6ce9f56b624363",
+      "source_key": "sha256:64ba760ead097a35392e5aef600d512a445699196d4ac1146e42e16354e93595",
+      "kind": "full_frame_photo_preview",
+      "dimensions_px": [
+        1200,
+        1600
+      ],
+      "processing": {
+        "orientation": "90 degrees clockwise; existing preview already applies this.",
+        "resize": "Pillow LANCZOS, aspect ratio preserved",
+        "crop": null,
+        "additional_rotation_degrees": 0,
+        "tonal_or_perspective_adjustments": false
+      }
+    },
+    {
+      "derivative_id": "photo-06",
+      "path": "Drawing_Process/2026-11-13/evidence/plane-checkpoints/20261113_032156_preview.jpg",
+      "bytes": 544800,
+      "sha256": "eed1fa416ff486a6fe5ea67a9a3dab658ac45f0ffa213c48e76edf005eefc402",
+      "source_key": "sha256:0633a52c9cbae11de9276fbafd407b7b6aeface9187c1734a809330df211eaa0",
+      "kind": "full_frame_photo_preview",
+      "dimensions_px": [
+        1200,
+        1600
+      ],
+      "processing": {
+        "orientation": "90 degrees clockwise; existing preview already applies this.",
+        "resize": "Pillow LANCZOS, aspect ratio preserved",
+        "crop": null,
+        "additional_rotation_degrees": 0,
+        "tonal_or_perspective_adjustments": false
+      }
+    },
+    {
+      "derivative_id": "floor-rt-detail",
+      "path": "Drawing_Process/2026-11-13/assets/floor-rt-detail.mp4",
+      "bytes": 766163,
+      "sha256": "9ab04e17b55498e8da98bd534d77c65f3d54708a89557f7e8334b8172d9a38dc",
+      "source_key": "sha256:a6ec3702ce7b8b42a8c7001aea03fb7b1042be1eb949d7040cc8338c00543804",
+      "kind": "review_excerpt",
+      "excerpt_source_start_s": 771,
+      "encoded_excerpt_duration_s": 5.0,
+      "video_filter": "crop=400:380:1150:1770",
+      "audio": "omitted",
+      "interpolated_frames_added": false,
+      "dimensions_px": [
+        400,
+        380
+      ]
+    },
+    {
+      "derivative_id": "floor-tl-detail",
+      "path": "Drawing_Process/2026-11-13/assets/floor-tl-detail.mp4",
+      "bytes": 196776,
+      "sha256": "b84cbf9610129b90f46037027e669ad0a2268b1c6cfbfed0f23aaa05b96816f6",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "review_excerpt",
+      "excerpt_source_start_s": 109.8,
+      "encoded_excerpt_duration_s": 0.966667,
+      "video_filter": "crop=460:440:1080:1400",
+      "audio": "omitted",
+      "interpolated_frames_added": false,
+      "dimensions_px": [
+        460,
+        440
+      ]
+    },
+    {
+      "derivative_id": "floor-before",
+      "path": "Drawing_Process/2026-11-13/assets/floor-before.jpg",
+      "bytes": 27225,
+      "sha256": "8391170cc85d31462a6796815ae077fecf42c7d251bc872ba4b80160c5f1c34e",
+      "source_key": "sha256:a6ec3702ce7b8b42a8c7001aea03fb7b1042be1eb949d7040cc8338c00543804",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        400,
+        380
+      ],
+      "source_time_s": 773.3,
+      "time_basis": "nominal_sample_offset"
+    },
+    {
+      "derivative_id": "floor-after",
+      "path": "Drawing_Process/2026-11-13/assets/floor-after.jpg",
+      "bytes": 27415,
+      "sha256": "de6327990e45cc38298c87285e7f765ee32a605fdc5176ebb8e7868c3c9a74e3",
+      "source_key": "sha256:a6ec3702ce7b8b42a8c7001aea03fb7b1042be1eb949d7040cc8338c00543804",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        400,
+        380
+      ],
+      "source_time_s": 775.0,
+      "time_basis": "nominal_sample_offset"
+    },
+    {
+      "derivative_id": "floor-tl-fine-013",
+      "path": "Drawing_Process/2026-11-13/evidence/floor-tl/fine_013.jpg",
+      "bytes": 43424,
+      "sha256": "d8c24fb365614afe2f0ee317ab3f59b462c01317ddd391fcfcdc3a901362763a",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "source_time_s": 110.232233,
+      "time_basis": "requested_seek_plus_filter_timestamp",
+      "filter_pts_after_seek_s": 0.432233,
+      "source_container_pts_verified": false
+    },
+    {
+      "derivative_id": "floor-tl-fine-014",
+      "path": "Drawing_Process/2026-11-13/evidence/floor-tl/fine_014.jpg",
+      "bytes": 44069,
+      "sha256": "dd4d5747330551a3b8586247f36f7a5ea30a83bca05a83556b4164b3e60d0256",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "source_time_s": 110.265567,
+      "time_basis": "requested_seek_plus_filter_timestamp",
+      "filter_pts_after_seek_s": 0.465567,
+      "source_container_pts_verified": false
+    },
+    {
+      "derivative_id": "floor-tl-fine-017",
+      "path": "Drawing_Process/2026-11-13/evidence/floor-tl/fine_017.jpg",
+      "bytes": 43415,
+      "sha256": "6141398a77eabb64ad5952ff5431ab70530dc3f3fb85719b523714a7071fb79a",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "source_time_s": 110.365567,
+      "time_basis": "requested_seek_plus_filter_timestamp",
+      "filter_pts_after_seek_s": 0.565567,
+      "source_container_pts_verified": false
+    },
+    {
+      "derivative_id": "floor-tl-fine-018",
+      "path": "Drawing_Process/2026-11-13/evidence/floor-tl/fine_018.jpg",
+      "bytes": 44042,
+      "sha256": "8fba6f748bc51ccfe565cd2a4c305005bcc367ca3f4171c143d7eda1e44abad0",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "source_time_s": 110.3989,
+      "time_basis": "requested_seek_plus_filter_timestamp",
+      "filter_pts_after_seek_s": 0.5989,
+      "source_container_pts_verified": false
+    },
+    {
+      "derivative_id": "floor-tl-fine-019",
+      "path": "Drawing_Process/2026-11-13/evidence/floor-tl/fine_019.jpg",
+      "bytes": 43264,
+      "sha256": "e9af01d5ae12514930e428f92b594440be71ce181c55e4f677723b99832ce3fb",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "source_time_s": 110.432233,
+      "time_basis": "requested_seek_plus_filter_timestamp",
+      "filter_pts_after_seek_s": 0.632233,
+      "source_container_pts_verified": false
+    },
+    {
+      "derivative_id": "floor-tl-fine-020",
+      "path": "Drawing_Process/2026-11-13/evidence/floor-tl/fine_020.jpg",
+      "bytes": 44009,
+      "sha256": "4d61ed6bbf08771dafa54c34b080f6aa0c60da02ab4d67610d1ec5cc37120c39",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "unannotated_native_crop",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "source_time_s": 110.465567,
+      "time_basis": "requested_seek_plus_filter_timestamp",
+      "filter_pts_after_seek_s": 0.665567,
+      "source_container_pts_verified": false
+    },
+    {
+      "derivative_id": "floor-context",
+      "path": "Drawing_Process/2026-11-13/assets/floor-context.jpg",
+      "bytes": 402264,
+      "sha256": "ea62643234b3b41d4040f02f13bbd1ef0eef4a17758f0a28b5ce51d744e3d0d2",
+      "source_key": "sha256:a6ec3702ce7b8b42a8c7001aea03fb7b1042be1eb949d7040cc8338c00543804",
+      "kind": "context_preview",
+      "dimensions_px": [
+        1080,
+        1920
+      ],
+      "source_time_s": 773.0,
+      "time_basis": "nominal_sample_offset",
+      "processing": "Autorotated source view resized for context; no physical calibration."
+    },
+    {
+      "derivative_id": "floor-tl-detail-poster",
+      "path": "Drawing_Process/2026-11-13/assets/floor-tl-detail-poster.jpg",
+      "bytes": 40893,
+      "sha256": "e4986f7f2353ea0d13f6a477b297fced126389652ad7c58f90592ee2b82050c2",
+      "source_key": "sha256:b6aff98b035cac38e310df0282f565a4c0dc5be2ea282b2fbf46beb9eae102ac",
+      "kind": "display_poster",
+      "dimensions_px": [
+        460,
+        440
+      ],
+      "derived_from_derivative_id": "floor-tl-detail",
+      "source_time_s": null,
+      "time_basis": "Display aid; no exact frame position assigned by this public record."
+    }
+  ]
+}

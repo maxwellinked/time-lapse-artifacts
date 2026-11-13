@@ -170,7 +170,7 @@
       "sizeBytes": 3004
     },
     "data/photo-selection-projection.json": {
-      "sha256": "2a80eae18d8f555e6adaa1c2eacf672d959503b0eb0386a2aee8b51d7f11fae9",
+      "sha256": "e8988ec29c0373d8875c1a5df5143d13edeac21f994a390b648ff3ab245fc5cf",
       "sizeBytes": 2884
     },
     "data/photograph-downloads.json": {
@@ -222,8 +222,8 @@
       "sizeBytes": 2612
     },
     "index.html": {
-      "sha256": "342a0cd03e06ef4c6441bef046076a44a398b75d14cd0b1793c18b6b528ad0f0",
-      "sizeBytes": 17135
+      "sha256": "99d9cc55cb10d6a17d5166891ae290cf9d6386daeb2d560ca31fe0127f29dfde",
+      "sizeBytes": 17297
     },
     "photograph-clarifications.html": {
       "sha256": "2f4157996f2a0edc93890f0e97d1cbc8a49ec705f61fcef30c077c22322eede2",

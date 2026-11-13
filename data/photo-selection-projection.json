@@ -60,8 +60,8 @@
       "size_bytes": 2612
     },
     "index.html": {
-      "sha256": "342a0cd03e06ef4c6441bef046076a44a398b75d14cd0b1793c18b6b528ad0f0",
-      "size_bytes": 17135
+      "sha256": "99d9cc55cb10d6a17d5166891ae290cf9d6386daeb2d560ca31fe0127f29dfde",
+      "size_bytes": 17297
     }
   },
   "proof_scope": "JSON regenerated from pinned source and immutable prior metadata; generated constants/cache tags checked using current implementation templates. Source table identity is verified by hash/OID and size; its contents are not decoded by this exporter."
