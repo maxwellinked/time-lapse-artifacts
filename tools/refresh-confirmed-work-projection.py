@@ -34,6 +34,7 @@ def load(filename):
 
 R = load('refresh-additive-projection.py')
 PHOTO = load('export-photo-selections.py')
+MIXED = load('mixed-reference-projection.py')
 M, LOOKUP, EVIDENCE = R.M, R.LOOKUP, R.EVIDENCE
 OUTPUTS = frozenset({
     'data/records.json', 'data/physical-references.json', 'data/reference-link-evidence.json',
@@ -57,6 +58,8 @@ def unique(rows, key, label):
 
 
 def validate_definition(value):
+    if value.get('schemaVersion') == 2:
+        return MIXED.validate_definition(value)
     require(set(value) in ({'schemaVersion', 'browserBase', 'confirmation', 'workCounts'},
                           {'schemaVersion', 'browserBase', 'confirmation', 'workCounts', 'sourceBaseRevision'})
             and value['schemaVersion'] == 1
@@ -82,6 +85,8 @@ def validate_definition(value):
 
 def validate_release(before, after, confirmation_bytes, media_identities, *, append_definition=None):
     """Verify published membership without reinterpreting older relationships."""
+    if append_definition is not None and append_definition.get('schemaVersion') == 2:
+        return MIXED.validate_release(before, after, confirmation_bytes, media_identities, append_definition)
     definition = validate_definition(append_definition) if append_definition is not None else {
         'confirmation': {'path': CONFIRMATION_PATH, 'sha256': CONFIRMATION_SHA256},
         'workCounts': [{'workId': WORK, 'count': 38}]}
@@ -204,11 +209,19 @@ def validate_current_receipt(receipt, browser, *, asset_revision=None):
         validate_definition(definition)
         base = definition['browserBase']
         binding = definition['confirmation']
-        require(receipt.get('schemaVersion') == 3 and receipt.get('contract') == 'confirmed_work_append_v2'
+        mixed = definition['schemaVersion'] == 2
+        require(receipt.get('schemaVersion') == (4 if mixed else 3)
+                and receipt.get('contract') == ('confirmed_mixed_reference_append_v1' if mixed else 'confirmed_work_append_v2')
                 and receipt.get('browserBase') == base
                 and receipt.get('workIds') == [e['workId'] for e in definition['workCounts']]
-                and receipt.get('addedCount') == sum(e['count'] for e in definition['workCounts']),
+                and receipt.get('addedCount') == sum(e['timeLapseCount' if mixed else 'count'] for e in definition['workCounts']),
                 'Invalid explicit append receipt')
+        if mixed:
+            require(receipt.get('addedRecordingCount') == 74
+                    and receipt.get('realTime', {}).get('addedCount') == 36
+                    and receipt.get('admission', {}).get('originalPayloadCount') == 138
+                    and receipt['admission'].get('sourcePhotoContainers', {}).get('canonicalWorkIdsAssigned') == 0,
+                    'Invalid bounded mixed admission receipt')
         historical_confirmed = M.git_bytes(browser, base, CURRENT_RECEIPT)
         require(receipt.get('priorConfirmedWorkReceiptSha256') == M.digest(historical_confirmed),
                 'Prior confirmed-work receipt binding differs')
@@ -234,6 +247,7 @@ def refresh(source, revision, browser, generated_at, *, append_definition=None, 
             and re.fullmatch(r'\d{4}-\d{2}-\d{2}', generated_at) is not None,
             'Exact accepted source revision and explicit generation date required')
     definition = validate_definition(append_definition) if append_definition is not None else None
+    mixed = definition is not None and definition['schemaVersion'] == 2
     base = definition['browserBase'] if definition else BROWSER_BASE
     confirmation_binding = definition['confirmation'] if definition else {
         'path': CONFIRMATION_PATH, 'sha256': CONFIRMATION_SHA256}
@@ -254,14 +268,16 @@ def refresh(source, revision, browser, generated_at, *, append_definition=None, 
         if path not in {'metadata.csv', 'Work_Identity/works.csv', 'Work_Identity/work_record_links.csv'}:
             require(raw == inputs[path], 'Historical reference input changed: ' + path)
     confirmation = source_bytes(confirmation_binding['path'])
-    member_list = json.loads(confirmation)['members']
+    member_list = (MIXED.confirmation_members(confirmation, definition, source_bytes(definition['ingestPlan']['path']))
+                   if mixed else json.loads(confirmation)['members'])
     identities = {m['file_path']: M.object_identity(source_bytes(m['file_path'])) for m in member_list}
     sums = {}
     for line in source_bytes('SHA256SUMS').decode().splitlines():
         match = re.fullmatch(r'([a-f0-9]{64}) [ *](.+)', line)
         require(match and match[2] not in sums, 'Malformed/duplicate authoritative checksum')
         sums[match[2]] = match[1]
-    require(all(sums.get(m['file_path']) == m['sha256'] for m in member_list),
+    require(all(sums.get(m['file_path']) == m['sha256'] for m in member_list
+                if not mixed or m['recording_mode'] == 'time_lapse'),
             'Confirmed source media checksum differs')
     def authority(values, selection):
         return dict(metadata=rows(values['metadata.csv']), works=rows(values['Work_Identity/works.csv']),
@@ -289,8 +305,19 @@ def refresh(source, revision, browser, generated_at, *, append_definition=None, 
             previousBrowserInputSha256=M.digest(prior['metadata.csv']),
             preexistingChangedRows=sum(bool(fields) for fields in changes),
             preexistingChangedFields=dict(sorted(Counter(key for fields in changes for key in fields).items())))
-    membership = validate_release(authority(comparison_prior, old_registry), authority(inputs, registry), confirmation, identities,
+    before_authority, after_authority = authority(comparison_prior, old_registry), authority(inputs, registry)
+    admission = None
+    if mixed:
+        before_authority['real_time'] = rows(old_bytes('data/real-time-source/metadata.csv'))
+        after_authority['real_time'] = rows(source_bytes('Real_Time_Recordings/metadata.csv'))
+    membership = validate_release(before_authority, after_authority, confirmation, identities,
                                   append_definition=definition)
+    if mixed:
+        extra_inputs, admission = MIXED.validate_source_admission(
+            source_bytes, lambda rev, path: M.git_bytes(source, rev, path), M.object_identity,
+            definition, after_authority, lambda rev: subprocess.run(
+                ['git', 'merge-base', '--is-ancestor', rev, revision], cwd=source, capture_output=True).returncode == 0)
+        inputs.update(extra_inputs)
     records = R.project_records(inputs['metadata.csv'], revision, generated_at)
     old_by_id = {r['recordId']: r for r in old_records['records']}
     current = {r['recordId']: r for r in records['records']}
@@ -348,8 +375,11 @@ def refresh(source, revision, browser, generated_at, *, append_definition=None, 
         outputs[path] = M.json_bytes(value)
     previous_rt = {name: old_bytes('data/real-time-source/' + name)
                    for name in ['metadata.csv', 'SHA256SUMS', 'manifest.json']}
-    rt_outputs, rt_receipt = R.prepare_real_time_refresh(previous_rt, source_bytes, records, 0)
+    rt_outputs, rt_receipt = R.prepare_real_time_refresh(previous_rt, source_bytes, records, 36 if mixed else 0)
     outputs.update(rt_outputs)
+    if mixed:
+        require(rt_receipt['addedRecords'] == membership['added_real_time_records'],
+                'RT projection differs from exact confirmed membership/order')
     if definition:
         # Existing oriented viewing remains an access derivative, with exactly
         # the retained orientation evidence and the new source URL pin.
@@ -421,6 +451,9 @@ process.stdout.write(buildClarificationPage(x.records,x.refs,x.evidence));"""
         if metadata_baseline:
             receipt['retainedMetadataBaseline'] = metadata_baseline
         del receipt['workId']
+        if mixed:
+            receipt.update(schemaVersion=4, contract='confirmed_mixed_reference_append_v1',
+                addedRecordingCount=membership['added_recording_count'], admission=admission)
     outputs[CURRENT_RECEIPT] = M.json_bytes(receipt)
     return outputs
 

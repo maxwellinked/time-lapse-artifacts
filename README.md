@@ -565,3 +565,21 @@ Use tools/export-photo-selections.py with --source-root, --source-revision and
 --destination, then run the existing site validator and tests. The retained
 source registry and exact binding reject mixed work/source/display/download
 choices. Historical recording and reference pins keep their own scope.
+
+### Bounded mixed recording admission
+
+`tools/projection-definitions/2026-11-13-reference-drawings.json` prepares a
+separate append contract for two creator-confirmed works: 38 time-lapses and
+36 real-time recordings. The definition binds the source confirmation and
+unchanged ingest plan, independently per mode. It contains no future source
+publication pin. Apply it only to the final verified Hugging Face commit with
+`refresh-confirmed-work-projection.py --append-definition`.
+
+The adapter verifies all 74 positive work links, retains prior rows and
+photograph selections, and records the separate 64 source-photo containers
+without assigning them to works or selecting fronts. Hosted-object and
+metadata-stage receipts must match actual immutable Git objects, and their
+revisions must remain ancestors of the final source commit. Pending states
+fail. The historical additive and confirmed-work contracts remain replayable.
+See [the adapter procedure](tools/projection-definitions/README.md) for the
+remaining source and preview gates; preparation alone does not publish data.
