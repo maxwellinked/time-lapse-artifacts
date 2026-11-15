@@ -1,4 +1,4 @@
-import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access";
+import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-c8a93d435ebd-dec020ec90d9-reviewed-access";
 import { loadReviewedPhotographIndex, getReviewedPhotographForWork } from "./reviewed-photographs.js?v=20261110-reviewed-access";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261110-browser-photo-scope";
@@ -122,11 +122,11 @@ function render(works) {
 
 try {
   const [recordData, referenceBytes, previews, evidence] = await Promise.all([
-    loadRecords("data/records.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810"),
-    fetch("data/physical-references.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
-    fetch("reference-previews/manifest.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
+    loadRecords("data/records.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942"),
+    fetch("data/physical-references.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942").then((response) => { if (!response.ok) throw new Error("Photograph lookup unavailable"); return response.arrayBuffer(); }),
+    fetch("reference-previews/manifest.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942").then((response) => { if (!response.ok) throw new Error("Preview manifest unavailable"); return response.json(); }),
     (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942", { signal: AbortSignal.timeout(5000) });
       return response.ok ? response.json() : null;
     })().catch(() => null),
   ]);

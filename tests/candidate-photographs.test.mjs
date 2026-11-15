@@ -22,7 +22,9 @@ test('13 unlinked records receive qualified DNG downloads without primary or wor
   for (const [id, entry] of Object.entries(index)) {
     assert.equal(args[2].records[id].workId, '');
     assert.equal(args[2].records[id].mainImage, null);
-    assert.match(entry.downloadUrl, /^https:\/\/huggingface\.co\/datasets\/maxwellinked\/time-lapse-artifacts\/resolve\/[a-f0-9]{40}\/Image_Source_Masters\/v1\/objects\/[a-f0-9]{64}\.DNG$/);
+    assert.ok(entry.downloadUrl.startsWith('https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts/resolve/202226b18431f67f879629d8f49d72883643f810/'));
+    assert.match(entry.downloadUrl, /\/Image_Source_Masters\/v1\/objects\/[a-f0-9]{64}\.DNG$/);
+    assert.match(entry.sourceMetadataUrl, /\/blob\/202226b18431f67f879629d8f49d72883643f810\//);
     assert.equal(Object.keys(entry).sort().join(','), 'associationBasis,downloadUrl,filename,qualification,sizeBytes,sourceMetadataUrl');
     assert.match(entry.qualification, /candidate/i);
     assert.match(entry.qualification, /endpoint/i);
@@ -38,11 +40,23 @@ test('Rec07 has group-derived evidence while the other 12 have direct cohort mem
   assert.equal(Object.values(index).filter(x => /direct cohort/i.test(x.associationBasis)).length, 12);
 });
 
+test('candidate photographs keep their historical authority as the current recording pin advances', () => {
+  const [projection, records, refs] = fixture();
+  const current = module.buildCandidatePhotographIndex(projection, records, refs);
+  const prior = records.sourceRevision;
+  const next = prior === 'a'.repeat(40) ? 'b'.repeat(40) : 'a'.repeat(40);
+  records.sourceRevision = refs.sourceRevision = next;
+  for (const record of records.records) record.videoUrl = record.videoUrl.replace(`/resolve/${prior}/`, `/resolve/${next}/`);
+  assert.deepEqual(module.buildCandidatePhotographIndex(projection, records, refs), current);
+});
+
 test('mixed revisions, unknown IDs, changed relationships and unsafe destinations fail closed', () => {
   const edits = [
     a => { a[0].sourceRevision = 'a'.repeat(40); },
     a => { a[1].sourceRevision = 'a'.repeat(40); },
     a => { a[2].sourceRevision = 'a'.repeat(40); },
+    a => { a[1].sourceRevision = a[2].sourceRevision = 'bad-pin'; },
+    a => { a[1].records.find(r => r.recordId === a[0].photographs[0].records[0].recordId).integrityReference = '0'.repeat(64); },
     a => { a[0].photographs[0].relationshipStatus = 'confirmed'; },
     a => { a[0].photographs[0].studySetId = 'unknown_group'; },
     a => { a[0].photographs[0].workId = 'tlaw-0123456789abcdef'; },
@@ -81,6 +95,15 @@ import importlib.util, pathlib, tempfile, shutil, json
 spec=importlib.util.spec_from_file_location('candidate_builder','tools/build-candidate-photographs.py')
 m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
 manifest,found=m.inputs()
+historical=m.browser_inputs(m.BROWSER_BASE)
+projection=m.build(manifest,found,historical=historical)
+for field,value,message in [('integrityReference','0'*64,'integrity'), ('videoUrl','https://example.invalid/changed.mp4','path')]:
+    current=m.browser_inputs()
+    rid=projection['photographs'][0]['records'][0]['recordId']
+    next(row for row in current[0]['records'] if row['recordId']==rid)[field]=value
+    try:m.check_current_membership(projection,historical,current)
+    except ValueError as e:assert message in str(e)
+    else:raise AssertionError('Changed current recording ' + field + ' accepted')
 found['relationships.json']['endpoint_established']=True
 try:m.build(manifest,found)
 except ValueError as e:assert 'qualification' in str(e)

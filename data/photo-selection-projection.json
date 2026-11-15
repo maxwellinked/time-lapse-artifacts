@@ -2,65 +2,65 @@
   "contract": "browser_photo_selection_projection_v1",
   "selection_registry": {
     "repository": "maxwellinked/time-lapse-artifacts",
-    "revision": "202226b18431f67f879629d8f49d72883643f810",
+    "revision": "c8a93d435ebd3e32f6041611102df59e09c84942",
     "path": "Physical_References/Selected_Front_Downloads/selections.json",
-    "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b"
+    "sha256": "dec020ec90d91ed6a6aea779667bcf5ebee09636119eff21fd3a4bfb889649a2"
   },
   "preserved_browser_revision": "290880f54e13b1b418321dfea3c9aaaf9f85d6df",
   "preserved_prior_sha256": "e26dc29b4762a8562c47b7aa2cba0ce11ce6c7972b8f2d55d312c77b17397fc8",
   "source_inputs": {
     "Physical_References/Selected_Front_Downloads/selections.json": {
-      "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b",
-      "size_bytes": 1335890
+      "sha256": "dec020ec90d91ed6a6aea779667bcf5ebee09636119eff21fd3a4bfb889649a2",
+      "size_bytes": 1335948
     },
     "drawing_photographs.parquet": {
-      "sha256": "68988203054d824d6a55f6de1de2db50aba910aebb7af8ea8503c3422c9b840d",
-      "size_bytes": 113424945
+      "sha256": "fc6df93480117692ed89f14765a71afa19e9eb272ee2376da933fbec9d6f0389",
+      "size_bytes": 113425815
     },
     "drawing_photographs.manifest.json": {
-      "sha256": "9fbacd0de37b3ccee1fcbef13624f483e97affc65b83671a6e53d1e46763b9f5",
+      "sha256": "9b41ef146046eae54875663534704bc88c9b52decc5579b7b23d68600663251e",
       "size_bytes": 974
     },
     "Physical_References/Selected_Front_Downloads/downloads.json": {
-      "sha256": "330e9e430b13a879a2677077c50b540886f7733430a0d3aa8a7927dea3776c41",
+      "sha256": "6eadb1c9e05929f8ad2bb6fdf165fa9a69ef891f8d6f612c6004f2516a7d9bf4",
       "size_bytes": 337408
     }
   },
   "outputs": {
     "assets/app.js": {
-      "sha256": "edec79fb7fb62d2635f89a6f271ebc643c3f3e17aa82abf35f3e590d7b66746d",
-      "size_bytes": 48792
+      "sha256": "87d5bfe4a0712044a9f0ad7823dc24b7a44e4eb7205da84bb1e5553e40a27489",
+      "size_bytes": 48799
     },
     "assets/drawing-archive.js": {
-      "sha256": "57e733cbbaab3b5b7184b7dd4e5492a2bca116c06aeee71c1b1be79d489b8e75",
+      "sha256": "17fb523bd039563ff400d61407a41323be3a7375ef1d70171c1ebe2f3775d72a",
       "size_bytes": 9364
     },
     "assets/photograph-downloads.js": {
-      "sha256": "b0bb37ea9abe9d121cdf36ddd7c052981505f9c5518236bf2637f95932a210d1",
+      "sha256": "2bbc365f7ed0433fa06ce6520520b1517cc8c797a648ec2a4f73dee5f99cdfb9",
       "size_bytes": 3992
     },
     "assets/selected-fronts.js": {
-      "sha256": "95cf7209dfd7d7f611a85a0246f21113d3f8eb850bcc8a7de85d9fcc73cba261",
+      "sha256": "1ccb36f88286f5913e22bd95224254de74c200d4bc24d554eaabec04069fdc40",
       "size_bytes": 5659
     },
     "data/photograph-downloads.json": {
-      "sha256": "074640cdb11a32e1a0cf735f3329856764bc6fa8851c1a8342275be8c5afb08b",
+      "sha256": "10ca9d10dbf9607a7fe3e509c2988710f22b98c0bb70f898800c705f752518a6",
       "size_bytes": 337468
     },
     "data/selected-fronts.json": {
-      "sha256": "d44a660e2f671d3f591a2832cf7c19acddc1b5a2ef172aac941645d4c4e2d581",
-      "size_bytes": 643649
+      "sha256": "e5be8bef58c0758a3c16ce78ee588b63837ffa0a028ee2c65014d8bf7709b929",
+      "size_bytes": 643707
     },
     "data/source-photo-selections.json": {
-      "sha256": "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b",
-      "size_bytes": 1335890
+      "sha256": "dec020ec90d91ed6a6aea779667bcf5ebee09636119eff21fd3a4bfb889649a2",
+      "size_bytes": 1335948
     },
     "drawings.html": {
-      "sha256": "70c72ecb330866fb9a658fd7504d701ce11f4e8cabd39f725591fa16bc650fe9",
+      "sha256": "d8178de31ed2065d5a6a05037fa499677e570f0b114924e34d80cfa254b406b0",
       "size_bytes": 2612
     },
     "index.html": {
-      "sha256": "99d9cc55cb10d6a17d5166891ae290cf9d6386daeb2d560ca31fe0127f29dfde",
+      "sha256": "eb445c89dd2ba44fb22c6643101b34436d87c86ecc8d3a15792e04ea8c7cca6b",
       "size_bytes": 17297
     }
   },

@@ -31,6 +31,28 @@ test('public page substitutes immutable pins and otherwise preserves authoritati
   const expected=inputs.files['presentation.html'].toString().replaceAll('__SOURCE_REVISION__',sourceRevision).replaceAll('__DERIVED_REVISION__',derivedRevision);
   assert.equal(buildDrawingProcessPage(inputs),expected);
 });
+test('links the accepted original-media release separately from the historical example',()=>{
+  const inputs=fixture();
+  updatedTemplate(inputs,inputs.files['presentation.html'].toString()
+    .replace('</body>','      <ul class="source-links"></ul></body>'));
+  const historical=buildDrawingProcessPage(inputs);
+  const confirmation={
+    path:'Work_Identity/Confirmations/2026-11-13-two-reference-drawings.json',sha256:'c'.repeat(64),
+  };
+  const accepted='d'.repeat(40);
+  inputs.currentProjection={
+    schemaVersion:4,contract:'confirmed_mixed_reference_append_v1',sourceRepository,sourceRevision:accepted,
+    addedRecordingCount:74,confirmation,appendDefinition:{sourceBaseRevision:sourceRevision,confirmation},
+    admission:{confirmedRecordings:74,originalPayloadCount:138,sourcePhotoContainers:{count:64},
+      mediaRevision:'e'.repeat(40),metadataRevision:'f'.repeat(40),
+      verification:'pinned_git_objects_and_published_observation_receipts'},
+  };
+  const page=buildDrawingProcessPage(inputs);
+  assert.match(page,new RegExp(`/blob/${accepted}/Standard_Time_Lapses/Provenance/2026-11-13/README\\.md`));
+  assert.equal(page.replace(/      <p>The first publication of this example[^\n]+\n/,''),historical);
+  inputs.currentProjection.sourceRevision='main';
+  assert.throws(()=>buildDrawingProcessPage(inputs),/availability receipt/i);
+});
 test('rejects a retained input changed without its receipt',()=>{
   const inputs=fixture();inputs.files['presentation.html']=Buffer.from('changed');
   assert.throws(()=>buildDrawingProcessPage(inputs),/input binding/i);

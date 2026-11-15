@@ -6,6 +6,21 @@ const MANIFEST_SHA256 = '8bb79930d2e0280b9d8151977644dbcac1770c79a479e09af9f539a
 const HASH = /^[a-f0-9]{64}$/;
 const RECORD = /^tla-[a-f0-9]{16}$/;
 const METADATA = 'Image_Source_Masters/v1/Receipts/relationships.json';
+const RECORDING_INTEGRITY = Object.freeze({
+  "tla-2c306a52343fe829": "0568b05192568ab9a3345923e2c717504d31314cc12fa2a2416758a8645de6ec",
+  "tla-2ebf06934b96e8dd": "b151492916b6d4e66142531f2c9e607b2f629f0f11444f71cbe2a83514034808",
+  "tla-33e35be7b71f596d": "2fdef54589e1b80e1831cc7ed39523d20463222f0c3c729204ba453dce7f70e6",
+  "tla-683d766e65b70e83": "315355e7d95e209f17315ad04c3b5f85bd3e32480f32c8f45f3b1fcd756650eb",
+  "tla-7adb8c892c296dc1": "7e280d503a57b78fede88784ac588bc7d444ae11d7b7e5ee47c899a9fe248eb6",
+  "tla-8cd5eb5c7bacdaa9": "5f18dcb8edb12834ee1e21411ebaa3b4ef9ee3e63c02701fb67265902803665c",
+  "tla-a3c2dfe3e7b14b01": "c5a6ff42f34a0517ceb162fea05f5dcc1fa8acb3d7d88899646bf6cf497f46be",
+  "tla-afcfcaf9ab1b6c16": "00d4fc1e48cd699495ce5bbd87d101aac653b352eccff9bee0bc065ddf73841a",
+  "tla-b0f113c9af61478f": "81693e143d04b2aaaf62add8958a32ba238d00e5aa02266b3ddbeb4c726c30c5",
+  "tla-b95b28799a6bedce": "47cdb1a09220510a74700aec439c1a33dbef93a872bc580939996790ffcf9a67",
+  "tla-d9c74b9d57e1c3a7": "d86f41ad72928db8ee3bb0dbb7a30574c8308ffc5e7e265eb9fff3b9475453e7",
+  "tla-e331a337491dcda6": "616a1d0a7c6f035641fb6bc35985d3ec5e5d670cf9ba534a514976de0ab5d346",
+  "tla-e646380c8407b8f4": "65604828e23da5fe239fc522fbba204927b4bec210d6cd9c956b3ec8d58d1fd2"
+});
 const DIRECT = 'Direct cohort membership; candidate photograph relationship retained.';
 const DERIVED = 'Group-derived from prior owner-confirmed recording membership; not individually listed in the later study cohort.';
 const QUALIFICATION = 'Published candidate reference photograph for this recording group. It does not establish an exact recording endpoint or final state, and is not a selected primary photograph. DNG source download; no browser image is supplied.';
@@ -32,10 +47,12 @@ function require(condition, message) { if (!condition) throw new Error(message);
 
 export function buildCandidatePhotographIndex(projection, recordData, references) {
   require(projection.schemaVersion === 1 && projection.sourceRepository === REPOSITORY &&
-    projection.sourceRevision === REVISION && recordData.sourceRepository === REPOSITORY &&
-    recordData.sourceRevision === REVISION && references.sourceRepository === REPOSITORY &&
-    references.sourceRevision === REVISION && projection.sourceManifestSha256 === MANIFEST_SHA256,
+    projection.sourceRevision === REVISION && projection.sourceManifestSha256 === MANIFEST_SHA256,
     'Candidate photograph source revision or manifest mismatch');
+  const revision = recordData.sourceRevision;
+  require(recordData.sourceRepository === REPOSITORY && references.sourceRepository === REPOSITORY &&
+    /^[a-f0-9]{40}$/.test(revision ?? '') && references.sourceRevision === revision,
+    'Current browser source revision mismatch');
   require(Array.isArray(projection.sourceInputs) && projection.sourceInputs.length === 6, 'Candidate source inputs missing');
   const paths = new Set();
   for (const input of projection.sourceInputs) {
@@ -75,8 +92,9 @@ export function buildCandidatePhotographIndex(projection, recordData, references
         association.associationBasis === (groupDerived ? DERIVED : DIRECT), 'Candidate association basis changed');
       require(association.canonicalPath === `Standard_Time_Lapses/${record.filename}` && association.filename === record.filename &&
         /^[A-Za-z0-9_.-]+\.mp4$/.test(record.filename) &&
-        record.videoUrl === `https://huggingface.co/datasets/${REPOSITORY}/resolve/${REVISION}/${association.canonicalPath}`,
+        record.videoUrl === `https://huggingface.co/datasets/${REPOSITORY}/resolve/${revision}/${association.canonicalPath}`,
         'Candidate recording source path differs');
+      require(record.integrityReference === RECORDING_INTEGRITY[id], 'Candidate recording integrity differs');
       byRecord[id] = Object.freeze({
         downloadUrl: `https://huggingface.co/datasets/${REPOSITORY}/resolve/${REVISION}/${photo.sourcePath}`,
         filename: photo.filename, sizeBytes: photo.sizeBytes, qualification: photo.qualification,

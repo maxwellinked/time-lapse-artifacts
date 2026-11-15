@@ -1,10 +1,10 @@
-import { loadPhotographDownloads } from "./photograph-downloads.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access";
+import { loadPhotographDownloads } from "./photograph-downloads.js?v=photo-selections-c8a93d435ebd-dec020ec90d9-reviewed-access";
 import { isUnlinkedRecording } from "./unlinked-recording.js?v=20261029-unlinked-recordings";
 // Current source-registry projection; historical candidate evidence retains its original pins.
-export const SELECTED_FRONTS_SHA256 = "d44a660e2f671d3f591a2832cf7c19acddc1b5a2ef172aac941645d4c4e2d581";
-export const LEGACY_REFERENCE_SHA256 = "79779d555a198398976e7401df1b6d79548c7c25cc6da8d18edb4d8a7ff4db89";
-export const PHOTO_SELECTION_REGISTRY_SHA256 = "90bded9bcd98914f1dbe776351d94497a7b33b28cff8278c3023e59f288f313b";
-export const PHOTO_SELECTION_SOURCE_REVISION = "202226b18431f67f879629d8f49d72883643f810";
+export const SELECTED_FRONTS_SHA256 = "e5be8bef58c0758a3c16ce78ee588b63837ffa0a028ee2c65014d8bf7709b929";
+export const LEGACY_REFERENCE_SHA256 = "f70824d0cfb15fa687cd45739e31ab8e0fe7c13d6cccbfab4376126587ca29c1";
+export const PHOTO_SELECTION_REGISTRY_SHA256 = "dec020ec90d91ed6a6aea779667bcf5ebee09636119eff21fd3a4bfb889649a2";
+export const PHOTO_SELECTION_SOURCE_REVISION = "c8a93d435ebd3e32f6041611102df59e09c84942";
 const HASH = /^[a-f0-9]{64}$/;
 const WORK = /^tlaw-[a-f0-9]{16}$/;
 const LINK_PATH = "Work_Identity/work_record_links.csv";

@@ -1,8 +1,8 @@
 """Reproduce qualified DNG access links from retained, published source receipts.
 
-Build and --check are offline. HF_SOURCE_ROOT additionally compares retained
-inputs to git show at the exact source revision. No images are derived, selected,
-or published and no canonical work identities are assigned by this projection.
+Build and --check replay the historical browser inputs locally with Git and
+check the current recording memberships. HF_SOURCE_ROOT additionally verifies
+retained evidence against the exact published source revision.
 """
 import argparse
 import hashlib
@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'data/candidate-photo-source'
 OUTPUT = ROOT / 'data/candidate-photographs.json'
 REVISION = '202226b18431f67f879629d8f49d72883643f810'
+BROWSER_BASE = '95ad8b8717cd641e4a21fb2c517afe6a47724f2f'
 REPOSITORY = 'maxwellinked/time-lapse-artifacts'
 MANIFEST_SHA256 = '8bb79930d2e0280b9d8151977644dbcac1770c79a479e09af9f539a354937865'
 QUALIFICATION = ('Published candidate reference photograph for this recording group. '
@@ -67,13 +68,41 @@ def inputs():
     return manifest, found
 
 
-def build(manifest, found):
-    records = json.loads((ROOT / 'data/records.json').read_bytes())
-    refs = json.loads((ROOT / 'data/physical-references.json').read_bytes())
+def browser_inputs(revision=None):
+    paths = ('data/records.json', 'data/physical-references.json')
+    return tuple(json.loads(
+        subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{revision}:{path}'])
+        if revision else (ROOT / path).read_bytes()
+    ) for path in paths)
+
+
+def index_browser_records(projections):
+    records, refs = projections
+    revision = records['sourceRevision']
     require(records['sourceRepository'] == refs['sourceRepository'] == REPOSITORY and
-            records['sourceRevision'] == refs['sourceRevision'] == REVISION, 'Browser source revision mismatch')
+            re.fullmatch(r'[a-f0-9]{40}', revision) and refs['sourceRevision'] == revision,
+            'Browser source revision mismatch')
     by_id = {r['recordId']: r for r in records['records']}
     require(len(by_id) == len(records['records']), 'Duplicate browser record')
+    return revision, by_id, refs['records']
+
+
+def check_recording(revision, by_id, references, row):
+    rid = row['recordId']
+    reference = references.get(rid)
+    require(rid in by_id and reference and reference['workId'] == '' and
+            reference['selectionStatus'] == 'missing_work_link' and reference['mainImage'] is None,
+            'Candidate record unknown or linked to a work')
+    record = by_id[rid]
+    path = row['canonicalPath']
+    require(record['videoUrl'] == f'https://huggingface.co/datasets/{REPOSITORY}/resolve/{revision}/{path}' and
+            record['filename'] == path.rsplit('/', 1)[1], 'Candidate browser recording path differs')
+    return record
+
+
+def build(manifest, found, *, historical=None):
+    revision, by_id, references = index_browser_records(historical or browser_inputs(BROWSER_BASE))
+    require(revision == REVISION, 'Historical browser source revision mismatch')
     relationship = found['relationships.json']
     authority = found['ingest-authority.json']
     cohort = found['cohort.json']
@@ -129,11 +158,8 @@ def build(manifest, found):
                 if row['record_id'] not in linked:
                     linked[row['record_id']] = {'recordId': row['record_id'], 'canonicalPath': row['canonical_path'], 'associationBasis': DERIVED, 'associationKind': 'owner_group_derived'}
         for rid, row in linked.items():
-            require(rid not in assigned and rid in by_id and refs['records'][rid]['workId'] == '' and
-                    refs['records'][rid]['selectionStatus'] == 'missing_work_link' and refs['records'][rid]['mainImage'] is None, 'Candidate record unknown, duplicated or linked to a work')
-            expected_url = f'https://huggingface.co/datasets/{REPOSITORY}/resolve/{REVISION}/{row["canonicalPath"]}'
-            require(by_id[rid]['videoUrl'] == expected_url and by_id[rid]['filename'] == row['canonicalPath'].rsplit('/', 1)[1], 'Candidate browser recording path differs')
-            row['filename'] = by_id[rid]['filename']
+            require(rid not in assigned, 'Duplicate candidate record')
+            row['filename'] = check_recording(revision, by_id, references, row)['filename']
             assigned.add(rid)
         photographs.append({'assetId': a['asset_id'], 'sourceSha256': a['sha256'], 'sourcePath': a['file_name'],
             'filename': a['original_filename'], 'sizeBytes': a['size_bytes'], 'studySetId': a['study_set_id'],
@@ -145,22 +171,44 @@ def build(manifest, found):
             'sourceManifestSha256': MANIFEST_SHA256, 'sourceInputs': manifest['inputs'], 'photographs': photographs}
 
 
+def check_current_membership(projection, historical, current):
+    _, legacy_by_id, _ = index_browser_records(historical)
+    revision, by_id, references = index_browser_records(current)
+    integrity = {}
+    for photo in projection['photographs']:
+        for row in photo['records']:
+            rid = row['recordId']
+            record = check_recording(revision, by_id, references, row)
+            expected = legacy_by_id[rid]['integrityReference']
+            require(re.fullmatch(r'[a-f0-9]{64}', expected) and record.get('integrityReference') == expected,
+                    'Candidate recording integrity differs: ' + rid)
+            integrity[rid] = expected
+    return integrity
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
     args = parser.parse_args()
     manifest, found = inputs()
-    data = serialized(build(manifest, found))
+    historical = browser_inputs(BROWSER_BASE)
+    projection = build(manifest, found, historical=historical)
+    integrity = check_current_membership(projection, historical, browser_inputs())
+    integrity_block = 'const RECORDING_INTEGRITY = Object.freeze(' + json.dumps(integrity, indent=2, sort_keys=True) + ');'
+    data = serialized(projection)
     module = ROOT / 'assets/candidate-photographs.js'
     expected_hash = digest(data)
     code = module.read_text(encoding='utf-8')
     if args.check:
         require(OUTPUT.read_bytes() == data, 'Candidate photograph projection is stale')
         require(f'CANDIDATE_PHOTOGRAPHS_SHA256 = "{expected_hash}"' in code, 'Runtime projection hash is stale')
+        require(integrity_block in code, 'Runtime recording integrity bindings are stale')
     else:
-        OUTPUT.write_bytes(data)
         code, count = re.subn(r'CANDIDATE_PHOTOGRAPHS_SHA256 = "[a-f0-9]{64}"', f'CANDIDATE_PHOTOGRAPHS_SHA256 = "{expected_hash}"', code)
         require(count == 1, 'Missing runtime projection hash')
+        code, count = re.subn(r'const RECORDING_INTEGRITY = Object\.freeze\(\{[^}]*\}\);', integrity_block, code)
+        require(count == 1, 'Missing runtime recording integrity bindings')
+        OUTPUT.write_bytes(data)
         module.write_text(code, encoding='utf-8', newline='\n')
     print('Candidate photographs: 2 published DNG sources; 12 direct cohort and 1 group-derived recording link; pinned inputs and projection verified')
 

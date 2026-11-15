@@ -7,6 +7,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import test from "node:test";
+import { isCompletePreview } from "../tools/preview-media.mjs";
 
 const exec = promisify(execFile);
 const repository = fileURLToPath(new URL("../", import.meta.url));
@@ -345,6 +346,7 @@ test("new recording: generate its motion preview and image while preserving olde
   const f = await fixture(t, "record"), before = await f.snapshot();
   const oldManifest = await json(join(f.output, "manifest.json"));
   await copyFile(join(repository, "tools/generate-previews.mjs"), join(f.root, "tools/generate-previews.mjs"));
+  await copyFile(join(repository, "tools/preview-media.mjs"), join(f.root, "tools/preview-media.mjs"));
   const bin = join(f.root, "bin"), log = join(f.root, "motion-calls.jsonl");
   await mkdir(bin);
   // Exercise the actual preview cache/orchestration without fetching source video.
@@ -381,4 +383,21 @@ fs.copyFileSync(${JSON.stringify(join(f.root, `previews/${f.ids[0]}.mp4`))}, pro
   const mixedSnapshot = await f.snapshot();
   assert.equal((await f.run({ TEST_FFMPEG_VERSION: "ffmpeg version 7-test", TEST_NO_ENCODING: "1" })).reused, 4);
   assert.deepEqual(await f.snapshot(), mixedSnapshot, "mixed encoder provenance survives the next cache-only run");
+});
+
+test("a sub-half-second preview can be smaller than 8 kB when its media validates", async (t) => {
+  const root = await mkdtemp(join(tmpdir(), "tla-short-preview-test-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const valid = join(root, "valid.mp4");
+  await exec("ffmpeg", [
+    "-v", "error", "-f", "lavfi", "-i", "color=black:s=270x480:r=12",
+    "-frames:v", "2", "-an", "-c:v", "libx264", "-pix_fmt", "yuv420p", valid,
+  ], { timeout: 15_000 });
+  const bytes = await readFile(valid);
+  assert.ok(bytes.length < 8_000);
+  assert.equal(isCompletePreview({ durationSeconds: 1 / 6 }, valid), true);
+  assert.equal(isCompletePreview({ durationSeconds: 0.5 }, valid), false);
+  const corrupt = join(root, "corrupt.mp4");
+  await writeFile(corrupt, bytes.subarray(0, Math.floor(bytes.length / 2)));
+  assert.equal(isCompletePreview({ durationSeconds: 1 / 6 }, corrupt), false);
 });

@@ -1,5 +1,5 @@
 // Independent download projection; selected display images remain unchanged.
-export const PHOTOGRAPH_DOWNLOADS_SHA256 = "074640cdb11a32e1a0cf735f3329856764bc6fa8851c1a8342275be8c5afb08b";
+export const PHOTOGRAPH_DOWNLOADS_SHA256 = "10ca9d10dbf9607a7fe3e509c2988710f22b98c0bb70f898800c705f752518a6";
 const HASH = /^[a-f0-9]{64}$/;
 const REVISION = /^[a-f0-9]{40}$/;
 const PREFIXES = ['Physical_References/Photographs/', 'Physical_References/Selected_Front_Downloads/'];
