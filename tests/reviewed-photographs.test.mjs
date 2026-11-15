@@ -22,6 +22,8 @@ test("published reviewed photographs reach exactly their 70 linked recordings wi
     assert.equal(photo.endpointEquality, null);
     assert.equal(photo.displayDimensions, "6048 × 8064");
     assert.match(photo.qualification, /exact recording endpoint.*not established/i);
+    assert.match(photo.fullResolutionUrl, /\/resolve\/202226b18431f67f879629d8f49d72883643f810\//);
+    assert.match(photo.sourceMetadataUrl, /\/blob\/202226b18431f67f879629d8f49d72883643f810\//);
   }
   assert.equal(getReviewedPhotographForRecord(index, "tla-41667b16a88d464a").workId, "tlaw-6a4a3ee3fdd84066");
   assert.equal(getReviewedPhotographForRecord(index, "tla-f43f562de8d027ed").workId, "tlaw-d5e993f2657744f6");
@@ -31,11 +33,30 @@ test("published reviewed photographs reach exactly their 70 linked recordings wi
   assert.equal(JSON.stringify(references), before);
 });
 
-test("a different source revision or work-link hash cannot supply reviewed photographs", () => {
+test("reviewed photographs retain historical links as current recording and work-link revisions advance", () => {
+  const old = buildReviewedPhotographIndex(projection(), records, references);
+  const nextRevision = "f".repeat(40);
+  const next = structuredClone(records);
+  const refs = structuredClone(references);
+  next.sourceRevision = refs.sourceRevision = nextRevision;
+  Object.assign(refs.sourceInputs["Work_Identity/work_record_links.csv"], {revision: nextRevision, sha256: "1".repeat(64)});
+  for (const recording of next.records) {
+    recording.videoUrl = recording.videoUrl.replace(`/resolve/${records.sourceRevision}/`, `/resolve/${nextRevision}/`);
+  }
+  assert.deepEqual(buildReviewedPhotographIndex(projection(), next, refs), old);
+});
+
+test("mixed pins, changed historical work links and changed recording integrity fail closed", () => {
   assert.throws(() => buildReviewedPhotographIndex(projection(), {...records, sourceRevision:"0".repeat(40)}, references), /snapshot|revision/);
   const changed = structuredClone(references);
-  changed.sourceInputs["Work_Identity/work_record_links.csv"].sha256 = "0".repeat(64);
+  changed.sourceInputs["Work_Identity/work_record_links.csv"].revision = "0".repeat(40);
   assert.throws(() => buildReviewedPhotographIndex(projection(), records, changed), /work links/);
+  const history = projection();
+  history.recordingLinks.sha256 = "0".repeat(64);
+  assert.throws(() => buildReviewedPhotographIndex(history, records, references), /historical work links/);
+  const next = structuredClone(records);
+  next.records.find(r => r.recordId === history.photographs[0].recordIds[0]).integrityReference = "0".repeat(64);
+  assert.throws(() => buildReviewedPhotographIndex(projection(), next, references), /recording integrity/);
 });
 
 test("ambiguous works and unrecognized relationship claims are rejected", () => {
@@ -59,6 +80,9 @@ test("unsafe preview and original URLs cannot enter the display index", () => {
 test("record membership must agree with the browser's pinned work links", () => {
   const changed = projection(); changed.photographs[0].recordIds.pop();
   assert.throws(() => buildReviewedPhotographIndex(changed, records, references), /membership/);
+  const refs = structuredClone(references);
+  refs.records[projection().photographs[0].recordIds[0]].workId = "";
+  assert.throws(() => buildReviewedPhotographIndex(projection(), records, refs), /membership/);
 });
 
 test("loading verifies exact projection bytes before building the index", async () => {

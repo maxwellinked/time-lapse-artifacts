@@ -12,6 +12,7 @@ import { buildClarificationPage } from "./build-photograph-clarifications.mjs";
 import { createValidationServer, hasRequiredSourceLinks } from "./validation-helpers.mjs";
 import { buildRealTimeProjection, buildRealTimePage, loadRealTimePresentation } from "./build-real-time-recordings.mjs";
 import {buildDrawingProcessPage, loadDrawingProcessInputs} from "./build-drawing-process.mjs";
+import { isCompletePreview } from "./preview-media.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 validateSelectedFrontAssets(root);
@@ -361,10 +362,11 @@ const previewDirectory = join(root, "previews");
 let previewFilenames = [];
 let previewManifest = null;
 try {
+  const recordsById = new Map(payload.records.map((record) => [record.recordId, record]));
   previewFilenames = readdirSync(previewDirectory).filter(
     (name) =>
       /^tla-[a-f0-9]+\.mp4$/.test(name) &&
-      statSync(join(previewDirectory, name)).size >= 8_000,
+      isCompletePreview(recordsById.get(name.slice(0, -4)), join(previewDirectory, name)),
   );
   previewManifest = JSON.parse(readFileSync(join(previewDirectory, "manifest.json"), "utf8"));
 } catch {

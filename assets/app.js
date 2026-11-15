@@ -1,10 +1,10 @@
 import { loadSequenceInsertions } from "./sequence-insertions.js?v=20261030-sequence-insertions";
-import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-202226b18431-90bded9bcd98-reviewed-access";
-import { loadReviewedPhotographIndex, getReviewedPhotographForRecord } from "./reviewed-photographs.js?v=20261110-reviewed-access";
-import { loadCandidatePhotographIndex, getCandidatePhotographForRecord } from "./candidate-photographs.js?v=20261110-candidate-access";
+import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-c8a93d435ebd-dec020ec90d9-reviewed-access";
+import { loadReviewedPhotographIndex, getReviewedPhotographForRecord } from "./reviewed-photographs.js?v=20261115-reviewed-access-growth";
+import { loadCandidatePhotographIndex, getCandidatePhotographForRecord } from "./candidate-photographs.js?v=20261115-candidate-access-growth";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";
-import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810";
+import { loadRealTimeMetadata, createRelatedRecordingsController, realTimeStatusLabel, realTimeDisplayFilename } from "./real-time-recordings.js?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942";
 import { getDisplayReference, referenceExclusion, describeReferenceLink, isOwnerConfirmedDisplayDerivative } from "./reference-policy.js?v=20261110-browser-photo-scope";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
 import { nativeInspectionUrl } from "./native-inspection-links.js?v=20261110-native-companions";
@@ -15,10 +15,10 @@ import {
   sortRecordsForDisplay,
 } from "./record-sequences.js?v=20261030-sequence-insertions";
 
-const DATA_URL = "data/records.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810";
+const DATA_URL = "data/records.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942";
 const PAGE_SIZE = 18;
 const PREVIEW_DIRECTORY = "previews";
-const REFERENCE_URL = "data/physical-references.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810";
+const REFERENCE_URL = "data/physical-references.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942";
 let referenceLookupPromise;
 let selectedFrontLookupPromise;
 let reviewedPhotographLookupPromise;
@@ -567,7 +567,7 @@ async function loadReferenceEvidence(lookupSha256) {
   if (!/^[a-f0-9]{64}$/.test(lookupSha256 ?? "")) return null;
   if (!referenceEvidencePromise) {
     referenceEvidencePromise = (async () => {
-      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-202226b18431f67f879629d8f49d72883643f810", { signal: AbortSignal.timeout(5000) });
+      const response = await fetch("data/reference-link-evidence.json?v=confirmed-work-c8a93d435ebd3e32f6041611102df59e09c84942", { signal: AbortSignal.timeout(5000) });
       if (!response.ok) throw new Error("Qualified-link evidence unavailable");
       const evidence = await response.json();
       if (evidence.schemaVersion !== 1 || evidence.sourceRevision !== state.sourceRevision) {

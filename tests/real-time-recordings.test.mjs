@@ -139,13 +139,34 @@ test("published real-time projection retains all five original records and remai
   const checksumLines=new Set(sums.toString("utf8").match(/[^\n]*\n|[^\n]+$/g));
   for(const line of historicalSums.toString("utf8").match(/[^\n]*\n|[^\n]+$/g))assert.ok(checksumLines.has(line),"Historical checksum line changed");
   const refresh=JSON.parse(read("data/source-refresh.json"));
-  const expectedCount=refresh.realTime?.records ?? historical.records.length;
   if(refresh.realTime){
     assert.equal(refresh.realTime.previousRecords,historical.records.length);
     assert.equal(refresh.realTime.records,refresh.realTime.previousRecords+refresh.realTime.addedCount);
   }
+  const currentReceiptPath=new URL("data/confirmed-work-refresh.json",root);
+  const currentReceipt=existsSync(currentReceiptPath)?JSON.parse(readFileSync(currentReceiptPath)):null;
+  const currentRefresh=currentReceipt?.realTime ?? refresh.realTime;
+  const expectedCount=currentRefresh?.records ?? historical.records.length;
+  if(currentReceipt?.realTime){
+    assert.equal(currentReceipt.sourceRevision,recordData.sourceRevision);
+    assert.equal(currentRefresh.records,currentRefresh.previousRecords+currentRefresh.addedCount);
+    assert.equal(currentRefresh.addedRecords.length,currentRefresh.addedCount);
+    const previousCsv=currentRefresh.previousSourceInputs["Real_Time_Recordings/metadata.csv"];
+    const retainedCsv=csv.subarray(0,previousCsv.sizeBytes);
+    assert.equal(hash(retainedCsv),previousCsv.sha256,"Previous confirmed RT source bytes changed");
+    assert.equal(parseCsv(retainedCsv.toString("utf8")).length,currentRefresh.previousRecords);
+    for(const [path,bytes] of [["metadata.csv",csv],["SHA256SUMS",sums]]){
+      const input=currentRefresh.sourceInputs[`Real_Time_Recordings/${path}`];
+      const output=currentReceipt.outputs[`data/real-time-source/${path}`];
+      assert.deepEqual(input,{sha256:hash(bytes),sizeBytes:bytes.length});
+      assert.deepEqual(output,input);
+    }
+  }
   assert.equal(hash(csv),manifest.inputs["Real_Time_Recordings/metadata.csv"].sha256);
   const p=m.buildRealTimeProjection(recordData,{manifest,csv,sums});assert.equal(p.records.length,expectedCount);
+  if(currentReceipt?.realTime){
+    assert.deepEqual(p.records.slice(currentRefresh.previousRecords).map(r=>r.record_id),currentRefresh.addedRecords);
+  }
   assert.deepEqual(p.records.slice(0,historical.records.length),historical.records);
   assert.equal(p.recordingModeBasis,"source_metadata");
   assert.equal(p.sourceFields.length,24);assert.ok(p.sourceFields.includes("recording_mode"));

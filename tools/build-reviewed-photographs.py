@@ -1,8 +1,9 @@
 """Project published work-level reference photographs without selecting primary fronts.
 
-Normal builds and --check are offline. --generate-previews reads public JPEGs
-from --image-root where available, otherwise from the revision-pinned Hub URL.
-HF_SOURCE_ROOT optionally verifies retained metadata against that Git snapshot.
+Normal builds and --check replay historical browser inputs with local Git and
+verify their current memberships. --generate-previews reads public JPEGs from
+--image-root or the revision-pinned Hub URL. HF_SOURCE_ROOT additionally checks
+the retained metadata against its exact published source revision.
 """
 import argparse
 import csv
@@ -20,6 +21,8 @@ SOURCE = ROOT / 'data/reviewed-photo-source'
 OUTPUT = ROOT / 'data/reviewed-photographs.json'
 LINKS = 'Work_Identity/work_record_links.csv'
 REPOSITORY = 'maxwellinked/time-lapse-artifacts'
+SOURCE_REVISION = '202226b18431f67f879629d8f49d72883643f810'
+BROWSER_BASE = '95ad8b8717cd641e4a21fb2c517afe6a47724f2f'
 CLASSES = {
     'owner_confirmed_work_photo_association',
     'creator_supplied_matching_finish_label_and_visual_corroboration',
@@ -50,7 +53,7 @@ def safe_relative(path):
 
 def inputs():
     manifest = json.loads((SOURCE / 'sources.json').read_bytes())
-    require(manifest['sourceRepository'] == REPOSITORY and re.fullmatch(r'[0-9a-f]{40}', manifest['sourceRevision']), 'Source snapshot')
+    require(manifest['sourceRepository'] == REPOSITORY and manifest['sourceRevision'] == SOURCE_REVISION, 'Source snapshot')
     found = {}
     for entry in manifest['inputs']:
         data = (ROOT / safe_relative(entry['retainedPath'])).read_bytes()
@@ -119,15 +122,39 @@ def create_previews(manifest, found, image_root):
         'pillowVersion': pillow_version, 'previews': receipts}))
 
 
-def build(manifest, found):
+def browser_inputs(revision=None):
+    paths = ('data/records.json', 'data/physical-references.json')
+    return tuple(json.loads(
+        subprocess.check_output(['git', '-C', str(ROOT), 'show', f'{revision}:{path}'])
+        if revision else (ROOT / path).read_bytes()
+    ) for path in paths)
+
+
+def index_browser_memberships(projections):
+    records, references = projections
+    revision = records['sourceRevision']
+    require(records['sourceRepository'] == references['sourceRepository'] == REPOSITORY and
+            re.fullmatch(r'[a-f0-9]{40}', revision) and references['sourceRevision'] == revision,
+            'Browser source revision mismatch')
+    work_links = references['sourceInputs'].get(LINKS, {})
+    require(work_links.get('path') == LINKS and work_links.get('revision') == revision and
+            re.fullmatch(r'[a-f0-9]{64}', work_links.get('sha256', '')), 'Browser work-link binding mismatch')
+    by_id = {r['recordId']: r for r in records['records']}
+    require(len(by_id) == len(records['records']), 'Duplicate browser recording ID')
+    by_work = {}
+    for rid in by_id:
+        work = references['records'].get(rid, {}).get('workId')
+        if work:
+            by_work.setdefault(work, set()).add(rid)
+    return revision, work_links, by_id, by_work
+
+
+def build(manifest, found, historical):
     from PIL import Image
-    records = json.loads((ROOT / 'data/records.json').read_bytes())
-    references = json.loads((ROOT / 'data/physical-references.json').read_bytes())
-    revision = manifest['sourceRevision']
-    require(revision == records['sourceRevision'] == references['sourceRevision'], 'Browser source revision mismatch')
-    require(found[LINKS][0]['sha256'] == references['sourceInputs'][LINKS]['sha256'], 'Browser work-link hash mismatch')
+    revision, work_links, _, by_work = index_browser_memberships(historical)
+    require(revision == manifest['sourceRevision'] == SOURCE_REVISION, 'Historical browser source revision mismatch')
+    require(found[LINKS][0]['sha256'] == work_links['sha256'], 'Historical browser work-link hash mismatch')
     memberships = list(csv.DictReader(io.StringIO(found[LINKS][1].decode('utf-8-sig'))))
-    record_ids = {r['recordId'] for r in records['records']}
     receipts = json.loads((SOURCE / 'preview-receipts.json').read_bytes())
     require(receipts['sourceRevision'] == revision, 'Preview source revision mismatch')
     preview_map = {p['workId']: p for p in receipts['previews']}
@@ -137,8 +164,7 @@ def build(manifest, found):
         work = association['work_id']
         linked = sorted(r['record_id'] for r in memberships if r['work_id'] == work)
         require(len(linked) == len(set(linked)) == association['recording_count'], 'Published membership count mismatch')
-        require(all(r in record_ids and references['records'][r]['workId'] == work for r in linked), 'Browser work membership mismatch')
-        require(linked == sorted(r for r in record_ids if references['records'][r].get('workId') == work), 'Browser work membership incomplete')
+        require(set(linked) == by_work.get(work), 'Historical browser work membership mismatch')
         preview = preview_map[work]
         require(preview['sourcePath'] == image_path and preview['sourceSha256'] == photo['image']['sha256'] and
                 preview['sourceSizeBytes'] == photo['image']['size_bytes'], 'Source JPEG receipt mismatch')
@@ -164,6 +190,26 @@ def build(manifest, found):
             'sourceInputs': manifest['inputs'], 'recordingLinks': found[LINKS][0], 'photographs': photographs}
 
 
+def check_current_memberships(projection, historical, current):
+    _, _, legacy_by_id, _ = index_browser_memberships(historical)
+    revision, work_links, by_id, by_work = index_browser_memberships(current)
+    if revision == projection['sourceRevision']:
+        require(work_links['sha256'] == projection['recordingLinks']['sha256'], 'Historical work-link hash mismatch')
+    integrity = {}
+    for photo in projection['photographs']:
+        require(set(photo['recordIds']) == by_work.get(photo['workId']), 'Current browser work membership mismatch')
+        for rid in photo['recordIds']:
+            old, record = legacy_by_id[rid], by_id[rid]
+            expected = old['integrityReference']
+            require(re.fullmatch(r'[a-f0-9]{64}', expected) and record.get('integrityReference') == expected,
+                    'Reviewed recording integrity differs: ' + rid)
+            url = f'https://huggingface.co/datasets/{REPOSITORY}/resolve/{revision}/Standard_Time_Lapses/{old["filename"]}'
+            require(record['filename'] == old['filename'] and record['videoUrl'] == url,
+                    'Reviewed recording path differs: ' + rid)
+            integrity[rid] = expected
+    return integrity
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true')
@@ -174,20 +220,28 @@ def main():
     manifest, found = inputs()
     if args.generate_previews:
         create_previews(manifest, found, args.image_root)
-    data = serialized(build(manifest, found))
+    historical = browser_inputs(BROWSER_BASE)
+    projection = build(manifest, found, historical)
+    integrity = check_current_memberships(projection, historical, browser_inputs())
+    integrity_block = 'const RECORDING_INTEGRITY = Object.freeze(' + json.dumps(integrity, indent=2, sort_keys=True) + ');'
+    data = serialized(projection)
     module = ROOT / 'assets/reviewed-photographs.js'
     expected_hash = digest(data)
+    text = module.read_text(encoding='utf-8')
+    link_hash = projection['recordingLinks']['sha256']
+    require(f'HISTORICAL_WORK_LINK_SHA256 = "{link_hash}"' in text, 'Runtime historical work-link hash is stale')
     if args.check:
         require(OUTPUT.read_bytes() == data, 'Reviewed photo projection is stale')
-        require(f'REVIEWED_PHOTOGRAPHS_SHA256 = "{expected_hash}"' in module.read_text(encoding='utf-8'), 'Runtime projection hash is stale')
+        require(f'REVIEWED_PHOTOGRAPHS_SHA256 = "{expected_hash}"' in text, 'Runtime projection hash is stale')
+        require(integrity_block in text, 'Runtime recording integrity bindings are stale')
     else:
-        OUTPUT.write_bytes(data)
-        text = module.read_text(encoding='utf-8')
         text, replacements = re.subn(r'REVIEWED_PHOTOGRAPHS_SHA256 = "[a-f0-9]{64}"',
                                      f'REVIEWED_PHOTOGRAPHS_SHA256 = "{expected_hash}"', text)
         require(replacements == 1, 'Runtime projection hash constant missing')
+        text, replacements = re.subn(r'const RECORDING_INTEGRITY = Object\.freeze\(\{[^}]*\}\);', integrity_block, text)
+        require(replacements == 1, 'Missing runtime recording integrity bindings')
+        OUTPUT.write_bytes(data)
         module.write_text(text, encoding='utf-8', newline='\n')
-    projection = json.loads(data)
     print(f'Reviewed photographs: {len(projection["photographs"])} works; {sum(len(p["recordIds"]) for p in projection["photographs"])} recordings; exact sources/previews/projection verified')
 
 

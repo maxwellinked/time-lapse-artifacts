@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "browserBase": "783c99304eebb5dbbfc806a68d7c7554df7361d2",
+  "sourceBaseRevision": "5d9defcf8bfeb24a60dda29a17b7072c6823ad6b",
+  "confirmation": {
+    "path": "Work_Identity/Confirmations/2026-11-13-two-reference-drawings.json",
+    "sha256": "3f07afbd36eb517907d0b5a82c6fcf4303073782740aade9dd422d0b2f5424e1"
+  },
+  "ingestPlan": {
+    "path": "Standard_Time_Lapses/Provenance/2026-11-13/ingest-plan.json",
+    "sha256": "af2fe4f9d330a3a6e624df7c21e57fe080d61a657f3bf3382cd6a1c65c97eef2"
+  },
+  "workCounts": [
+    {
+      "workId": "tlaw-f7f3c7dbddaadc18",
+      "count": 42,
+      "timeLapseCount": 21,
+      "realTimeCount": 21
+    },
+    {
+      "workId": "tlaw-10a9fba63ea2a7c6",
+      "count": 32,
+      "timeLapseCount": 17,
+      "realTimeCount": 15
+    }
+  ],
+  "photoSources": {
+    "path": "Image_Source_Masters/v2/Receipts/source-records.json",
+    "sha256": "838effdee0d02c2acba7bc886364f0f13d2a57cfb4f27d62e74c24e6a4bc87ba",
+    "count": 64
+  }
+}

@@ -7,6 +7,7 @@ on:
       - .github/workflows/generate-previews.yml
       - data/records.json
       - tools/generate-previews.mjs
+      - tools/preview-media.mjs
       - tools/generate-record-anchors.mjs
       - tools/publish-previews.sh
       - tools/validate.mjs
@@ -54,7 +55,7 @@ jobs:
             ffmpeg -version
             dpkg-query -W -f='${binary:Package}\t${Version}\t${Architecture}\n' ffmpeg 'libx264-*'
             printf '\nSHA-256 of FFmpeg executable, source index and generator:\n'
-            sha256sum "$(command -v ffmpeg)" data/records.json tools/generate-previews.mjs
+            sha256sum "$(command -v ffmpeg)" data/records.json tools/generate-previews.mjs tools/preview-media.mjs
           } > "$RUNNER_TEMP/preview-toolchain.txt"
 
       - name: Generate late-stage motion previews

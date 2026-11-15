@@ -8,6 +8,8 @@ export const NOTE_PATH = 'docs/notes/drawing-process-2026-11-13';
 export const DERIVED_PATH = 'Drawing_Process/2026-11-13/';
 const ROOT = new URL('../', import.meta.url);
 const INPUT_NAMES = ['presentation.html','derivatives.json','manifest.json'];
+const REFERENCE_CONFIRMATION = 'Work_Identity/Confirmations/2026-11-13-two-reference-drawings.json';
+const REFERENCE_PACKET = 'Standard_Time_Lapses/Provenance/2026-11-13/README.md';
 const HASH = /^[a-f0-9]{64}$/;
 const REVISION = /^(?!0{40}$)[a-f0-9]{40}$/;
 const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
@@ -15,7 +17,7 @@ const require = (value, message) => {if (!value) throw new Error(message);};
 const safePath = value => typeof value === 'string' && value.length > 0 && !value.startsWith('/') &&
   !value.includes('\\') && !value.includes(':') && value.split('/').every(p => p && p !== '.' && p !== '..');
 
-export function buildDrawingProcessPage({receipt,files}) {
+export function buildDrawingProcessPage({receipt,files,currentProjection}) {
   require(receipt?.schema === 'drawing-process-browser-source/v1' &&
     receipt.sourceRepository === SOURCE_REPOSITORY && receipt.derivedRepository === DERIVED_REPOSITORY &&
     receipt.notePath === NOTE_PATH, 'Unsupported drawing-process source receipt');
@@ -73,14 +75,42 @@ export function buildDrawingProcessPage({receipt,files}) {
     }
     throw new Error(`Unpinned or unsupported template URL: ${url}`);
   }
-  return template.replaceAll('__SOURCE_REVISION__',receipt.sourceRevision)
+  const html = template.replaceAll('__SOURCE_REVISION__',receipt.sourceRevision)
     .replaceAll('__DERIVED_REVISION__',receipt.derivedRevision);
+  if (currentProjection?.confirmation?.path !== REFERENCE_CONFIRMATION) return html;
+
+  const {admission, appendDefinition, confirmation, sourceRevision} = currentProjection;
+  require(currentProjection.schemaVersion === 4 && currentProjection.contract === 'confirmed_mixed_reference_append_v1' &&
+    currentProjection.sourceRepository === SOURCE_REPOSITORY && REVISION.test(sourceRevision) &&
+    sourceRevision !== receipt.sourceRevision && appendDefinition?.sourceBaseRevision === receipt.sourceRevision &&
+    HASH.test(confirmation.sha256) && appendDefinition.confirmation?.path === REFERENCE_CONFIRMATION &&
+    appendDefinition.confirmation.sha256 === confirmation.sha256 &&
+    currentProjection.addedRecordingCount === 74 && admission?.confirmedRecordings === 74 &&
+    admission.originalPayloadCount === 138 && admission.sourcePhotoContainers?.count === 64 &&
+    REVISION.test(admission.mediaRevision) && REVISION.test(admission.metadataRevision) &&
+    admission.verification === 'pinned_git_objects_and_published_observation_receipts',
+  'Invalid current source availability receipt');
+
+  const marker = '      <ul class="source-links">';
+  require(html.split(marker).length === 2, 'Missing or duplicate source links in drawing-process template');
+  const availability = `      <p>The first publication of this example contained excerpts and previews. The <a href="${sourcePrefix}blob/${sourceRevision}/${REFERENCE_PACKET}">source release for the two reference drawings</a> indexes 74 original recordings and 64 original photograph containers.</p>\n`;
+  return html.replace(marker, availability + marker);
+}
+
+function loadCurrentProjection(root) {
+  try {
+    return JSON.parse(readFileSync(new URL('data/confirmed-work-refresh.json',root)));
+  } catch (error) {
+    if (error.code !== 'ENOENT') throw error;
+    return undefined;
+  }
 }
 
 export function loadDrawingProcessInputs(root = ROOT) {
   const folder = new URL('data/drawing-process-source/',root);
   return {receipt:JSON.parse(readFileSync(new URL('source.json',folder))),
-    files:Object.fromEntries(INPUT_NAMES.map(name=>[name,readFileSync(new URL(name,folder))]))};
+    files:Object.fromEntries(INPUT_NAMES.map(name=>[name,readFileSync(new URL(name,folder))])),
+    currentProjection:loadCurrentProjection(root)};
 }
 
 async function sync(revision) {
@@ -98,7 +128,7 @@ async function sync(revision) {
     derivedRevision:derivatives.revision,
     scope:'Exact retained source display template and derivative declarations; original payload ingest remains separately qualified by the authoritative note.',
     inputs:Object.fromEntries(fetched.map(([name,bytes])=>[name,{bytes:bytes.length,sha256:sha256(bytes)}]))};
-  const html = buildDrawingProcessPage({receipt,files});
+  const html = buildDrawingProcessPage({receipt,files,currentProjection:loadCurrentProjection(ROOT)});
   // Validate the full fetched set before replacing any retained source bytes.
   const folder = new URL('data/drawing-process-source/',ROOT);
   mkdirSync(folder,{recursive:true});

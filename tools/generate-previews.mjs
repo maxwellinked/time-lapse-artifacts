@@ -10,6 +10,7 @@ import {
 } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { join } from "node:path";
+import { isCompletePreview } from "./preview-media.mjs";
 
 const root = fileURLToPath(new URL("../", import.meta.url));
 const payload = JSON.parse(readFileSync(join(root, "data/records.json"), "utf8"));
@@ -113,7 +114,7 @@ function isComplete(record, path, requireCurrentIdentity = true) {
     ) {
       return false;
     }
-    return statSync(path).size >= 8_000;
+    return isCompletePreview(record, path);
   } catch {
     return false;
   }
