@@ -20,12 +20,15 @@ const app=readFileSync(new URL("../assets/app.js",import.meta.url),"utf8");
 const gallery=readFileSync(new URL("../assets/drawing-archive.js",import.meta.url),"utf8");
 const clone=structuredClone;
 
-test("435 retained fronts and three explicitly unselected works agree with 438 gallery identities",()=>{
+test("435 retained fronts and five explicitly unselected works agree with 440 gallery identities",()=>{
  const before=JSON.stringify(refs);
  const works=buildDrawingArchive(data,refs,read("../reference-previews/manifest.json"));
- assert.equal(works.length,438); assert.equal(Object.keys(index.byRecord).length,1256);
+ assert.equal(works.length,440); assert.equal(Object.keys(index.byRecord).length,1256);
  assert.equal(Object.keys(index.byWork).length,435);
- assert.deepEqual(index.unselectedWorkIds,['tlaw-6a4a3ee3fdd84066','tlaw-d5e993f2657744f6','tlaw-e5c89a91491998a7']);
+ assert.deepEqual(index.unselectedWorkIds,[
+   'tlaw-10a9fba63ea2a7c6','tlaw-6a4a3ee3fdd84066','tlaw-d5e993f2657744f6',
+   'tlaw-e5c89a91491998a7','tlaw-f7f3c7dbddaadc18',
+ ]);
  assert.deepEqual(data.records.filter(r=>getSelectedFrontForRecord(index,r.recordId)===null).map(r=>r.recordId).sort(),
    data.records.filter(r=>refs.records[r.recordId].selectionStatus==="missing_work_link" ||
      index.unselectedWorkIds.includes(refs.records[r.recordId].workId)).map(r=>r.recordId).sort());

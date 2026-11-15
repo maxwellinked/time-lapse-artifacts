@@ -36,7 +36,8 @@ async function fixture(t, kind) {
   let ids;
   if (kind === "record") {
     const records = await json(join(repository, "data/records.json"));
-    records.records = records.records.slice(0, 3);
+    // These cache fixtures use ordinary previews. The short-preview test runs the real decoder separately.
+    records.records = records.records.filter(({ durationSeconds }) => durationSeconds >= 0.5).slice(0, 3);
     ids = records.records.map(({ recordId }) => recordId);
     await putJson(join(root, "data/records.json"), records);
     const previews = await json(join(repository, "previews/manifest.json"));
@@ -352,8 +353,10 @@ test("new recording: generate its motion preview and image while preserving olde
   // Exercise the actual preview cache/orchestration without fetching source video.
   await writeFile(join(bin, "ffmpeg"), `#!${process.execPath}\n
 const fs = require('node:fs');
+const output = process.argv.at(-1);
+if (!output.endsWith('.part.mp4')) throw new Error('Expected a motion preview output');
 fs.appendFileSync(${JSON.stringify(log)}, JSON.stringify(process.argv.slice(2)) + '\\n');
-fs.copyFileSync(${JSON.stringify(join(f.root, `previews/${f.ids[0]}.mp4`))}, process.argv.at(-1));
+fs.copyFileSync(${JSON.stringify(join(f.root, `previews/${f.ids[0]}.mp4`))}, output);
 `);
   await chmod(join(bin, "ffmpeg"), 0o755);
   const path = join(f.root, "data/records.json"), index = await json(path);
@@ -362,7 +365,7 @@ fs.copyFileSync(${JSON.stringify(join(f.root, `previews/${f.ids[0]}.mp4`))}, pro
   index.records.push(record);
   await putJson(path, index);
   await exec(process.execPath, [join(f.root, "tools/generate-previews.mjs")], {
-    env: { ...process.env, PATH: `${bin}:${process.env.PATH}` }, timeout: 15000,
+    cwd: f.root, env: { ...process.env, PATH: `${bin}:${process.env.PATH}` }, timeout: 15000,
   });
   const calls = (await readFile(log, "utf8")).trim().split("\n").map(JSON.parse);
   assert.equal(calls.length, 1);

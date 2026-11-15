@@ -107,11 +107,12 @@ fabricated gallery link. Source metadata and relationship authority remain on
 Hugging Face; this access projection does not change them.
 
 The [oriented real-time viewing page](real-time-viewing.html) offers **Play
-oriented view** for all 18 recordings. Historical reproduction receipts retain
-their original byte bindings; both current pages use the accepted source pin.
-It streams the pinned original only after activation and applies an additional
-viewing rotation after the browser's source-display orientation. The player fits
-the complete frame, retains the different camera angle, and keeps playback
+oriented view** for 18 reviewed recordings out of 54 in the real-time index.
+Both current pages use the same accepted source pin. Historical reproduction
+receipts retain their original byte bindings. The player streams the pinned
+original only after activation and applies an additional viewing rotation after
+the browser's source-display orientation. The player fits the complete frame,
+retains the different camera angle, and keeps playback
 controls upright. The original-source links remain available for compatible
 players when a browser cannot decode a MOV.
 
@@ -128,17 +129,22 @@ does not change the Standard browser's source pin, any original metadata value,
 the MOV bytes, or native Hugging Face file-player behavior.
 
 The [drawing photograph view](drawings.html), recording dialog and photograph
-filter retain the same 435 selected fronts. The current registry has 438 active
-registered drawings and 1,326 Standard recording joins. The Standard index contains
-1,381 recordings at Hugging Face revision
-`202226b18431f67f879629d8f49d72883643f810`. Its 55 unlinked recordings have no assigned
-work IDs or photograph links; they remain available in the recording browser and
-are omitted from registered-drawing grouping. The November 10 append adds 32
-original MP4s in creator-confirmed groups of 3 and 29, for works
+filter retain the same 435 selected fronts. The current registry has 440 active
+registered drawings and 1,364 Standard recording joins. The Standard index contains
+1,419 recordings at Hugging Face revision
+`c8a93d435ebd3e32f6041611102df59e09c84942`. Its 55 unlinked recordings have no assigned
+work IDs or photograph links. They remain available in the recording browser.
+The drawing gallery groups recordings with an assigned work ID.
+
+The November 10 snapshot at `202226b18431f67f879629d8f49d72883643f810` had
+1,381 Standard recordings, 1,326 Standard recording joins, and 438 active
+registered drawings. That append added 32 original MP4s in creator-confirmed
+groups of 3 and 29, for works
 `tlaw-e5c89a91491998a7` and `tlaw-6a4a3ee3fdd84066`. These two works and the
 October 31 work `tlaw-d5e993f2657744f6` remain explicitly unselected in the
-photograph map. The creator described both new drawings as complete; recording
-coverage and capture continuity remain unknown. Intermediate viewing order
+photograph map, alongside the two works added by the November 15 projection.
+The creator described both November 10 drawings as complete. Recording coverage
+and capture continuity remain unknown. Intermediate viewing order
 follows source basenames and does not establish every capture position.
 The 430 surviving earlier displays retain their exact candidate bytes.
 Five additional displays (51 recording joins) are bounded derivatives of the
@@ -171,6 +177,7 @@ committed line endings and skip LFS media downloads:
 
 ```console
 GIT_LFS_SKIP_SMUDGE=1 git -c core.autocrlf=false clone --filter=blob:none --no-checkout https://huggingface.co/datasets/maxwellinked/time-lapse-artifacts /path/to/hf-git
+GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin c8a93d435ebd3e32f6041611102df59e09c84942
 GIT_LFS_SKIP_SMUDGE=1 git -C /path/to/hf-git fetch origin 202226b18431f67f879629d8f49d72883643f810 44ac0117e9240f2c3f2877d8739abdc159b8370f 08cff299256b152828b69e261ad9d791dbc2376d 3a9c13f603f7255a86ddf2e47d403934dbe09f78 4f563085afacfc454496ac2d61606614268b2cb8 12d5713326886bc18669f2a5c571c4fe7ac1fb73 253e2ad859ea93b183110f19b5bbd78fc0bd6289 dcfe6cb22fe20bc6677464875f2333600f32bf64
 HF_SOURCE_ROOT=/path/to/hf-git python3 -B tools/test-pinned-reproduction.py
 ```
@@ -316,11 +323,12 @@ Git history only to reproduce historical rendered index snapshots. Use
 
 ### Confirmed work appends
 
-The current bounded projection adds the November 10 release's 32 original
-recordings and two creator-confirmed works. Its exact source confirmation,
+The November 15 browser projection adds 38 Standard time-lapses and 36 real-time
+recordings for two creator-confirmed works. Its exact source confirmation,
 per-work counts, and prior browser commit are recorded in the `appendDefinition`
-of `data/confirmed-work-refresh.json`. The October 31 one-work/38-record contract
-remains independently reproducible from its immutable browser snapshot.
+of `data/confirmed-work-refresh.json`. The November 10 two-work/32-record and
+October 31 one-work/38-record contracts remain independently reproducible from
+their immutable browser snapshots.
 `data/records.json` remains the playback source pin, and the
 photograph registry keeps its own explicit source binding.
 
@@ -333,8 +341,7 @@ work/link row, all 435 photograph selections and display bytes, and historical
 correction evidence. The source baseline separately binds 168 earlier
 `original_filename` enrichments that do not change browser record values.
 Published confirmation bytes bind each new work's exact original path/hash/size
-membership. The three unselected work IDs follow the source's sorted order.
-No photograph is promoted into the selected-front map by this append.
+membership. All five unselected work IDs appear in the source's sorted order.
 
 After the exact Hugging Face main revision is published and independently checked:
 
@@ -568,10 +575,10 @@ choices. Historical recording and reference pins keep their own scope.
 
 ### Bounded mixed recording admission
 
-`tools/projection-definitions/2026-11-13-reference-drawings.json` prepares a
-separate append contract for two creator-confirmed works: 38 time-lapses and
-36 real-time recordings. The definition binds the source confirmation and
-unchanged ingest plan, independently per mode. It contains no future source
+`tools/projection-definitions/2026-11-13-reference-drawings.json` defines the
+mixed append contract used by the November 15 browser projection. The definition
+binds the source confirmation and unchanged ingest plan independently per mode.
+It contains no future source
 publication pin. Apply it only to the final verified Hugging Face commit with
 `refresh-confirmed-work-projection.py --append-definition`.
 
@@ -582,4 +589,4 @@ metadata-stage receipts must match actual immutable Git objects, and their
 revisions must remain ancestors of the final source commit. Pending states
 fail. The historical additive and confirmed-work contracts remain replayable.
 See [the adapter procedure](tools/projection-definitions/README.md) for the
-remaining source and preview gates; preparation alone does not publish data.
+source and preview checks.

@@ -28,12 +28,12 @@
   },
   "outputs": {
     "assets/app.js": {
-      "sha256": "87d5bfe4a0712044a9f0ad7823dc24b7a44e4eb7205da84bb1e5553e40a27489",
-      "size_bytes": 48799
+      "sha256": "090fcea4e7078bab227ce7eacb67fd2a28e5885289fda4b74558115a948ec172",
+      "size_bytes": 48806
     },
     "assets/drawing-archive.js": {
-      "sha256": "17fb523bd039563ff400d61407a41323be3a7375ef1d70171c1ebe2f3775d72a",
-      "size_bytes": 9364
+      "sha256": "fc94f66259a6936b3a666d64685d20cea3624ee66c0b1e335eb52e7374c00b90",
+      "size_bytes": 9371
     },
     "assets/photograph-downloads.js": {
       "sha256": "2bbc365f7ed0433fa06ce6520520b1517cc8c797a648ec2a4f73dee5f99cdfb9",

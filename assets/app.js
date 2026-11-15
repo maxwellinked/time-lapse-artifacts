@@ -1,6 +1,6 @@
 import { loadSequenceInsertions } from "./sequence-insertions.js?v=20261030-sequence-insertions";
 import { loadSelectedFrontIndex, getSelectedFrontForRecord } from "./selected-fronts.js?v=photo-selections-c8a93d435ebd-dec020ec90d9-reviewed-access";
-import { loadReviewedPhotographIndex, getReviewedPhotographForRecord } from "./reviewed-photographs.js?v=20261110-reviewed-access";
+import { loadReviewedPhotographIndex, getReviewedPhotographForRecord } from "./reviewed-photographs.js?v=20261115-reviewed-access-growth";
 import { loadCandidatePhotographIndex, getCandidatePhotographForRecord } from "./candidate-photographs.js?v=20261115-candidate-access-growth";
 import { referencePreviewPath } from "./reference-preview-paths.js?v=20261025-master-fronts";
 import { loadRecords, RecordsDataError } from "./data-loader.js?v=20261025-canonical-metadata";

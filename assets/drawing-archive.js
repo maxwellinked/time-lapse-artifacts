@@ -1,5 +1,5 @@
 import { loadSelectedFrontIndex, applySelectedFronts } from "./selected-fronts.js?v=photo-selections-c8a93d435ebd-dec020ec90d9-reviewed-access";
-import { loadReviewedPhotographIndex, getReviewedPhotographForWork } from "./reviewed-photographs.js?v=20261110-reviewed-access";
+import { loadReviewedPhotographIndex, getReviewedPhotographForWork } from "./reviewed-photographs.js?v=20261115-reviewed-access-growth";
 import { loadRecords } from "./data-loader.js?v=20261025-canonical-metadata";
 import { buildDrawingArchive, verifiedDrawingEvidence } from "./drawing-archive-model.js?v=20261110-browser-photo-scope";
 import { getPhotographDisplayRotation } from "./photograph-orientation.js?v=20261020-owner-rotation";
